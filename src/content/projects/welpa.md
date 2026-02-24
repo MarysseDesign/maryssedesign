@@ -93,7 +93,6 @@ The goal was to reduce friction and make the core actions immediately accessible
           playsinline 
           preload="metadata"
           class="project-video"
-          poster="/images/projects/portfolio/welpa/ui_poster_02.jpg"
           aria-label="Welpa UI motion preview showing interface transitions."
         >
           <source src="/videos/projects/welpa/ui_02.mp4" type="video/mp4" />
