@@ -171,9 +171,7 @@ optimized for mobile and built to support a high volume of unique pages.
         loop
         playsinline
         preload="metadata"
-        poster="/images/projects/portfolio/08_Armani_Rinascente_5.jpg"
-        aria-label="Short preview of the live retouching workflow and instant QR-based portrait delivery."
-      >
+        aria-label="Short preview of the live retouching workflow and instant QR-based portrait delivery.">
         <source src="/videos/projects/armani/08_Armani_Rinascente_5.mp4" type="video/mp4" />
       </video>
     </div>

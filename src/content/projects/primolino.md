@@ -132,9 +132,7 @@ brand, digital and social touchpoints.
           loop
           playsinline
           preload="metadata"
-          poster="/images/projects/portfolio/primolino/identity/poster_01.jpg"
-          aria-label="Primolino identity motion preview."
-        >
+          aria-label="Primolino identity motion preview." >
           <source src="/videos/projects/primolino/01-identity_primolino.mp4" type="video/mp4" />
         </video>
 
@@ -157,9 +155,7 @@ brand, digital and social touchpoints.
           loop
           playsinline
           preload="metadata"
-          poster="/images/projects/portfolio/primolino/identity/poster_02.jpg"
-          aria-label="Primolino storytelling motion preview."
-        >
+          aria-label="Primolino storytelling motion preview." >
           <source src="/videos/projects/primolino/02-storytelling_primolino.mp4" type="video/mp4" />
         </video>
 
@@ -228,9 +224,7 @@ ensuring consistent brand presence while optimizing navigation and content prior
           loop
           playsinline
           preload="metadata"
-          poster="/images/projects/portfolio/primolino/web/poster_01.jpg"
-          aria-label="Primolino website motion preview."
-        >
+        aria-label="Primolino website motion preview." >
           <source src="/videos/projects/primolino/02-website_primolino-video.mp4" type="video/mp4" />
         </video>
 

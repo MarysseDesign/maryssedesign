@@ -94,9 +94,7 @@ The system was conceived to be lightweight, repeatable and adaptable across plat
         loop
         playsinline
         preload="metadata"
-        aria-label="Quantic Milano motion graphics preview."
-        poster="/images/projects/portfolio/quantic_poster.jpg"
-      >
+        aria-label="Quantic Milano motion graphics preview.">
         <source src="/videos/projects/quantic/quantic_motion.mp4" type="video/mp4" />
       </video>
     </div>

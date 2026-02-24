@@ -132,9 +132,7 @@ nextSlug: "welpa"
           loop
           playsinline
           preload="metadata"
-          poster="/images/projects/portfolio/schreiber/schreiber-strip_01.jpg"
-          aria-label="Short DEM preview showing Schreiber Gioielli’s monogram-led layout and editorial visual direction."
-        >
+          aria-label="Short DEM preview showing Schreiber Gioielli’s monogram-led layout and editorial visual direction.">
           <source src="/videos/projects/schreiber/schreiber-dem.mp4" type="video/mp4" />
         </video>
       </div>
