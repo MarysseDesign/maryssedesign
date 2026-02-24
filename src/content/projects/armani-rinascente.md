@@ -124,7 +124,7 @@ Alongside the digital experience, Marysse Studio developed printed materials use
    />
   </div>
   <div class="col-md-3">
-    <img class="fadein reveal-media" src="/images/projects/portfolio/Armani_Pass_Privé_Mockup.jpg" alt="Armani In the Spotlight VIP access pass mockup designed for the Fashion Week activation."
+    <img class="fadein reveal-media" src="/images/projects/portfolio/armani-pass-prive-mockup.jpg" alt="Armani In the Spotlight VIP access pass mockup designed for the Fashion Week activation."
     width="1500"
     height="1140"
     loading="lazy"
