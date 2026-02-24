@@ -21,7 +21,7 @@ const photoSrc = "/images/projects/portfolio/90.Photo_InTheSpotlight_WX5YZ_090.j
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
 
-    <meta name="description" content="Armani in the Spotlight - Picture 090" />
+   <meta name="description" content="Armani in the Spotlight – Official campaign image 090." />
     <meta
       name="keywords"
       content="Armani in the Spotlight, Armani, Armani Beauty, Armani Milano, Giorgio Armani, beauty milano, makeup milano, fashion Milano"
@@ -43,32 +43,33 @@ const photoSrc = "/images/projects/portfolio/90.Photo_InTheSpotlight_WX5YZ_090.j
       </div>
 
       <!-- Istruzioni -->
-      <p class="instruction-text instruction-mobile">
-        Tocca l'immagine e mantieni premuto per salvarla sul tuo cellulare.
-      </p>
-      <p class="instruction-text instruction-desktop">
-        Clicca con il mouse destro sull'immagine per salvarla sul tuo computer.
-      </p>
+<!-- Instructions -->
+<p class="instruction-text instruction-mobile">
+  Tap and hold the image to save it to your device.
+</p>
+<p class="instruction-text instruction-desktop">
+  Right-click the image to download it.
+</p>
 
       <div class="divider"></div>
 
-      <!-- Hashtag -->
-      <p class="hashtag main-hashtag">#ARMANIINTHESPOTLIGHT</p>
+     <!-- Campaign Reference -->
+<p class="hashtag main-hashtag">#ArmaniInTheSpotlight</p>
 
-      <div class="secondary-hashtags">
-        <p class="hashtag small-hashtag">
-          <a href="https://www.instagram.com/armanibeauty/" target="_blank" rel="noreferrer noopener" class="hashtag-link">
-            @armanibeauty
-          </a>
-          <span class="sep"> | </span>
-          <a href="https://www.instagram.com/rinascente/" target="_blank" rel="noreferrer noopener" class="hashtag-link">
-            @rinascente
-          </a>
-        </p>
+<div class="secondary-hashtags">
+  <p class="hashtag small-hashtag">
+    Featuring
+    <a href="https://www.instagram.com/armanibeauty/" target="_blank" rel="noreferrer noopener" class="hashtag-link">
+      @armanibeauty
+    </a>
+    <span class="sep"> · </span>
+    <a href="https://www.instagram.com/rinascente/" target="_blank" rel="noreferrer noopener" class="hashtag-link">
+      @rinascente
+    </a>
+  </p>
 
-        <p class="hashtag small-hashtag">#ArmaniMakeup</p>
-        <p class="hashtag small-hashtag">#ArmaniFragrance</p>
-      </div>
+  <p class="hashtag small-hashtag">#ArmaniMakeup · #ArmaniFragrance</p>
+</div>
 
       <!-- Social Icons -->
       <div class="social-icons">
@@ -125,7 +126,11 @@ const photoSrc = "/images/projects/portfolio/90.Photo_InTheSpotlight_WX5YZ_090.j
       height: auto;
       display: inline-block;
     }
-
+    
+  .instruction-text {
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
     /* Fade-in animation */
     .fade-in {
       opacity: 0;
@@ -247,5 +252,6 @@ const photoSrc = "/images/projects/portfolio/90.Photo_InTheSpotlight_WX5YZ_090.j
     .social-link:hover {
       color: #aaa;
     }
+    
   </style>
 </BaseLayout>
