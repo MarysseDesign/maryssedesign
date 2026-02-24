@@ -169,6 +169,10 @@ declare global {
       );
       if (!cards.length) return;
 
+      // Optional but helps pointer stability on some browsers (Firefox/trackpad)
+      // If you already set these in CSS, you can ignore.
+      stage.style.userSelect = "none";
+
       let z = 20;
 
       const clamp = (v: number, min: number, max: number) =>
@@ -244,43 +248,35 @@ declare global {
           closeModal();
       });
 
+      /**
+       * ✅ Drag handler (fixed):
+       * - Adds global pointermove/up listeners ONLY while dragging
+       * - Releases pointer capture (Firefox stability)
+       * - Handles pointercancel + blur
+       * - Keeps original behavior on other browsers
+       */
       const enableDrag = (card: HTMLElement) => {
         let dragging = false;
         let moved = 0;
         let startX = 0;
         let startY = 0;
         let startPos = { x: 0, y: 0 };
+        let activePointerId: number | null = null;
 
-        // Migliora UX su touchpad: non trascinare se target è link/btn interno (se mai ce ne fossero)
+        // Migliora UX: non trascinare se target è link/btn interno (se mai ce ne fossero)
         const isInteractive = (el: EventTarget | null) => {
           const t = el as HTMLElement | null;
           return !!t?.closest?.("a,button,input,textarea,select,label");
         };
 
-        const onDown = (e: PointerEvent) => {
-          if (isInteractive(e.target)) return;
-          if (e.button === 2) return; // no right click
-          if (isMobile()) return; // safety
-
-          dragging = true;
-          moved = 0;
-
-          card.classList.add("is-dragging");
-          bringToFront(card);
-
-          startX = e.clientX ?? 0;
-          startY = e.clientY ?? 0;
-          startPos = getPos(card);
-
-          // Cattura pointer
-          card.setPointerCapture?.(e.pointerId);
-
-          // Importantissimo: evita selezione/scroll while dragging
-          e.preventDefault();
-        };
+        // For smoother behavior on touchpads + consistent pointer stream
+        // (Doesn't affect click-to-open)
+        card.style.touchAction = "none";
 
         const onMove = (e: PointerEvent) => {
           if (!dragging) return;
+          if (activePointerId !== null && e.pointerId !== activePointerId)
+            return;
 
           const s = stage.getBoundingClientRect();
           const sw = Math.max(1, s.width);
@@ -299,13 +295,62 @@ declare global {
           const y = clamp(startPos.y + dyPct, b.minY, b.maxY);
 
           setPos(card, x, y);
+
+          // During drag: prevent selection / default gestures
           e.preventDefault();
         };
 
-        const onUp = () => {
+        const stopDrag = () => {
           if (!dragging) return;
           dragging = false;
           card.classList.remove("is-dragging");
+
+          // Release pointer capture (important for Firefox)
+          if (activePointerId !== null) {
+            try {
+              card.releasePointerCapture?.(activePointerId);
+            } catch {}
+          }
+          activePointerId = null;
+
+          // Remove global listeners
+          window.removeEventListener("pointermove", onMove as any);
+          window.removeEventListener("pointerup", onUp as any);
+          window.removeEventListener("pointercancel", onUp as any);
+          window.removeEventListener("blur", onUp as any);
+        };
+
+        const onUp = (_e?: Event) => stopDrag();
+
+        const onDown = (e: PointerEvent) => {
+          if (isInteractive(e.target)) return;
+          if (e.button === 2) return; // no right click
+          if (isMobile()) return; // safety
+
+          dragging = true;
+          moved = 0;
+
+          card.classList.add("is-dragging");
+          bringToFront(card);
+
+          activePointerId = e.pointerId;
+          startX = e.clientX ?? 0;
+          startY = e.clientY ?? 0;
+          startPos = getPos(card);
+
+          // Capture pointer
+          try {
+            card.setPointerCapture?.(e.pointerId);
+          } catch {}
+
+          // Attach global listeners only now
+          window.addEventListener("pointermove", onMove, { passive: false });
+          window.addEventListener("pointerup", onUp, { passive: true });
+          window.addEventListener("pointercancel", onUp, { passive: true });
+          window.addEventListener("blur", onUp);
+
+          // Avoid selection / default behavior
+          e.preventDefault();
         };
 
         const openFromCard = () => {
@@ -319,9 +364,6 @@ declare global {
         };
 
         on(card, "pointerdown", onDown);
-        // Listener globali ma rimossi via destroy()
-        on(window, "pointermove", onMove, { passive: false });
-        on(window, "pointerup", onUp);
 
         // Click only if not a drag
         on(card, "click", () => {
@@ -342,7 +384,6 @@ declare global {
       cards.forEach(enableDrag);
 
       // Initial layout once stage has real size
-      // (requestAnimationFrame assicura layout calcolato in build/preview)
       requestAnimationFrame(() => shuffle());
     };
 
@@ -367,7 +408,6 @@ declare global {
       // cleanup listeners e re-init
       destroy();
       // reinstalla un nuovo ciclo (ripristina destroy su window)
-      // NB: run() richiama anche la destroy precedente
       run();
     };
 
