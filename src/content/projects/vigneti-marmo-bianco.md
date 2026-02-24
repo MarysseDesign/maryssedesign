@@ -49,9 +49,7 @@ leading the digital direction of the project, from identity definition <br class
         loop
         playsinline
         preload="metadata"
-        aria-label="Vigneti Marmo Bianco website overview video."
-        poster="/images/projects/portfolio/vigneti-marmo-bianco/poster_01.jpg"
-      >
+        aria-label="Vigneti Marmo Bianco website overview video.">
         <source
           src="/videos/projects/vigneti-marmo-bianco/vigneti-marmo-bianco_overview-2.mp4"
           type="video/mp4"
