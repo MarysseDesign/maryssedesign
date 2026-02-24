@@ -1,0 +1,18 @@
+---
+/**
+ * PatternBand.astro
+ * Usage:
+ * <PatternBand patternUrl="/images/.../pattern.jpg" ariaLabel="Primolino pattern" />
+ */
+const { patternUrl, ariaLabel = "Pattern band" } = Astro.props as {
+  patternUrl: string;
+  ariaLabel?: string;
+};
+---
+
+<div
+  class="pattern-band"
+  role="img"
+  aria-label={ariaLabel}
+  style={`--pattern-url: url('${patternUrl}');`}
+></div>

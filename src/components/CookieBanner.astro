@@ -1,0 +1,78 @@
+---
+const { GA_ID = "UA-120911902-1" } = Astro.props;
+---
+
+<style is:global>
+  .shadow-cookie { box-shadow: 0 12px 32px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04); }
+</style>
+
+<!-- Badge -->
+<div id="cookie-badge" class="fixed bottom-4 right-4 z-[60] select-none">
+  <button type="button"
+    class="font-montserrat uppercase tracking-[.2em] text-[10px] px-3 py-2 rounded-full border border-gray-300 bg-white hover:bg-gray-50">
+    🍪 Cookies
+  </button>
+</div>
+
+<!-- Panel -->
+<div id="cookie-panel"
+  class="hidden fixed bottom-4 right-4 z-[70] w-[min(92vw,520px)] rounded-2xl border border-gray-200 bg-white shadow-cookie">
+  <div class="p-5 md:p-6">
+    <h3 class="font-semibold text-sm mb-1">Cookie & Privacy</h3>
+    <p class="text-[12px] leading-relaxed text-gray-700">
+      Usiamo cookie per migliorare l’esperienza e analizzare il traffico.
+      Leggi la <a href="/cookie-policy" class="underline">Cookie Policy</a> e la
+      <a href="/privacy" class="underline">Privacy Policy</a>.
+    </p>
+    <div class="mt-4 flex items-center gap-2">
+      <button id="cookie-accept"
+        class="px-4 py-2 rounded-full bg-gray-900 text-white text-[12px] uppercase tracking-[.15em]">Accetta</button>
+      <button id="cookie-decline"
+        class="px-4 py-2 rounded-full border border-gray-300 text-[12px] uppercase tracking-[.15em] hover:bg-gray-50">Rifiuta</button>
+      <button id="cookie-close" class="ml-auto px-3 py-2 text-[12px] text-gray-500 hover:text-gray-700">Chiudi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const KEY = "cookieConsent";
+    const badge = document.getElementById("cookie-badge");
+    const badgeBtn = badge?.querySelector("button");
+    const panel = document.getElementById("cookie-panel");
+    const btnAccept = document.getElementById("cookie-accept");
+    const btnDecline = document.getElementById("cookie-decline");
+    const btnClose = document.getElementById("cookie-close");
+    const GA = "<?= GA_ID ?>"; // Astro inietta come stringa
+
+    function getState(){ try{return JSON.parse(localStorage.getItem(KEY));}catch{return null;} }
+    function setState(status){ localStorage.setItem(KEY, JSON.stringify({status, ts: Date.now()})); }
+    function openPanel(){ panel?.classList.remove("hidden"); }
+    function closePanel(){ panel?.classList.add("hidden"); }
+
+    function loadGA(){
+      if(!GA || document.getElementById("gtag-js")) return;
+      const s = document.createElement("script");
+      s.id = "gtag-js"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id="+GA;
+      document.head.appendChild(s);
+      const i = document.createElement("script");
+      i.text = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', '${GA}');
+      `;
+      document.head.appendChild(i);
+    }
+
+    // init
+    const st = getState();
+    if (st?.status === "accepted") loadGA();
+
+    // handlers (attacco SEMPRE agli elementi, no selettori annidati strani)
+    badgeBtn?.addEventListener("click", openPanel);
+    btnClose?.addEventListener("click", closePanel);
+    btnAccept?.addEventListener("click", ()=>{ setState("accepted"); loadGA(); closePanel(); });
+    btnDecline?.addEventListener("click", ()=>{ setState("declined"); closePanel(); });
+  })();
+</script>

@@ -1,0 +1,61 @@
+/* Elegant badges (Marysse-like) */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center; /* se in area centrata */
+  margin-top: 14px;
+}
+
+/* Badge statici (non cliccabili) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: rgba(17, 17, 17, 0.65);
+  background: rgba(255, 255, 255, 0.7);
+
+  cursor: default;              /* ⬅️ NON pointer */
+  user-select: none;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Hover solo visivo (nessuna azione implicita) */
+.badge:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.07);
+  color: rgba(17, 17, 17, 0.9);
+}
+
+.badge {
+  cursor: none;
+}
+
+/* When badges are inside cards (left aligned) */
+.card .badge-row {
+  justify-content: flex-start;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .badge-row {
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .badge {
+    padding: 7px 10px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}

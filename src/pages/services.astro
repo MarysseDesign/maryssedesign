@@ -1,0 +1,340 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "../styles/bigservices.css";
+
+/**
+ * SERVICES
+ * Mirrors the 10 tarot cards shown on the homepage.
+ * Each module can be booked individually, or combined into a wider brand architecture.
+ */
+const modules = [
+  {
+    key: "branding",
+    title: "Branding",
+    subtitle: "Identity and Positioning",
+    desc:
+      "An identity and positioning crafted to feel inevitable, consistent and unmistakable across every touchpoint.",
+    bullets: [
+      "Brand architecture and positioning",
+      "Visual identity system",
+      "Guidelines and core assets",
+    ],
+    image: "/images/tarot/branding.jpg",
+    imageAlt: "Branding tarot card",
+  },
+  {
+    key: "strategy",
+    title: "Creative Direction",
+    subtitle: "Strategy and Creative Concept",
+    desc:
+      "Creative direction that shapes vision and meaning, guiding strategy, concepts and visual expression as one.",
+    bullets: [
+      "Creative concept and direction",
+      "Art direction and visual language",
+      "Oversight across touchpoints",
+    ],
+    image: "/images/tarot/strategy.jpg",
+    imageAlt: "Creative direction tarot card",
+  },
+  {
+    key: "advertising",
+    title: "Advertising",
+    subtitle: "Campaigns and Art Direction",
+    desc:
+      "Campaigns designed with a refined eye, where art direction and visuals work together to express value and desire.",
+    bullets: [
+      "Campaign concept and key visuals",
+      "Art direction for imagery",
+      "Assets for digital and print",
+    ],
+    image: "/images/tarot/advertising.jpg",
+    imageAlt: "Advertising tarot card",
+  },
+  {
+    key: "storytelling",
+    title: "Storytelling",
+    subtitle: "Narratives and Brand Voice",
+    desc:
+      "Stories that sound authentic and intentional, shaping tone of voice and narratives that resonate over time.",
+    bullets: [
+      "Tone of voice and messaging",
+      "Narrative structure and copy direction",
+      "Editorial guidelines",
+    ],
+    image: "/images/tarot/storytelling.jpg",
+    imageAlt: "Storytelling tarot card",
+  },
+  {
+    key: "web",
+    title: "Web Design",
+    subtitle: "Luxury Digital Experiences",
+    desc:
+      "Digital experiences crafted with clarity and precision, where structure, typography and motion feel effortless.",
+    bullets: [
+      "UX and UI architecture",
+      "Component ready design system",
+      "Astro or WordPress build",
+    ],
+    image: "/images/tarot/web.jpg",
+    imageAlt: "Web design tarot card",
+  },
+  {
+    key: "social",
+    title: "Social Media",
+    subtitle: "Content and Editorial Rhythm",
+    desc:
+      "A considered social presence built through rhythm, content direction and visual consistency.",
+    bullets: [
+      "Editorial rhythm and format rules",
+      "Content direction and planning",
+      "Visual consistency over time",
+    ],
+    image: "/images/tarot/social.jpg",
+    imageAlt: "Social media tarot card",
+  },
+  {
+    key: "visual",
+    title: "Visual System",
+    subtitle: "Guidelines and Design Language",
+    desc:
+      "A coherent visual system that defines rules, layouts and design language ready to evolve with the brand.",
+    bullets: [
+      "Design language and layout rules",
+      "Templates and components",
+      "Guidelines for teams",
+    ],
+    image: "/images/tarot/visual.jpg",
+    imageAlt: "Visual system tarot card",
+  },
+  {
+    key: "photo",
+    title: "Photography",
+    subtitle: "Product and Brand Imagery",
+    desc:
+      "Curated photography guided by art direction, shaping images that feel aligned, elevated and intentional.",
+    bullets: [
+      "Pre shoot planning",
+      "On set art direction",
+      "Selection and post production",
+    ],
+    image: "/images/tarot/photo.jpg",
+    imageAlt: "Photography tarot card",
+  },
+  {
+    key: "video",
+    title: "Video",
+    subtitle: "Motion and Brand Films",
+    desc:
+      "Motion and video content designed with cinematic sensitivity, from brand films to digital storytelling.",
+    bullets: [
+      "Direction for motion language",
+      "Storyboards and pacing",
+      "Deliverables for digital",
+    ],
+    image: "/images/tarot/video.jpg",
+    imageAlt: "Video tarot card",
+  },
+  {
+    key: "events",
+    title: "Experiential",
+    subtitle: "Events and Brand Moments",
+    desc:
+      "Physical brand experiences shaped through identity, visuals and direction, translating the brand into space.",
+    bullets: [
+      "Event identity and direction",
+      "Touchpoints and assets",
+      "Consistency across space",
+    ],
+    image: "/images/tarot/events.jpg",
+    imageAlt: "Experiential tarot card",
+  },
+];
+
+const architectures = [
+  // ✅ FIX: intro for modules grid (was an empty object)
+  {
+    kicker: "Identity",
+    title: "Positioning and design language.",
+    lead:
+      "The foundation that defines perception, sets standards and builds consistency over time.",
+    keys: ["branding", "storytelling", "visual"],
+  },
+  {
+    kicker: "Direction",
+    title: "Concept, campaigns and imagery.",
+    lead:
+      "A single vision guiding creative expression across narrative, visuals and execution.",
+    keys: ["strategy", "advertising", "photo", "video", "events"],
+  },
+  {
+    kicker: "Digital",
+    title: "Web and editorial presence.",
+    lead:
+      "Digital experiences built with structure, typography and rhythm that feel effortless.",
+    keys: ["web", "social"],
+  },
+];
+
+const byKey = Object.fromEntries(modules.map((m) => [m.key, m]));
+---
+
+<BaseLayout brand="marysse" title="Services · Marysse Design" footerVariant="minimal">
+  <main class="bigservices-page services-page">
+    <header class="bigservices-hero">
+      <div class="bigservices-center">
+        <div class="bigservices-hero__inner">
+          <h1 class="bigservices-title page-fade" style="--d: 80ms;">Services</h1>
+
+          <p class="bigservices-subtitle">
+            How vision becomes form.<br />
+            Modular services for premium and luxury brands,<br class="hide-mobile" /> shaped by strategy and designed to work as a coherent system.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- MODULES GRID (tarot inspired, minimal) -->
+    <section id="modules" class="services-section about-veil" aria-label="Services modules">
+      <div class="site-container services-inner">
+     
+
+        <div class="module-grid" role="list">
+          {modules.map((m, idx) => (
+            <a
+              class="module-card reveal"
+              style={`--delay:${140 + idx * 40}ms`}
+              href={`#${m.key}`}
+              role="listitem"
+              aria-label={`Open ${m.title}`}
+            >
+              <figure class="module-media" aria-hidden="true">
+                <img src={m.image} alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+              </figure>
+              <div class="module-meta">
+                <h3 class="module-title">{m.title}</h3>
+                <p class="module-sub">{m.subtitle}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURES + FULL ROWS (50/50, full visual) -->
+    <section class="services-section about-light" aria-label="Services details">
+      <div class="site-container services-inner">
+        {architectures
+          .filter((a) => a.keys)
+          .map((a, aIdx) => (
+            <section class="services-arch" aria-label={a.kicker}>
+              <header class="services-archHead reveal" style={`--delay:${80 + aIdx * 40}ms`}>
+                <p class="services-kicker">{a.kicker}</p>
+                <h2 class="services-title">{a.title}</h2>
+                <p class="services-lead">{a.lead}</p>
+              </header>
+
+              <div class="services-rows">
+                {a.keys.map((key, idx) => {
+                  const m = byKey[key];
+                  const reverse = idx % 2 === 1;
+                  return (
+                    <article
+                      id={m.key}
+                      class={`service-row reveal ${reverse ? "is-reversed" : ""}`}
+                      style={`--delay:${140 + idx * 60}ms`}
+                    >
+                      <figure class="service-media" aria-label={m.imageAlt}>
+                        <img src={m.image} alt={m.imageAlt} width="1400" height="1750" loading="lazy" decoding="async" />
+                      </figure>
+
+                      <div class="service-content">
+                        <p class="services-kicker">{m.subtitle}</p>
+                        <h3 class="services-subtitle">{m.title}</h3>
+                        <p class="service-lead">{m.desc}</p>
+
+                        <div class="service-items" aria-label={`${m.title} includes`}>
+                          {m.bullets.map((b) => (
+                            <span class="service-item">{b}</span>
+                          ))}
+                        </div>
+
+                        <div class="service-actions" aria-label={`${m.title} actions`}>
+                          <a href="/contacts/" class="cta-dark">ENQUIRE</a>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+      </div>
+    </section>
+
+    <!-- CURATORIAL SUPPORT -->
+    <section class="services-section about-veil" aria-label="Curatorial support">
+      <div class="site-container services-inner">
+        <div class="services-curation reveal" style="--delay: 80ms">
+          <p class="services-kicker">Curatorial support</p>
+          <h2 class="services-title">A focused partnership.</h2>
+          <p class="services-lead">
+            For brands that need continuity, clarity and consistent standards. A curated setup shapes the right combination of modules, with one direction guiding every output.
+          </p>
+          
+
+          <div class="curation-grid">
+            <div class="curation-card">
+              <h3>On call</h3>
+              <p>
+                Short focused sprints for refinements, critical decisions and design direction when timing matters.
+              </p>
+            </div>
+
+            <div class="curation-card2">
+              <h3>Ongoing</h3>
+              <p>
+                A monthly collaboration to keep the brand coherent over time, across content, campaigns and digital touchpoints.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- CONTACT -->
+    <section id="contact" class="services-section about-light" aria-label="Contact">
+      <div class="site-container services-inner">
+        <header class="services-intro reveal" style="--delay: 80ms">
+          <p class="services-kicker">Contact</p>
+          <h2 class="services-title">Let’s build something precise.</h2>
+          <p class="services-lead">
+            Tell me what you’re planning and I’ll come back with the best next step.<br class="hide-mobile" />
+            Prefer email? Write to <a class="inline-link" href="mailto:info@maryssedesign.com">info@maryssedesign.com</a>.
+          <br class="hide-mobile" /></p>
+        </header>
+
+      <div class="contact-actions reveal" style="--delay: 140ms">
+  <a class="cta-dark" href="/contacts/">START A PROJECT</a> <a class="cta-stroke" href="/projects/">VIEW SELECTED PROJECTS</a>
+</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scroll reveal (same pattern used in About) -->
+  <script is:inline>
+    const els = document.querySelectorAll(".reveal");
+    if (els.length) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("is-inview");
+          });
+        },
+        { threshold: 0.14 }
+      );
+      els.forEach((el) => io.observe(el));
+    }
+  </script>
+</BaseLayout>

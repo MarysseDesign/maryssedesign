@@ -1,0 +1,964 @@
+/* ==========================================================================
+   Template-specific tweaks
+   Use .template-<name> on <main class="project-page ...">
+   ========================================================================== */
+
+/* Shared helpers */
+.project-page .row-center {
+  justify-content: center;
+  padding-bottom: 80px;
+}
+
+/* --------------------------------------------------------------------------
+   CROP-VIDEO (ex Makeup Milano)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-crop-video .hero {
+  padding-bottom: 28px;
+}
+
+/* ✅ NON forzare flex su tutte le colonne: rompe spaziature.
+   Applica solo alle colonne che contengono media/video. */
+.project-page.template-crop-video .col-md-6:has(.media-crop),
+.project-page.template-crop-video .col-md-6:has(video) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centro verticale solo dove serve */
+}
+
+.project-page.template-crop-video .media-crop {
+  width: 80%;
+  aspect-ratio: 1 / 1.28;
+  overflow: hidden;
+  border-radius: 0;
+  position: relative;
+  margin-top: 20px;
+}
+
+.project-page.template-crop-video .media-crop video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.project-page.template-crop-video .project-year.with-line {
+  margin-top: 16px !important;
+  padding-top: 18px;
+}
+
+.project-page.template-crop-video .project-year.with-line::before {
+  height: 138px;
+}
+@media (min-width: 981px) {
+  .project-page.template-crop-video .row:has(.box.moretop) {
+    align-items: center;
+    max-width: 1120px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+  .project-page.template-crop-video .nolarge {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .project-page.template-crop-video .videotop {
+    padding-top: 100px;
+  }
+
+  .project-page.template-brand-ecosystem .row-center {
+    padding-bottom: 0px !important;
+  }
+}
+@media (max-width: 768px) {
+  .project-page.template-crop-video .crop-img-pad {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+  .project-page.template-crop-video .col-md-6.videotop {
+    padding-top: 22px;
+  }
+
+  .project-page.template-brand-ecosystem .row-center {
+    padding-bottom: 0px !important;
+  }
+}
+
+/* ✅ IMPORTANT: niente padding-bottom “globale” qui.
+   Se un giorno vuoi spacing immagini in crop-video, riattivalo con selettori corretti:
+   .project-page.template-crop-video .prose img,
+   .project-page.template-crop-video img.fadein { padding-bottom: 40px; }
+*/
+
+/* --------------------------------------------------------------------------
+   SILVIAN HEACH (template dedicato)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-box-editorial .content {
+  padding-top: 32px;
+}
+
+.project-page.template-box-editorial .pads {
+  padding-top: 42px;
+}
+
+.project-page.template-box-editorial .row {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .project-page img.fadein {
+    padding-bottom: 0px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ADV (ex armanibeauty)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-adv img.fadein.imagepaddingbottom {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+.project-page.template-adv .row-center {
+  padding-bottom: 50px !important;
+}
+
+/* ✅ niente regole globali travestite */
+.project-page.template-adv .prose img,
+.project-page.template-adv img.fadein {
+  /* padding-bottom: 40px;  (se serve, attivalo qui) */
+}
+
+@media (max-width: 640px) {
+  .project-page.template-adv .mt-xl {
+    margin-top: 0px;
+  }
+  .project-page.template-adv .row-center {
+    padding-bottom: 30px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LEGACY-VIDEO (Quantic)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-legacy-video .media-crop video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (min-width: 981px) {
+  .project-page.template-legacy-video .alignvideo {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   IDENTITY (ex brezza-marina + bonmiele)
+   Base comune: qui vuoi il padding-bottom immagini
+   -------------------------------------------------------------------------- */
+
+.project-page.template-identity img.fadein.imagepaddingbottom {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* ✅ Solo Identity: spacing immagini */
+.project-page.template-identity .prose img,
+.project-page.template-identity img.fadein {
+  padding-bottom: 24px;
+}
+
+/* Base spacing titoli in identity */
+.project-page.template-identity .prose h2 {
+  margin-top: 30px;
+}
+
+/* Titolo specifico (ok tenerlo così) */
+.project-page.template-identity #packaging--experience-design {
+  margin-top: 40px;
+}
+
+.project-page.template-identity .col-md-12.nopaddingbottom img,
+.project-page.template-identity .col-md-12.nopaddingbottom video {
+  padding-bottom: 0 !important;
+}
+/* Identity — joined images block (Bonmiele) */
+.project-page.template-identity .row.nopaddingblock {
+  margin-top: 0 !important;
+}
+
+.project-page.template-identity .row.nopaddingblock .col-md-6 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.project-page.template-identity .row.nopaddingblock img {
+  padding-bottom: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   VIGNETI (se lo lasci come template custom, ok. Se lo porti a legacy, possiamo pulirlo)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-hero-video .col-md-6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-page.template-hero-video .text-box-width {
+  max-width: 400px;
+}
+
+.project-page.template-hero-video .vigneti-site,
+.project-page.template-hero-video .vigneti-feature {
+  display: flex;
+  justify-content: center;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.project-page.template-hero-video .vigneti-site img,
+.project-page.template-hero-video .vigneti-feature img {
+  max-width: 420px;
+}
+
+@media (max-width: 768px) {
+  .project-page.template-hero-video .row-compact {
+    margin-top: 0px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LEGACY (anchor specific)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-legacy #motion-graphics--digital-presence {
+  margin-top: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile tweaks
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .imagepadding {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .project-page.template-adv img.fadein.imagepaddingbottom {
+    padding-bottom: 20px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   OPTIONAL: project-specific hooks within identity
+   (attivi solo se aggiungi wrapper nel MD:
+   <div class="identity--bonmiele"> ... </div>
+   <div class="identity--brezza"> ... </div>
+   -------------------------------------------------------------------------- */
+
+/* Bonmiele only (wrapper-based) */
+.project-page.template-identity .identity--bonmiele .heart-mask {
+  /* ... */
+}
+
+.project-page.template-identity .identity--bonmiele .max-largh {
+  /* ... */
+}
+
+/* Brezza only (wrapper-based) */
+.project-page.template-identity .identity--brezza .role-block-2 {
+  /* ... */
+}
+
+.project-page.template-identity .identity--brezza .video-no-padding {
+  /* ... */
+}
+
+/* --------------------------------------------------------------------------
+   Extra mobile spacing (only crop-video)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  /* spazio sopra SOLO dove serve */
+  .template-crop-video .project-page .box.moretop {
+    margin-top: 18px;
+  }
+
+  /* se ti serve più spazio sotto */
+  .template-crop-video .project-page .box.morebottom {
+    margin-bottom: 18px;
+  }
+
+  /* testo più arioso SOLO qui */
+  .template-crop-video .project-page .box.moretop h3 {
+    margin-bottom: 18px;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-page .project-year.with-line::before {
+    display: none;
+  }
+}
+
+/* YouTube embed — award case */
+
+.project-page.template-award-case .video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-page.template-award-case .video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   AWARD-CASE — nopaddingbottom
+   Coerente con identity
+   -------------------------------------------------------------------------- */
+
+.project-page.template-award-case .nopaddingbottom img,
+.project-page.template-award-case .nopaddingbottom video,
+.project-page.template-award-case .nopaddingbottom iframe {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* --------------------------------------------------------------------------
+   AWARD-CASE — video sizing (match images)
+   -------------------------------------------------------------------------- */
+
+/* AWARD-CASE — video exactly like images */
+.project-page.template-award-case .award-video {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.project-page.template-award-case .hide-mobile {
+  display: block;
+}
+
+/* wrapper ratio */
+.project-page.template-award-case .video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* iframe full cover */
+.project-page.template-award-case .video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+@media (hover: hover) {
+  .project-page.template-award-case .video-embed iframe {
+    pointer-events: auto;
+  }
+}
+/* --------------------------------------------------------------------------
+   AWARD-CASE — award note
+   -------------------------------------------------------------------------- */
+
+.project-page.template-award-case .award-note {
+  max-width: 620px;
+  margin: 10px auto 42px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: rgba(25, 17, 24, 0.75);
+}
+
+.project-page.template-award-case .award-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(25, 17, 24, 0.25);
+}
+
+.project-page.template-award-case .award-note a:hover {
+  text-decoration-color: rgba(25, 17, 24, 0.5);
+}
+/* --------------------------------------------------------------------------
+   AWARD-CASE — official award link
+   -------------------------------------------------------------------------- */
+
+.project-page.template-award-case .award-link {
+  margin: 6px auto 46px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(25, 17, 24, 0.65);
+}
+
+.project-page.template-award-case .award-link a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(25, 17, 24, 0.22);
+}
+
+.project-page.template-award-case .award-link a:hover {
+  text-decoration-color: rgba(25, 17, 24, 0.45);
+}
+/* --------------------------------------------------------------------------
+   AWARD-CASE — award note/link (use div, not p)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-award-case .award-note,
+.project-page.template-award-case .award-link {
+  max-width: 620px;
+  margin: 10px auto 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: rgba(25, 17, 24, 0.75);
+}
+
+.project-page.template-award-case .award-link {
+  margin-bottom: 42px;
+  font-size: 13px;
+  color: rgba(25, 17, 24, 0.65);
+}
+
+.project-page.template-award-case .award-note a,
+.project-page.template-award-case .award-link a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(25, 17, 24, 0.22);
+}
+
+.project-page.template-award-case .award-note a:hover,
+.project-page.template-award-case .award-link a:hover {
+  text-decoration-color: rgba(25, 17, 24, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   AWARD-CASE — Project collaboration rows (no ul/li)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-award-case .project-collaboration {
+  max-width: 680px;
+  margin: 72px auto 72px;
+  position: relative;
+}
+
+.project-page.template-award-case .project-collaboration::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(25, 17, 24, 0.15);
+}
+
+.project-page.template-award-case .project-team,
+.project-page.template-award-case .project-tutors {
+  padding-top: 32px;
+}
+
+.project-page.template-award-case .project-tutors {
+  margin-top: 24px;
+}
+
+.project-page.template-award-case .project-team h2,
+.project-page.template-award-case .project-tutors h2 {
+  margin: 0 0 18px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: rgba(25, 17, 24, 0.6);
+}
+
+.project-page.template-award-case .team-rows {
+  display: block;
+}
+
+.project-page.template-award-case .team-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(25, 17, 24, 0.12);
+
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(25, 17, 24, 0.85);
+
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.project-page.template-award-case .team-row:last-child {
+  border-bottom: none;
+}
+
+.project-page.template-award-case .team-arrow {
+  opacity: 0.6;
+}
+
+.project-page.template-award-case .team-row:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .project-page.template-award-case .project-collaboration {
+    margin: 56px auto 56px;
+  }
+
+  .project-page.template-award-case .team-row {
+    padding: 8px 0;
+    font-size: 13.5px;
+  }
+}
+/* --------------------------------------------------------------------------
+   GORILLAS — video max width (match images)
+   -------------------------------------------------------------------------- */
+
+.project-page .media-crop {
+  width: 100%;
+}
+
+.project-page .media-crop.project-video,
+.project-page .media-crop video,
+.project-page .media-crop {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* sicurezza: il video riempie il wrapper */
+.project-page .media-crop video.project-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* --------------------------------------------------------------------------
+   BRAND-ECOSYSTEM (Primolino)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-brand-ecosystem .row.nopaddingbottom {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.project-page.template-brand-ecosystem .hero {
+  padding-bottom: 34px;
+}
+
+/* ===== Split B2B / B2C ===== */
+
+.project-page.template-brand-ecosystem .ecosystem-split {
+  margin-top: 18px;
+  margin-bottom: 20px !important;
+  align-items: stretch;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-card {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  padding: 22px 22px 18px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+}
+
+.project-page.template-brand-ecosystem .ecosystem-kicker {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.6);
+  margin-bottom: 10px;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-text {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 28px;
+  font-weight: 300;
+  color: rgba(17, 17, 17, 0.78);
+  max-width: 60ch;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  text-align: center;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #111;
+  background: transparent;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-pill:hover {
+  border-color: rgba(0, 0, 0, 0.55);
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.project-page.template-brand-ecosystem .ecosystem-pill.is-ghost {
+  opacity: 0.75;
+}
+
+/* ===== Media strip (CSS-only) ===== */
+
+.project-page.template-brand-ecosystem .media-strip {
+  margin: 26px auto 54px;
+  width: min(var(--max), 92vw);
+}
+
+.project-page.template-brand-ecosystem .media-strip__track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 2px 14px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-page.template-brand-ecosystem .media-strip__track::-webkit-scrollbar {
+  height: 8px;
+}
+.project-page.template-brand-ecosystem
+  .media-strip__track::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+}
+
+.project-page.template-brand-ecosystem .media-strip__item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Dimensioni: “tile editoriale” */
+.project-page.template-brand-ecosystem .media-strip__item img,
+.project-page.template-brand-ecosystem .media-strip__item video {
+  display: block;
+  width: clamp(220px, 32vw, 420px);
+  height: auto;
+}
+
+/* ===== Pattern band (CSS animation, no GIF) ===== */
+
+.project-page.template-brand-ecosystem .pattern-band {
+  width: min(var(--max), 92vw);
+  margin: 28px auto 54px;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+
+  /* use: style="--pattern-url: url('/path.jpg')" */
+  background-image: var(--pattern-url);
+  background-repeat: repeat;
+  background-size: 720px auto;
+  background-position: 0 0;
+
+  /* height “showcase” */
+  height: clamp(180px, 22vw, 320px);
+
+  animation: brandEcosystemPatternDrift 18s linear infinite;
+}
+
+@keyframes brandEcosystemPatternDrift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 720px 0;
+  }
+}
+
+/* ===== Optional: video loop in content ===== */
+.project-page.template-brand-ecosystem .video-loop {
+  width: 100%;
+  max-width: 1120px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .project-page.template-brand-ecosystem .ecosystem-card {
+    padding: 18px 16px 14px;
+  }
+
+  .project-page.template-brand-ecosystem .ecosystem-actions {
+    justify-content: center;
+  }
+
+  .project-page.template-brand-ecosystem .media-strip {
+    margin-bottom: 40px;
+  }
+
+  .project-page.template-brand-ecosystem .media-strip__track {
+    gap: 12px;
+  }
+
+  .project-page.template-brand-ecosystem .pattern-band {
+    border-radius: 16px;
+    background-size: 560px auto;
+    animation-duration: 16s;
+  }
+
+  .project-page.template-brand-ecosystem .row.nopaddingbottom {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .project-page.template-identity .col-md-6.nopaddingbottom {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .project-page.template-identity .prose img,
+  .project-page.template-identity img.fadein {
+    padding-bottom: 0px !important;
+  }
+
+  .project-page.template-identity .mt-xl {
+    margin-top: 0px !important;
+  }
+}
+/* --------------------------------------------------------------------------
+   BRAND-ECOSYSTEM (Primolino) — align split boxes to image width (1120px)
+   -------------------------------------------------------------------------- */
+
+.project-page.template-brand-ecosystem .row.ecosystem-split {
+  width: min(1120px, 92vw);
+  margin: 18px auto 54px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  justify-content: center;
+  gap: 24px;
+}
+/* togliamo i padding delle colonne SOLO dentro questo blocco,
+   così la larghezza totale resta davvero 1120px */
+.project-page.template-brand-ecosystem .row.ecosystem-split > .col-md-6 {
+  padding-left: 0;
+  padding-right: 0;
+
+  /* manteniamo 2 colonne ma lasciamo respirare col gap */
+  width: calc(50% - 12px);
+}
+
+/* Wide full-bleed only on desktop */
+.project-page.template-brand-ecosystem .only-desktop-wide .wide-media {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0; /* oppure 16px se vuoi */
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .project-page.template-brand-ecosystem .only-desktop-wide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .project-page.template-brand-ecosystem .ecosystem-card {
+    text-align: center;
+  }
+
+  .project-page.template-brand-ecosystem .ecosystem-actions {
+    justify-content: center;
+  }
+}
+/* Primolino: hide ecosystem split on iPad + mobile */
+@media (max-width: 900px) {
+  .project-page.template-brand-ecosystem .ecosystem-split {
+    display: none !important;
+  }
+}
+/* ==========================================================================
+   PRODUCT-UX — Media Strip
+   ========================================================================== */
+
+.project-page.template-product-ux .media-strip {
+  margin: 26px auto 54px;
+  width: min(1120px, 92vw);
+}
+
+.project-page.template-product-ux .media-strip__track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 2px 14px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-page.template-product-ux .media-strip__track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.project-page.template-product-ux .media-strip__track::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+}
+
+.project-page.template-product-ux .media-strip__item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.project-page.template-product-ux .media-strip__item img {
+  display: block;
+  width: clamp(240px, 32vw, 420px);
+  height: auto;
+}
+.project-page.template-product-ux .media-strip__item img,
+.project-page.template-product-ux .media-strip__item video {
+  display: block;
+  width: clamp(240px, 32vw, 420px);
+  height: auto;
+}
+/* ==========================================================================
+   BONMIELE — identity tweaks
+   Wrapper presente nel MD: <div class="identity--bonmiele"> ... </div>
+   ========================================================================== */
+
+/* 1) RIGA 2 IMMAGINI: stessa max-width dell’immagine sopra + zero gutter */
+.project-page.template-identity .identity--bonmiele .row.nopaddingblock {
+  max-width: 1120px; /* uguale alle immagini “big” */
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  /* neutralizza i negative margins della .row legacy */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+
+  /* layout due colonne senza gap */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+/* colonne: zero padding sempre */
+.project-page.template-identity
+  .identity--bonmiele
+  .row.nopaddingblock
+  .col-md-6 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* immagini: nessun padding/margin extra */
+.project-page.template-identity .identity--bonmiele .row.nopaddingblock img {
+  display: block;
+  width: 100%;
+  max-width: none; /* IMPORTANT: non limitare singola colonna */
+  height: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.project-page.template-identity .identity--bonmiele .video-no-top {
+  margin-top: 0px;
+}
+
+/* Mobile: stack senza spazi laterali */
+@media (max-width: 768px) {
+  .project-page.template-identity .identity--bonmiele .row.nopaddingblock {
+    flex-direction: column;
+  }
+}
+
+/* 2) VIDEO “miele che cola” dentro maschera a cuore (match width immagini) */
+.project-page.template-identity .identity--bonmiele .heart-mask {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0;
+
+  /* ratio coerente (puoi cambiare se serve) */
+  aspect-ratio: 16 / 9;
+
+  /* mask (Safari + Chrome) */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 85 C35 72 10 55 10 32 C10 18 20 10 33 10 C41 10 47 14 50 20 C53 14 59 10 67 10 C80 10 90 18 90 32 C90 55 65 72 50 85 Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 85 C35 72 10 55 10 32 C10 18 20 10 33 10 C41 10 47 14 50 20 C53 14 59 10 67 10 C80 10 90 18 90 32 C90 55 65 72 50 85 Z'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+.project-page.template-identity .identity--bonmiele .heart-mask video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

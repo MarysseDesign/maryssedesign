@@ -1,0 +1,264 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "../styles/marysszang.css";
+
+/** Filtri identici alla reference */
+const filterDefs = [
+  { label: "All", key: "all" },
+  { label: "Clouds Collection", key: "clouds" },
+  { label: "Architecture Collection", key: "architecture" },
+  { label: "La vie en rose Collection", key: "la-vie-en-rose" },
+  { label: "Moon Collection", key: "moon" },
+  { label: "Creathings collection", key: "creathings" },
+];
+
+/** artworks: ordine, titoli e collezioni come nella reference */
+const items = [
+  { src: "/images/artworks/36-ig.jpg", title: "Listening", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/31-ig.jpg", title: "Touching", collection: "Moon collection", filterKey: "moon" },
+  { src: "/images/artworks/34-ig.jpg", title: "Restare", collection: "Moon collection", filterKey: "moon" },
+  { src: "/images/artworks/33-ig.jpg", title: "Moon's surf", collection: "Moon collection", filterKey: "moon" },
+  { src: "/images/artworks/32-ig.jpg", title: "Naked", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/30-ig.jpg", title: "Oxygen", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/29-ig.jpg", title: "Collapse", collection: "Creathings collection", filterKey: "creathings" },
+  { src: "/images/artworks/35-ig.jpg", title: "Blossed plane", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/01-ig.jpg", title: "Children Dreams I", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/02-ig.jpg", title: "Flight to heaven", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/03-ig.jpg", title: "Life is a carousel", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/04-ig.jpg", title: "Up like mushrooms", collection: "Architecture collection", filterKey: "architecture" },
+  { src: "/images/artworks/05-ig.jpg", title: "Serenity", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/06-ig.jpg", title: "Head in the clouds", collection: "Creathings collection", filterKey: "creathings" },
+  { src: "/images/artworks/07-ig.jpg", title: "Color attack", collection: "Creathings collection", filterKey: "creathings" },
+  { src: "/images/artworks/08-ig.jpg", title: "The pink hour", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/09-ig.jpg", title: "Melting skyline", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/10-ig.jpg", title: "Cotton city", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/11-ig.jpg", title: "Sweet skyline", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/12-ig.jpg", title: "Shapes", collection: "Architecture collection", filterKey: "architecture" },
+  { src: "/images/artworks/13-ig.jpg", title: "Anthophila", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/14-ig.jpg", title: "Carts & stairs", collection: "Creathings collection", filterKey: "creathings" },
+  { src: "/images/artworks/15-ig.jpg", title: "Born to be print", collection: "Creathings collection", filterKey: "creathings" },
+  { src: "/images/artworks/16-ig.jpg", title: "Feelings of shapes", collection: "Creathings collection", filterKey: "creathings" },
+  { src: "/images/artworks/17-ig.jpg", title: "Sunflower inn", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/18-ig.jpg", title: "Fior di luna", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/19-ig.jpg", title: "La vie en rose", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/20-ig.jpg", title: "Children Dreams II", collection: "Clouds collection", filterKey: "clouds" },
+  { src: "/images/artworks/21-ig.jpg", title: "Sunny Day", collection: "Architecture collection", filterKey: "architecture" },
+  { src: "/images/artworks/22-ig.jpg", title: "Breid", collection: "Architecture collection", filterKey: "architecture" },
+  { src: "/images/artworks/23-ig.jpg", title: "Chemical chimney", collection: "Architecture collection", filterKey: "architecture" },
+  { src: "/images/artworks/24-ig.jpg", title: "Cut-things", collection: "Architecture collection", filterKey: "architecture" },
+  { src: "/images/artworks/25-ig.jpg", title: "L-over", collection: "Moon collection", filterKey: "moon" },
+  { src: "/images/artworks/26-ig.jpg", title: "Delicate", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/27-ig.jpg", title: "Hello beauty!", collection: "Moon collection", filterKey: "moon" },
+  { src: "/images/artworks/28-ig.jpg", title: "Chatouille", collection: "La vie en rose collection", filterKey: "la-vie-en-rose" },
+];
+
+const pageTitle = "Art is the best way to live the world.";
+---
+
+<BaseLayout brand="marysszang" title="Marysszang · Artworks">
+  <!-- HERO -->
+  <section class="msz-hero">
+    <!-- HERO TITLE -->
+    <h1 class="msz-title typewriter" data-text={pageTitle}>
+      <span aria-hidden="true">{pageTitle}</span>
+    </h1>
+
+    <p class="msz-subtitle">
+      As you move through this page, you’ll discover my soul as a digital artist —
+      a visual language of softness and balance,
+      an invitation to breathe, to feel, to see light.
+      <br />
+      <a
+        href="https://www.instagram.com/marysszang"
+        target="_blank"
+        rel="noopener"
+        class="msz-ig"
+      >
+        @marysszang
+      </a>
+    </p>
+
+    <ul class="msz-filters" id="filters">
+      {filterDefs.map((f) => (
+        <li>
+          <button
+            type="button"
+            class={"msz-chip " + (f.key === "all" ? "active" : "")}
+            data-filter={f.key}
+          >
+            {f.label}
+          </button>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- GRIGLIA artworks -->
+  <section class="msz-grid" id="artworks">
+    {items.map((it) => (
+      <figure class={"msz-card " + it.filterKey}>
+        <img loading="lazy" decoding="async" src={it.src} alt={`${it.title} @marysszang`} />
+        <figcaption>
+          <strong>{it.title}</strong>
+          <span>{it.collection}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </section>
+
+  <!-- ABOUT -->
+  <section class="msz-about" id="about">
+    <div class="msz-about-inner">
+      <h2>About Marysszang</h2>
+
+      <p>
+        Marysszang is my visual space — a dialogue between lightness and emotion.
+        <br class="hide-on-mobile" />
+        Every creation begins with a fleeting thought, a subtle detail, a silent reflection —
+        transformed into a story made of images.
+        Through photography and visual storytelling, I explore the beauty of simplicity,
+        <br class="hide-on-mobile" />
+        the poetry of everyday life, and the subtle balance between imagination and reality.
+      </p>
+
+      <p>
+        My creative language flows between softness and surreality, inspired by textures, natural light,
+        and the quiet rhythm of time. Marysszang is not just a project — it’s an evolving vision,
+        <br class="hide-on-mobile" />
+        a way to shape emotions and share calm and wonder.
+      </p>
+
+      <a
+        href="https://www.instagram.com/marysszang"
+        target="_blank"
+        rel="noopener"
+        class="msz-ig"
+      >
+        @marysszang
+      </a>
+    </div>
+
+    <!-- About image -->
+    <figure class="msz-about-figure">
+      <img
+        src="/images/about/marysszang-portrait.jpg"
+        alt="Marysszang — surreal minimalist portrait"
+        loading="lazy"
+        decoding="async"
+        width="768"
+        height="910"
+      />
+    </figure>
+  </section>
+
+  <!-- SEZIONE collaborations -->
+  <section class="msz-collaborations mt-24" id="collaborations">
+    <h2 class="text-center text-[18px] tracking-[0.25em] uppercase text-gray-600 mb-6">
+      collaborations & Partners
+    </h2>
+
+    <p class="msz-collaborations-intro">
+      Along my artistic path, I’ve had the chance to collaborate with <br class="hide-on-mobile" />
+      kindred brands and creative collaborations:
+    </p>
+
+    <div class="relative overflow-hidden">
+      <div class="flex animate-marquee items-center whitespace-nowrap">
+        <!-- LOGHI SCORRENTI -->
+        <img src="/images/collaborations/Canon.png" alt="Canon" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Kia.png" alt="Kia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Acaf-Catania.png" alt="Acaf Catania" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Telki-Milano.png" alt="Telkì Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Psicografici-Editore.png" alt="Psicografici Editore" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/PullAndBear.png" alt="Pull&Bear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Garnier.png" alt="Garnier" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Tijnhomelife.png" alt="Tijnhomelife" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Campomarzio70.png" alt="Campomarzio70" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Memoparis.png" alt="Memoparis" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ortastro.png" alt="Ortastro" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/GoodYear.png" alt="GoodYear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Italia.png" alt="Igers Italia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Milano.png" alt="Igers Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Visit-Milano.png" alt="Visit Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Europa.png" alt="Igers Europa" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Tropea.png" alt="Igers Tropea" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Calabria.png" alt="Igers Calabria" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Dyson.png" alt="Dyson" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/NapLoungewear.png" alt="Nap Loungewear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ecosusi-Vintage.png" alt="Ecosusi Vintage" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Little-Look-Shop.png" alt="Little Look Shop" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Stronger.png" alt="Stronger" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+
+        <!-- duplicazione per loop continuo -->
+        <img src="/images/collaborations/Canon.png" alt="Canon" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Kia.png" alt="Kia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Acaf-Catania.png" alt="Acaf Catania" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Telki-Milano.png" alt="Telkì Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Psicografici-Editore.png" alt="Psicografici Editore" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/PullAndBear.png" alt="Pull&Bear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Garnier.png" alt="Garnier" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Tijnhomelife.png" alt="Tijnhomelife" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Campomarzio70.png" alt="Campomarzio70" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Memoparis.png" alt="Memoparis" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ortastro.png" alt="Ortastro" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/GoodYear.png" alt="GoodYear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Italia.png" alt="Igers Italia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Milano.png" alt="Igers Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Visit-Milano.png" alt="Visit Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Europa.png" alt="Igers Europa" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Tropea.png" alt="Igers Tropea" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Calabria.png" alt="Igers Calabria" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Dyson.png" alt="Dyson" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/NapLoungewear.png" alt="Nap Loungewear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ecosusi-Vintage.png" alt="Ecosusi Vintage" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Little-Look-Shop.png" alt="Little Look Shop" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Stronger.png" alt="Stronger" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="msz-footer-simple">
+    <p class="msz-affiliate">
+      As an Amazon Associate I earn from qualifying purchases.
+    </p>
+  </footer>
+
+  <!-- ✅ SCRIPT FILTRI -->
+  <script is:inline>
+    function initMszFilters() {
+      const filtersRoot = document.getElementById("filters");
+      const grid = document.getElementById("artworks");
+      if (!filtersRoot || !grid) return;
+
+      const buttons = Array.from(filtersRoot.querySelectorAll("button[data-filter]"));
+      const cards = Array.from(grid.querySelectorAll(".msz-card"));
+
+      if (!buttons.length || !cards.length) return;
+
+      const applyFilter = (key) => {
+        cards.forEach((card) => {
+          const show = key === "all" || card.classList.contains(key);
+          card.style.display = show ? "" : "none";
+        });
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.dataset.filter || "all";
+
+          buttons.forEach((b) => b.classList.toggle("active", b === btn));
+          applyFilter(key);
+        });
+      });
+
+      // Stato iniziale coerente con "All"
+      applyFilter("all");
+    }
+
+    // Primo load
+    document.addEventListener("DOMContentLoaded", initMszFilters);
+
+    // Navigazioni client-side (se usi View Transitions / routing Astro)
+    document.addEventListener("astro:page-load", initMszFilters);
+  </script>
+</BaseLayout>

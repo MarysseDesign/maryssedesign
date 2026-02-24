@@ -1,0 +1,73 @@
+/* src/styles/header.css */
+
+/* Header height token (Marysse) */
+:root {
+  --header-h: 52px; /* mobile */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 80px; /* md+ */
+  }
+}
+
+/* Bottoni “pill” */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid #191118;
+  line-height: 1;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+.pill:hover {
+  opacity: 0.85;
+}
+
+.pill--dark {
+  background: #191118;
+  color: #fff;
+  border-color: #191118;
+}
+
+/* Variante chiara, se ti serve altrove */
+.pill--light {
+  background: #fff;
+  color: #191118;
+  border-color: #e5e7eb;
+}
+
+/* Fix stretching SOLO per il logo Marysszang nell'header */
+header img.logo-marysszang[alt="marysszang"] {
+  width: auto !important; /* batte eventuale img{width:100%} globale */
+  height: auto !important; /* mai height:100% */
+  max-height: 34px; /* mobile */
+  object-fit: contain; /* preserva il ratio */
+  display: block;
+}
+
+/* tablet */
+@media (min-width: 768px) {
+  header img.logo-marysszang[alt="marysszang"] {
+    max-height: 42px;
+  }
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  header img.logo-marysszang[alt="marysszang"] {
+    max-height: 48px;
+  }
+}
+
+/* micro-clamp nel range "critico" attorno a 900px */
+@media (min-width: 840px) and (max-width: 940px) {
+  header img.logo-marysszang[alt="marysszang"] {
+    max-height: 40px;
+  }
+}

@@ -1,0 +1,66 @@
+---
+const LOGO = "/images/Logo-marysszang.png";
+---
+
+<header class="msz-header">
+  <div class="msz-header__bar">
+    <!-- Logo -->
+    <a href="/marysszang/" class="msz-header__brand" aria-label="Marysszang">
+      <img src={LOGO} alt="marysszang" />
+    </a>
+
+    <!-- NAV DESKTOP (mostrata solo ≥1024px) -->
+   <nav class="msz-desktop-nav" aria-label="Primary">
+  <a href="/marysszang/#artworks">Artworks</a>
+  <a href="/marysszang/#about">About Marysszang</a>
+  <a href="/marysszang/#collaborations">Collaborations</a>
+  <span class="divider" aria-hidden="true"></span>
+  <a href="mailto:info@maryssedesign.com" class="msz-chip-btn">Contacts</a>
+  <a href="/" class="pill pill--dark">Brand Boutique</a>
+</nav>
+
+
+    <!-- HAMBURGER MOBILE (mostrato solo <1024px) -->
+    <button id="mszHamburger" class="msz-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+
+  <!-- PANNELLO MOBILE -->
+  <div id="mszMobilePanel" class="msz-menu">
+    <span class="msz-menu__diamond" aria-hidden="true"></span>
+    <nav class="msz-menu__nav">
+  <a href="/marysszang/#artworks">artworks</a>
+  <a href="/marysszang/#about">About Marysszang</a>
+  <a href="/marysszang/#collaborations">collaborations</a>
+  <a href="mailto:info@maryssedesign.com">Contacts</a>
+  <a href="/" class="pill pill--dark msz-menu__cta">Brand Boutique</a>
+</nav>
+
+  </div>
+
+  <script is:inline>
+    (() => {
+      const btn = document.getElementById('mszHamburger');
+      const panel = document.getElementById('mszMobilePanel');
+      if (!btn || !panel) return;
+
+      let open = false;
+      const setOpen = (state) => {
+        open = state;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.classList.toggle('is-open', open);
+        panel.classList.toggle('is-open', open);
+        document.documentElement.classList.toggle('msz-no-scroll', open);
+      };
+
+      btn.addEventListener('click', () => setOpen(!open));
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && open && setOpen(false));
+      panel.addEventListener('click', (e) => {
+        if (e.target.closest('a')) setOpen(false);
+      });
+    })();
+  </script>
+</header>

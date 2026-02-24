@@ -1,0 +1,251 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const logoSrc = "/images/projects/portfolio/Logo_inthespotlight.svg";
+const photoSrc = "/images/projects/portfolio/90.Photo_InTheSpotlight_WX5YZ_090.jpg";
+---
+
+<BaseLayout brand="marysse" title="Armani in the Spotlight - Picture 090" footerVariant="minimal" noMainBottomPadding={true}>
+  <Fragment slot="head">
+    <!-- Font: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons (solo icone, senza Bootstrap) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <meta name="description" content="Armani in the Spotlight - Picture 090" />
+    <meta
+      name="keywords"
+      content="Armani in the Spotlight, Armani, Armani Beauty, Armani Milano, Giorgio Armani, beauty milano, makeup milano, fashion Milano"
+    />
+
+
+  </Fragment>
+
+  <main class="page">
+    <div class="wrap">
+      <!-- Logo -->
+      <div class="logo">
+        <img src={logoSrc} alt="Armani in the Spotlight" loading="eager" />
+      </div>
+
+      <!-- Image with fade-in + passepartout -->
+      <div class="fade-in passepartout-container">
+        <img src={photoSrc} alt="Featured" class="main-image" loading="eager" />
+      </div>
+
+      <!-- Istruzioni -->
+      <p class="instruction-text instruction-mobile">
+        Tocca l'immagine e mantieni premuto per salvarla sul tuo cellulare.
+      </p>
+      <p class="instruction-text instruction-desktop">
+        Clicca con il mouse destro sull'immagine per salvarla sul tuo computer.
+      </p>
+
+      <div class="divider"></div>
+
+      <!-- Hashtag -->
+      <p class="hashtag main-hashtag">#ARMANIINTHESPOTLIGHT</p>
+
+      <div class="secondary-hashtags">
+        <p class="hashtag small-hashtag">
+          <a href="https://www.instagram.com/armanibeauty/" target="_blank" rel="noreferrer noopener" class="hashtag-link">
+            @armanibeauty
+          </a>
+          <span class="sep"> | </span>
+          <a href="https://www.instagram.com/rinascente/" target="_blank" rel="noreferrer noopener" class="hashtag-link">
+            @rinascente
+          </a>
+        </p>
+
+        <p class="hashtag small-hashtag">#ArmaniMakeup</p>
+        <p class="hashtag small-hashtag">#ArmaniFragrance</p>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a
+          href="https://www.instagram.com/armanibeauty/"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="social-link"
+          aria-label="Instagram"
+        >
+          <i class="bi bi-instagram"></i>
+        </a>
+
+        <a
+          href="https://www.tiktok.com/@armanibeauty"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="social-link"
+          aria-label="TikTok"
+        >
+          <i class="bi bi-tiktok"></i>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    /* Base */
+    :global(body) {
+      font-family: "Poppins", sans-serif;
+    }
+
+    .page {
+      min-height: 100vh;
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 18px;
+    }
+
+    .wrap {
+      width: min(920px, 100%);
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 40px;
+    }
+
+    .logo img {
+      width: min(400px, 100%);
+      height: auto;
+      display: inline-block;
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Passepartout */
+    .passepartout-container {
+      background-color: #fff;
+      padding: 16px; /* sottile su mobile */
+      display: inline-block;
+      border-radius: 0; /* bordi squadrati */
+    }
+
+    .passepartout-container img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (min-width: 992px) {
+      .passepartout-container {
+        padding: 40px; /* più spesso su desktop */
+      }
+    }
+
+    /* Istruzioni */
+    .instruction-text {
+      margin: 26px 0 0;
+      font-size: 0.95rem;
+      color: #ccc;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    @media (max-width: 768px) {
+      .instruction-text {
+        padding: 0 2rem;
+      }
+      .instruction-desktop {
+        display: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .instruction-mobile {
+        display: none;
+      }
+    }
+
+    /* Divider */
+    .divider {
+      margin: 38px auto 18px;
+      width: 100%;
+      max-width: 520px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Hashtag */
+    .main-hashtag {
+      font-size: 1.2rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin: 0;
+    }
+
+    .secondary-hashtags {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .small-hashtag {
+      font-size: 0.85rem;
+      font-weight: 200;
+      color: #aaa;
+      margin: 0.2rem 0;
+      letter-spacing: 0.4px;
+    }
+
+    .secondary-hashtags a.hashtag-link {
+      color: #aaa;
+      text-decoration: none;
+      font-weight: 200;
+      transition: color 0.3s ease;
+    }
+
+    .secondary-hashtags a.hashtag-link:hover {
+      color: #fff;
+    }
+
+    .sep {
+      color: #aaa;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      color: #fff;
+      font-size: 1.6rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-link:hover {
+      color: #aaa;
+    }
+  </style>
+</BaseLayout>

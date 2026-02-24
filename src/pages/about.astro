@@ -1,0 +1,659 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const HERO_IMG_DESKTOP = "/images/hero-desktop.jpg";
+const HERO_IMG_MOBILE = "/images/hero-mobile.jpg";
+
+const iconImages = {
+  boutique: "/images/about/icons/boutique.jpg",
+  identity: "/images/about/icons/identity.jpg",
+  digital: "/images/about/icons/digital.jpg",
+};
+---
+
+<BaseLayout brand="marysse" title="About · Marysse Design" noMainBottomPadding={true} footerVariant="minimal">
+<head slot="head">
+    <link rel="preload" as="image" href={HERO_IMG_DESKTOP} />
+    <link rel="preload" as="image" href={HERO_IMG_MOBILE} media="(max-width: 768px)" />
+  </head>
+
+
+
+  <!-- HERO -->
+  <section class="relative h-screen w-full overflow-hidden -mt-20">
+    <picture class="absolute inset-0">
+      <source srcset={HERO_IMG_MOBILE} media="(max-width: 768px)" />
+      <img
+        src={HERO_IMG_DESKTOP}
+        alt=""
+        class="w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+    </picture>
+
+    <div class="absolute inset-0 z-10 pointer-events-none"></div>
+
+    <div class="hero-inner relative z-20 flex h-full items-center">
+      <div class="site-container pb-14 md:pb-16">
+        <div class="hero-copy max-w-xl text-white">
+          <h1 class="hero-title text-5xl md:text-7xl">
+            Ready to shape<br />your vision.
+          </h1>
+
+          <p class="about-leadwhite opacity-100">
+            Thoughtful brand architecture and <br class="show-mobile" /> refined identity for modern brands.
+<br/>    Some visions need to be shaped.<br class="show-mobile" /> Others need to be read.
+ </p>
+
+          <div class="mt-10 hero-cta flex flex-wrap gap-3">
+            <a href="/services/" class="cta-light">DISCOVER HOW</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="absolute inset-x-0 bottom-0 z-30 h-11 md:h-14">
+     <div class="marquee-overlay"></div>
+      <div class="relative h-full w-full overflow-hidden leading-none flex items-center">
+        <div class="whitespace-nowrap animate-marquee uppercase tracking-wide text-[13px] md:text-sm">
+          <span class="mx-8">ADVERTISING</span><span class="mx-8">·</span>
+          <span class="mx-8">BRANDING</span><span class="mx-8">·</span>
+          <span class="mx-8">WEB DESIGN</span><span class="mx-8">·</span>
+          <span class="mx-8">SOCIAL MEDIA</span><span class="mx-8">·</span>
+          <span class="mx-8">VISUAL DESIGN</span><span class="mx-8">·</span>
+          <span class="mx-8">CREATIVE CONCEPT</span><span class="mx-8">·</span>
+          <span class="mx-8">PHOTOGRAPHY</span><span class="mx-8">·</span>
+          <span class="mx-8">VIDEO</span><span class="mx-8">·</span>
+          <span class="mx-8">EVENTS</span><span class="mx-8">·</span>
+          <span class="mx-8"><strong>MARYSSE DESIGN</strong></span><span class="mx-8">·</span>
+
+          <span class="mx-8">ADVERTISING</span><span class="mx-8">·</span>
+          <span class="mx-8">BRANDING</span><span class="mx-8">·</span>
+          <span class="mx-8">WEB DESIGN</span><span class="mx-8">·</span>
+          <span class="mx-8">SOCIAL MEDIA</span><span class="mx-8">·</span>
+          <span class="mx-8">VISUAL DESIGN</span><span class="mx-8">·</span>
+          <span class="mx-8">CREATIVE CONCEPT</span><span class="mx-8">·</span>
+          <span class="mx-8">PHOTOGRAPHY</span><span class="mx-8">·</span>
+          <span class="mx-8">VIDEO</span><span class="mx-8">·</span>
+          <span class="mx-8">EVENTS</span><span class="mx-8">·</span>
+          <span class="mx-8"><strong>MARYSSE DESIGN</strong></span><span class="mx-8">·</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div class="about-page">
+    <!-- INTRO -->
+    <section class="about-section about-light" aria-label="About overview">
+      <div class="site-container about-inner">
+        <div class="about-top">
+          <div class="reveal" style="--delay: 80ms">
+            <p class="about-kicker">About Marysse Design</p>
+            <h2 class="about-title">A Boutique Studio <br class="hide-mobile" />for Brand Architecture.</h2><br class="hide-mobile" />
+            <p class="about-lead">
+
+Marysse Design is an independent creative studio crafting brand identity, <br class="hide-mobile" /> campaigns, and digital experiences for premium and luxury positioning.
+<br class="hide-mobile" />Each project is approached with strategic clarity and a refined visual language,<br class="hide-mobile" /> where structure precedes decoration and coherence defines value.<br class="hide-mobile" />
+<br class="hide-mobile" /> </p>
+          </div>
+        </div>
+
+        <div class="about-cards">
+          <article class="about-card tarot-min reveal" style="--delay: 140ms">
+            <figure class="about-media" aria-hidden="true">
+              <img src={iconImages.boutique} alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+            </figure>
+
+            <div class="tarot-content">
+              <h3>Positioning</h3>
+              <p>
+
+                We define what a brand stands for and <br class="hide-mobile" /> how it should be perceived, instantly and consistently.
+              </p>
+
+              <div class="tarot-items">
+                <span class="tarot-item">Brand Strategy</span>
+                <span class="tarot-item">Voice and Tone</span>
+                <span class="tarot-item">Guiding Principles</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="about-card tarot-min reveal" style="--delay: 200ms">
+            <figure class="about-media" aria-hidden="true">
+              <img src={iconImages.identity} alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+            </figure>
+
+            <div class="tarot-content">
+              <h3>Identity</h3>
+              <p>
+We design structured systems that are coherent, <br class="hide-mobile" /> elegant and scalable. Every element is intentional.
+
+              </p>
+
+              <div class="tarot-items">
+                <span class="tarot-item">Art Direction</span>
+                <span class="tarot-item">Visual Identity</span>
+                <span class="tarot-item">Design Systems</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="about-card tarot-min reveal" style="--delay: 260ms">
+            <figure class="about-media" aria-hidden="true">
+              <img src={iconImages.digital} alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+            </figure>
+
+            <div class="tarot-content">
+              <h3>Experiences</h3>
+              <p>We translate brand worlds into touchpoints that feel editorial, premium and aligned.</p>
+
+              <div class="tarot-items">
+                <span class="tarot-item">Web Design</span>
+                <span class="tarot-item">Campaigns</span>
+                <span class="tarot-item">Content Direction</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION -->
+    <section class="about-section about-veil" aria-label="Vision">
+      <div class="site-container about-inner">
+        <div class="about-grid">
+          <header class="about-head reveal" style="--delay: 80ms">
+            <p class="about-kicker">Vision</p>
+            <h2 class="about-title">We build Brand worlds.</h2>
+            <p class="about-lead">
+              A premium Brand grows when every detail speaks the same language. <br class="show-mobile" />
+              The goal is coherence across touchpoints, <br class="show-mobile" /> so the Brand feels effortless, desirable,<br class="show-mobile" /> and unmistakably itself.
+            </p>
+          </header>
+
+          <div class="about-body">
+            <div class="about-miniGrid">
+              <div class="about-mini reveal" style="--delay: 140ms">
+                <h4>Clarity comes first</h4>
+                <p>Strategy is the backbone that makes <br class="hide-mobile" /> everything feel inevitable.</p>
+              </div>
+
+              <div class="about-mini2 reveal" style="--delay: 200ms">
+                <h4>Consistency defines perception</h4>
+                <p>One sensibility guides every output, from a <br class="hide-mobile" /> landing page to a campaign frame.</p>
+              </div>
+
+              <div class="about-mini reveal" style="--delay: 260ms">
+                <h4>Timeless over trendy</h4>
+                <p>Restraint, precision and direction shape a visual language designed to endure.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   <!-- METHOD / FIT -->
+<section class="about-section about-light about-collab" aria-label="Method">
+  <div class="site-container about-inner">
+    <div class="about-grid">
+      <header class="about-head reveal" style="--delay: 80ms">
+        <p class="about-kicker">Method</p>
+        <h2 class="about-title">Where detail leads.</h2>
+        <p class="about-lead">
+          Marysse Design operates as a focused creative studio,  <br class="hide-mobile" /> shaped around each project.
+          One vision guides the process, ensuring clarity, consistency, and refined execution.
+        </p>
+      </header>
+
+      <div class="about-body">
+        <div class="about-miniGrid two">
+          <div class="about-mini2 reveal" style="--delay: 140ms">
+            <h4>Studio structure</h4>
+            <p>
+              A flexible, curated setup designed to adapt to the scale and nature of each brand.
+              The structure evolves with the project, never the other way around.
+            </p>
+          </div>
+
+          <div class="about-mini reveal" style="--delay: 200ms">
+            <h4>One direction</h4>
+            <p>
+              Every decision follows a single creative direction.
+              The result is a coherent language, precise taste, and shared standards at every touchpoint.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-split reveal" style="--delay: 260ms">
+          <div>
+            <p class="about-kicker">Best fit</p>
+            <h3 class="about-subtitle">For brands that value meaning.</h3>
+          </div>
+          <ul class="about-list">
+            <li>Premium and luxury positioning</li>
+            <li>Founders and brand teams</li>
+            <li>New launches or brand evolutions</li>
+            <li>Teams who care about detail and coherence</li>
+          </ul>
+        </div>
+
+        <div class="about-actions reveal" style="--delay: 320ms">
+          <a href="/projects/" class="cta-dark">EXPLORE PROJECTS</a>
+          <a href="/marysszang/" class="cta-ghost-dark">ARTISTIC SIDE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+  <style is:global>
+
+    /* =========================================================
+       ABOUT ONLY
+       ========================================================= */
+
+    .about-page {
+      background: #fff;
+
+      --box-border-color: #e5e7eb;
+      --box-border-width: 1px;
+
+      --stroke-color: rgba(25, 17, 24, 0.12);
+      --stroke-width: 0.4px;
+    }
+
+    .about-section {
+      position: relative;
+      padding: clamp(54px, 7vw, 92px) 0;
+      text-align: center;
+    }
+
+    .about-inner { position: relative; }
+
+    :root {
+  --about-sky-1: #e5edf4;
+  --about-sky-2: #c1d3e2;
+  --about-sky-3: #b2c7d8;
+
+  --about-blush-1: #d2c4ce;
+  --about-lav-1: #aeb0c3;
+
+  --about-deep-1: #4f7f9c;
+  --about-blue-1: #bccae2;
+}
+
+
+    .about-light {
+      background:
+        radial-gradient(900px 520px at 70% 85%, color-mix(in srgb, var(--about-blush-1) 45%, transparent), transparent 70%),
+        linear-gradient(180deg, #ffffff 0%, #ffffff 55%, color-mix(in srgb, var(--about-sky-3) 18%, #ffffff) 100%);
+    }
+
+    .about-veil {
+      background:
+        radial-gradient(980px 520px at 35% 440%, color-mix(in srgb, var(--about-sky-2) 82%, transparent), transparent 100%),
+        radial-gradient(980px 520px at 65% 90%, color-mix(in srgb, var(--about-blue-1) 28%, transparent), transparent 100%),
+        linear-gradient(180deg, #fbfbfb 0%, #ffffff 100%);
+        
+    }
+
+    /* Typography */
+    .about-kicker {
+      margin: 0 0 12px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(25, 17, 24, 0.62);
+    }
+
+    .about-title {
+      margin: 0;
+      font-family: "Noto Serif Display", serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.06;
+      font-size: clamp(34px, 4.8vw, 58px);
+      color: var(--ink);
+    }
+
+    .about-subtitle {
+      margin: 0;
+      font-family: "Noto Serif Display", serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      font-size: clamp(22px, 2.4vw, 28px);
+      color: var(--ink);
+    }
+
+    .about-lead {
+      margin: 14px auto 0;
+      font-size: 16px;
+      line-height: 1.85;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.82);
+      max-width: 70ch;
+    }
+
+
+        .about-leadwhite {
+     margin: 14px auto 0;
+     padding-top: 14px;
+    font-size: 16px;
+    line-height: 1.85;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 70ch;
+    }
+
+
+
+    /* Layout */
+    .about-top { max-width: 1120px; margin: 0 auto; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+      max-width: 1120px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-veil .about-grid {
+      grid-template-columns: 1fr;
+      max-width: 980px;
+    }
+
+    /* Cards grid */
+    .about-cards {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 1120px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* unified border */
+    .about-card,
+    .about-mini,
+    .about-mini2,
+    .about-split {
+      border: var(--box-border-width) solid var(--box-border-color);
+    }
+
+    /* =========================
+       Tarot outer cards
+       - NO padding around image
+       - image touches the card edges
+       ========================= */
+
+    .tarot-min {
+      position: relative;
+      border-radius: 42px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 14px 40px rgba(25, 17, 24, 0.08);
+      overflow: hidden; /* important: makes image stick + respects radius */
+      text-align: center;
+      padding: 0; /* <— removes the “frame” */
+    }
+
+    @media (hover:hover) {
+      .tarot-min {
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      }
+      .tarot-min:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 52px rgba(25, 17, 24, 0.1);
+        border-color: rgba(25, 17, 24, 0.18);
+      }
+    }
+
+    /* Image: attached to edges, rounded ONLY on top */
+    .about-media {
+      margin: 0;               /* no gap */
+      width: 100%;
+      border: 0;               /* no extra border frame */
+      border-radius: 42px 42px 0 0;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.75);
+
+      /* Less tall than before */
+      aspect-ratio: 1 / 1;     /* <— makes them “less elongated” */
+    }
+
+    .about-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    /* Content spacing now handled here */
+    .tarot-content {
+      padding: 18px 22px 18px;
+    }
+
+    .tarot-min h3 {
+      margin: 2px 0 10px;
+      font-family: "Noto Serif Display", serif;
+      font-weight: 300;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .tarot-min h3::after {
+      content: "";
+      display: block;
+      width: 46px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: rgba(25, 17, 24, 0.1);
+    }
+
+    .tarot-min p {
+      margin: 0;
+      max-width: 42ch;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.9;
+      color: rgba(25, 17, 24, 0.78);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* inner items boxes */
+    .tarot-items {
+      margin-top: 16px;
+      display: grid;
+      gap: 8px;
+      max-width: 260px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tarot-item {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 30px;
+      border: 1px solid #e5e7eb;
+      background: rgba(255, 255, 255, 0.55);
+      font-size: 12.5px;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      text-align: center;
+      color: rgba(25, 17, 24, 0.78);
+    }
+
+    /* Mini cards */
+    .about-miniGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      justify-items: center;
+    }
+    .about-miniGrid.two { grid-template-columns: repeat(2, 1fr); }
+
+    .about-mini {
+      border-end-end-radius: 42px;
+      border-top-left-radius: 42px;
+      padding: 18px 16px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      width: 100%;
+    }
+
+    .about-mini2 {
+      border-end-start-radius: 42px;
+      border-top-right-radius: 42px;
+      padding: 18px 16px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      width: 100%;
+    }
+
+    .about-mini h4,
+    .about-mini2 h4 {
+      margin: 8px 0 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    .about-mini p,
+    .about-mini2 p {
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.75;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.78);
+    }
+
+    /* Split */
+    .about-split {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+
+    .about-list {
+      margin: 0;
+      padding-left: 0;
+      list-style-position: inside;
+      color: rgba(25, 17, 24, 0.78);
+      font-size: 14px;
+      line-height: 1.9;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    /* Actions */
+    .about-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .cta-ghost-dark {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--hairline);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+      text-decoration: none !important;
+      transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-ghost-dark:hover {
+      opacity: 0.82;
+      transform: translateY(-1px);
+      border-color: rgba(25, 17, 24, 0.28);
+    }
+
+    .show-mobile { display: inline; }
+    .hide-mobile { display: none; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-cards { grid-template-columns: 1fr; }
+
+      .about-miniGrid,
+      .about-miniGrid.two {
+        grid-template-columns: 1fr;
+      }
+
+      .tarot-content { padding: 16px 18px 18px; }
+      .about-media { aspect-ratio: 1 / 1!important; }
+    }
+
+    @media (max-width: 640px) {
+      .about-section { padding: 52px 0; }
+     
+     
+      .hero-copy { padding-top: 14px; }
+      .about-title { font-size: clamp(30px, 9.4vw, 44px); line-height: 1.08; }
+
+      .tarot-content { padding: 14px 16px 16px; }
+      .tarot-items { max-width: 320px; }
+    }
+
+    .reveal { transition-delay: var(--delay, 0ms); }
+
+    /* Collaboration: center text vertically (desktop) */
+    .about-collab .about-grid { align-items: stretch; }
+    .about-collab .about-head {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+    }
+    .about-collab .about-head > * {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+@media (min-width: 768px) {
+  
+  .show-mobile {
+    display: none !important;
+  }
+
+  .hide-mobile { display: inline; }
+   }
+
+
+  </style>
+</BaseLayout>

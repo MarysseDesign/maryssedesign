@@ -1,0 +1,108 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout brand="marysse" title="Page not found · Marysse Design" footerVariant="minimal">
+  <main class="error-page">
+    <section class="error-hero" aria-label="Page not found">
+      <div class="site-container error-inner">
+
+        <p class="error-kicker">404</p>
+
+        <h1 class="error-title">
+          This page<br />does not exist.
+        </h1>
+
+        <p class="error-lead">
+          The link may be outdated, or the path may have shifted.
+          Let’s return to clarity.
+        </p>
+
+        <div class="error-actions">
+          <a href="/" class="cta-dark">Back to home</a>
+          <a href="/projects/" class="cta-stroke">View projects</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <style is:global>
+    .error-page {
+      background: #fff;
+    }
+
+    .error-hero {
+      padding: clamp(80px, 10vw, 130px) 0;
+      text-align: center;
+    }
+
+    .error-inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .error-kicker {
+      margin: 0 0 12px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(25, 17, 24, 0.55);
+    }
+
+    .error-title {
+      margin: 0;
+      font-family: "Noto Serif Display", serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.04;
+      font-size: clamp(42px, 6vw, 76px);
+      color: var(--ink);
+    }
+
+    .error-lead {
+      margin: 16px auto 0;
+      max-width: 66ch;
+      font-size: 16px;
+      line-height: 1.9;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.78);
+    }
+
+    .error-actions {
+      margin-top: 26px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-stroke {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      background: rgba(255,255,255,0.9);
+      color: rgba(25,17,24,0.78);
+      border: 1px solid rgba(25,17,24,0.16);
+      transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, transform 220ms ease;
+      text-decoration: none;
+    }
+
+    .cta-stroke:hover {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 640px) {
+      .error-title {
+        font-size: clamp(34px, 9vw, 52px);
+      }
+    }
+  </style>
+</BaseLayout>

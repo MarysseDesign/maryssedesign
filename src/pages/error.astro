@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout brand="marysse" title="Contact · Message not sent" footerVariant="minimal">
+  <main class="contact-landing">
+    <section class="contact-hero" aria-label="Message not sent">
+      <div class="site-container contact-inner">
+        <p class="contact-kicker">Something went wrong</p>
+
+        <h1 class="contact-title">Not sent.</h1>
+
+        <p class="contact-lead">
+          Please try again, or email directly.
+        </p>
+
+        <div class="contact-actions" role="group" aria-label="Next actions">
+          <a class="cta-dark" href="/contacts/">Try again</a>
+          <a class="cta-stroke" href="mailto:info@maryssedesign.com">Email directly</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style is:global>
+    .contact-landing { background: #fff; }
+    .contact-hero { padding: clamp(78px, 9vw, 120px) 0; text-align: center; }
+    .contact-inner { max-width: 980px; margin: 0 auto; }
+    .contact-kicker{ margin:0 0 12px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(25,17,24,.62); }
+    .contact-title{ margin:0; font-family:"Noto Serif Display",serif; font-weight:300; letter-spacing:-.02em; line-height:1.02; font-size:clamp(40px,6vw,74px); color:var(--ink); }
+    .contact-lead{ margin:14px auto 0; max-width:70ch; font-size:16px; line-height:1.85; font-weight:300; color:rgba(25,17,24,.82); }
+    .contact-actions{ margin-top:22px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+
+    .cta-stroke{
+      display:inline-block; padding:12px 22px; border-radius:999px;
+      font-size:13px; font-weight:300; text-transform:uppercase; letter-spacing:.18em;
+      background:rgba(255,255,255,.9); color:rgba(25,17,24,.78);
+      border:1px solid rgba(25,17,24,.16);
+      transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease,transform 220ms ease;
+      text-decoration:none;
+    }
+    .cta-stroke:hover{ background:var(--ink); color:#fff; border-color:var(--ink); transform:translateY(-1px); }
+  </style>
+</BaseLayout>

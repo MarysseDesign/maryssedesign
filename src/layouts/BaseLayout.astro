@@ -1,0 +1,236 @@
+---
+import "@/styles/tailwind.css";
+import "@/styles/global.css";
+import "@/styles/header.css";
+
+import Header from "@/components/Header.astro";
+import SiteHeaderMarysszang from "@/components/SiteHeader.astro";
+import Footer from "@/components/Footer.astro";
+import CookieBanner from "@/components/CookieBanner.astro";
+
+type FooterVariant = "default" | "minimal";
+
+interface Props {
+  brand?: "marysse" | "marysszang";
+  title?: string;
+  description?: string;
+  lang?: string;
+
+  /** Social image opzionale (absolute o relative). Default: /og-image.jpg */
+  ogImage?: string;
+
+  /** se true: rimuove il padding-bottom del main (evita “striscia bianca” su pagine full-bg) */
+  noMainBottomPadding?: boolean;
+
+  /** footer standard o minimal (solo per pagine come /services) */
+  footerVariant?: FooterVariant;
+
+  /** se true: rimuove il padding-top nella pagina index da mobile) */
+  noMainTopPadding?: boolean;
+}
+
+const {
+  brand = "marysse",
+  title = "MARYSSE · Dual Brand",
+  description = "Design, identity and creativity",
+  lang = "it",
+  ogImage = "/og-image.jpg",
+  noMainBottomPadding = false,
+  footerVariant = "default",
+  noMainTopPadding = false,
+} = Astro.props;
+
+/**
+ * URL assoluti per OG/canonical:
+ * - se astro.config.mjs ha `site`, usa quello
+ * - altrimenti fallback all'origin corrente (Astro.url.origin)
+ */
+const origin = (Astro.site ?? Astro.url.origin) as string;
+const canonicalURL = new URL(Astro.url.pathname, origin).toString();
+
+const absoluteOgImage = ogImage.startsWith("http")
+  ? ogImage
+  : new URL(ogImage, origin).toString();
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <slot name="head" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/m_favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/m_favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Social (dynamic) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content={canonicalURL} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body
+    class="min-h-screen bg-white text-gray-900 font-sans text-base font-light"
+    data-footer-variant={footerVariant}
+  >
+    {brand === "marysszang" ? <SiteHeaderMarysszang /> : <Header />}
+    <CookieBanner GA_ID="UA-120911902-1" />
+
+    <!-- IMPORTANT: se noMainBottomPadding=true, niente pb-24 => sparisce la striscia bianca -->
+    <main
+      style={`padding-top: ${noMainTopPadding ? "0px" : "var(--header-h, 80px)"}`}
+      class={`${noMainBottomPadding ? "pb-0" : "pb-24"}`}
+    >
+      <slot />
+    </main>
+
+    {footerVariant === "minimal" ? (
+      <footer data-footer-variant="minimal" class="bg-[#120b10] text-white/70">
+        <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+          <img
+            src="/images/Marysse_logo_footer.png"
+            alt="Marysse Design"
+            class="mx-auto h-10 w-auto opacity-90"
+            loading="lazy"
+            decoding="async"
+          />
+          <p class="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-70">
+            BY MARIA ASSUNTA ZANGONE
+          </p>
+
+          <p class="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-50">
+            © MARYSSE DESIGN 2025 | P. IVA: 13993600967 | REGISTERED OFFICE: VIA
+            LOMELLINA 12, MILAN (MI) ITALY
+          </p>
+
+          <div class="mt-8 flex items-center justify-center gap-6 text-[11px] tracking-[0.22em] uppercase">
+            <a class="opacity-70 hover:opacity-100 transition" href="/privacy-policy"
+              >Privacy Policy</a
+            >
+            <span class="opacity-40">|</span>
+            <a class="opacity-70 hover:opacity-100 transition" href="/cookie-policy"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+      </footer>
+    ) : (
+      <Footer />
+    )}
+
+    <script defer src="/js/smooth-scroll.js"></script>
+    <script defer src="/js/monogram-cursor.js"></script>
+
+    <script is:inline>
+      (() => {
+        const els = document.querySelectorAll('.reveal, .reveal-media, .reveal-line');
+        if (!('IntersectionObserver' in window) || !els.length) {
+          els.forEach(el => el.classList.add('is-inview'));
+          return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            const el = entry.target;
+            const d = el.getAttribute('data-delay');
+            if (d) el.style.setProperty('--delay', `${d}ms`);
+
+            el.classList.add('is-inview');
+            io.unobserve(el);
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -10% 0px'
+        });
+
+        els.forEach(el => io.observe(el));
+      })();
+    </script>
+
+    <script is:inline>
+      (() => {
+        const normalize = (p) => {
+          if (!p) return "/";
+          // rimuove query/hash e trailing slash (eccetto root)
+          const clean = p.split("?")[0].split("#")[0];
+          return clean.length > 1 ? clean.replace(/\/+$/, "") : "/";
+        };
+
+        const path = normalize(window.location.pathname);
+
+        // seleziona i link del menu
+        const links = document.querySelectorAll("header nav a[href^='/']");
+        if (!links.length) return;
+
+        let bestMatch = null;
+        let bestLen = -1;
+
+        links.forEach((a) => {
+          const href = normalize(a.getAttribute("href") || "/");
+
+          // match esatto oppure se la pagina sta "dentro" quella sezione
+          const isMatch = href === path || (href !== "/" && path.startsWith(href + "/"));
+          if (!isMatch) return;
+
+          if (href.length > bestLen) {
+            bestLen = href.length;
+            bestMatch = a;
+          }
+        });
+
+        if (bestMatch) bestMatch.classList.add("is-active");
+      })();
+    </script>
+
+    <style is:global>
+      /* Active menu item (minimal + luxury) */
+      header nav a.is-active {
+        color: var(--ink);
+        position: relative;
+      }
+
+      header nav a.is-active::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -6px;
+        width: 4px;
+        height: 4px;
+        border-radius: 999px;
+        background: var(--ink);
+        transform: translateX(-50%);
+        opacity: 0.9;
+      }
+    </style>
+  </body>
+</html>

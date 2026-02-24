@@ -1,0 +1,410 @@
+/* =========================================================
+   Brand gray system (based on #191118)
+   ========================================================= */
+:root {
+  --ink: #191118; /* primary brand dark */
+  --ink-2: #2a232a; /* secondary text */
+  --ink-3: #6f6a6f; /* soft text (CTA light, microcopy) */
+  --hairline: rgba(25, 17, 24, 0.22); /* subtle borders */
+  --cursor-monogram-color: #191118;
+  --text: rgba(255, 255, 255, 0.92);
+}
+
+#mono-cursor {
+  color: var(--cursor-monogram-color);
+}
+#mono-cursor svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+/* =========================================================
+   Marquee
+   ========================================================= */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 70s linear infinite;
+  display: inline-flex;
+  min-width: 200%;
+}
+.marquee-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   Layout utilities
+   ========================================================= */
+.site-container {
+  @apply container mx-auto px-8 md:px-16;
+}
+
+/* =========================================================
+   CTAs
+   ========================================================= */
+
+/* CTA Light */
+.cta-light {
+  @apply inline-block px-6 py-3 rounded-full text-sm font-light uppercase tracking-widest transition-colors duration-300;
+  background-color: #ffffff;
+  color: var(--ink-3);
+}
+
+.cta-light:hover {
+  background-color: var(--ink);
+  color: #ffffff;
+}
+
+/* CTA Dark */
+.cta-dark {
+  @apply inline-block px-6 py-3 rounded-full text-sm font-light uppercase tracking-widest transition-colors duration-300;
+  background-color: var(--ink);
+  color: #ffffff !important;
+  border: 1px solid var(--ink);
+  text-decoration: none !important;
+}
+
+.cta-dark:hover {
+  background-color: #ffffff;
+  color: var(--ink) !important;
+  border: 1px solid var(--ink-3);
+  text-decoration: none !important;
+}
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero-title {
+  margin: 0 0 10px;
+  font-weight: 300;
+  font-size: clamp(40px, 5.2vw, 82px) !important;
+  line-height: 1.02;
+}
+
+/* =========================================================
+   Projects page hero
+   ========================================================= */
+.projects-hero {
+  text-align: center;
+  margin: 80px auto 64px;
+  max-width: 760px;
+}
+
+.projects-title {
+  font-family: "Noto Serif Display", serif;
+  font-weight: 300;
+  font-size: clamp(34px, 4.2vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+
+/* MOBILE FINE TUNING */
+@media (max-width: 768px) {
+  .projects-title {
+    line-height: 1.22;
+    margin-bottom: 18px;
+  }
+}
+
+.projects-subtitle {
+  margin: 43px auto 0;
+  max-width: 72ch; /* oppure 640px, come preferisci */
+  font-size: 17px;
+  line-height: 32px;
+  font-weight: 300;
+  color: rgba(25, 17, 24, 0.82);
+}
+
+/* =========================================================
+   Scroll Reveal (site-wide)
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-media {
+  opacity: 0;
+  transform: scale(1.02);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-media.is-inview {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* stagger support */
+.reveal[data-delay] {
+  transition-delay: var(--delay, 0ms);
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-media {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* =========================================================
+   Reveal soft (hero text)
+   ========================================================= */
+.reveal-soft {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-soft.is-inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   Footer icons (pink — not part of gray system)
+   ========================================================= */
+.footer-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* =========================================================
+   Tailwind utility override
+   ========================================================= */
+
+.hero-subtitle {
+  margin: 30px auto 18px;
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+}
+
+/* =========================================================
+   Mobile adjustments
+   ========================================================= */
+@media (max-width: 768px) {
+  .hero-copy {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-copy .cta-light {
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-size: clamp(34px, 10.5vw, 56px) !important;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    align-items: flex-start;
+  }
+
+  .hero-inner > .site-container {
+    padding-top: 7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-cta {
+    position: absolute;
+    left: 50%;
+    bottom: 4.5rem;
+    transform: translateX(-50%);
+    margin-top: 0;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   Logo footer
+   ========================================================= */
+.logofootbottom {
+  padding-bottom: 20px;
+}
+
+/* ===============================
+   Legal pages (Privacy / Cookie)
+================================ */
+
+.legal-page {
+  max-width: 720px; /* più elegante di 3xl */
+  margin: 0 auto;
+  padding: 6rem 1.5rem 5rem; /* aria sopra/sotto */
+}
+
+@media (min-width: 768px) {
+  .legal-page {
+    padding: 7rem 0 6rem;
+  }
+}
+
+/* Titoli */
+.legal-page h1 {
+  font-family: "Noto Serif Display", serif;
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.legal-page h2 {
+  margin-top: 3rem;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #191118;
+  font-weight: 500;
+}
+
+/* Testo */
+.legal-page p,
+.legal-page li {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(25, 17, 24, 0.82);
+}
+
+/* Meta info */
+.legal-page .legal-meta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a868a;
+  margin-bottom: 3rem;
+}
+
+/* Link */
+.legal-page a {
+  color: #191118;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-page a:hover {
+  opacity: 0.7;
+}
+
+/* mobile: centra tutto */
+@media (max-width: 768px) {
+  .legal-page {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .legal-page h1,
+  .legal-page h2,
+  .legal-page h3 {
+    text-align: center;
+  }
+
+  .legal-page p,
+  .legal-page ul,
+  .legal-page li {
+    text-align: center;
+  }
+
+  .legal-page ul {
+    padding-left: 0;
+    list-style-position: inside;
+  }
+
+  .legal-page li {
+    margin-left: 0;
+  }
+
+  /* link più leggibili da mobile */
+  .legal-page a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-page .pb-24 {
+    padding-bottom: 0rem;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY: GLOBAL FOCUS
+   ========================================================= */
+:focus-visible {
+  outline: 2px solid rgba(25, 17, 24, 0.55);
+  outline-offset: 4px;
+}
+
+a:focus-visible {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-video {
+    animation: none !important;
+  }
+}
+.project-page .nav-circle .nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(17, 17, 17, 0.86);
+  transition:
+    transform 160ms ease,
+    color 160ms ease;
+}
+
+.project-page .nav-circle:hover .nav-icon {
+  color: rgba(17, 17, 17, 0.95);
+}
+
+/* micro “direzionalità” */
+.project-page .nav-circle[aria-label="Previous project"]:hover .nav-icon {
+  transform: translateX(-1px);
+}
+.project-page .nav-circle[aria-label="Next project"]:hover .nav-icon {
+  transform: translateX(1px);
+}

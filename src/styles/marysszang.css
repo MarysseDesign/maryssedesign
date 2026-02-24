@@ -1,0 +1,943 @@
+/* =========================================================
+   Marysszang — CSS completo, ordinato e coerente
+   (header/nav, hero + typewriter, filtri, griglia, didascalie,
+    collaborations carousel, footer)
+
+   NOTE:
+   - L’header è fixed; per evitare salto pagina usiamo padding-top sul body.
+   - Hamburger SOLO <1024px. Su desktop rimane la nav orizzontale.
+   - Palette grigi allineata a #191118
+   ========================================================= */
+
+/* =========================================================
+   Brand gray system (based on #191118)
+   ========================================================= */
+:root {
+  --ink: #191118;
+  --ink-2: #2a232a;
+  --ink-3: #6f6a6f;
+  --hairline: rgba(25, 17, 24, 0.18);
+  --hairline-2: rgba(25, 17, 24, 0.12);
+
+  /* Alias semantici Marysszang */
+  --fg: var(--ink);
+  --muted: var(--ink-3);
+
+  --chip-bg: #f4f4f4;
+  --chip-border: var(--hairline-2);
+  --chip-active: var(--ink);
+  --chip-active-text: #fff;
+
+  /* Didascalie */
+  --cap-line-w: 2px;
+  --cap-line-gray: rgba(25, 17, 24, 0.18);
+  --cap-line-active: var(--ink);
+
+  /* Layout globali */
+  --container: 1200px;
+  --gutter: 24px;
+  --header-h: 64px;
+}
+
+/* =========================================================
+   Marquee (single source of truth)
+   ========================================================= */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  display: inline-flex;
+  min-width: 200%;
+  will-change: transform;
+}
+
+/* ---------- Reset di base ---------- */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- Tipografia base ---------- */
+body.msz-body {
+  color: var(--fg);
+  background: #fff;
+  font:
+    400 16px/1.55 "Inter",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  padding-top: var(--header-h); /* header fixed */
+}
+
+/* =========================================================
+   HEADER + NAV
+   ========================================================= */
+
+.msz-header {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.86);
+  border-bottom: 1px solid var(--hairline-2);
+}
+
+.msz-header__bar {
+  max-width: var(--container);
+  height: var(--header-h);
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand */
+.msz-header__brand img {
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Nav desktop (visibile da ≥1024px) */
+.msz-desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 12px;
+}
+
+.msz-desktop-nav a {
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.msz-desktop-nav a:hover {
+  opacity: 1;
+}
+
+.msz-desktop-nav .divider {
+  width: 1px;
+  height: 20px;
+  background: var(--hairline);
+  margin: 0 6px;
+}
+
+/* CTA chiara dentro l’overlay mobile */
+.msz-menu__nav .pill--dark {
+  background: #fff;
+  color: var(--ink) !important;
+  border-color: #fff;
+}
+
+/* Hamburger mobile (solo <1024px) */
+.msz-hamburger {
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.msz-hamburger .bar {
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition:
+    transform 0.28s ease,
+    opacity 0.2s ease,
+    background 0.2s;
+}
+
+.msz-hamburger .bar:nth-child(1) {
+  transform: translateY(-7px);
+}
+.msz-hamburger .bar:nth-child(2) {
+  transform: translateY(0);
+}
+.msz-hamburger .bar:nth-child(3) {
+  transform: translateY(7px);
+}
+.msz-hamburger.is-open .bar:nth-child(1) {
+  transform: translateY(0) rotate(45deg);
+}
+.msz-hamburger.is-open .bar:nth-child(2) {
+  opacity: 0;
+}
+.msz-hamburger.is-open .bar:nth-child(3) {
+  transform: translateY(0) rotate(-45deg);
+}
+
+/* Pannello mobile */
+.msz-menu {
+  position: absolute;
+  left: 50%;
+  top: var(--header-h);
+  width: 92vw;
+  max-width: 480px;
+  transform: translate(-50%, 8px);
+  background: var(--ink);
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.msz-menu.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.msz-menu__diamond {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  width: 14px;
+  height: 14px;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--ink);
+}
+
+.msz-menu__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: 28px 20px 24px;
+}
+
+.msz-menu__nav a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 12px;
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+
+.msz-menu__nav a:hover {
+  opacity: 1;
+}
+
+.msz-menu__cta {
+  margin-top: 8px;
+}
+
+/* Disattiva overlay e mostra nav su desktop */
+@media (min-width: 1024px) {
+  .msz-desktop-nav {
+    display: flex;
+  }
+  .msz-hamburger {
+    display: none;
+  }
+  .msz-menu {
+    display: none !important;
+  }
+}
+
+/* Blocca scroll quando menu mobile aperto */
+html.msz-no-scroll,
+.msz-no-scroll body {
+  overflow: hidden;
+}
+
+/* =========================================================
+   HERO / TITOLO con TYPEWRITER
+   ========================================================= */
+
+.msz-hero {
+  max-width: var(--container);
+  margin: calc(var(--header-h) + 2rem) auto 16px;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+/* Titolo base */
+.msz-title {
+  font-family:
+    "Noto Serif Display", ui-serif, Georgia, "Times New Roman", serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  font-size: clamp(32px, 6vw, 72px);
+  margin: 0 auto 1rem;
+  position: relative;
+  display: inline-block;
+  padding: 18px 0;
+  color: var(--ink);
+}
+
+/* Mini descrizione sotto al titolo */
+.msz-subtitle {
+  max-width: 640px;
+  margin: 0.25rem auto 1.75rem;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .msz-subtitle {
+    font-size: 14.5px;
+    line-height: 1.55;
+    padding: 0 1rem;
+  }
+}
+
+/* Nascondi il <br> su mobile */
+.msz-subtitle .hide-on-mobile {
+  display: inline;
+}
+@media (max-width: 640px) {
+  .msz-subtitle .hide-on-mobile {
+    display: none;
+  }
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Handle Instagram: staccato e colore diverso */
+.msz-subtitle .msz-ig {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: rgba(25, 17, 24, 0.78);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(25, 17, 24, 0.22);
+  transition:
+    opacity 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.msz-subtitle .msz-ig:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+  opacity: 0.85;
+}
+
+/* Typewriter container */
+.typewriter {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .typewriter {
+    white-space: normal; /* fix: wrap valido */
+  }
+}
+
+.typewriter > span {
+  width: auto;
+  white-space: normal;
+  border-right: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .typewriter {
+    --tw-base: 3.6s;
+  }
+
+  /* Apply animation only on screens wider than 767px */
+  @media (min-width: 768px) {
+    .typewriter > span {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      border-right: 2px solid var(--ink);
+      will-change: width;
+      animation:
+        typingWidth var(--tw-base) steps(var(--chars, 42)) 0.15s both,
+        caretBlink 0.9s step-end infinite;
+    }
+  }
+}
+
+/* Keyframes */
+@keyframes typingWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes caretBlink {
+  0%,
+  100% {
+    border-right-color: var(--ink);
+  }
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter > span {
+    width: auto;
+    border-right: none;
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   FILTRI (chip/pill)
+   ========================================================= */
+
+.msz-filters {
+  max-width: var(--container);
+  margin: 0.625rem auto 0;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+.msz-filters li {
+  margin: 0;
+}
+.msz-chip {
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--ink-2);
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+}
+.msz-chip:hover {
+  background: white;
+}
+.msz-chip.active {
+  background: var(--chip-active);
+  color: var(--chip-active-text);
+  border-color: var(--chip-active);
+}
+
+/* =========================================================
+   GRIGLIA artworks
+   ========================================================= */
+
+.msz-grid {
+  max-width: var(--container);
+  margin: 1.75rem auto 5rem;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0;
+}
+@media (min-width: 640px) {
+  .msz-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .msz-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .msz-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.msz-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+.msz-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.35s ease;
+}
+.msz-card:hover img {
+  filter: brightness(1.06);
+}
+
+/* === Didascalia === */
+.msz-card figcaption {
+  position: relative;
+  background: #fff;
+  padding: 14px 16px 14px;
+  margin: 0 0 18px 0;
+  border-bottom: var(--cap-line-w) solid var(--cap-line-gray);
+}
+
+.msz-card figcaption strong {
+  display: block;
+  font-family: "Heebo", ui-sans-serif, sans-serif;
+  font-weight: 300;
+  font-size: 15.5px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 0 6px 0;
+  transition:
+    color 0.25s ease,
+    font-weight 0.25s ease;
+}
+
+.msz-card figcaption span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Underline attiva */
+.msz-card figcaption::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--cap-line-w);
+  bottom: calc(-1 * var(--cap-line-w));
+  background: var(--cap-line-active);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.msz-card:hover figcaption::after {
+  transform: scaleX(1);
+}
+
+.msz-card:hover figcaption strong,
+.msz-card:active figcaption strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* Mobile: titolo un filo più “bold” sempre */
+@media (max-width: 767px) {
+  .msz-card figcaption strong {
+    font-weight: 400;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msz-card figcaption::after {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   collaborations / CAROUSEL (scorrimento continuo)
+   ========================================================= */
+
+.msz-collaborations-intro {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  margin: 0 auto 2rem;
+  max-width: 640px;
+}
+
+@media (max-width: 640px) {
+  .msz-collaborations-intro {
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0 1rem;
+  }
+}
+
+.msz-collaborations {
+  margin-top: 80px;
+  padding: 64px 0;
+}
+.msz-collaborations h2 {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(25, 17, 24, 0.62);
+  margin: 0 0 28px 0;
+}
+
+.msz-collaborations .track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+.msz-collaborations img {
+  filter: grayscale(100%);
+  opacity: 0.9;
+  height: 5rem;
+  margin: 0 2.5rem;
+  transition:
+    filter 0.3s ease,
+    opacity 0.3s ease;
+}
+.msz-collaborations img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .msz-collaborations img {
+    height: 4rem;
+    margin: 0 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .msz-collaborations img {
+    height: 3.75rem;
+    margin: 0 1.5rem;
+  }
+}
+
+/* =========================================================
+   ABOUT MARYSSZANG
+   ========================================================= */
+.msz-about {
+  max-width: var(--container);
+  margin: 6rem auto 5rem;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+.msz-about-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.msz-about h2 {
+  font-family:
+    "Noto Serif Display", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+.msz-about p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.msz-about .msz-ig-about {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: var(--ink);
+  font-weight: 400;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(25, 17, 24, 0.25);
+  transition:
+    border-color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.msz-about .msz-ig-about:hover {
+  border-color: var(--ink);
+  opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+  .msz-about p {
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+}
+
+/* Immagine hero dell'about */
+.msz-about-figure {
+  margin: 2.5rem auto 0;
+  max-width: 560px;
+  padding: 0 var(--gutter);
+}
+.msz-about-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+}
+@media (min-width: 1024px) {
+  .msz-about-figure {
+    max-width: 640px;
+  }
+}
+
+/* =========================================================
+   FOOTER (legacy, se usato)
+   ========================================================= */
+.msz-footer {
+  max-width: var(--container);
+  margin: 0 auto 60px;
+  padding: 40px var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.msz-mini {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+.msz-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.msz-footer-brand img {
+  height: 26px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+.msz-legal {
+  font-size: 12px;
+  color: rgba(25, 17, 24, 0.55);
+  margin-bottom: 6px;
+}
+.msz-links a {
+  color: rgba(25, 17, 24, 0.72);
+  text-decoration: none;
+  font-size: 12px;
+}
+@media (max-width: 640px) {
+  .msz-footer {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .msz-footer-brand {
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   Utility pill (riutilizzata)
+   ========================================================= */
+.pill {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* di default (se serve fuori nav) */
+.pill--dark {
+  background: var(--ink);
+  color: #fff;
+  border: 1px solid var(--ink);
+}
+.pill--dark:hover {
+  filter: brightness(1.04);
+}
+
+/* Smooth scroll globale */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset per header fisso */
+#artworks,
+#about,
+#collaborations {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+/* =========================================================
+   NAV MENU — underline hover/active (solo voci normali)
+   ========================================================= */
+.msz-desktop-nav a {
+  position: relative;
+  display: inline-block;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Linea fluida al passaggio */
+.msz-desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+  opacity: 0.9;
+}
+
+/* Hover con animazione morbida */
+.msz-desktop-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Stato active coerente con hover */
+.msz-desktop-nav a.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Active: leggero bold + colore pieno */
+.msz-desktop-nav a.is-active {
+  font-weight: 400;
+  opacity: 1;
+  color: var(--ink);
+}
+
+/* Mobile menu: evidenziazione coerente */
+.msz-menu__nav a.is-active {
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* =========================================================
+   CTA desktop: Contacts + Go to Marysse
+   ========================================================= */
+
+/* Niente underline animata sulle due CTA */
+.msz-desktop-nav a.msz-chip-btn::after,
+.msz-desktop-nav a.pill::after,
+.msz-desktop-nav a.pill--dark::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Contacts — pill chiara */
+.msz-desktop-nav a.msz-chip-btn {
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--ink);
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.msz-desktop-nav a.msz-chip-btn:hover {
+  background: white;
+  border: 1px solid var(--chip-border);
+  color: var(--ink);
+}
+
+/* Go to Marysse — pill scura brand */
+.msz-desktop-nav a.pill--dark {
+  background: var(--ink);
+  color: #ffffff;
+  border: 1px solid var(--ink);
+  padding: 9px 14px;
+  border-radius: 999px;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.msz-desktop-nav a.pill--dark:hover {
+  background: #ffffff;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* Evita il bold “active” ereditato sulle CTA */
+.msz-desktop-nav a.msz-chip-btn.is-active,
+.msz-desktop-nav a.pill.is-active,
+.msz-desktop-nav a.pill--dark.is-active {
+  font-weight: 300 !important;
+}
+
+/* =========================================================
+   Footer semplice — Marysszang only
+   ========================================================= */
+.msz-footer-simple {
+  max-width: var(--container);
+  margin: 3rem auto 3rem;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+.msz-affiliate {
+  font-size: 11px;
+  line-height: 1.5;
+  color: rgba(25, 17, 24, 0.58);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+:root {
+  --header-h: 56px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 64px;
+  }
+}

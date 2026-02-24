@@ -1,0 +1,44 @@
+---
+/**
+ * MediaStrip.astro
+ * Usage:
+ * <MediaStrip items={[
+ *  { src:"/img.jpg", alt:"...", type:"image" },
+ *  { src:"/vid.mp4", alt:"...", type:"video", poster:"/poster.jpg" },
+ * ]} />
+ */
+type Item =
+  | { type?: "image"; src: string; alt: string }
+  | { type: "video"; src: string; alt: string; poster?: string };
+
+const { items = [], ariaLabel = "Media strip" } = Astro.props as {
+  items: Item[];
+  ariaLabel?: string;
+};
+---
+
+{items?.length ? (
+  <div class="media-strip" aria-label={ariaLabel}>
+    <div class="media-strip__track">
+      {items.map((it) => (
+        <figure class="media-strip__item">
+          {it.type === "video" ? (
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster={it.poster}
+              aria-label={it.alt}
+            >
+              <source src={it.src} type="video/mp4" />
+            </video>
+          ) : (
+            <img loading="lazy" src={it.src} alt={it.alt} />
+          )}
+        </figure>
+      ))}
+    </div>
+  </div>
+) : null}
