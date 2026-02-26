@@ -53,38 +53,87 @@ const items = [
 ];
 
 const pageTitle = "Art is the best way to live the world.";
+
+/**
+ * ✅ Alt texts (20–36) + fallback elegante.
+ * Se vuoi, possiamo completare anche 01–19 nello stesso stile.
+ */
+const altBySrc = {
+  "/images/artworks/20-ig.jpg": "Minimal pastel architecture with arched frame and a small bird crossing a pink sky",
+  "/images/artworks/21-ig.jpg": "Airplane leaving a white trail above a rainbow-colored building under a clear blue sky",
+  "/images/artworks/22-ig.jpg": "Geometric pastel rooftops with soft shadows and a faint airplane trail in the sky",
+  "/images/artworks/23-ig.jpg": "Blurred female silhouette walking beneath a heart-shaped moon in a dreamy sunset sky",
+  "/images/artworks/24-ig.jpg": "Three delicate peach flowers aligned vertically on a soft neutral background",
+  "/images/artworks/25-ig.jpg": "Crescent moon suspended in a pastel sunset sky with soft pink and blue clouds",
+  "/images/artworks/26-ig.jpg": "Hand holding a delicate flowering branch against a muted pink sky with flying birds",
+  "/images/artworks/27-ig.jpg": "Surreal portrait of a woman bending beneath a staircase in a pastel interior setting",
+  "/images/artworks/28-ig.jpg": "Back view of a woman facing the sea with wind-blown hair blending into clouds",
+  "/images/artworks/29-ig.jpg": "Floating dandelion beneath a crescent moon in a soft blue and pink twilight sky",
+  "/images/artworks/30-ig.jpg": "Woman sitting alone on white rocky mountains surrounded by mist and clouds",
+  "/images/artworks/31-ig.jpg": "Full moon resting on calm ocean water at sunset with pastel clouds above",
+  "/images/artworks/32-ig.jpg": "Woman walking toward the sea under a crescent moon in a serene pastel sunset",
+  "/images/artworks/33-ig.jpg": "Pink flowers framed inside a circular window with a crescent moon in the background",
+  "/images/artworks/34-ig.jpg": "Woman sitting in a pink-toned desert landscape at sunset with glowing reflections",
+  "/images/artworks/35-ig.jpg": "Victorian house emerging from pastel clouds with birds flying across the sky",
+  "/images/artworks/36-ig.jpg": "Golden statue seen through a round window against a soft blue and peach sky",
+};
+
+const getAlt = (src, title) => altBySrc[src] ?? `${title} — digital artwork by Marysszang`;
 ---
 
 <BaseLayout brand="marysszang" title="Marysszang · Artworks">
+  <style is:inline>
+    /* ✅ Accessibilità: testo solo screen reader */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
   <!-- HERO -->
-  <section class="msz-hero">
+  <section class="msz-hero" aria-labelledby="msz-title">
     <!-- HERO TITLE -->
-    <h1 class="msz-title typewriter" data-text={pageTitle}>
+    <h1 class="msz-title typewriter" id="msz-title" data-text={pageTitle}>
+      <!-- ✅ SR vede il titolo, visivamente resta il typewriter -->
+      <span class="sr-only">{pageTitle}</span>
       <span aria-hidden="true">{pageTitle}</span>
     </h1>
 
     <p class="msz-subtitle">
       As you move through this page, you’ll discover my soul as a digital artist. <br class="hide-on-mobile" />
-A language of softness and balance.<br class="hide-on-mobile" />
-An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
+      A language of softness and balance.<br class="hide-on-mobile" />
+      An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
       <br />
       <a
         href="https://www.instagram.com/marysszang"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         class="msz-ig"
+        aria-label="Open @marysszang on Instagram (opens in a new tab)"
       >
         @marysszang
       </a>
     </p>
 
-    <ul class="msz-filters" id="filters">
+    <!-- ✅ Annuncio cambio filtro -->
+    <p id="filterStatus" class="sr-only" aria-live="polite"></p>
+
+    <ul class="msz-filters" id="filters" aria-label="Filter artworks">
       {filterDefs.map((f) => (
         <li>
           <button
             type="button"
             class={"msz-chip " + (f.key === "all" ? "active" : "")}
             data-filter={f.key}
+            aria-controls="artworks"
+            aria-pressed={f.key === "all" ? "true" : "false"}
           >
             {f.label}
           </button>
@@ -94,10 +143,15 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
   </section>
 
   <!-- GRIGLIA artworks -->
-  <section class="msz-grid" id="artworks">
+  <section class="msz-grid" id="artworks" aria-label="Artworks grid">
     {items.map((it) => (
-      <figure class={"msz-card " + it.filterKey}>
-        <img loading="lazy" decoding="async" src={it.src} alt={`${it.title} @marysszang`} />
+      <figure class={"msz-card " + it.filterKey} data-filterkey={it.filterKey}>
+        <img
+          loading="lazy"
+          decoding="async"
+          src={it.src}
+          alt={getAlt(it.src, it.title)}
+        />
         <figcaption>
           <strong>{it.title}</strong>
           <span>{it.collection}</span>
@@ -107,9 +161,9 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
   </section>
 
   <!-- ABOUT -->
-  <section class="msz-about" id="about">
+  <section class="msz-about" id="about" aria-labelledby="about-title">
     <div class="msz-about-inner">
-      <h2>About Marysszang</h2>
+      <h2 id="about-title">About Marysszang</h2>
 
       <p>
         Marysszang is my visual space, a dialogue between lightness and emotion.
@@ -131,8 +185,9 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
       <a
         href="https://www.instagram.com/marysszang"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         class="msz-ig"
+        aria-label="Open @marysszang on Instagram (opens in a new tab)"
       >
         @marysszang
       </a>
@@ -152,8 +207,11 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
   </section>
 
   <!-- SEZIONE collaborations -->
-  <section class="msz-collaborations mt-24" id="collaborations">
-    <h2 class="text-center text-[18px] tracking-[0.25em] uppercase text-gray-600 mb-6">
+  <section class="msz-collaborations mt-24" id="collaborations" aria-labelledby="collab-title">
+    <h2
+      id="collab-title"
+      class="text-center text-[18px] tracking-[0.25em] uppercase text-gray-600 mb-6"
+    >
       collaborations & Partners
     </h2>
 
@@ -162,7 +220,7 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
       kindred brands and creative collaborations:
     </p>
 
-    <div class="relative overflow-hidden">
+    <div class="relative overflow-hidden" aria-label="Collaborations logos marquee">
       <div class="flex animate-marquee items-center whitespace-nowrap">
         <!-- LOGHI SCORRENTI -->
         <img src="/images/collaborations/Canon.png" alt="Canon" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
@@ -223,11 +281,12 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
     </p>
   </footer>
 
-  <!-- ✅ SCRIPT FILTRI -->
+  <!-- ✅ SCRIPT FILTRI (accessibile) -->
   <script is:inline>
     function initMszFilters() {
       const filtersRoot = document.getElementById("filters");
       const grid = document.getElementById("artworks");
+      const status = document.getElementById("filterStatus");
       if (!filtersRoot || !grid) return;
 
       const buttons = Array.from(filtersRoot.querySelectorAll("button[data-filter]"));
@@ -235,30 +294,51 @@ An invitation to breathe, to feel, to see light.<br class="hide-on-mobile" />
 
       if (!buttons.length || !cards.length) return;
 
+      const getLabelByKey = (key) => {
+        const btn = buttons.find((b) => (b.dataset.filter || "all") === key);
+        return btn ? btn.textContent.trim() : "All";
+      };
+
       const applyFilter = (key) => {
+        let visibleCount = 0;
+
         cards.forEach((card) => {
           const show = key === "all" || card.classList.contains(key);
           card.style.display = show ? "" : "none";
+          if (show) visibleCount++;
+        });
+
+        if (status) {
+          const label = getLabelByKey(key);
+          status.textContent = `${label} selected. Showing ${visibleCount} artworks.`;
+        }
+      };
+
+      const setActiveButton = (activeBtn) => {
+        buttons.forEach((b) => {
+          const isActive = b === activeBtn;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-pressed", isActive ? "true" : "false");
         });
       };
 
       buttons.forEach((btn) => {
         btn.addEventListener("click", () => {
           const key = btn.dataset.filter || "all";
-
-          buttons.forEach((b) => b.classList.toggle("active", b === btn));
+          setActiveButton(btn);
           applyFilter(key);
         });
+
+        // ✅ Tastiera: Enter/Space già gestiti dal button
       });
 
       // Stato iniziale coerente con "All"
+      const initial = buttons.find((b) => (b.dataset.filter || "all") === "all") || buttons[0];
+      setActiveButton(initial);
       applyFilter("all");
     }
 
-    // Primo load
     document.addEventListener("DOMContentLoaded", initMszFilters);
-
-    // Navigazioni client-side (se usi View Transitions / routing Astro)
     document.addEventListener("astro:page-load", initMszFilters);
   </script>
 </BaseLayout>
