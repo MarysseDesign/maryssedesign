@@ -2,19 +2,107 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import "../styles/services-dark-tarot.css";
 
-
-
 const tarotServices = [
-  { key: "branding", title: "Branding", subtitle: "Identity & Positioning", img: "/images/tarot/branding.jpg", desc: "An identity and positioning crafted to feel inevitable, consistent and unmistakable across every touchpoint." },
-  { key: "strategy", title: "Creative Direction", subtitle: "Strategy & Creative Concept", img: "/images/tarot/strategy.jpg", desc: "Creative direction that shapes vision and meaning, guiding strategy, concepts and visual expression as one." },
-  { key: "advertising", title: "Advertising", subtitle: "Campaigns & Art Direction", img: "/images/tarot/advertising.jpg", desc: "Campaigns designed with a refined eye, where art direction and visuals work together to express value and desire." },
-  { key: "storytelling", title: "Storytelling", subtitle: "Narratives & Brand Voice", img: "/images/tarot/storytelling.jpg", desc: "Stories that sound authentic and intentional, shaping tone of voice and narratives that resonate over time." },
-  { key: "web", title: "Web Design", subtitle: "Luxury Digital Experiences", img: "/images/tarot/web.jpg", desc: "Digital experiences crafted with clarity and precision, where structure, typography and motion feel effortless." },
-  { key: "social", title: "Social Media", subtitle: "Content & Editorial Rhythm", img: "/images/tarot/social.jpg", desc: "A considered social presence built through rhythm, content direction and visual consistency." },
-  { key: "visual", title: "Visual System", subtitle: "Guidelines & Design Language", img: "/images/tarot/visual.jpg", desc: "A coherent visual system that defines rules, layouts and design language ready to evolve with the brand." },
-  { key: "photo", title: "Photography", subtitle: "Product & Brand Imagery", img: "/images/tarot/photo.jpg", desc: "Curated photography guided by art direction, shaping images that feel aligned, elevated and intentional." },
-  { key: "video", title: "Video", subtitle: "Motion & Brand Films", img: "/images/tarot/video.jpg", desc: "Motion and video content designed with cinematic sensitivity, from brand films to digital storytelling." },
-  { key: "events", title: "Experiential", subtitle: "Events & Brand Moments", img: "/images/tarot/events.jpg", desc: "Physical brand experiences shaped through identity, visuals and direction, translating the brand into space." },
+  {
+    key: "branding",
+    number: "I",
+    title: "Branding",
+    archetype: "The Signature",
+    subtitle: "Identity & Positioning",
+    img: "/images/tarot/branding.jpg",
+    desc:
+      "An identity and positioning crafted to feel inevitable, consistent and unmistakable across every touchpoint.",
+  },
+  {
+    key: "strategy",
+    number: "II",
+    title: "Creative Direction",
+    archetype: "The Visionary",
+    subtitle: "Strategy & Creative Concept",
+    img: "/images/tarot/strategy.jpg",
+    desc:
+      "Creative direction that shapes vision and meaning, guiding strategy, concepts and visual expression as one.",
+  },
+  {
+    key: "advertising",
+    number: "III",
+    title: "Advertising",
+    archetype: "The Allure",
+    subtitle: "Campaigns & Art Direction",
+    img: "/images/tarot/advertising.jpg",
+    desc:
+      "Campaigns designed with a refined eye, where art direction and visuals work together to express value and desire.",
+  },
+  {
+    key: "web",
+    number: "IV",
+    title: "Web Design",
+    archetype: "The Portal",
+    subtitle: "Luxury Digital Experiences",
+    img: "/images/tarot/web.jpg",
+    desc:
+      "Digital experiences crafted with clarity and precision, where structure, typography and motion feel effortless.",
+  },
+  {
+    key: "storytelling",
+    number: "V",
+    title: "Storytelling",
+    archetype: "The Voice",
+    subtitle: "Narratives & Brand Voice",
+    img: "/images/tarot/storytelling.jpg",
+    desc:
+      "Stories that sound authentic and intentional, shaping tone of voice and narratives that resonate over time.",
+  },
+  {
+    key: "social",
+    number: "VI",
+    title: "Social Media",
+    archetype: "The Pulse",
+    subtitle: "Content & Editorial Rhythm",
+    img: "/images/tarot/social.jpg",
+    desc:
+      "A considered social presence built through rhythm, content direction and visual consistency.",
+  },
+  {
+    key: "visual",
+    number: "VII",
+    title: "Visual System",
+    archetype: "The Code",
+    subtitle: "Guidelines & Design Language",
+    img: "/images/tarot/visual.jpg",
+    desc:
+      "A coherent visual system that defines rules, layouts and design language ready to evolve with the brand.",
+  },
+  {
+    key: "photo",
+    number: "VIII",
+    title: "Photography",
+    archetype: "The Gaze",
+    subtitle: "Product & Brand Imagery",
+    img: "/images/tarot/photo.jpg",
+    desc:
+      "Curated photography guided by art direction, shaping images that feel aligned, elevated and intentional.",
+  },
+  {
+    key: "video",
+    number: "IX",
+    title: "Video",
+    archetype: "The Motion",
+    subtitle: "Motion & Brand Films",
+    img: "/images/tarot/video.jpg",
+    desc:
+      "Motion and video content designed with cinematic sensitivity, from brand films to digital storytelling.",
+  },
+  {
+    key: "events",
+    number: "X",
+    title: "Experiential",
+    archetype: "The Encounter",
+    subtitle: "Events & Brand Moments",
+    img: "/images/tarot/events.jpg",
+    desc:
+      "Physical brand experiences shaped through identity, visuals and direction, translating the brand into space.",
+  },
 ];
 ---
 
@@ -25,7 +113,6 @@ const tarotServices = [
   footerVariant="minimal"
 >
   <div class="about-page">
-    <!-- STAR SKY BACKGROUND -->
     <div class="starfield" aria-hidden="true">
       <div class="sky-glow"></div>
       <div class="stars stars--far"></div>
@@ -35,20 +122,23 @@ const tarotServices = [
       <div class="vignette"></div>
     </div>
 
-    <!-- HERO -->
     <section class="tarot-hero" id="services">
       <div class="tarot-hero__wrap">
         <h1 class="tarot-hero__title">
-  <span class="only-desktop">Pick a card, define your Brand.</span>
-  <span class="only-mobile">Swipe the cards, define your Brand.</span>
-</h1>
+          <span class="only-desktop">Pick a card, define your Brand.</span>
+          <span class="only-mobile">Swipe the cards, define your Brand.</span>
+        </h1>
+
         <br />
+
         <p class="tarot-hero__sub only-desktop">
           Each one reveals a service. We can create identity,<br class="hide-mobile" />
           digital systems and experiential presence.
         </p>
 
-        <p class="tarot-hint only-desktop">Drag to move. Draw a card. Click to reveal the details.</p>
+        <p class="tarot-hint only-desktop">
+          Drag to move. Draw a card. Click to reveal the details.
+        </p>
 
         <p class="tarot-hero__sub only-mobile">
           Discover how we can create identity, digital systems, and experiential presence.<br class="show-mobile" />
@@ -56,11 +146,12 @@ const tarotServices = [
         </p>
 
         <div class="tarot-actions">
-          <button class="tarot-btn shuffle" type="button" id="tarotShuffle">Shuffle</button>
+          <button class="tarot-btn shuffle" type="button" id="tarotShuffle">
+            Shuffle
+          </button>
         </div>
       </div>
 
-      <!-- DESKTOP STAGE -->
       <div class="tarot-stage-wrap" aria-hidden="false">
         <div class="tarot-stage" id="tarotStage" aria-label="Tarot services stage">
           {tarotServices.map((s, i) => (
@@ -70,8 +161,10 @@ const tarotServices = [
               role="button"
               aria-label={`${s.title} — open details`}
               data-key={s.key}
+              data-number={s.number}
               data-title={s.title}
               data-subtitle={s.subtitle}
+              data-archetype={s.archetype}
               data-img={s.img}
               data-desc={s.desc}
               style={`
@@ -81,12 +174,12 @@ const tarotServices = [
               `}
             >
               <div class="tarot-card__img">
-               <img
-  src={s.img}
-  alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`}
-  loading={i < 2 ? "eager" : "lazy"}
-  decoding="async"
-/>
+                <img
+                  src={s.img}
+                  alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
               </div>
 
               <div class="tarot-card__meta">
@@ -102,7 +195,6 @@ const tarotServices = [
         </div>
       </div>
 
-      <!-- MOBILE: CAROUSEL + DETAILS (NO MODAL) -->
       <div class="tarot-mobile" id="tarotMobile" aria-label="Services carousel">
         <div class="tarot-carousel" id="tarotCarousel">
           {tarotServices.map((s) => (
@@ -110,14 +202,21 @@ const tarotServices = [
               class="tarot-slide"
               type="button"
               data-key={s.key}
+              data-number={s.number}
               data-title={s.title}
               data-subtitle={s.subtitle}
+              data-archetype={s.archetype}
               data-img={s.img}
               data-desc={s.desc}
               aria-label={`${s.title} — show details`}
             >
               <div class="tarot-slide__img">
-                <img src={s.img} alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`} loading="lazy" decoding="async" />
+                <img
+                  src={s.img}
+                  alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
 
               <div class="tarot-slide__meta">
@@ -131,22 +230,43 @@ const tarotServices = [
         <div class="tarot-detail" id="tarotDetail" aria-live="polite">
           <p class="tarot-detail__kicker" id="tarotDetailKicker"></p>
           <h2 class="tarot-detail__title" id="tarotDetailTitle"></h2>
+          <p class="tarot-detail__archetype" id="tarotDetailArchetype"></p>
           <p class="tarot-detail__text" id="tarotDetailText"></p>
 
           <div class="tarot-detail__actions">
-            <a class="tarot-btn" id="tarotDetailMore" href="/services/">Explore the Service</a>
+            <a class="tarot-btn" id="tarotDetailMore" href="/services/">
+              Explore the Service
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- DESKTOP MODAL -->
       <div class="tarot-modal" id="tarotModal" hidden aria-hidden="true">
         <div class="tarot-modal__backdrop" data-close></div>
-        <div class="tarot-modal__panel" role="dialog" aria-modal="true" aria-labelledby="tarotModalTitle">
-          <button class="tarot-modal__close" type="button" aria-label="Close" data-close>✕</button>
+
+        <div
+          class="tarot-modal__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="tarotModalTitle"
+          aria-describedby="tarotModalText"
+        >
+          <button
+            class="tarot-modal__close"
+            type="button"
+            aria-label="Close"
+            data-close
+          >
+            ✕
+          </button>
 
           <div class="tarot-modal__grid">
             <div class="tarot-modal__media">
+              <div class="tarot-modal__card-meta" aria-hidden="true">
+                <p class="tarot-modal__card-number" id="tarotModalNumber"></p>
+                <p class="tarot-modal__card-archetype" id="tarotModalArchetype"></p>
+              </div>
+
               <img id="tarotModalImg" alt="" />
             </div>
 
@@ -156,21 +276,30 @@ const tarotServices = [
               <p class="tarot-modal__text" id="tarotModalText"></p>
 
               <div class="tarot-modal__actions">
-                <a class="tarot-btn" id="tarotModalMore" href="/services/">Explore the Service</a>
-                <button class="tarot-btn tarot-btn--solid" type="button" id="tarotModalShuffle">Shuffle again</button>
+                <a class="tarot-btn" id="tarotModalMore" href="/services/">
+                  Explore the Service
+                </a>
+                <button
+                  class="tarot-btn tarot-btn--solid"
+                  type="button"
+                  id="tarotModalShuffle"
+                >
+                  Shuffle again
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="tarot-continue" style="display:flex;justify-content:center;margin:2.5rem 0 4rem;">
+      <div
+        class="tarot-continue"
+        style="display:flex;justify-content:center;margin:2.5rem 0 4rem;"
+      >
         <a class="tarot-btn tarot-btn--solid" href="/about/">Continue</a>
       </div>
 
-   <!-- index.astro (in fondo alla pagina va benissimo) -->
-<script src="../scripts/tarot-services.ts"></script>
+      <script src="../scripts/tarot-services.ts"></script>
     </section>
   </div>
-
 </BaseLayout>

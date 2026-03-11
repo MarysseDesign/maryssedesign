@@ -1,6 +1,7 @@
 // src/scripts/tarot-services.ts
 // Tarot services interactions (desktop drag + modal, mobile carousel details)
-// Robust for Astro dev/build + client-side navigations (View Transitions) with full cleanup.
+// Base: old working behavior preserved.
+// Added only: roman number + archetype support for modal and mobile detail.
 
 console.log("✅ tarot-services loaded");
 
@@ -8,6 +9,8 @@ type TarotData = {
   key?: string;
   title?: string;
   subtitle?: string;
+  number?: string;
+  archetype?: string;
   img?: string;
   desc?: string;
 };
@@ -29,15 +32,32 @@ declare global {
     return `${base}${p}`;
   };
 
+  const slugFromKey = (key: string) => {
+    const map: Record<string, string> = {
+      branding: "branding",
+      strategy: "creative-direction",
+      advertising: "advertising",
+      storytelling: "storytelling",
+      web: "web-design",
+      social: "social-media",
+      visual: "visual-system",
+      photo: "photography",
+      video: "video",
+      events: "experiential",
+    };
+
+    return map[key] ?? key;
+  };
+
   const makeServicesHref = (key?: string) =>
-    `${joinBase("services/")}#${key ?? ""}`;
+    `${joinBase("services/")}#${slugFromKey(key ?? "")}`;
 
   const run = () => {
-    // Se Astro rimpiazza il DOM (View Transitions), evitiamo doppio init
     window.__tarotServicesDestroy?.();
     window.__tarotServicesDestroy = undefined;
 
     const cleanups: Cleanup[] = [];
+
     const on = <T extends EventTarget>(
       target: T | null | undefined,
       type: string,
@@ -69,6 +89,7 @@ declare global {
     const mobileRoot = document.getElementById("tarotMobile");
     const detailKicker = document.getElementById("tarotDetailKicker");
     const detailTitle = document.getElementById("tarotDetailTitle");
+    const detailArchetype = document.getElementById("tarotDetailArchetype");
     const detailText = document.getElementById("tarotDetailText");
     const detailMore = document.getElementById(
       "tarotDetailMore",
@@ -80,6 +101,13 @@ declare global {
       const ds = btn.dataset;
       detailKicker.textContent = ds.subtitle || "";
       detailTitle.textContent = ds.title || "";
+
+      if (detailArchetype) {
+        detailArchetype.textContent = ds.archetype
+          ? ds.archetype.toUpperCase()
+          : "";
+      }
+
       detailText.textContent = ds.desc || "";
 
       if (detailMore) detailMore.href = makeServicesHref(ds.key);
@@ -101,7 +129,7 @@ declare global {
 
       slides.forEach((btn) => {
         on(btn, "click", () => setDetailFromBtn(btn), { passive: true });
-        // Accessibilità (Enter/Space)
+
         on(btn, "keydown", (e: Event) => {
           const ke = e as KeyboardEvent;
           if (ke.key === "Enter" || ke.key === " ") {
@@ -117,13 +145,14 @@ declare global {
     // ===== DESKTOP =====
     const stage = document.getElementById("tarotStage");
 
-    // Modal elements
     const modal = document.getElementById("tarotModal") as HTMLElement | null;
     const modalImg = document.getElementById(
       "tarotModalImg",
     ) as HTMLImageElement | null;
     const modalKicker = document.getElementById("tarotModalKicker");
     const modalTitle = document.getElementById("tarotModalTitle");
+    const modalNumber = document.getElementById("tarotModalNumber");
+    const modalArchetype = document.getElementById("tarotModalArchetype");
     const modalText = document.getElementById("tarotModalText");
     const modalShuffle = document.getElementById(
       "tarotModalShuffle",
@@ -132,14 +161,28 @@ declare global {
       "tarotModalMore",
     ) as HTMLAnchorElement | null;
 
+    let lastFocusedCard: HTMLElement | null = null;
+
     const openModal = (data: TarotData) => {
-      if (!modal || !modalImg || !modalKicker || !modalTitle || !modalText)
+      if (!modal || !modalImg || !modalKicker || !modalTitle || !modalText) {
         return;
+      }
 
       modalImg.src = data.img || "";
       modalImg.alt = data.title ? `${data.title} image` : "";
       modalKicker.textContent = data.subtitle || "";
       modalTitle.textContent = data.title || "";
+
+      if (modalNumber) {
+        modalNumber.textContent = data.number || "";
+      }
+
+      if (modalArchetype) {
+        modalArchetype.textContent = data.archetype
+          ? data.archetype.toUpperCase()
+          : "";
+      }
+
       modalText.textContent = data.desc || "";
 
       if (modalMore) modalMore.href = makeServicesHref(data.key);
@@ -158,7 +201,10 @@ declare global {
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden", "true");
       document.documentElement.classList.remove("tarot-modal-lock");
-      window.setTimeout(() => ((modal as any).hidden = true), 180);
+      window.setTimeout(() => {
+        (modal as any).hidden = true;
+        if (lastFocusedCard) lastFocusedCard.focus();
+      }, 180);
     };
 
     const initDesktop = () => {
@@ -169,8 +215,6 @@ declare global {
       );
       if (!cards.length) return;
 
-      // Optional but helps pointer stability on some browsers (Firefox/trackpad)
-      // If you already set these in CSS, you can ignore.
       stage.style.userSelect = "none";
 
       let z = 20;
@@ -187,7 +231,6 @@ declare global {
         const s = stage.getBoundingClientRect();
         const c = card.getBoundingClientRect();
 
-        // Evita divisioni strane se stage non ha dimensioni (edge cases)
         const sw = Math.max(1, s.width);
         const sh = Math.max(1, s.height);
 
@@ -219,6 +262,8 @@ declare global {
         return { x, y };
       };
 
+      // IMPORTANT:
+      // this is the old shuffle behavior preserved
       const shuffle = () => {
         cards.forEach((card) => {
           const b = getBoundsPercent(card);
@@ -229,14 +274,12 @@ declare global {
         });
       };
 
-      // Shuffle buttons
       on(shuffleBtn, "click", shuffle);
       on(modalShuffle, "click", () => {
         shuffle();
         closeModal();
       });
 
-      // Modal close
       on(modal, "click", (e: Event) => {
         const t = e.target as HTMLElement | null;
         if (t && t.matches?.("[data-close]")) closeModal();
@@ -244,17 +287,11 @@ declare global {
 
       on(window, "keydown", (e: Event) => {
         const ke = e as KeyboardEvent;
-        if (ke.key === "Escape" && modal && !(modal as any).hidden)
+        if (ke.key === "Escape" && modal && !(modal as any).hidden) {
           closeModal();
+        }
       });
 
-      /**
-       * ✅ Drag handler (fixed):
-       * - Adds global pointermove/up listeners ONLY while dragging
-       * - Releases pointer capture (Firefox stability)
-       * - Handles pointercancel + blur
-       * - Keeps original behavior on other browsers
-       */
       const enableDrag = (card: HTMLElement) => {
         let dragging = false;
         let moved = 0;
@@ -263,14 +300,11 @@ declare global {
         let startPos = { x: 0, y: 0 };
         let activePointerId: number | null = null;
 
-        // Migliora UX: non trascinare se target è link/btn interno (se mai ce ne fossero)
         const isInteractive = (el: EventTarget | null) => {
           const t = el as HTMLElement | null;
           return !!t?.closest?.("a,button,input,textarea,select,label");
         };
 
-        // For smoother behavior on touchpads + consistent pointer stream
-        // (Doesn't affect click-to-open)
         card.style.touchAction = "none";
 
         const onMove = (e: PointerEvent) => {
@@ -296,7 +330,6 @@ declare global {
 
           setPos(card, x, y);
 
-          // During drag: prevent selection / default gestures
           e.preventDefault();
         };
 
@@ -305,7 +338,6 @@ declare global {
           dragging = false;
           card.classList.remove("is-dragging");
 
-          // Release pointer capture (important for Firefox)
           if (activePointerId !== null) {
             try {
               card.releasePointerCapture?.(activePointerId);
@@ -313,7 +345,6 @@ declare global {
           }
           activePointerId = null;
 
-          // Remove global listeners
           window.removeEventListener("pointermove", onMove as any);
           window.removeEventListener("pointerup", onUp as any);
           window.removeEventListener("pointercancel", onUp as any);
@@ -324,8 +355,8 @@ declare global {
 
         const onDown = (e: PointerEvent) => {
           if (isInteractive(e.target)) return;
-          if (e.button === 2) return; // no right click
-          if (isMobile()) return; // safety
+          if (e.button === 2) return;
+          if (isMobile()) return;
 
           dragging = true;
           moved = 0;
@@ -338,26 +369,26 @@ declare global {
           startY = e.clientY ?? 0;
           startPos = getPos(card);
 
-          // Capture pointer
           try {
             card.setPointerCapture?.(e.pointerId);
           } catch {}
 
-          // Attach global listeners only now
           window.addEventListener("pointermove", onMove, { passive: false });
           window.addEventListener("pointerup", onUp, { passive: true });
           window.addEventListener("pointercancel", onUp, { passive: true });
           window.addEventListener("blur", onUp);
 
-          // Avoid selection / default behavior
           e.preventDefault();
         };
 
         const openFromCard = () => {
+          lastFocusedCard = card;
           openModal({
             key: card.dataset.key,
             title: card.dataset.title,
             subtitle: card.dataset.subtitle,
+            number: card.dataset.number,
+            archetype: card.dataset.archetype,
             img: card.dataset.img,
             desc: card.dataset.desc,
           });
@@ -365,13 +396,11 @@ declare global {
 
         on(card, "pointerdown", onDown);
 
-        // Click only if not a drag
         on(card, "click", () => {
           if (moved > 10) return;
           openFromCard();
         });
 
-        // Accessibilità
         on(card, "keydown", (e: Event) => {
           const ke = e as KeyboardEvent;
           if (ke.key === "Enter" || ke.key === " ") {
@@ -383,7 +412,6 @@ declare global {
 
       cards.forEach(enableDrag);
 
-      // Initial layout once stage has real size
       requestAnimationFrame(() => shuffle());
     };
 
@@ -400,30 +428,23 @@ declare global {
 
     boot();
 
-    // Breakpoint change: reinizializza senza reload, pulendo i listener
     const onBreakpoint = () => {
-      // chiude modale se cambi viewport
       closeModal();
-
-      // cleanup listeners e re-init
       destroy();
-      // reinstalla un nuovo ciclo (ripristina destroy su window)
       run();
     };
 
-    // addEventListener su MediaQueryList è supportato moderno; fallback a onchange per safety
     if (mqMobile.addEventListener) {
       on(mqMobile, "change", onBreakpoint);
     } else {
-      // @ts-expect-error legacy
+      // @ts-expect-error legacy fallback
       mqMobile.onchange = onBreakpoint;
       cleanups.push(() => {
-        // @ts-expect-error legacy
+        // @ts-expect-error legacy fallback
         mqMobile.onchange = null;
       });
     }
 
-    // In Astro con View Transitions: prima dello swap pulisci
     on(document, "astro:before-swap", () => {
       window.__tarotServicesDestroy?.();
       window.__tarotServicesDestroy = undefined;
@@ -432,7 +453,6 @@ declare global {
 
   const start = () => run();
 
-  // Astro event (se presente) + fallback
   document.addEventListener("astro:page-load", start, { once: true });
 
   if (document.readyState === "loading") {
