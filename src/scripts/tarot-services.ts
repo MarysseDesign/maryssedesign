@@ -203,7 +203,12 @@ declare global {
       document.documentElement.classList.remove("tarot-modal-lock");
       window.setTimeout(() => {
         (modal as any).hidden = true;
-        if (lastFocusedCard) lastFocusedCard.focus();
+
+        if (lastFocusedCard) {
+          lastFocusedCard.blur();
+        }
+
+        lastFocusedCard = null;
       }, 180);
     };
 

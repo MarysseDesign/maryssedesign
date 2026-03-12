@@ -877,7 +877,6 @@ body[data-footer-variant="minimal"] main {
    ========================================================= */
 .tarot-btn:focus-visible,
 .tarot-slide:focus-visible,
-.tarot-card:focus-visible,
 .tarot-modal__close:focus-visible,
 .tarot-modal__actions a:focus-visible,
 .tarot-modal__actions button:focus-visible {
@@ -886,8 +885,10 @@ body[data-footer-variant="minimal"] main {
 }
 
 .tarot-card:focus-visible {
-  border-color: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.7);
+  outline: 2px solid rgba(255, 255, 255, 0.58);
+  outline-offset: 3px;
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.62);
 }
 
 .tarot-btn--solid:focus-visible {
