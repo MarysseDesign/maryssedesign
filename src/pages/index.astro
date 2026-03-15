@@ -383,11 +383,11 @@ const selectedWorks = [
 
 <div class="md-divider"></div>
 
-<section class="md-home-section md-collaborations">
+<section class="md-home-section md-collaborations fade-row">
       
     </section>
 
-    <section class="md-home-section md-partners" aria-labelledby="partners-title">
+    <section class="md-home-section md-partners fade-row" aria-labelledby="partners-title">
   <div class="md-home-wrap">
 
     <div class="md-section-head">
@@ -446,10 +446,10 @@ const selectedWorks = [
 
 <div class="md-divider"></div>
 
-<section class="md-home-section md-collaborations">
+<section class="md-home-section md-collaborations fade-row">
 
     <section
-      class="md-home-section md-selected-work"
+      class="md-home-section md-selected-work fade-row"
       id="selected-work"
       aria-labelledby="selected-work-title"
     >
@@ -503,7 +503,7 @@ const selectedWorks = [
     Discover the studio
   </a>
 
-  <a class="tarot-btn shuffle" href="/projects/">
+  <a class="tarot-btn" href="/projects/">
     Explore the work
   </a>
 </div>
@@ -513,4 +513,29 @@ const selectedWorks = [
       </div>
     </section>
   </div>
+
+  <script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const fadeRows = document.querySelectorAll(".fade-row");
+
+    if (!fadeRows.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px",
+      }
+    );
+
+    fadeRows.forEach((row) => observer.observe(row));
+  });
+</script>
 </BaseLayout>

@@ -1553,18 +1553,45 @@ body[data-footer-variant="minimal"] main {
     line-height: 1.12;
   }
 
-  .md-logo-item {
-    min-height: 74px;
-    padding: 0 1.2rem;
+  /* FIX MOBILE LOGO CAROUSEL */
+  .md-marquee-shell {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 16px;
+    mask-image: none;
+    -webkit-mask-image: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
   }
 
-  .md-logo-image {
-    max-width: 145px;
-    max-height: 36px;
+  .md-marquee-shell::-webkit-scrollbar {
+    display: none;
   }
 
   .md-marquee-track {
-    animation-duration: 34s;
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    min-width: auto;
+    animation: none;
+    will-change: auto;
+    padding-right: 16px;
+  }
+
+  .md-logo-item {
+    min-height: 74px;
+    padding: 0 1rem;
+    scroll-snap-align: start;
+  }
+
+  .md-logo-item[aria-hidden="true"] {
+    display: none;
+  }
+
+  .md-logo-image {
+    max-width: 132px;
+    max-height: 34px;
   }
 
   .md-work-card--visual {
@@ -1582,6 +1609,27 @@ body[data-footer-variant="minimal"] main {
 
   .md-bottom-cta__inner {
     width: min(100%, calc(100% - 32px));
+  }
+}
+
+@media (max-width: 480px) {
+  .md-marquee-shell {
+    padding: 0 12px;
+  }
+
+  .md-marquee-track {
+    padding-right: 12px;
+    gap: 0;
+  }
+
+  .md-logo-item {
+    min-height: 68px;
+    padding: 0 0.85rem;
+  }
+
+  .md-logo-image {
+    max-width: 118px;
+    max-height: 30px;
   }
 }
 
@@ -1626,5 +1674,58 @@ body[data-footer-variant="minimal"] main {
   .md-home-continue--bottom {
     flex-direction: column;
     gap: 10px;
+  }
+}
+/* =========================================================
+   FADE-IN ROWS AFTER TAROT
+   NON TOCCA LE CARTE
+   ========================================================= */
+
+.fade-row {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.fade-row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* leggera progressione visiva */
+.fade-row:nth-of-type(1) {
+  transition-delay: 0s;
+}
+
+.fade-row:nth-of-type(2) {
+  transition-delay: 0.04s;
+}
+
+.fade-row:nth-of-type(3) {
+  transition-delay: 0.08s;
+}
+
+.fade-row:nth-of-type(4) {
+  transition-delay: 0.12s;
+}
+
+@media (max-width: 900px) {
+  .fade-row {
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-row,
+  .fade-row.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
