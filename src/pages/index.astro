@@ -356,24 +356,37 @@ const selectedWorks = [
           </h2>
         </div>
 
-        <div class="md-marquee-shell" aria-label="Collaborations logos marquee">
-          <div class="md-marquee-track">
-            {[...collaborations, ...collaborations].map((logo, index) => (
-              <div
-                class="md-logo-item"
-                aria-hidden={index >= collaborations.length ? "true" : "false"}
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  loading="lazy"
-                  decoding="async"
-                  class="md-logo-image"
-                />
-              </div>
-            ))}
-          </div>
+     <div class="md-marquee-shell" aria-label="Collaborations logos marquee">
+  <div class="md-marquee-track">
+    <div class="md-marquee-set">
+      {collaborations.map((logo) => (
+        <div class="md-logo-item">
+          <img
+            src={logo.src}
+            alt={logo.name}
+            loading="lazy"
+            decoding="async"
+            class="md-logo-image"
+          />
         </div>
+      ))}
+    </div>
+
+    <div class="md-marquee-set" aria-hidden="true">
+      {collaborations.map((logo) => (
+        <div class="md-logo-item">
+          <img
+            src={logo.src}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="md-logo-image"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
       </div>
     </section>
 

@@ -1198,10 +1198,10 @@ body[data-footer-variant="minimal"] main {
    ========================================================= */
 @keyframes md-marquee {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -1217,26 +1217,33 @@ body[data-footer-variant="minimal"] main {
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 1) 10%,
-    rgba(0, 0, 0, 1) 90%,
+    rgba(0, 0, 0, 1) 8%,
+    rgba(0, 0, 0, 1) 92%,
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 1) 10%,
-    rgba(0, 0, 0, 1) 90%,
+    rgba(0, 0, 0, 1) 8%,
+    rgba(0, 0, 0, 1) 92%,
     transparent 100%
   );
 }
 
 .md-marquee-track {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   width: max-content;
+  min-width: max-content;
   white-space: nowrap;
-  animation: md-marquee 60s linear infinite;
   will-change: transform;
+  animation: md-marquee 60s linear infinite;
+}
+
+.md-marquee-set {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
 }
 
 .md-logo-item {
@@ -1255,7 +1262,7 @@ body[data-footer-variant="minimal"] main {
   max-width: clamp(160px, 13vw, 280px);
   max-height: clamp(34px, 3vw, 58px);
   object-fit: contain;
-  filter: grayscale(100%) brightness(0) invert(1);
+  filter: brightness(0) invert(1);
   opacity: 0.72;
   transition:
     opacity 0.28s ease,
@@ -1441,7 +1448,6 @@ body[data-footer-variant="minimal"] main {
     aspect-ratio: 16 / 11;
   }
 }
-
 @media (max-width: 900px) {
   .home-marysse {
     --home-wrap: min(100% - 32px, 1240px);
@@ -1472,18 +1478,35 @@ body[data-footer-variant="minimal"] main {
     line-height: 1.12;
   }
 
+  .md-marquee-shell {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 1) 6%,
+      rgba(0, 0, 0, 1) 94%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 1) 6%,
+      rgba(0, 0, 0, 1) 94%,
+      transparent 100%
+    );
+  }
+
   .md-marquee-track {
-    animation-duration: 52s;
+    animation-duration: 48s;
   }
 
   .md-logo-item {
     min-height: 92px;
-    padding: 0 1.7rem;
+    padding: 0 1.8rem;
   }
 
   .md-logo-image {
-    max-width: 180px;
-    max-height: 48px;
+    max-width: 170px;
+    max-height: 44px;
   }
 
   .md-work-card--visual {
@@ -1505,35 +1528,18 @@ body[data-footer-variant="minimal"] main {
 }
 
 @media (max-width: 480px) {
-  .md-marquee-shell {
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 1) 8%,
-      rgba(0, 0, 0, 1) 92%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 1) 8%,
-      rgba(0, 0, 0, 1) 92%,
-      transparent 100%
-    );
-  }
-
   .md-marquee-track {
-    animation-duration: 46s;
+    animation-duration: 42s;
   }
 
   .md-logo-item {
-    min-height: 84px;
-    padding: 0 1.2rem;
+    min-height: 82px;
+    padding: 0 1.25rem;
   }
 
   .md-logo-image {
-    max-width: 150px;
-    max-height: 40px;
+    max-width: 138px;
+    max-height: 36px;
   }
 }
 
