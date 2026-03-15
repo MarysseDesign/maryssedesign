@@ -106,19 +106,18 @@ const tarotServices = [
 ];
 
 const collaborations = [
-  { name: "Armani", src: "/images/collaborations/armani-beauty-logo.png",},
-  { name: "Rinascente", src: "/images/collaborations/rinascente-logo.png",  },
-  { name: "Mondadori", src: "/images/collaborations/mondadori-logo.png",  },
-  { name: "Campari Academy", src: "/images/collaborations/campari-academy-logo.png", },
-  { name:"Terrazza Aperol", src: "/images/collaborations/terrazza-aperol-logo.png",  },
-  { name: "Berlucchi Franciacorta", src: "/images/collaborations/berlucchi-logo.png",  },
-  { name: "The Wom", src: "/images/collaborations/the-wom-logo.png",  },
-  { name: "My Personal Trainer", src: "/images/collaborations/my-personal-trainer-logo.png",  },
-  { name: "My Personal Beauty", src: "/images/collaborations/my-personal-beauty-logo.png",  },
-  { name: "L'Oreal", src: "/images/collaborations/loreal-logo.png",},
-  { name: "Pupa", src: "/images/collaborations/pupa-logo.png",  },
-  { name: "Primolino", src: "/images/collaborations/primolino-logo.png",  }
- 
+  { name: "Armani", src: "/images/collaborations/armani-beauty-logo.png" },
+  { name: "Rinascente", src: "/images/collaborations/rinascente-logo.png" },
+  { name: "Mondadori", src: "/images/collaborations/mondadori-logo.png" },
+  { name: "Campari Academy", src: "/images/collaborations/campari-academy-logo.png" },
+  { name: "Terrazza Aperol", src: "/images/collaborations/terrazza-aperol-logo.png" },
+  { name: "Berlucchi Franciacorta", src: "/images/collaborations/berlucchi-logo.png" },
+  { name: "The Wom", src: "/images/collaborations/the-wom-logo.png" },
+  { name: "My Personal Trainer", src: "/images/collaborations/my-personal-trainer-logo.png" },
+  { name: "My Personal Beauty", src: "/images/collaborations/my-personal-beauty-logo.png" },
+  { name: "L'Oreal", src: "/images/collaborations/loreal-logo.png" },
+  { name: "Pupa", src: "/images/collaborations/pupa-logo.png" },
+  { name: "Primolino", src: "/images/collaborations/primolino-logo.png" },
 ];
 
 const selectedWorks = [
@@ -170,7 +169,7 @@ const selectedWorks = [
         </h1>
 
         <p class="tarot-hero__sub only-desktop">
-          Art direction & strategy, identity and visual worlds for contemporary brands.
+          Art direction, identity, brand strategy and visual worlds for contemporary brands.
         </p>
 
         <p class="tarot-hero__explain only-desktop">
@@ -182,7 +181,7 @@ const selectedWorks = [
         </p>
 
         <p class="tarot-hero__sub only-mobile">
-          Brand strategy, identity and visual worlds for contemporary brands.
+          Art direction, identity, brand strategy and visual worlds for contemporary brands.
         </p>
 
         <p class="tarot-hero__explain only-mobile">
@@ -345,19 +344,19 @@ const selectedWorks = [
     </section>
 
     <section
-      class="md-home-section md-collaborations"
+      class="md-home-section md-collaborations fade-row"
       id="collaborations"
       aria-labelledby="collab-title"
     >
       <div class="md-home-wrap">
         <div class="md-section-head">
-          <p class="md-section-kicker">Selected collaborations</p>
+          <p class="md-section-kicker">Collaborations</p>
           <h2 id="collab-title" class="md-section-title">
-            Selected brands I’ve collaborated with
+            Selected brands I’ve worked with
           </h2>
         </div>
 
-      <div class="md-marquee-shell" aria-label="Collaborations logos marquee">
+        <div class="md-marquee-shell" aria-label="Collaborations logos marquee">
           <div class="md-marquee-track">
             {[...collaborations, ...collaborations].map((logo, index) => (
               <div
@@ -375,78 +374,64 @@ const selectedWorks = [
             ))}
           </div>
         </div>
-
-        
       </div>
-
-      </section>
-
-<div class="md-divider"></div>
-
-<section class="md-home-section md-collaborations fade-row">
-      
     </section>
 
+    <div class="md-divider fade-row"></div>
+
     <section class="md-home-section md-partners fade-row" aria-labelledby="partners-title">
-  <div class="md-home-wrap">
+      <div class="md-home-wrap">
+        <div class="md-section-head">
+          <p class="md-section-kicker">Network</p>
+          <h2 id="partners-title" class="md-section-title">
+            Agencies and partners
+          </h2>
+        </div>
 
-    <div class="md-section-head">
-      <p class="md-section-kicker">Creative network</p>
+        <div class="md-partners-grid md-partners-grid--desktop">
+          <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
+          <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
+          <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
+          <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
+          <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
+          <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
+          <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
+          <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
+          <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
+          <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
+          <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
+          <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
+        </div>
 
-      <h2 id="partners-title" class="md-section-title">
-        Agencies and collaborators
-      </h2>
-    </div>
+        <div class="md-partners-inline" aria-label="Agencies and collaborators">
+          <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="md-partners-grid md-partners-grid--desktop">
-     <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
-      <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
-      <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
-      <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
-      <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
-      <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
-      <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
-      <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
-      <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
-      <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
-      <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
-      <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
-    </div>
-
-    <div class="md-partners-inline" aria-label="Agencies and collaborators">
-      <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
-      <span aria-hidden="true">•</span>
-     <span aria-hidden="true">•</span>
-      <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
-       <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
-      <span aria-hidden="true">•</span>
-      <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
-    </div>
-
-  </div>
-</section>
-    
-</section>
-
-<div class="md-divider"></div>
-
-<section class="md-home-section md-collaborations fade-row">
+    <div class="md-divider fade-row"></div>
 
     <section
       class="md-home-section md-selected-work fade-row"
@@ -455,7 +440,7 @@ const selectedWorks = [
     >
       <div class="md-home-wrap">
         <div class="md-section-head md-section-head--work">
-          <p class="md-section-kicker">Selected work</p>
+          <p class="md-section-kicker kicker-work">Selected work</p>
           <h2 id="selected-work-title" class="md-section-title">
             A curated selection of projects across retail, experience and brand identity.
           </h2>
@@ -489,7 +474,7 @@ const selectedWorks = [
       </div>
     </section>
 
-    <section class="md-home-section md-bottom-cta" aria-labelledby="md-bottom-cta-title">
+    <section class="md-home-section md-bottom-cta fade-row" aria-labelledby="md-bottom-cta-title">
       <div class="md-bottom-cta__inner">
         <div class="tarot-foundation md-bottom-cta__foundation">
           <p id="md-bottom-cta-title" class="tarot-foundation__text">
@@ -498,44 +483,41 @@ const selectedWorks = [
           </p>
         </div>
 
-       <div class="tarot-continue md-home-continue md-home-continue--bottom">
-  <a class="tarot-btn tarot-btn--solid" href="/about/">
-    Discover the studio
-  </a>
+        <div class="tarot-continue md-home-continue md-home-continue--bottom">
+          <a class="tarot-btn tarot-btn--solid" href="/about/">
+            Discover the studio
+          </a>
 
-  <a class="tarot-btn" href="/projects/">
-    Explore the work
-  </a>
-</div>
-  
-
-</div>
+          <a class="tarot-btn" href="/projects/">
+            Explore the work
+          </a>
+        </div>
       </div>
     </section>
   </div>
 
   <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const fadeRows = document.querySelectorAll(".fade-row");
+    document.addEventListener("DOMContentLoaded", () => {
+      const fadeRows = document.querySelectorAll(".fade-row");
 
-    if (!fadeRows.length) return;
+      if (!fadeRows.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.14,
-        rootMargin: "0px 0px -8% 0px",
-      }
-    );
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.14,
+          rootMargin: "0px 0px -8% 0px",
+        }
+      );
 
-    fadeRows.forEach((row) => observer.observe(row));
-  });
-</script>
+      fadeRows.forEach((row) => observer.observe(row));
+    });
+  </script>
 </BaseLayout>
