@@ -31,9 +31,9 @@ interface Props {
 
 const {
   brand = "marysse",
-  title = "MARYSSE · Dual Brand",
-  description = "Design, identity and creativity",
-  lang = "it",
+  title = "Marysse Design — Brand Boutique",
+  description = "Creative direction, brand identity and visual culture.",
+  lang = "en",
   ogImage = "/og-image.jpg",
   noMainBottomPadding = false,
   footerVariant = "default",
@@ -83,6 +83,26 @@ const absoluteOgImage = ogImage.startsWith("http")
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteOgImage} />
+
+       <!-- STRUCTURED DATA -->
+    <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "CreativeAgency",
+ "name": "Marysse Design",
+ "url": "https://maryssedesign.com",
+ "logo": "https://maryssedesign.com/images/Marysse_logo_footer.png",
+ "description": "Brand boutique focused on creative direction, brand identity and visual culture.",
+ "sameAs": [
+   "https://www.instagram.com/marysszang/"
+ ],
+ "founder": {
+   "@type": "Person",
+   "name": "Maria Assunta Zangone",
+   "jobTitle": "Art Director & Visual Artist"
+ }
+}
+</script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
