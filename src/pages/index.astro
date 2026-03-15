@@ -104,6 +104,46 @@ const tarotServices = [
       "Physical brand experiences shaped through identity, visuals and direction, translating the brand into space.",
   },
 ];
+
+const collaborations = [
+  { name: "Armani", src: "/images/collaborations/armani-beauty-logo.png",},
+  { name: "Rinascente", src: "/images/collaborations/rinascente-logo.png",  },
+  { name: "Mondadori", src: "/images/collaborations/mondadori-logo.png",  },
+  { name: "Campari Academy", src: "/images/collaborations/campari-academy-logo.png", },
+  { name:"Terrazza Aperol", src: "/images/collaborations/terrazza-aperol-logo.png",  },
+  { name: "Berlucchi Franciacorta", src: "/images/collaborations/berlucchi-logo.png",  },
+  { name: "The Wom", src: "/images/collaborations/the-wom-logo.png",  },
+  { name: "My Personal Trainer", src: "/images/collaborations/my-personal-trainer-logo.png",  },
+  { name: "My Personal Beauty", src: "/images/collaborations/my-personal-beauty-logo.png",  },
+  { name: "L'Oreal", src: "/images/collaborations/loreal-logo.png",},
+  { name: "Pupa", src: "/images/collaborations/pupa-logo.png",  },
+  { name: "Primolino", src: "/images/collaborations/primolino-logo.png",  }
+ 
+];
+
+const selectedWorks = [
+  {
+    title: "Armani × Rinascente",
+    category: "Retail Experience / Art Direction",
+    href: "/projects/armani-rinascente/",
+    image: "/images/projects/covers/home_Armani_Rinascente.jpg",
+    alt: "Armani Rinascente project cover",
+  },
+  {
+    title: "Campari Academy",
+    category: "Brand Experience / Campaign",
+    href: "/projects/campari/",
+    image: "/images/projects/covers/03.png",
+    alt: "Campari Academy project cover",
+  },
+  {
+    title: "Primolino Milano",
+    category: "Brand Identity / Packaging",
+    href: "/projects/primolino/",
+    image: "/images/projects/covers/11.Primolino.jpg",
+    alt: "Primolino project cover",
+  },
+];
 ---
 
 <BaseLayout
@@ -112,7 +152,7 @@ const tarotServices = [
   noMainTopPadding={true}
   footerVariant="minimal"
 >
-  <div class="about-page">
+  <div class="about-page home-marysse">
     <div class="starfield" aria-hidden="true">
       <div class="sky-glow"></div>
       <div class="stars stars--far"></div>
@@ -130,7 +170,7 @@ const tarotServices = [
         </h1>
 
         <p class="tarot-hero__sub only-desktop">
-          Brand strategy, identity and visual worlds for contemporary brands.
+          Art direction & strategy, identity and visual worlds for contemporary brands.
         </p>
 
         <p class="tarot-hero__explain only-desktop">
@@ -301,21 +341,176 @@ const tarotServices = [
         </div>
       </div>
 
-      <div class="tarot-foundation">
-        <p class="tarot-foundation__text">
-          Marysse Design is the brand boutique founded by Maria Assunta Zangone,
-          art director and visual artist based in Milan.
-        </p>
-      </div>
-
-      <div
-        class="tarot-continue"
-        style="display:flex;justify-content:center;margin:2.5rem 0 4rem;"
-      >
-        <a class="tarot-btn tarot-btn--solid" href="/about/">Continue</a>
-      </div>
-
       <script src="../scripts/tarot-services.ts"></script>
+    </section>
+
+    <section
+      class="md-home-section md-collaborations"
+      id="collaborations"
+      aria-labelledby="collab-title"
+    >
+      <div class="md-home-wrap">
+        <div class="md-section-head">
+          <p class="md-section-kicker">Selected collaborations</p>
+          <h2 id="collab-title" class="md-section-title">
+            Selected brands I’ve collaborated with
+          </h2>
+        </div>
+
+      <div class="md-marquee-shell" aria-label="Collaborations logos marquee">
+          <div class="md-marquee-track">
+            {[...collaborations, ...collaborations].map((logo, index) => (
+              <div
+                class="md-logo-item"
+                aria-hidden={index >= collaborations.length ? "true" : "false"}
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  loading="lazy"
+                  decoding="async"
+                  class="md-logo-image"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        
+      </div>
+
+      </section>
+
+<div class="md-divider"></div>
+
+<section class="md-home-section md-collaborations">
+      
+    </section>
+
+    <section class="md-home-section md-partners" aria-labelledby="partners-title">
+  <div class="md-home-wrap">
+
+    <div class="md-section-head">
+      <p class="md-section-kicker">Creative network</p>
+
+      <h2 id="partners-title" class="md-section-title">
+        Agencies and collaborators
+      </h2>
+    </div>
+
+    <div class="md-partners-grid md-partners-grid--desktop">
+     <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
+      <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
+      <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
+      <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
+      <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
+      <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
+      <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
+      <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
+      <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
+      <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
+      <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
+      <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
+    </div>
+
+    <div class="md-partners-inline" aria-label="Agencies and collaborators">
+      <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
+      <span aria-hidden="true">•</span>
+     <span aria-hidden="true">•</span>
+      <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
+       <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
+      <span aria-hidden="true">•</span>
+      <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
+    </div>
+
+  </div>
+</section>
+    
+</section>
+
+<div class="md-divider"></div>
+
+<section class="md-home-section md-collaborations">
+
+    <section
+      class="md-home-section md-selected-work"
+      id="selected-work"
+      aria-labelledby="selected-work-title"
+    >
+      <div class="md-home-wrap">
+        <div class="md-section-head md-section-head--work">
+          <p class="md-section-kicker">Selected work</p>
+          <h2 id="selected-work-title" class="md-section-title">
+            A curated selection of projects across retail, experience and brand identity.
+          </h2>
+        </div>
+
+        <div class="md-work-grid">
+          {selectedWorks.map((project, index) => (
+            <a
+              class="md-work-card md-work-card--visual"
+              href={project.href}
+              aria-label={`Open project ${project.title}`}
+            >
+              <div class="md-work-card__visual">
+                <img
+                  src={project.image}
+                  alt={project.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <div class="md-work-card__content">
+                <p class="md-work-card__index">{String(index + 1).padStart(2, "0")}</p>
+                <p class="md-work-card__category">{project.category}</p>
+                <h3 class="md-work-card__title">{project.title}</h3>
+                <span class="md-work-card__link">View project</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="md-home-section md-bottom-cta" aria-labelledby="md-bottom-cta-title">
+      <div class="md-bottom-cta__inner">
+        <div class="tarot-foundation md-bottom-cta__foundation">
+          <p id="md-bottom-cta-title" class="tarot-foundation__text">
+            Marysse Design is the brand boutique founded by Maria Assunta Zangone,
+            art director and visual artist based in Milan.
+          </p>
+        </div>
+
+       <div class="tarot-continue md-home-continue md-home-continue--bottom">
+  <a class="tarot-btn tarot-btn--solid" href="/about/">
+    Discover the studio
+  </a>
+
+  <a class="tarot-btn shuffle" href="/projects/">
+    Explore the work
+  </a>
+</div>
+  
+
+</div>
+      </div>
     </section>
   </div>
 </BaseLayout>
