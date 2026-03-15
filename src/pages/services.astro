@@ -313,20 +313,97 @@ const byKey = Object.fromEntries(modules.map((m) => [m.key, m]));
         </div>
       </div>
     </section>
-  </main>
 
-  <script is:inline>
-    const els = document.querySelectorAll(".reveal");
-    if (els.length) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("is-inview");
-          });
-        },
-        { threshold: 0.14 }
-      );
-      els.forEach((el) => io.observe(el));
-    }
-  </script>
+    <style>
+  /* ===============================
+   Go to top – cookie style
+================================ */
+.go-to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 60px;
+  padding: 10px 19px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.go-to-top.is-visible {
+  opacity: 0.75;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.go-to-top.is-active {
+  opacity: 1 !important;
+}
+
+.go-to-top:active {
+  transform: translateY(2px);
+}
+
+@media (hover: hover) {
+  .go-to-top.is-visible:hover {
+    opacity: 1;
+  }
+}
+
+    </style>
+  </main>
 </BaseLayout>
+
+<button id="goToTop" aria-label="Go to top" class="go-to-top">
+  GO TO TOP
+</button>
+
+<script is:inline>
+  const els = document.querySelectorAll(".reveal");
+  if (els.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("is-inview");
+        });
+      },
+      { threshold: 0.14 }
+    );
+    els.forEach((el) => io.observe(el));
+  }
+
+  (() => {
+    const btn = document.getElementById("goToTop");
+    if (!btn) return;
+
+    const toggle = () => {
+      if (window.scrollY > 300) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
+    };
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
+  })();
+</script>

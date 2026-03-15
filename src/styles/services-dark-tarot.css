@@ -935,3 +935,121 @@ body[data-footer-variant="minimal"] main {
     animation: none !important;
   }
 }
+/* =========================================================
+   HERO CLARITY ADDITIONS
+   ========================================================= */
+
+.tarot-hero__title {
+  margin-bottom: 20px;
+}
+
+.tarot-hero__sub {
+  margin-top: 0;
+  margin-bottom: 26px;
+}
+
+.tarot-hero__explain {
+  margin: 0 auto 18px;
+  max-width: 560px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.8;
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
+}
+
+.tarot-hint {
+  margin-top: 0;
+  margin-bottom: 26px;
+}
+
+.tarot-actions {
+  margin-top: 0;
+  margin-bottom: 36px;
+}
+
+.tarot-stage-wrap {
+  margin-top: 0;
+}
+
+/* =========================================================
+   FOUNDATION NOTE
+   ========================================================= */
+
+.tarot-foundation {
+  width: min(760px, calc(100% - 48px));
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.tarot-foundation::before {
+  content: "";
+  display: block;
+  width: 68px;
+  height: 1px;
+  margin: 0 auto 22px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.tarot-foundation__text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 13px;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+/* =========================================================
+   MOBILE REFINEMENT
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .tarot-hero__wrap {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .tarot-hero__title {
+    margin-bottom: 14px;
+  }
+
+  .tarot-hero__sub.only-mobile {
+    max-width: 26ch;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.84);
+    margin: 0 auto 16px;
+    padding-top: 0;
+  }
+
+  .tarot-hero__explain.only-mobile {
+    max-width: 30ch;
+    margin: 0 auto 14px;
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .tarot-hint.only-mobile {
+    margin-bottom: 18px;
+  }
+
+  .tarot-actions {
+    margin-bottom: 24px;
+  }
+
+  .tarot-mobile {
+    margin-top: 0;
+  }
+
+  .tarot-foundation {
+    width: min(100%, calc(100% - 32px));
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .tarot-foundation__text {
+    font-size: 12.5px;
+    line-height: 1.8;
+  }
+}
