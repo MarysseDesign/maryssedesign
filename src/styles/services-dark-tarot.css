@@ -1224,9 +1224,11 @@ body[data-footer-variant="minimal"] main {
 }
 
 .md-marquee-row {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   white-space: nowrap;
+  width: max-content;
   min-width: 200%;
   will-change: transform;
   animation: md-marquee 52s linear infinite;
@@ -1533,7 +1535,6 @@ body[data-footer-variant="minimal"] main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .md-marquee-row,
   .md-logo-image,
   .md-work-card--visual,
   .md-work-card__visual img,
