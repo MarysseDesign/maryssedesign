@@ -1089,7 +1089,7 @@ body[data-footer-variant="minimal"] main {
   }
 
   .tarot-hero__sub.only-mobile {
-    max-width: 30ch;
+    max-width: 32ch;
     font-size: 14px;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.84);
@@ -1098,7 +1098,7 @@ body[data-footer-variant="minimal"] main {
   }
 
   .tarot-hero__explain.only-mobile {
-    max-width: 36ch;
+    max-width: 38ch;
     margin: 0 auto 14px;
     font-size: 12.5px;
     line-height: 1.75;
