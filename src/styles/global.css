@@ -408,3 +408,50 @@ a:focus-visible {
 .project-page .nav-circle[aria-label="Next project"]:hover .nav-icon {
   transform: translateX(1px);
 }
+
+.go-to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 60px;
+  padding: 10px 19px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.go-to-top.is-visible {
+  opacity: 0.75;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.go-to-top.is-active {
+  opacity: 1 !important;
+}
+
+.go-to-top:active {
+  transform: translateY(2px);
+}
+
+@media (hover: hover) {
+  .go-to-top.is-visible:hover {
+    opacity: 1;
+  }
+}

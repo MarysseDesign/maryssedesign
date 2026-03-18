@@ -281,6 +281,10 @@ const getAlt = (src, title) => altBySrc[src] ?? `${title} — digital artwork by
     </p>
   </footer>
 
+<button id="goToTop" aria-label="Go to top" class="go-to-top">
+  GO TO TOP
+</button>
+
   <!-- ✅ SCRIPT FILTRI (accessibile) -->
   <script is:inline>
     function initMszFilters() {
@@ -340,5 +344,29 @@ const getAlt = (src, title) => altBySrc[src] ?? `${title} — digital artwork by
 
     document.addEventListener("DOMContentLoaded", initMszFilters);
     document.addEventListener("astro:page-load", initMszFilters);
+
+
+
+  (() => {
+    const btn = document.getElementById("goToTop");
+    if (!btn) return;
+
+    const toggle = () => {
+      if (window.scrollY > 300) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
+    };
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
+  })();
+
+
   </script>
 </BaseLayout>
