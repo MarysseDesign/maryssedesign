@@ -43,7 +43,7 @@ const iconImages = {
 
           <p class="about-leadwhite opacity-100">
             Thoughtful brand architecture and <br class="show-mobile" /> refined identity for modern brands.
-<br/>    Some visions need to be shaped.<br class="show-mobile" /> Others need to be read.
+<br/>    Some visions need to be shaped.<br class="show-mobile" /> Others need to be read. <span class="hide-mobile">Each one requires a precise eye, and a single direction.</span>
  </p>
 
           <div class="mt-10 hero-cta flex flex-wrap gap-3">
@@ -95,9 +95,11 @@ const iconImages = {
             <h2 class="about-title">A Boutique Studio <br class="hide-mobile" />for Brand Architecture.</h2><br class="hide-mobile" />
             <p class="about-lead">
 
-Marysse Design is an independent creative studio crafting brand identity, <br class="hide-mobile" /> campaigns, and digital experiences for premium and luxury positioning.
-<br class="hide-mobile" />Each project is approached with strategic clarity and a refined visual language,<br class="hide-mobile" /> where structure precedes decoration and coherence defines value.<br class="hide-mobile" />
-<br class="hide-mobile" /> </p>
+Marysse Design is an independent creative studio founded and directed by Maria Assunta Zangone. <br>
+It operates as a focused creative direction, shaping brand identity, <br class="hide-mobile" />campaigns and digital experiences for premium and luxury positioning.
+Each project is guided by a singular vision, where strategy defines structure and aesthetic choices are never arbitrary. </p>
+
+<p class="about-lead">Every brand is approached as a system, shaped through three fundamental layers.</p>
           </div>
         </div>
 
@@ -168,10 +170,12 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
         <div class="about-grid">
           <header class="about-head reveal" style="--delay: 80ms">
             <p class="about-kicker">Vision</p>
-            <h2 class="about-title">We build Brand worlds.</h2>
+            <h2 class="about-title">We build brand worlds, guided by a <br class="show-mobile" />  precise and consistent vision.</h2>
             <p class="about-lead">
-              A premium Brand grows when every detail speaks the same language. <br class="show-mobile" />
-              The goal is coherence across touchpoints, <br class="show-mobile" /> so the Brand feels effortless, desirable,<br class="show-mobile" /> and unmistakably itself.
+
+              A premium brand is not the result of multiple directions, but of one clear point of view.
+              
+              The goal is coherence across touchpoints, <br class="show-mobile" /> so the brand feels effortless, desirable,<br class="show-mobile" /> and unmistakably itself.
             </p>
           </header>
 
@@ -193,6 +197,12 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
               </div>
             </div>
           </div>
+
+ <p class="about-lead">
+  A strong brand grows when every detail speaks the same language. <br class="show-mobile" />
+            </p>
+
+
         </div>
       </div>
     </section>
@@ -205,8 +215,8 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
         <p class="about-kicker">Method</p>
         <h2 class="about-title">Where detail leads.</h2>
         <p class="about-lead">
-          Marysse Design operates as a focused creative studio,  <br class="hide-mobile" /> shaped around each project.
-          One vision guides the process, ensuring clarity, consistency, and refined execution.
+         Marysse Design operates under a single creative direction  <br class="hide-mobile" />led by Maria Assunta Zangone.
+Each project is shaped through a curated structure, where collaborators and specialists are involved based on the brand’s needs, while the vision remains consistent and controlled.
         </p>
       </header>
 
@@ -228,6 +238,43 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
             </p>
           </div>
         </div>
+
+
+<!-- SIGNATURE -->
+<div class="about-signature reveal" style="--delay: 240ms">
+  <div class="signature-inner">
+
+    <div class="signature-image">
+      <img src="/images/about/marysse-portrait.jpg" alt="Maria Assunta Zangone" />
+    </div>
+
+    <div class="signature-content">
+      <p class="about-kicker">Signature</p>
+
+      <p class="about-lead">
+        Marysse Design is built on a specific sensibility:
+        a balance between structure and intuition,
+        between editorial aesthetics and strategic clarity.
+      </p>
+
+      <p class="about-lead">
+        The studio is led by Maria Assunta Zangone,
+        whose direction shapes each project with a precise and consistent vision.
+      </p>
+
+      <p class="about-lead">
+        Every brand is treated as a whole system,
+        where taste, coherence and intention are aligned from the start.
+      </p>
+
+      <p class="signature-caption">
+        Maria Assunta Zangone <br> Founder & Creative Director
+      </p>
+    </div>
+
+  </div>
+</div>
+
 
         <div class="about-split reveal" style="--delay: 260ms">
           <div>
@@ -339,7 +386,7 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
       line-height: 1.85;
       font-weight: 300;
       color: rgba(25, 17, 24, 0.82);
-      max-width: 70ch;
+      max-width: 78ch;
     }
 
 
@@ -653,6 +700,51 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
 
   .hide-mobile { display: inline; }
    }
+
+
+   /* SIGNATURE */
+.about-signature {
+  margin-top: 32px;
+}
+
+.signature-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 32px;
+  align-items: center;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.signature-image img {
+  width: 100%;
+  border-radius: 28px;
+  object-fit: cover;
+}
+
+.signature-content {
+  text-align: left;
+}
+
+.signature-caption {
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(25, 17, 24, 0.6);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .signature-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .signature-content {
+    text-align: center;
+  }
+}
 
 
   </style>
