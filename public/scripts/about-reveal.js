@@ -1,4 +1,8 @@
 (() => {
+  // Prevent multiple boot (Astro / client navigation safety)
+  if (window.__aboutRevealInit) return;
+  window.__aboutRevealInit = true;
+
   const PAGE_SELECTOR = ".about-page";
   const ITEM_SELECTOR = ".about-page .reveal";
   const MOBILE_BP = 768;
@@ -7,6 +11,8 @@
   let currentMode = null;
   let resizeTicking = false;
   let fallbackTimer = null;
+
+  // -------- utils --------
 
   function getPage() {
     return document.querySelector(PAGE_SELECTOR);
@@ -17,9 +23,11 @@
   }
 
   function getViewportHeight() {
-    return window.visualViewport
-      ? window.visualViewport.height
-      : window.innerHeight || document.documentElement.clientHeight;
+    // iOS safe viewport
+    if (window.visualViewport && window.visualViewport.height) {
+      return window.visualViewport.height;
+    }
+    return window.innerHeight || document.documentElement.clientHeight;
   }
 
   function cleanup() {
@@ -34,10 +42,14 @@
     }
   }
 
+  // -------- core logic --------
+
   function reveal(el) {
     if (!el || el.dataset.revealed === "true") return;
+
     el.classList.add("is-inview");
     el.dataset.revealed = "true";
+
     if (observer) observer.unobserve(el);
   }
 
@@ -64,8 +76,12 @@
       },
       {
         root: null,
+
+        // iOS safe: mobile più permissivo
         threshold: isMobile ? 0 : 0.14,
-        rootMargin: isMobile ? "0px 0px -5% 0px" : "0px 0px -12% 0px",
+
+        // evita bug viewport Safari
+        rootMargin: isMobile ? "0px 0px -6% 0px" : "0px 0px -12% 0px",
       },
     );
   }
@@ -77,6 +93,7 @@
       if (item.dataset.revealed === "true") return;
 
       const rect = item.getBoundingClientRect();
+
       const visible =
         rect.top < viewportH * (isMobile ? 0.99 : 0.92) &&
         rect.bottom > viewportH * 0.02;
@@ -108,7 +125,9 @@
     }
 
     cleanup();
+
     currentMode = nextMode;
+
     page.classList.remove("reveal-ready");
     hideOnlyUnrevealed(items);
 
@@ -128,8 +147,10 @@
         }
       });
 
+      // immediate check (critical for iOS)
       revealAlreadyVisible(items, isMobile);
 
+      // fallback (iOS failsafe)
       fallbackTimer = window.setTimeout(
         () => {
           const viewportH = getViewportHeight();
@@ -138,6 +159,7 @@
             .filter((item) => item.dataset.revealed !== "true")
             .forEach((item) => {
               const rect = item.getBoundingClientRect();
+
               if (rect.top < viewportH * (isMobile ? 1.05 : 0.96)) {
                 reveal(item);
               }
@@ -147,6 +169,8 @@
       );
     });
   }
+
+  // -------- events --------
 
   function onResize() {
     if (resizeTicking) return;
@@ -167,6 +191,7 @@
   }
 
   function onPageShow(event) {
+    // iOS back-forward cache fix
     if (event.persisted) {
       initReveal({ force: true });
     } else {
@@ -175,8 +200,10 @@
   }
 
   function boot() {
+    // initial
     initReveal({ force: true });
 
+    // DO NOT re-init fully on load (prevents iOS glitches)
     window.addEventListener(
       "load",
       () => {
@@ -187,6 +214,7 @@
 
     window.addEventListener("resize", onResize, { passive: true });
 
+    // iOS viewport change fix
     if (window.visualViewport) {
       window.visualViewport.addEventListener(
         "resize",
@@ -198,17 +226,21 @@
     }
 
     window.addEventListener("orientationchange", () => {
-      setTimeout(() => initReveal({ force: true }), 250);
+      setTimeout(() => {
+        initReveal({ force: true });
+      }, 250);
     });
 
     window.addEventListener("pageshow", onPageShow);
 
+    // tab switch fix (Safari)
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) {
         revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
       }
     });
 
+    // Astro navigation
     document.addEventListener("astro:page-load", () => {
       initReveal({ force: true });
     });
