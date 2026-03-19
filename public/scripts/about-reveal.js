@@ -6,6 +6,7 @@
   let observer = null;
   let currentMode = null;
   let resizeTicking = false;
+  let fallbackTimer = null;
 
   function getPage() {
     return document.querySelector(PAGE_SELECTOR);
@@ -20,13 +21,10 @@
       observer.disconnect();
       observer = null;
     }
-  }
-
-  function markHidden(items) {
-    items.forEach((item) => {
-      item.classList.remove("is-inview");
-      item.dataset.revealed = "false";
-    });
+    if (fallbackTimer) {
+      clearTimeout(fallbackTimer);
+      fallbackTimer = null;
+    }
   }
 
   function reveal(el) {
@@ -36,17 +34,30 @@
     if (observer) observer.unobserve(el);
   }
 
+  function hideOnlyUnrevealed(items) {
+    items.forEach((item) => {
+      if (item.dataset.revealed === "true") {
+        item.classList.add("is-inview");
+        return;
+      }
+      item.classList.remove("is-inview");
+      item.dataset.revealed = "false";
+    });
+  }
+
   function buildObserver(isMobile) {
     observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) reveal(entry.target);
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            reveal(entry.target);
+          }
         });
       },
       {
         root: null,
-        threshold: isMobile ? 0.08 : 0.14,
-        rootMargin: isMobile ? "0px 0px -8% 0px" : "0px 0px -12% 0px",
+        threshold: isMobile ? 0.01 : 0.14,
+        rootMargin: isMobile ? "0px 0px -2% 0px" : "0px 0px -12% 0px",
       },
     );
   }
@@ -56,37 +67,79 @@
       window.innerHeight || document.documentElement.clientHeight;
 
     items.forEach((item) => {
+      if (item.dataset.revealed === "true") return;
+
       const rect = item.getBoundingClientRect();
       const visible =
-        rect.top < viewportH * (isMobile ? 0.96 : 0.92) &&
-        rect.bottom > viewportH * 0.04;
+        rect.top < viewportH * (isMobile ? 0.98 : 0.92) &&
+        rect.bottom > viewportH * 0.02;
 
       if (visible) reveal(item);
     });
   }
 
-  function initReveal() {
+  function revealAllHidden(items) {
+    items.forEach((item) => reveal(item));
+  }
+
+  function initReveal({ force = false } = {}) {
     const page = getPage();
     const items = getItems();
     if (!page || !items.length) return;
 
-    cleanup();
-
     const isMobile = window.innerWidth <= MOBILE_BP;
-    currentMode = isMobile ? "mobile" : "desktop";
+    const nextMode = isMobile ? "mobile" : "desktop";
+
+    if (
+      !force &&
+      currentMode === nextMode &&
+      page.classList.contains("reveal-ready")
+    ) {
+      revealAlreadyVisible(items, isMobile);
+      return;
+    }
+
+    cleanup();
+    currentMode = nextMode;
 
     page.classList.remove("reveal-ready");
-    markHidden(items);
+    hideOnlyUnrevealed(items);
 
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        page.classList.add("reveal-ready");
+      page.classList.add("reveal-ready");
 
-        buildObserver(isMobile);
-        items.forEach((item) => observer.observe(item));
+      if (!("IntersectionObserver" in window)) {
+        revealAllHidden(items);
+        return;
+      }
 
-        revealAlreadyVisible(items, isMobile);
+      buildObserver(isMobile);
+      items.forEach((item) => {
+        if (item.dataset.revealed !== "true") observer.observe(item);
       });
+
+      revealAlreadyVisible(items, isMobile);
+
+      fallbackTimer = window.setTimeout(
+        () => {
+          const stillHidden = items.filter(
+            (item) => item.dataset.revealed !== "true",
+          );
+
+          if (stillHidden.length) {
+            stillHidden.forEach((item) => {
+              const rect = item.getBoundingClientRect();
+              const viewportH =
+                window.innerHeight || document.documentElement.clientHeight;
+
+              if (rect.top < viewportH * 1.15) {
+                reveal(item);
+              }
+            });
+          }
+        },
+        isMobile ? 900 : 1200,
+      );
     });
   }
 
@@ -97,22 +150,44 @@
     requestAnimationFrame(() => {
       const nextMode = window.innerWidth <= MOBILE_BP ? "mobile" : "desktop";
       if (nextMode !== currentMode) {
-        initReveal();
+        initReveal({ force: true });
+      } else {
+        revealAlreadyVisible(getItems(), nextMode === "mobile");
       }
       resizeTicking = false;
     });
   }
 
+  function onPageShow(event) {
+    if (event.persisted) {
+      initReveal({ force: true });
+    } else {
+      revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
+    }
+  }
+
   function boot() {
-    initReveal();
+    initReveal({ force: true });
+
+    window.addEventListener(
+      "load",
+      () => {
+        initReveal({ force: true });
+      },
+      { once: true },
+    );
 
     window.addEventListener("resize", onResize, { passive: true });
-    window.addEventListener("orientationchange", () => {
-      setTimeout(initReveal, 200);
-    });
-    window.addEventListener("pageshow", initReveal);
 
-    document.addEventListener("astro:page-load", initReveal);
+    window.addEventListener("orientationchange", () => {
+      setTimeout(() => initReveal({ force: true }), 250);
+    });
+
+    window.addEventListener("pageshow", onPageShow);
+
+    document.addEventListener("astro:page-load", () => {
+      initReveal({ force: true });
+    });
   }
 
   if (document.readyState === "loading") {
