@@ -4,8 +4,8 @@
   const MOBILE_BP = 768;
 
   let observer = null;
-  let resizeHandler = null;
   let currentMode = null;
+  let resizeTicking = false;
 
   function getPage() {
     return document.querySelector(PAGE_SELECTOR);
@@ -15,119 +15,104 @@
     return Array.from(document.querySelectorAll(ITEM_SELECTOR));
   }
 
-  function resetItems(items) {
-    items.forEach((item) => {
-      item.classList.remove("is-inview");
-      item.dataset.revealed = "false";
-    });
-  }
-
-  function destroyObserver() {
+  function cleanup() {
     if (observer) {
       observer.disconnect();
       observer = null;
     }
   }
 
-  function destroyResizeHandler() {
-    if (resizeHandler) {
-      window.removeEventListener("resize", resizeHandler);
-      resizeHandler = null;
-    }
-  }
-
-  function revealDesktop(items) {
-    resetItems(items);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        items.forEach((item) => {
-          item.classList.add("is-inview");
-          item.dataset.revealed = "true";
-        });
-      });
+  function markHidden(items) {
+    items.forEach((item) => {
+      item.classList.remove("is-inview");
+      item.dataset.revealed = "false";
     });
   }
 
-  function revealMobile(items) {
-    resetItems(items);
+  function reveal(el) {
+    if (!el || el.dataset.revealed === "true") return;
+    el.classList.add("is-inview");
+    el.dataset.revealed = "true";
+    if (observer) observer.unobserve(el);
+  }
 
+  function buildObserver(isMobile) {
     observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const el = entry.target;
-
-          if (entry.isIntersecting) {
-            el.classList.add("is-inview");
-            el.dataset.revealed = "true";
-            observer.unobserve(el);
-          }
+          if (entry.isIntersecting) reveal(entry.target);
         });
       },
       {
         root: null,
-        threshold: 0.12,
-        rootMargin: "0px 0px -10% 0px",
+        threshold: isMobile ? 0.08 : 0.14,
+        rootMargin: isMobile ? "0px 0px -8% 0px" : "0px 0px -12% 0px",
       },
     );
+  }
 
-    items.forEach((item) => observer.observe(item));
+  function revealAlreadyVisible(items, isMobile) {
+    const viewportH =
+      window.innerHeight || document.documentElement.clientHeight;
 
-    // Safari / iPhone: forzo un controllo extra dopo assestamento layout
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        items.forEach((item) => {
-          const rect = item.getBoundingClientRect();
-          const viewportH =
-            window.innerHeight || document.documentElement.clientHeight;
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const visible =
+        rect.top < viewportH * (isMobile ? 0.96 : 0.92) &&
+        rect.bottom > viewportH * 0.04;
 
-          const visible =
-            rect.top < viewportH * 0.92 && rect.bottom > viewportH * 0.08;
-          if (visible) {
-            item.classList.add("is-inview");
-            item.dataset.revealed = "true";
-            if (observer) observer.unobserve(item);
-          }
-        });
-      });
+      if (visible) reveal(item);
     });
   }
 
   function initReveal() {
     const page = getPage();
     const items = getItems();
-
     if (!page || !items.length) return;
 
-    destroyObserver();
-    destroyResizeHandler();
+    cleanup();
 
     const isMobile = window.innerWidth <= MOBILE_BP;
     currentMode = isMobile ? "mobile" : "desktop";
 
-    // attivo il sistema solo quando il DOM è realmente pronto
+    page.classList.remove("reveal-ready");
+    markHidden(items);
+
     requestAnimationFrame(() => {
-      page.classList.add("reveal-ready");
+      requestAnimationFrame(() => {
+        page.classList.add("reveal-ready");
 
-      if (isMobile) {
-        revealMobile(items);
-      } else {
-        revealDesktop(items);
-      }
+        buildObserver(isMobile);
+        items.forEach((item) => observer.observe(item));
+
+        revealAlreadyVisible(items, isMobile);
+      });
     });
+  }
 
-    resizeHandler = () => {
+  function onResize() {
+    if (resizeTicking) return;
+    resizeTicking = true;
+
+    requestAnimationFrame(() => {
       const nextMode = window.innerWidth <= MOBILE_BP ? "mobile" : "desktop";
       if (nextMode !== currentMode) {
         initReveal();
       }
-    };
-
-    window.addEventListener("resize", resizeHandler, { passive: true });
+      resizeTicking = false;
+    });
   }
 
   function boot() {
     initReveal();
+
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("orientationchange", () => {
+      setTimeout(initReveal, 200);
+    });
+    window.addEventListener("pageshow", initReveal);
+
+    document.addEventListener("astro:page-load", initReveal);
   }
 
   if (document.readyState === "loading") {
@@ -135,12 +120,4 @@
   } else {
     boot();
   }
-
-  window.addEventListener("load", initReveal);
-  window.addEventListener("pageshow", initReveal);
-  window.addEventListener("orientationchange", () => {
-    setTimeout(initReveal, 180);
-  });
-
-  document.addEventListener("astro:page-load", initReveal);
 })();
