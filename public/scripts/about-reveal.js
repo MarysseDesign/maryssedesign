@@ -7,6 +7,7 @@
   let currentMode = null;
   let resizeTicking = false;
   let fallbackTimer = null;
+  let fallbackTimer2 = null;
 
   function getPage() {
     return document.querySelector(PAGE_SELECTOR);
@@ -22,16 +23,33 @@
       : window.innerHeight || document.documentElement.clientHeight;
   }
 
+  function isMobileNow() {
+    return window.innerWidth <= MOBILE_BP;
+  }
+
   function cleanup() {
     if (observer) {
       observer.disconnect();
       observer = null;
     }
-
     if (fallbackTimer) {
       clearTimeout(fallbackTimer);
       fallbackTimer = null;
     }
+    if (fallbackTimer2) {
+      clearTimeout(fallbackTimer2);
+      fallbackTimer2 = null;
+    }
+  }
+
+  // Applica il delay direttamente come style.transitionDelay.
+  // Su Safari/iOS le CSS custom properties (--delay) usate dentro transition-delay
+  // hanno una race condition quando reveal-ready viene aggiunta via JS:
+  // il valore risulta 0ms o viene ignorato del tutto.
+  // Applicarlo via JS *dopo* che reveal-ready è attiva risolve il problema.
+  function applyDelay(el, isMobile) {
+    const rawDelay = el.style.getPropertyValue("--delay") || "0ms";
+    el.style.transitionDelay = isMobile ? "0ms" : rawDelay;
   }
 
   function reveal(el) {
@@ -47,7 +65,6 @@
         item.classList.add("is-inview");
         return;
       }
-
       item.classList.remove("is-inview");
       item.removeAttribute("data-revealed");
     });
@@ -64,28 +81,24 @@
       },
       {
         root: null,
-        // Su Safari/iOS i rootMargin negativi con % hanno un bug noto:
-        // quando l'elemento è già parzialmente visibile al caricamento
-        // l'observer non triggera mai. Su mobile usiamo margini positivi
-        // o zero per evitarlo del tutto.
-        threshold: isMobile ? 0 : 0.14,
-        rootMargin: isMobile ? "0px 0px 0px 0px" : "0px 0px -12% 0px",
+        // Safari/iOS ha un bug con rootMargin negativi in percentuale:
+        // non triggera per elementi gia' parzialmente visibili al load.
+        // Su mobile usiamo "0px" per sicurezza assoluta.
+        threshold: isMobile ? 0 : 0.12,
+        rootMargin: isMobile ? "0px" : "0px 0px -10% 0px",
       },
     );
   }
 
   function revealAlreadyVisible(items, isMobile) {
     const viewportH = getViewportHeight();
-
     items.forEach((item) => {
       if (item.dataset.revealed === "true") return;
-
       const rect = item.getBoundingClientRect();
-      const visible =
+      const inView =
         rect.top < viewportH * (isMobile ? 0.99 : 0.92) &&
-        rect.bottom > viewportH * 0.02;
-
-      if (visible) reveal(item);
+        rect.bottom > 0;
+      if (inView) reveal(item);
     });
   }
 
@@ -99,7 +112,7 @@
 
     if (!page || !items.length) return;
 
-    const isMobile = window.innerWidth <= MOBILE_BP;
+    const isMobile = isMobileNow();
     const nextMode = isMobile ? "mobile" : "desktop";
 
     if (
@@ -116,114 +129,112 @@
     page.classList.remove("reveal-ready");
     hideOnlyUnrevealed(items);
 
+    // Doppio rAF: il primo frame rimuove reveal-ready e resetta lo stato,
+    // il secondo parte *dopo* che il browser ha dipinto il frame senza la classe,
+    // garantendo che la transition parta da zero.
+    // Safari comprime i rAF singoli — il doppio e' necessario.
     requestAnimationFrame(() => {
-      page.classList.add("reveal-ready");
+      requestAnimationFrame(() => {
+        page.classList.add("reveal-ready");
 
-      if (!("IntersectionObserver" in window)) {
-        revealAllHidden(items);
-        return;
-      }
+        // Applica i delay via JS *dopo* che reveal-ready e' attiva.
+        // Cosi' la custom property --delay e' gia' risolta dal browser
+        // e non c'e' alcuna race condition.
+        items.forEach((item) => applyDelay(item, isMobile));
 
-      buildObserver(isMobile);
-
-      items.forEach((item) => {
-        if (item.dataset.revealed !== "true") {
-          observer.observe(item);
+        if (!("IntersectionObserver" in window)) {
+          revealAllHidden(items);
+          return;
         }
-      });
 
-      revealAlreadyVisible(items, isMobile);
+        buildObserver(isMobile);
 
-      fallbackTimer = window.setTimeout(
-        () => {
-          const viewportH = getViewportHeight();
+        items.forEach((item) => {
+          if (item.dataset.revealed !== "true") {
+            observer.observe(item);
+          }
+        });
 
-          items
+        // Rivela subito gli elementi gia' visibili nel viewport
+        revealAlreadyVisible(items, isMobile);
+
+        // Fallback 1: elementi visibili ma non rivelati (Safari lento al primo render)
+        fallbackTimer = window.setTimeout(() => {
+          const vh = getViewportHeight();
+          getItems()
             .filter((item) => item.dataset.revealed !== "true")
             .forEach((item) => {
               const rect = item.getBoundingClientRect();
-              if (rect.top < viewportH * (isMobile ? 1.05 : 0.96)) {
+              if (rect.top < vh * (isMobile ? 1.05 : 0.96)) {
                 reveal(item);
               }
             });
+        }, isMobile ? 400 : 800);
 
-          // Secondo fallback su mobile: se ci sono ancora elementi nascosti
-          // dopo altri 600ms (es. rendering lento su Safari) li riveliamo tutti
-          if (isMobile) {
-            window.setTimeout(() => {
-              getItems()
-                .filter((item) => item.dataset.revealed !== "true")
-                .forEach((item) => {
-                  const rect = item.getBoundingClientRect();
-                  const vh = getViewportHeight();
-                  if (rect.top < vh * 1.1) reveal(item);
-                });
-            }, 600);
-          }
-        },
-        isMobile ? 400 : 1200,
-      );
+        // Fallback 2 (solo mobile): rete lenta o rendering pesante
+        if (isMobile) {
+          fallbackTimer2 = window.setTimeout(() => {
+            const vh = getViewportHeight();
+            getItems()
+              .filter((item) => item.dataset.revealed !== "true")
+              .forEach((item) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < vh * 1.1) reveal(item);
+              });
+          }, 1200);
+        }
+      });
     });
   }
 
   function onResize() {
     if (resizeTicking) return;
-
     resizeTicking = true;
-
     requestAnimationFrame(() => {
-      const nextMode = window.innerWidth <= MOBILE_BP ? "mobile" : "desktop";
-
+      const nextMode = isMobileNow() ? "mobile" : "desktop";
       if (nextMode !== currentMode) {
         initReveal({ force: true });
       } else {
         revealAlreadyVisible(getItems(), nextMode === "mobile");
       }
-
       resizeTicking = false;
     });
   }
 
   function onPageShow(event) {
     if (event.persisted) {
+      // bfcache (back/forward su Safari): reinizializza tutto
       initReveal({ force: true });
     } else {
-      revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
+      revealAlreadyVisible(getItems(), isMobileNow());
     }
   }
 
   function boot() {
     initReveal({ force: true });
 
-    window.addEventListener(
-      "load",
-      () => {
-        revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
-      },
-      { once: true },
-    );
+    window.addEventListener("load", () => {
+      revealAlreadyVisible(getItems(), isMobileNow());
+    }, { once: true });
 
     window.addEventListener("resize", onResize, { passive: true });
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener(
-        "resize",
-        () => {
-          revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
-        },
-        { passive: true },
-      );
+      window.visualViewport.addEventListener("resize", () => {
+        revealAlreadyVisible(getItems(), isMobileNow());
+      }, { passive: true });
     }
 
     window.addEventListener("orientationchange", () => {
-      setTimeout(() => initReveal({ force: true }), 250);
+      // Su iOS il resize arriva prima che innerWidth sia aggiornato
+      setTimeout(() => initReveal({ force: true }), 300);
     });
 
     window.addEventListener("pageshow", onPageShow);
 
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) {
-        revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
+        revealAlreadyVisible(getItems(), isMobileNow());
       }
     });
 

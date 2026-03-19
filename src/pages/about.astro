@@ -693,12 +693,14 @@ const iconImages = {
     .about-page.reveal-ready .reveal {
       opacity: 0;
       /* translateY invece di translate3d: evita il bug Safari/iOS
-         in cui opacity:0 + translate3d blocca il repaint GPU */
+         in cui opacity:0 + translate3d blocca il repaint GPU.
+         transition-delay NON e' dichiarato qui: viene applicato
+         via JavaScript dopo che reveal-ready e' attiva, cosi'
+         non c'e' race condition con le CSS custom properties su Safari. */
       transform: translateY(18px);
       transition:
         opacity 0.72s cubic-bezier(0.2, 0.8, 0.2, 1),
         transform 0.72s cubic-bezier(0.2, 0.8, 0.2, 1);
-      transition-delay: var(--delay, 0ms);
       will-change: opacity, transform;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
@@ -708,6 +710,8 @@ const iconImages = {
     .about-page.reveal-ready .reveal.is-inview {
       opacity: 1;
       transform: translateY(0);
+      /* Reset del delay una volta rivelato */
+      transition-delay: 0ms !important;
     }
 
     /* Collaboration: center text vertically (desktop) */
@@ -804,13 +808,6 @@ const iconImages = {
 
       .signature-content {
         text-align: center;
-      }
-
-      /* Su mobile azzeriamo i delay inline con !important:
-         senza di esso Safari ignora il reset perché --delay
-         è dichiarato come attributo style="" direttamente sull'elemento */
-      .about-page.reveal-ready .reveal {
-        transition-delay: 0ms !important;
       }
 
       .signature-image img {
