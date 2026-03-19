@@ -12,12 +12,10 @@ const iconImages = {
 ---
 
 <BaseLayout brand="marysse" title="About · Marysse Design" noMainBottomPadding={true} footerVariant="minimal">
-<head slot="head">
+  <head slot="head">
     <link rel="preload" as="image" href={HERO_IMG_DESKTOP} />
     <link rel="preload" as="image" href={HERO_IMG_MOBILE} media="(max-width: 768px)" />
   </head>
-
-
 
   <!-- HERO -->
   <section class="relative h-screen w-full overflow-hidden -mt-20">
@@ -43,8 +41,11 @@ const iconImages = {
 
           <p class="about-leadwhite opacity-100">
             Thoughtful brand architecture and <br class="show-mobile" /> refined identity for modern brands.
-<br/>    Some visions need to be shaped.<br class="show-mobile" /> Others need to be read. <span class="hide-mobile">Each one requires a precise eye, and a single direction.</span>
- </p>
+            <br />
+            Some visions need to be shaped.<br class="show-mobile" />
+            Others need to be read. <br class="hide-mobile" />
+            Each one requires a precise eye, and a single direction.
+          </p>
 
           <div class="mt-10 hero-cta flex flex-wrap gap-3">
             <a href="/services/" class="cta-light">DISCOVER HOW</a>
@@ -55,7 +56,7 @@ const iconImages = {
 
     <!-- MARQUEE -->
     <div class="absolute inset-x-0 bottom-0 z-30 h-11 md:h-14">
-     <div class="marquee-overlay"></div>
+      <div class="marquee-overlay"></div>
       <div class="relative h-full w-full overflow-hidden leading-none flex items-center">
         <div class="whitespace-nowrap animate-marquee uppercase tracking-wide text-[13px] md:text-sm">
           <span class="mx-8">ADVERTISING</span><span class="mx-8">·</span>
@@ -92,14 +93,22 @@ const iconImages = {
         <div class="about-top">
           <div class="reveal" style="--delay: 80ms">
             <p class="about-kicker">About Marysse Design</p>
-            <h2 class="about-title">A Boutique Studio <br class="hide-mobile" />for Brand Architecture.</h2><br class="hide-mobile" />
+            <h2 class="about-title">
+              A Boutique Studio <br class="hide-mobile" />for Brand Architecture.
+            </h2>
+            <br class="hide-mobile" />
             <p class="about-lead">
+              Marysse Design is an independent creative studio founded and directed by Maria Assunta Zangone.
+              <br class="hide-mobile" />
+              It operates as a focused creative direction, shaping brand identity, campaigns
+              <br class="hide-mobile" />
+              and digital experiences for premium and luxury positioning.
+              Each project is guided by a singular vision, where strategy defines structure and aesthetic choices are never arbitrary.
+            </p>
 
-Marysse Design is an independent creative studio founded and directed by Maria Assunta Zangone. <br>
-It operates as a focused creative direction, shaping brand identity, <br class="hide-mobile" />campaigns and digital experiences for premium and luxury positioning.
-Each project is guided by a singular vision, where strategy defines structure and aesthetic choices are never arbitrary. </p>
-
-<p class="about-lead">Every brand is approached as a system, shaped through three fundamental layers.</p>
+            <p class="about-lead">
+              Every brand is approached as a system, shaped through three fundamental layers.
+            </p>
           </div>
         </div>
 
@@ -112,8 +121,8 @@ Each project is guided by a singular vision, where strategy defines structure an
             <div class="tarot-content">
               <h3>Positioning</h3>
               <p>
-
-                We define what a brand stands for and <br class="hide-mobile" /> how it should be perceived, instantly and consistently.
+                We define what a brand stands for and <br class="hide-mobile" />
+                how it should be perceived, instantly and consistently.
               </p>
 
               <div class="tarot-items">
@@ -132,8 +141,8 @@ Each project is guided by a singular vision, where strategy defines structure an
             <div class="tarot-content">
               <h3>Identity</h3>
               <p>
-We design structured systems that are coherent, <br class="hide-mobile" /> elegant and scalable. Every element is intentional.
-
+                We design structured systems that are coherent, <br class="hide-mobile" />
+                elegant and scalable. Every element is intentional.
               </p>
 
               <div class="tarot-items">
@@ -170,12 +179,15 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
         <div class="about-grid">
           <header class="about-head reveal" style="--delay: 80ms">
             <p class="about-kicker">Vision</p>
-            <h2 class="about-title">We build brand worlds, guided by a <br class="show-mobile" />  precise and consistent vision.</h2>
+            <h2 class="about-title">
+              We build brand worlds, guided by a <br class="show-mobile" /> precise and consistent vision.
+            </h2>
             <p class="about-lead">
-
               A premium brand is not the result of multiple directions, but of one clear point of view.
-              
-              The goal is coherence across touchpoints, <br class="show-mobile" /> so the brand feels effortless, desirable,<br class="show-mobile" /> and unmistakably itself.
+
+              The goal is coherence across touchpoints, <br class="show-mobile" />
+              so the brand feels effortless, desirable,<br class="show-mobile" />
+              and unmistakably itself.
             </p>
           </header>
 
@@ -183,12 +195,18 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
             <div class="about-miniGrid">
               <div class="about-mini reveal" style="--delay: 140ms">
                 <h4>Clarity comes first</h4>
-                <p>Strategy is the backbone that makes <br class="hide-mobile" /> everything feel inevitable.</p>
+                <p>
+                  Strategy is the backbone that makes <br class="hide-mobile" />
+                  everything feel inevitable.
+                </p>
               </div>
 
               <div class="about-mini2 reveal" style="--delay: 200ms">
                 <h4>Consistency defines perception</h4>
-                <p>One sensibility guides every output, from a <br class="hide-mobile" /> landing page to a campaign frame.</p>
+                <p>
+                  One sensibility guides every output, from a <br class="hide-mobile" />
+                  landing page to a campaign frame.
+                </p>
               </div>
 
               <div class="about-mini reveal" style="--delay: 260ms">
@@ -198,120 +216,111 @@ We design structured systems that are coherent, <br class="hide-mobile" /> elega
             </div>
           </div>
 
- <p class="about-lead">
-  A strong brand grows when every detail speaks the same language. <br class="show-mobile" />
-            </p>
-
-
+          <p class="about-lead">
+            A strong brand grows when every detail speaks the same language. <br class="show-mobile" />
+          </p>
         </div>
       </div>
     </section>
 
-   <!-- METHOD / FIT -->
-<section class="about-section about-light about-collab" aria-label="Method">
-  <div class="site-container about-inner">
-    <div class="about-grid">
-      <header class="about-head reveal" style="--delay: 80ms">
-        <p class="about-kicker">Method</p>
-        <h2 class="about-title">Where detail leads.</h2>
-        <p class="about-lead">
-         Marysse Design operates under a single creative direction  <br class="hide-mobile" />led by Maria Assunta Zangone.
-Each project is shaped through a curated structure, where collaborators and specialists are involved based on the brand’s needs, while the vision remains consistent and controlled.
-        </p>
-      </header>
-
-      <div class="about-body">
-        <div class="about-miniGrid two">
-          <div class="about-mini2 reveal" style="--delay: 140ms">
-            <h4>Studio structure</h4>
-            <p>
-              A flexible, curated setup designed to adapt to the scale and nature of each brand.
-              The structure evolves with the project, never the other way around.
+    <!-- METHOD / FIT -->
+    <section class="about-section about-light about-collab" aria-label="Method">
+      <div class="site-container about-inner">
+        <div class="about-grid">
+          <header class="about-head reveal" style="--delay: 80ms">
+            <p class="about-kicker">Method</p>
+            <h2 class="about-title">Where detail leads.</h2>
+            <p class="about-lead">
+              The studio operates under a single creative direction.<br class="hide-mobile" />
+              Each project is shaped through a curated structure, where collaborators and specialists are involved based on the brand’s needs, while the vision remains consistent and controlled.
             </p>
+          </header>
+
+          <div class="about-body">
+            <div class="about-miniGrid two">
+              <div class="about-mini2 reveal" style="--delay: 140ms">
+                <h4>Studio structure</h4>
+                <p>
+                  A flexible, curated setup designed to adapt to the scale and nature of each brand.
+                  The structure evolves with the project, never the other way around.
+                </p>
+              </div>
+
+              <div class="about-mini reveal" style="--delay: 200ms">
+                <h4>One direction</h4>
+                <p>
+                  Every decision follows a single creative direction.
+                  The result is a coherent language, precise taste, and shared standards at every touchpoint.
+                </p>
+              </div>
+            </div>
+
+            <!-- SIGNATURE -->
+            <div class="about-signature reveal" style="--delay: 240ms">
+              <div class="signature-inner">
+                <div class="signature-image">
+                  <img src="/images/about/marysse-portrait.jpg" alt="Maria Assunta Zangone" />
+                </div>
+
+                <div class="signature-content">
+                  <p class="about-kicker">Signature</p>
+
+                  <p class="about-lead">
+                    Marysse Design is built on a specific sensibility:
+                    a balance between structure and intuition,
+                    between editorial aesthetics and strategic clarity.
+                  </p>
+
+                  <p class="about-lead">
+                    The direction is singular,
+                    shaping each project with precision and consistency.
+                  </p>
+
+                  <p class="about-lead">
+                    Every brand is treated as a whole system,
+                    where taste, coherence and intention are aligned from the start.
+                  </p>
+
+                  <p class="signature-caption">
+                    Maria Assunta Zangone <br />
+                    Founder & Creative Director
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-split reveal" style="--delay: 260ms">
+              <div>
+                <p class="about-kicker">Best fit</p>
+                <h3 class="about-subtitle">For brands that value meaning.</h3>
+              </div>
+              <ul class="about-list">
+                <li>Premium and luxury positioning</li>
+                <li>Founders and brand teams</li>
+                <li>New launches or brand evolutions</li>
+                <li>Teams who care about detail and coherence</li>
+              </ul>
+            </div>
+
+            <div class="about-actions reveal" style="--delay: 320ms">
+              <a href="/projects/" class="cta-dark">EXPLORE PROJECTS</a>
+              <a href="/marysszang/" class="cta-ghost-dark">ARTISTIC SIDE</a>
+            </div>
           </div>
-
-          <div class="about-mini reveal" style="--delay: 200ms">
-            <h4>One direction</h4>
-            <p>
-              Every decision follows a single creative direction.
-              The result is a coherent language, precise taste, and shared standards at every touchpoint.
-            </p>
-          </div>
-        </div>
-
-
-<!-- SIGNATURE -->
-<div class="about-signature reveal" style="--delay: 240ms">
-  <div class="signature-inner">
-
-    <div class="signature-image">
-      <img src="/images/about/marysse-portrait.jpg" alt="Maria Assunta Zangone" />
-    </div>
-
-    <div class="signature-content">
-      <p class="about-kicker">Signature</p>
-
-      <p class="about-lead">
-        Marysse Design is built on a specific sensibility:
-        a balance between structure and intuition,
-        between editorial aesthetics and strategic clarity.
-      </p>
-
-      <p class="about-lead">
-        The studio is led by Maria Assunta Zangone,
-        whose direction shapes each project with a precise and consistent vision.
-      </p>
-
-      <p class="about-lead">
-        Every brand is treated as a whole system,
-        where taste, coherence and intention are aligned from the start.
-      </p>
-
-      <p class="signature-caption">
-        Maria Assunta Zangone <br> Founder & Creative Director
-      </p>
-    </div>
-
-  </div>
-</div>
-
-
-        <div class="about-split reveal" style="--delay: 260ms">
-          <div>
-            <p class="about-kicker">Best fit</p>
-            <h3 class="about-subtitle">For brands that value meaning.</h3>
-          </div>
-          <ul class="about-list">
-            <li>Premium and luxury positioning</li>
-            <li>Founders and brand teams</li>
-            <li>New launches or brand evolutions</li>
-            <li>Teams who care about detail and coherence</li>
-          </ul>
-        </div>
-
-        <div class="about-actions reveal" style="--delay: 320ms">
-          <a href="/projects/" class="cta-dark">EXPLORE PROJECTS</a>
-          <a href="/marysszang/" class="cta-ghost-dark">ARTISTIC SIDE</a>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-</section>
-
-</div>
 
   <style is:global>
-
     /* =========================================================
        ABOUT ONLY
        ========================================================= */
 
     .about-page {
       background: #fff;
-
       --box-border-color: #e5e7eb;
       --box-border-width: 1px;
-
       --stroke-color: rgba(25, 17, 24, 0.12);
       --stroke-width: 0.4px;
     }
@@ -322,33 +331,48 @@ Each project is shaped through a curated structure, where collaborators and spec
       text-align: center;
     }
 
-    .about-inner { position: relative; }
+    .about-inner {
+      position: relative;
+    }
 
     :root {
-  --about-sky-1: #e5edf4;
-  --about-sky-2: #c1d3e2;
-  --about-sky-3: #b2c7d8;
-
-  --about-blush-1: #d2c4ce;
-  --about-lav-1: #aeb0c3;
-
-  --about-deep-1: #4f7f9c;
-  --about-blue-1: #bccae2;
-}
-
+      --about-sky-1: #e5edf4;
+      --about-sky-2: #c1d3e2;
+      --about-sky-3: #b2c7d8;
+      --about-blush-1: #d2c4ce;
+      --about-lav-1: #aeb0c3;
+      --about-deep-1: #4f7f9c;
+      --about-blue-1: #bccae2;
+    }
 
     .about-light {
       background:
-        radial-gradient(900px 520px at 70% 85%, color-mix(in srgb, var(--about-blush-1) 45%, transparent), transparent 70%),
-        linear-gradient(180deg, #ffffff 0%, #ffffff 55%, color-mix(in srgb, var(--about-sky-3) 18%, #ffffff) 100%);
+        radial-gradient(
+          900px 520px at 70% 85%,
+          color-mix(in srgb, var(--about-blush-1) 45%, transparent),
+          transparent 70%
+        ),
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #ffffff 55%,
+          color-mix(in srgb, var(--about-sky-3) 18%, #ffffff) 100%
+        );
     }
 
     .about-veil {
       background:
-        radial-gradient(980px 520px at 35% 440%, color-mix(in srgb, var(--about-sky-2) 82%, transparent), transparent 100%),
-        radial-gradient(980px 520px at 65% 90%, color-mix(in srgb, var(--about-blue-1) 28%, transparent), transparent 100%),
+        radial-gradient(
+          980px 520px at 35% 440%,
+          color-mix(in srgb, var(--about-sky-2) 82%, transparent),
+          transparent 100%
+        ),
+        radial-gradient(
+          980px 520px at 65% 90%,
+          color-mix(in srgb, var(--about-blue-1) 28%, transparent),
+          transparent 100%
+        ),
         linear-gradient(180deg, #fbfbfb 0%, #ffffff 100%);
-        
     }
 
     /* Typography */
@@ -389,21 +413,21 @@ Each project is shaped through a curated structure, where collaborators and spec
       max-width: 78ch;
     }
 
-
-        .about-leadwhite {
-     margin: 14px auto 0;
-     padding-top: 14px;
-    font-size: 16px;
-    line-height: 1.85;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.82);
-    max-width: 70ch;
+    .about-leadwhite {
+      margin: 14px auto 0;
+      padding-top: 14px;
+      font-size: 16px;
+      line-height: 1.85;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 70ch;
     }
 
-
-
     /* Layout */
-    .about-top { max-width: 1120px; margin: 0 auto; }
+    .about-top {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
 
     .about-grid {
       display: grid;
@@ -439,26 +463,25 @@ Each project is shaped through a curated structure, where collaborators and spec
       border: var(--box-border-width) solid var(--box-border-color);
     }
 
-    /* =========================
-       Tarot outer cards
-       - NO padding around image
-       - image touches the card edges
-       ========================= */
-
+    /* Tarot outer cards */
     .tarot-min {
       position: relative;
       border-radius: 42px;
       background: rgba(255, 255, 255, 0.72);
       box-shadow: 0 14px 40px rgba(25, 17, 24, 0.08);
-      overflow: hidden; /* important: makes image stick + respects radius */
+      overflow: hidden;
       text-align: center;
-      padding: 0; /* <— removes the “frame” */
+      padding: 0;
     }
 
-    @media (hover:hover) {
+    @media (hover: hover) {
       .tarot-min {
-        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
       }
+
       .tarot-min:hover {
         transform: translateY(-2px);
         box-shadow: 0 18px 52px rgba(25, 17, 24, 0.1);
@@ -466,17 +489,14 @@ Each project is shaped through a curated structure, where collaborators and spec
       }
     }
 
-    /* Image: attached to edges, rounded ONLY on top */
     .about-media {
-      margin: 0;               /* no gap */
+      margin: 0;
       width: 100%;
-      border: 0;               /* no extra border frame */
+      border: 0;
       border-radius: 42px 42px 0 0;
       overflow: hidden;
       background: rgba(255, 255, 255, 0.75);
-
-      /* Less tall than before */
-      aspect-ratio: 1 / 1;     /* <— makes them “less elongated” */
+      aspect-ratio: 1 / 1;
     }
 
     .about-media img {
@@ -487,7 +507,6 @@ Each project is shaped through a curated structure, where collaborators and spec
       filter: saturate(0.95) contrast(1.02);
     }
 
-    /* Content spacing now handled here */
     .tarot-content {
       padding: 18px 22px 18px;
     }
@@ -511,10 +530,8 @@ Each project is shaped through a curated structure, where collaborators and spec
     }
 
     .tarot-min p {
-      margin: 0;
+      margin: 0 auto;
       max-width: 42ch;
-      margin-left: auto;
-      margin-right: auto;
       opacity: 0.9;
       color: rgba(25, 17, 24, 0.78);
       font-weight: 300;
@@ -522,7 +539,6 @@ Each project is shaped through a curated structure, where collaborators and spec
       font-size: 14px;
     }
 
-    /* inner items boxes */
     .tarot-items {
       margin-top: 16px;
       display: grid;
@@ -552,7 +568,10 @@ Each project is shaped through a curated structure, where collaborators and spec
       gap: 12px;
       justify-items: center;
     }
-    .about-miniGrid.two { grid-template-columns: repeat(2, 1fr); }
+
+    .about-miniGrid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     .about-mini {
       border-end-end-radius: 42px;
@@ -640,7 +659,10 @@ Each project is shaped through a curated structure, where collaborators and spec
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(6px);
       text-decoration: none !important;
-      transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      transition:
+        opacity 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
     }
 
     .cta-ghost-dark:hover {
@@ -649,103 +671,269 @@ Each project is shaped through a curated structure, where collaborators and spec
       border-color: rgba(25, 17, 24, 0.28);
     }
 
-    .show-mobile { display: inline; }
-    .hide-mobile { display: none; }
-
-    /* Responsive */
-    @media (max-width: 980px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .about-cards { grid-template-columns: 1fr; }
-
-      .about-miniGrid,
-      .about-miniGrid.two {
-        grid-template-columns: 1fr;
-      }
-
-      .tarot-content { padding: 16px 18px 18px; }
-      .about-media { aspect-ratio: 1 / 1!important; }
+    .show-mobile {
+      display: inline;
     }
 
-    @media (max-width: 640px) {
-      .about-section { padding: 52px 0; }
-     
-     
-      .hero-copy { padding-top: 14px; }
-      .about-title { font-size: clamp(30px, 9.4vw, 44px); line-height: 1.08; }
-
-      .tarot-content { padding: 14px 16px 16px; }
-      .tarot-items { max-width: 320px; }
+    .hide-mobile {
+      display: none;
     }
 
-    .reveal { transition-delay: var(--delay, 0ms); }
+    /* Reveal base */
+    .about-page .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        opacity 0.72s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.72s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition-delay: var(--delay, 0ms);
+      will-change: opacity, transform;
+    }
+
+    .about-page .reveal.is-inview {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Collaboration: center text vertically (desktop) */
-    .about-collab .about-grid { align-items: stretch; }
+    .about-collab .about-grid {
+      align-items: stretch;
+    }
+
     .about-collab .about-head {
       display: flex;
       flex-direction: column;
       justify-content: center;
       min-height: 100%;
     }
+
     .about-collab .about-head > * {
       margin-left: auto;
       margin-right: auto;
     }
 
-@media (min-width: 768px) {
-  
-  .show-mobile {
-    display: none !important;
-  }
+    /* SIGNATURE */
+    .about-signature {
+      margin-top: 32px;
+    }
 
-  .hide-mobile { display: inline; }
-   }
+    .signature-inner {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 32px;
+      align-items: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
 
+    .signature-image img {
+      width: 100%;
+      border-radius: 28px;
+      object-fit: cover;
+      display: block;
+    }
 
-   /* SIGNATURE */
-.about-signature {
-  margin-top: 32px;
-}
+    .signature-content {
+      text-align: left;
+    }
 
-.signature-inner {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 32px;
-  align-items: center;
-  max-width: 980px;
-  margin: 0 auto;
-}
+    .signature-caption {
+      margin-top: 18px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(25, 17, 24, 0.6);
+    }
 
-.signature-image img {
-  width: 100%;
-  border-radius: 28px;
-  object-fit: cover;
-}
+    /* Desktop / tablet */
+    @media (min-width: 768px) {
+      .show-mobile {
+        display: none !important;
+      }
 
-.signature-content {
-  text-align: left;
-}
+      .hide-mobile {
+        display: inline;
+      }
+    }
 
-.signature-caption {
-  margin-top: 18px;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(25, 17, 24, 0.6);
-}
+    /* Responsive */
+    @media (max-width: 980px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
 
-/* mobile */
-@media (max-width: 768px) {
-  .signature-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
+      .about-cards {
+        grid-template-columns: 1fr;
+      }
 
-  .signature-content {
-    text-align: center;
-  }
-}
+      .about-miniGrid,
+      .about-miniGrid.two {
+        grid-template-columns: 1fr;
+      }
 
+      .tarot-content {
+        padding: 16px 18px 18px;
+      }
 
+      .about-media {
+        aspect-ratio: 1 / 1 !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .signature-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 18px;
+      }
+
+      .signature-content {
+        text-align: center;
+      }
+
+      /* Mobile reveal refinement */
+      .about-page .reveal {
+        transform: translateY(22px) scale(0.985);
+        transition:
+          opacity 0.82s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 0.82s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .about-page .reveal.is-inview {
+        transform: translateY(0) scale(1);
+      }
+
+      .about-card.reveal,
+      .about-mini.reveal,
+      .about-mini2.reveal,
+      .about-signature.reveal,
+      .about-split.reveal,
+      .about-actions.reveal {
+        transform: translateY(24px) scale(0.985);
+      }
+
+      .signature-image img {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-section {
+        padding: 52px 0;
+      }
+
+      .hero-copy {
+        padding-top: 14px;
+      }
+
+      .about-title {
+        font-size: clamp(30px, 9.4vw, 44px);
+        line-height: 1.08;
+      }
+
+      .tarot-content {
+        padding: 14px 16px 16px;
+      }
+
+      .tarot-items {
+        max-width: 320px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-page .reveal,
+      .about-page .reveal.is-inview {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
   </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealItems = Array.from(document.querySelectorAll(".about-page .reveal"));
+      if (!revealItems.length) return;
+
+      const mobileQuery = window.matchMedia("(max-width: 768px)");
+      let observer = null;
+
+      const clearObserver = () => {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+      };
+
+      const resetAll = () => {
+        revealItems.forEach((item) => item.classList.remove("is-inview"));
+      };
+
+      const initDesktopObserver = () => {
+        clearObserver();
+
+        observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-inview");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            root: null,
+            threshold: 0.14,
+            rootMargin: "0px 0px -8% 0px",
+          }
+        );
+
+        revealItems.forEach((item) => observer.observe(item));
+      };
+
+      const initMobileObserver = () => {
+        clearObserver();
+
+        observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-inview");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            root: null,
+            threshold: 0.16,
+            rootMargin: "0px 0px -10% 0px",
+          }
+        );
+
+        revealItems.forEach((item) => observer.observe(item));
+      };
+
+      const handleRevealMode = () => {
+        resetAll();
+
+        if (mobileQuery.matches) {
+          initMobileObserver();
+        } else {
+          initDesktopObserver();
+        }
+      };
+
+      handleRevealMode();
+
+      const onChange = () => {
+        handleRevealMode();
+      };
+
+      if (typeof mobileQuery.addEventListener === "function") {
+        mobileQuery.addEventListener("change", onChange);
+      } else if (typeof mobileQuery.addListener === "function") {
+        mobileQuery.addListener(onChange);
+      }
+    });
+  </script>
 </BaseLayout>
