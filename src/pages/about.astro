@@ -692,20 +692,22 @@ const iconImages = {
     /* stato iniziale animabile */
     .about-page.reveal-ready .reveal {
       opacity: 0;
-      transform: translate3d(0, 18px, 0);
+      /* translateY invece di translate3d: evita il bug Safari/iOS
+         in cui opacity:0 + translate3d blocca il repaint GPU */
+      transform: translateY(18px);
       transition:
         opacity 0.72s cubic-bezier(0.2, 0.8, 0.2, 1),
         transform 0.72s cubic-bezier(0.2, 0.8, 0.2, 1);
       transition-delay: var(--delay, 0ms);
       will-change: opacity, transform;
-      backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
 
     /* stato visibile */
     .about-page.reveal-ready .reveal.is-inview {
       opacity: 1;
-      transform: translate3d(0, 0, 0);
+      transform: translateY(0);
     }
 
     /* Collaboration: center text vertically (desktop) */
@@ -804,17 +806,12 @@ const iconImages = {
         text-align: center;
       }
 
-     .about-page.reveal-ready .reveal {
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity 0.78s cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 0.78s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transition-delay: 0ms;
-}
-
-.about-page.reveal-ready .reveal.is-inview {
-  transform: translate3d(0, 0, 0);
-}
+      /* Su mobile azzeriamo i delay inline con !important:
+         senza di esso Safari ignora il reset perché --delay
+         è dichiarato come attributo style="" direttamente sull'elemento */
+      .about-page.reveal-ready .reveal {
+        transition-delay: 0ms !important;
+      }
 
       .signature-image img {
         max-width: 100%;

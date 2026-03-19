@@ -1,8 +1,4 @@
 (() => {
-  // Prevent multiple boot (Astro / client navigation safety)
-  if (window.__aboutRevealInit) return;
-  window.__aboutRevealInit = true;
-
   const PAGE_SELECTOR = ".about-page";
   const ITEM_SELECTOR = ".about-page .reveal";
   const MOBILE_BP = 768;
@@ -11,8 +7,6 @@
   let currentMode = null;
   let resizeTicking = false;
   let fallbackTimer = null;
-
-  // -------- utils --------
 
   function getPage() {
     return document.querySelector(PAGE_SELECTOR);
@@ -23,11 +17,9 @@
   }
 
   function getViewportHeight() {
-    // iOS safe viewport
-    if (window.visualViewport && window.visualViewport.height) {
-      return window.visualViewport.height;
-    }
-    return window.innerHeight || document.documentElement.clientHeight;
+    return window.visualViewport
+      ? window.visualViewport.height
+      : window.innerHeight || document.documentElement.clientHeight;
   }
 
   function cleanup() {
@@ -42,14 +34,10 @@
     }
   }
 
-  // -------- core logic --------
-
   function reveal(el) {
     if (!el || el.dataset.revealed === "true") return;
-
     el.classList.add("is-inview");
     el.dataset.revealed = "true";
-
     if (observer) observer.unobserve(el);
   }
 
@@ -76,12 +64,12 @@
       },
       {
         root: null,
-
-        // iOS safe: mobile più permissivo
+        // Su Safari/iOS i rootMargin negativi con % hanno un bug noto:
+        // quando l'elemento è già parzialmente visibile al caricamento
+        // l'observer non triggera mai. Su mobile usiamo margini positivi
+        // o zero per evitarlo del tutto.
         threshold: isMobile ? 0 : 0.14,
-
-        // evita bug viewport Safari
-        rootMargin: isMobile ? "0px 0px -6% 0px" : "0px 0px -12% 0px",
+        rootMargin: isMobile ? "0px 0px 0px 0px" : "0px 0px -12% 0px",
       },
     );
   }
@@ -93,7 +81,6 @@
       if (item.dataset.revealed === "true") return;
 
       const rect = item.getBoundingClientRect();
-
       const visible =
         rect.top < viewportH * (isMobile ? 0.99 : 0.92) &&
         rect.bottom > viewportH * 0.02;
@@ -125,9 +112,7 @@
     }
 
     cleanup();
-
     currentMode = nextMode;
-
     page.classList.remove("reveal-ready");
     hideOnlyUnrevealed(items);
 
@@ -147,10 +132,8 @@
         }
       });
 
-      // immediate check (critical for iOS)
       revealAlreadyVisible(items, isMobile);
 
-      // fallback (iOS failsafe)
       fallbackTimer = window.setTimeout(
         () => {
           const viewportH = getViewportHeight();
@@ -159,18 +142,29 @@
             .filter((item) => item.dataset.revealed !== "true")
             .forEach((item) => {
               const rect = item.getBoundingClientRect();
-
               if (rect.top < viewportH * (isMobile ? 1.05 : 0.96)) {
                 reveal(item);
               }
             });
+
+          // Secondo fallback su mobile: se ci sono ancora elementi nascosti
+          // dopo altri 600ms (es. rendering lento su Safari) li riveliamo tutti
+          if (isMobile) {
+            window.setTimeout(() => {
+              getItems()
+                .filter((item) => item.dataset.revealed !== "true")
+                .forEach((item) => {
+                  const rect = item.getBoundingClientRect();
+                  const vh = getViewportHeight();
+                  if (rect.top < vh * 1.1) reveal(item);
+                });
+            }, 600);
+          }
         },
-        isMobile ? 900 : 1200,
+        isMobile ? 400 : 1200,
       );
     });
   }
-
-  // -------- events --------
 
   function onResize() {
     if (resizeTicking) return;
@@ -191,7 +185,6 @@
   }
 
   function onPageShow(event) {
-    // iOS back-forward cache fix
     if (event.persisted) {
       initReveal({ force: true });
     } else {
@@ -200,10 +193,8 @@
   }
 
   function boot() {
-    // initial
     initReveal({ force: true });
 
-    // DO NOT re-init fully on load (prevents iOS glitches)
     window.addEventListener(
       "load",
       () => {
@@ -214,7 +205,6 @@
 
     window.addEventListener("resize", onResize, { passive: true });
 
-    // iOS viewport change fix
     if (window.visualViewport) {
       window.visualViewport.addEventListener(
         "resize",
@@ -226,21 +216,17 @@
     }
 
     window.addEventListener("orientationchange", () => {
-      setTimeout(() => {
-        initReveal({ force: true });
-      }, 250);
+      setTimeout(() => initReveal({ force: true }), 250);
     });
 
     window.addEventListener("pageshow", onPageShow);
 
-    // tab switch fix (Safari)
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) {
         revealAlreadyVisible(getItems(), window.innerWidth <= MOBILE_BP);
       }
     });
 
-    // Astro navigation
     document.addEventListener("astro:page-load", () => {
       initReveal({ force: true });
     });
