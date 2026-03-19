@@ -850,90 +850,112 @@ const iconImages = {
     }
   </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const revealItems = Array.from(document.querySelectorAll(".about-page .reveal"));
-      if (!revealItems.length) return;
+  <script is:inline>
+  (() => {
+    let observer = null;
+    let cleanupMediaListener = null;
 
-      const mobileQuery = window.matchMedia("(max-width: 768px)");
-      let observer = null;
+    const SELECTOR = ".about-page .reveal";
+    const MOBILE_QUERY = "(max-width: 768px)";
 
-      const clearObserver = () => {
-        if (observer) {
-          observer.disconnect();
-          observer = null;
-        }
-      };
+    function getRevealItems() {
+      return Array.from(document.querySelectorAll(SELECTOR));
+    }
 
-      const resetAll = () => {
-        revealItems.forEach((item) => item.classList.remove("is-inview"));
-      };
+    function clearObserver() {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+    }
 
-      const initDesktopObserver = () => {
-        clearObserver();
+    function resetItems(items) {
+      items.forEach((item) => item.classList.remove("is-inview"));
+    }
 
-        observer = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-inview");
-                obs.unobserve(entry.target);
-              }
-            });
-          },
-          {
-            root: null,
-            threshold: 0.14,
-            rootMargin: "0px 0px -8% 0px",
+    function showItems(items) {
+      items.forEach((item) => item.classList.add("is-inview"));
+    }
+
+    function buildObserver(options) {
+      return new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-inview");
+            obs.unobserve(entry.target);
           }
-        );
+        });
+      }, options);
+    }
 
-        revealItems.forEach((item) => observer.observe(item));
-      };
+    function initReveal() {
+      const items = getRevealItems();
+      if (!items.length) return;
 
-      const initMobileObserver = () => {
-        clearObserver();
+      const mediaQuery = window.matchMedia(MOBILE_QUERY);
+      const isMobile = mediaQuery.matches;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        observer = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-inview");
-                obs.unobserve(entry.target);
-              }
+      clearObserver();
+
+      if (reduceMotion) {
+        showItems(items);
+        return;
+      }
+
+      // Aspetta che il layout sia davvero stabile su iOS
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          resetItems(items);
+
+          if (isMobile) {
+            observer = buildObserver({
+              root: null,
+              threshold: 0.08,
+              rootMargin: "0px 0px -6% 0px",
             });
-          },
-          {
-            root: null,
-            threshold: 0.16,
-            rootMargin: "0px 0px -10% 0px",
+          } else {
+            observer = buildObserver({
+              root: null,
+              threshold: 0.14,
+              rootMargin: "0px 0px -8% 0px",
+            });
           }
-        );
 
-        revealItems.forEach((item) => observer.observe(item));
-      };
+          items.forEach((item) => observer.observe(item));
+        });
+      });
 
-      const handleRevealMode = () => {
-        resetAll();
-
-        if (mobileQuery.matches) {
-          initMobileObserver();
-        } else {
-          initDesktopObserver();
-        }
-      };
-
-      handleRevealMode();
+      if (cleanupMediaListener) cleanupMediaListener();
 
       const onChange = () => {
-        handleRevealMode();
+        initReveal();
       };
 
-      if (typeof mobileQuery.addEventListener === "function") {
-        mobileQuery.addEventListener("change", onChange);
-      } else if (typeof mobileQuery.addListener === "function") {
-        mobileQuery.addListener(onChange);
+      if (typeof mediaQuery.addEventListener === "function") {
+        mediaQuery.addEventListener("change", onChange);
+        cleanupMediaListener = () => mediaQuery.removeEventListener("change", onChange);
+      } else if (typeof mediaQuery.addListener === "function") {
+        mediaQuery.addListener(onChange);
+        cleanupMediaListener = () => mediaQuery.removeListener(onChange);
       }
-    });
-  </script>
+    }
+
+    function bootReveal() {
+      initReveal();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bootReveal, { once: true });
+    } else {
+      bootReveal();
+    }
+
+    // Astro client-side navigation
+    document.addEventListener("astro:page-load", bootReveal);
+
+    // iOS back/forward cache
+    window.addEventListener("pageshow", bootReveal);
+  })();
+</script>
 </BaseLayout>
