@@ -1,0 +1,74 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import "@/styles/legacy-project.css";
+
+export async function getStaticPaths() {
+  const progetti = await getCollection("progetti");
+  return progetti.map((p) => ({
+    params: { slug: p.slug },
+    props: { progetto: p },
+  }));
+}
+
+const { progetto } = Astro.props;
+const { Content } = await progetto.render();
+
+const pageTitle = `${progetto.data.titolo} — Projects`;
+const pageDescription = progetto.data.abstract ?? "Project case study.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} brand="marysse">
+  <div class="project-page">
+    <!-- HERO -->
+    <section class="hero text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h1>{progetto.data.titolo}</h1>
+
+            {progetto.data.sottotitolo && (
+              <div class="project-meta" set:html={progetto.data.sottotitolo} />
+            )}
+
+            {progetto.data.intro && (
+              <p class="introduction" set:html={progetto.data.intro} />
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="content text-center">
+      <div class="container content-container">
+        <article class="prose">
+          <Content />
+        </article>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="container">
+        <div class="row mt-xl">
+          <div class="col-md-12">
+            <div class="pagination">
+              {progetto.data.prevSlug && (
+                <a class="nav-circle" href={`/progetti/${progetto.data.prevSlug}`} aria-label="Previous project">
+                  &lt;
+                </a>
+              )}
+
+              <a class="nav-pill" href="/progetti">Back</a>
+
+              {progetto.data.nextSlug && (
+                <a class="nav-circle" href={`/progetti/${progetto.data.nextSlug}`} aria-label="Next project">
+                  &gt;
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

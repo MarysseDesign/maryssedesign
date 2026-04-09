@@ -358,7 +358,9 @@ body {
    ========================================================= */
 .tarot-hero {
   position: relative;
-  z-index: 1;
+  z-index: 5;
+  isolation: isolate;
+  overflow: visible;
   padding-top: calc(var(--header-h, 80px) + clamp(46px, 6vw, 56px));
   padding-bottom: 26px;
 }
@@ -471,6 +473,8 @@ body {
    DESKTOP: STAGE + CARDS
    ========================================================= */
 .tarot-stage-wrap {
+  position: relative;
+  z-index: 6;
   width: 100%;
   margin-top: 18px;
   padding-bottom: 10px;
@@ -479,6 +483,8 @@ body {
 }
 
 .tarot-stage {
+  position: relative;
+  z-index: 6;
   width: min(1500px, calc(100vw - 80px));
   height: clamp(560px, 66vh, 780px);
   position: relative;
@@ -491,6 +497,7 @@ body {
 
 .tarot-card {
   position: absolute;
+  z-index: 1;
   left: calc(var(--x) * 1%);
   top: calc(var(--y) * 0.9%);
   transform: translate(-50%, -50%) rotate(var(--r));
@@ -774,16 +781,16 @@ html.tarot-modal-lock body {
 .tarot-modal {
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 40;
   display: grid;
   place-items: center;
-  padding: 18px;
+  padding: calc(var(--header-h, 80px) + 18px) 18px 18px;
 }
 
 .tarot-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(2, 6, 18, 0.62);
+  background: rgba(2, 6, 18, 0.82);
   backdrop-filter: blur(10px);
   opacity: 0;
   transition: opacity 0.18s ease;
@@ -795,6 +802,7 @@ html.tarot-modal-lock body {
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
   box-shadow: 0 30px 120px rgba(0, 0, 0, 0.7);
   overflow: hidden;
   transform: translateY(10px) scale(0.98);
@@ -892,6 +900,7 @@ html.tarot-modal-lock body {
   min-height: 100%;
   align-items: flex-start;
   justify-content: center;
+  color: var(--text);
 }
 
 .tarot-modal__kicker {
@@ -910,11 +919,12 @@ html.tarot-modal-lock body {
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1.08;
   max-width: 10ch;
+  color: rgba(255, 255, 255, 0.94);
 }
 
 .tarot-modal__text {
   margin: 88px 0 0;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.74);
   line-height: 1.8;
   font-size: 15px;
   max-width: 34ch;
@@ -1144,6 +1154,13 @@ body[data-footer-variant="minimal"] main {
    ========================================================= */
 .home-marysse {
   --home-wrap: min(1240px, calc(100% - 48px));
+  position: relative;
+  isolation: isolate;
+}
+
+.md-divider {
+  position: relative;
+  z-index: 1;
 }
 
 .md-home-section {

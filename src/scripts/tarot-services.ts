@@ -20,6 +20,7 @@ type Cleanup = () => void;
 declare global {
   interface Window {
     __tarotServicesDestroy?: Cleanup;
+    __tarotServicesStarted?: boolean;
   }
 }
 
@@ -72,6 +73,7 @@ declare global {
     };
 
     const destroy = () => {
+      closeModal();
       for (const c of cleanups.splice(0)) c();
     };
 
@@ -161,9 +163,17 @@ declare global {
       "tarotModalMore",
     ) as HTMLAnchorElement | null;
 
+    const ensureModalPortal = () => {
+      if (!modal) return;
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+    };
+
     let lastFocusedCard: HTMLElement | null = null;
 
     const openModal = (data: TarotData) => {
+      ensureModalPortal();
       if (!modal || !modalImg || !modalKicker || !modalTitle || !modalText) {
         return;
       }
@@ -453,12 +463,17 @@ declare global {
     on(document, "astro:before-swap", () => {
       window.__tarotServicesDestroy?.();
       window.__tarotServicesDestroy = undefined;
+      window.__tarotServicesStarted = false;
     });
   };
 
-  const start = () => run();
+  const start = () => {
+    if (window.__tarotServicesStarted) return;
+    window.__tarotServicesStarted = true;
+    run();
+  };
 
-  document.addEventListener("astro:page-load", start, { once: true });
+  document.addEventListener("astro:page-load", start);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", start, { once: true });

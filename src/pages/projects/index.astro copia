@@ -1,0 +1,464 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import ProjectsGrid from "@/components/ProjectsGrid.jsx";
+
+
+const ALL_CATEGORIES = [
+  "All",
+  "Fashion & Luxury",
+  "Corporate & Innovation",
+  "Retail & Hospitality",
+  "Professional Services",
+  "Big Brands",
+];
+
+const projects = await getCollection("projects");
+
+// normalizzo e ordino
+const items = projects
+  .map((p) => ({
+    slug: p.slug,
+    ordine: p.data.ordine ?? 999,
+    titolo: p.data.titolo,
+    abstract: p.data.abstract ?? "",
+    cover: p.data.cover,
+    meta: [p.data.cliente, p.data.anno].filter(Boolean).join(" • "),
+    badges: p.data.badges ?? [],
+    categories: p.data.categories ?? [],
+  }))
+  .sort((a, b) => a.ordine - b.ordine);
+---
+
+<BaseLayout title="Projects · Marysse Design">
+  <main class="projects-page">
+    <header class="projects-hero">
+      <div class="projects-center">
+        <div class="projects-hero__inner">
+          <h1 class="projects-title page-fade" style="--d: 80ms;">Projects</h1>
+
+          <p class="projects-subtitle">
+            Simple ideas, carefully crafted.<br />
+            Design is strongest when it says only what is needed.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Fade di filtri + griglia -->
+    <div class="projects-center page-fade" style="--d: 320ms;">
+      <ProjectsGrid client:load items={items} categories={ALL_CATEGORIES} />
+    </div>
+
+    <style>
+      /* ==========================================================
+        Layout / centering
+      ========================================================== */
+
+      .projects-page {
+        padding-top: 40px;
+        padding-bottom: 80px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .projects-center {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .projects-hero {
+        text-align: center;
+        width: 100%;
+      }
+
+      .projects-hero__inner {
+        width: min(980px, 52vw);
+        text-align: center;
+        position: relative;
+      }
+
+      .projects-title,
+      .projects-subtitle {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      .projects-title {
+        margin: 0;
+        font-family: "Noto Serif Display", serif;
+        font-weight: 300;
+        font-size: clamp(40px, 5.2vw, 78px);
+        line-height: 1.02;
+        color: #111;
+      }
+
+    .projects-subtitle {
+  margin: 14px auto 0;
+  font-size: 16px;
+  line-height: 1.85;
+  font-weight: 300;
+  color: rgba(25, 17, 24, 0.82);
+  max-width: 70ch;
+}
+
+      /* Grid container (React root) */
+      :global(.projects) {
+        width: min(1100px, 94vw);
+        margin: 0 !important; /* ci pensa il flex wrapper */
+      }
+
+      /* ==========================================================
+        Filters + Grid
+      ========================================================== */
+
+      :global(.projects__filters) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 0 26px;
+      }
+
+      :global(.filter-chip) {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        background: rgba(255, 255, 255, 0.7);
+        color: rgba(13, 13, 13, 0.78);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      :global(.filter-chip:hover) {
+        transform: translateY(-1px);
+        border-color: rgba(0, 0, 0, 0.28);
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      :global(.filter-chip__dot) {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.22);
+      }
+
+      :global(.filter-chip.is-active) {
+        border-color: rgba(0, 0, 0, 0.38);
+        background: rgba(0, 0, 0, 0.03);
+        color: rgba(12, 12, 12, 0.98);
+      }
+
+      :global(.filter-chip.is-active .filter-chip__dot) {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      :global(.projects__grid) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+        padding-top: 6px;
+      }
+
+      @media (max-width: 840px) {
+        .projects-title { font-size: 44px; }
+        :global(.projects__grid) { grid-template-columns: 1fr; }
+        .spark { display: none; }
+      }
+
+      /* ==========================================================
+        Card (rendered by React)
+      ========================================================== */
+
+      :global(.p-card) {
+        display: block;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.10);
+        background: #fff;
+        text-decoration: none;
+        color: inherit;
+        transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      }
+
+      :global(.p-card:hover) {
+        transform: translateY(-2px);
+        border-color: rgba(0,0,0,0.18);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      }
+
+      :global(.p-card__media img) {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      :global(.p-card__body) {
+        padding: 14px 16px 16px;
+      }
+
+      :global(.p-card__title) {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.3;
+        color: rgba(17,17,17,0.92);
+      }
+
+      :global(.p-card__abstract) {
+        margin: 8px 0 0;
+        font-size: 13px;
+        color: rgba(10, 10, 10, 0.68);
+        line-height: 1.455;
+      }
+
+      :global(.p-card__meta) {
+        margin: 8px 0 0;
+        font-size: 12px;
+        color: rgba(14, 14, 14, 0.48);
+      }
+
+      :global(.p-card__badges) {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      :global(.p-badge) {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.12);
+        color: rgba(17,17,17,0.62);
+        background: rgba(255,255,255,0.7);
+      }
+
+      /* ==========================================================
+        ✨ Elegant Fade In (title + grid)
+      ========================================================== */
+
+      .page-fade {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(6px);
+        animation: pageFadeUp 900ms cubic-bezier(.2, .8, .2, 1) forwards;
+        animation-delay: var(--d, 0ms);
+        will-change: opacity, transform, filter;
+      }
+
+      .projects-title.page-fade {
+        transform: translateY(6px);
+      }
+
+      @keyframes pageFadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      /* ==========================================================
+        ✨ Card stagger (premium)
+        - entra una dopo l’altra senza toccare React
+      ========================================================== */
+
+      :global(.projects__grid .p-card) {
+        opacity: 0;
+        transform: translateY(14px);
+        filter: blur(8px);
+        animation: cardFadeUp 900ms cubic-bezier(.2, .8, .2, 1) forwards;
+        animation-delay: var(--card-d, 520ms);
+        will-change: opacity, transform, filter;
+      }
+
+      @keyframes cardFadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      /* delays */
+      :global(.projects__grid > :nth-child(1))  { --card-d: 520ms; }
+      :global(.projects__grid > :nth-child(2))  { --card-d: 590ms; }
+      :global(.projects__grid > :nth-child(3))  { --card-d: 660ms; }
+      :global(.projects__grid > :nth-child(4))  { --card-d: 730ms; }
+      :global(.projects__grid > :nth-child(5))  { --card-d: 800ms; }
+      :global(.projects__grid > :nth-child(6))  { --card-d: 870ms; }
+      :global(.projects__grid > :nth-child(7))  { --card-d: 940ms; }
+      :global(.projects__grid > :nth-child(8))  { --card-d: 1010ms; }
+      :global(.projects__grid > :nth-child(9))  { --card-d: 1080ms; }
+      :global(.projects__grid > :nth-child(10)) { --card-d: 1150ms; }
+      :global(.projects__grid > :nth-child(11)) { --card-d: 1220ms; }
+      :global(.projects__grid > :nth-child(12)) { --card-d: 1290ms; }
+
+      /* ==========================================================
+        Accessibility
+      ========================================================== */
+
+      @media (prefers-reduced-motion: reduce) {
+        .page-fade,
+        :global(.projects__grid .p-card) {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      }
+
+
+
+
+      /* ==========================================================
+  Mobile compact header spacing
+========================================================== */
+@media (max-width: 640px) {
+
+.projects-hero {
+    text-align: center;
+    margin: 10px auto 40px;
+    max-width: 760px;
+}
+
+.projects-hero__inner {
+   padding-top: 20px !important;
+}
+  .projects-page {
+    padding-top: 20px !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* header più compatto */
+  .projects-hero__inner {
+    width: min(980px, 92vw);
+  }
+
+  /* titolo: un filo più piccolo + meno spazio sotto */
+  .projects-title {
+    font-size: 40px;     /* prima 44px (già a 840px) */
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  /* sottotitolo: meno margini */
+  .projects-subtitle {
+    margin: 10px auto 10px; /* prima 18px auto 18px */
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* filtri: meno padding sopra/sotto */
+  :global(.projects__filters) {
+    padding: 10px 0 16px;   /* prima 14px 0 26px */
+    gap: 8px;
+  }
+
+  /* opzionale: chip leggermente più piccoli su mobile */
+  :global(.filter-chip) {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+}
+
+/* ===============================
+   Go to top – cookie style
+================================ */
+.go-to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 60px;
+  padding: 10px 19px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+
+  /* stato nascosto */
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+/* visibile (solo mobile) */
+@media (max-width: 768px) {
+  .go-to-top.is-visible {
+    opacity: .75; /* semi-trasparente */
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* stato attivo (tap) */
+.go-to-top.is-active {
+  opacity: 1 !important;
+}
+
+/* feedback tap */
+.go-to-top:active {
+  transform: translateY(2px);
+}
+
+/* hover su device che lo supportano */
+@media (hover: hover) {
+  .go-to-top.is-visible:hover {
+    opacity: 1;
+  }
+}
+
+ </style>
+  </main>
+</BaseLayout>
+
+
+<button id="goToTop" aria-label="Go to top" class="go-to-top">
+  GO TO TOP
+</button>
+
+
+<script is:inline>
+  (() => {
+    const btn = document.getElementById('goToTop');
+    if (!btn) return;
+
+    const toggle = () => {
+      if (window.scrollY > 300) {
+        btn.classList.add('is-visible');
+      } else {
+        btn.classList.remove('is-visible');
+      }
+    };
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+  })();
+</script>
