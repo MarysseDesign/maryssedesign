@@ -3,8 +3,6 @@
 // Base: old working behavior preserved.
 // Added only: roman number + archetype support for modal and mobile detail.
 
-console.log("✅ tarot-services loaded");
-
 type TarotData = {
   key?: string;
   title?: string;
@@ -277,8 +275,6 @@ declare global {
         return { x, y };
       };
 
-      // IMPORTANT:
-      // this is the old shuffle behavior preserved
       const shuffle = () => {
         cards.forEach((card) => {
           const b = getBoundsPercent(card);
@@ -324,8 +320,9 @@ declare global {
 
         const onMove = (e: PointerEvent) => {
           if (!dragging) return;
-          if (activePointerId !== null && e.pointerId !== activePointerId)
+          if (activePointerId !== null && e.pointerId !== activePointerId) {
             return;
+          }
 
           const s = stage.getBoundingClientRect();
           const sw = Math.max(1, s.width);
@@ -431,12 +428,6 @@ declare global {
     };
 
     const boot = () => {
-      console.log("RUN ✅", {
-        isMobile: isMobile(),
-        hasStage: !!document.getElementById("tarotStage"),
-        cards: document.querySelectorAll(".tarot-card").length,
-      });
-
       if (isMobile()) initMobile();
       else initDesktop();
     };
