@@ -7,7 +7,6 @@ const nav =
         { href: "/about", label: "About" },
         { href: "/projects/", label: "Projects" },
         { href: "/services", label: "Services" },
-        
       ]
     : [
         { href: "/marysszang/", label: "Artworks" },
@@ -18,31 +17,37 @@ const nav =
 const otherBrand =
   brand === "marysse"
     ? { href: "/marysszang/", label: "Artistic Side" }
-    : { href: "/marysse/", label: "Brand Boutique" };
+    : { href: "/", label: "Brand Boutique" };
+
+const homeHref = brand === "marysse" ? "/" : "/marysszang/";
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-[#191118]/15">
-  <!-- BAR -->
   <div class="container mx-auto relative px-6 md:px-16 py-2 md:py-4">
-    <!-- MOBILE: logo centrato -->
+    <!-- MOBILE -->
     <div class="md:hidden flex items-center justify-center">
-      <a href="/" class="inline-flex">
-        <img src="/images/Marysse_logo.svg" alt="Marysse Logo" class="h-9" />
+      <a href={homeHref} class="inline-flex">
+        <img
+          src="/images/Marysse_logo.svg"
+          alt="Marysse Logo"
+          class="h-9"
+          width="140"
+          height="36"
+        />
       </a>
 
-      <!-- HAMBURGER -->
       <button
         id="menuToggle"
         class="group absolute right-6 top-1/2 -translate-y-1/2 w-8 h-8 flex flex-col items-center justify-center z-50"
         aria-label="Apri menu"
         aria-expanded="false"
+        aria-controls="mobilePanel"
+        type="button"
       >
-        <!-- 3 linee -->
         <span class="line block w-6 h-[1px] bg-[#191118] transition-all duration-300"></span>
         <span class="line block w-6 h-[1px] bg-[#191118] transition-all duration-300 my-[5px]"></span>
         <span class="line block w-6 h-[1px] bg-[#191118] transition-all duration-300"></span>
 
-        <!-- Rombo outline: solo in hover da chiuso -->
         <span
           id="hoverDiamond"
           class="pointer-events-none absolute -right-3 w-2.5 h-2.5 rotate-45 border border-[#191118] opacity-0 transition-opacity duration-150"
@@ -52,13 +57,21 @@ const otherBrand =
 
     <!-- DESKTOP -->
     <div class="hidden md:flex items-center justify-between">
-      <a href="/" class="flex items-center">
-        <img src="/images/Marysse_logo.svg" alt="Marysse Logo" class="h-12" />
+      <a href={homeHref} class="flex items-center">
+        <img
+          src="/images/Marysse_logo.svg"
+          alt="Marysse Logo"
+          class="h-12"
+          width="186"
+          height="48"
+        />
       </a>
 
       <nav class="flex items-center gap-6 tracking-widest text-[12px] uppercase text-[#191118]">
         {nav.map((l) => (
-          <a href={l.href} class="hover:opacity-70 transition-opacity">{l.label}</a>
+          <a href={l.href} class="hover:opacity-70 transition-opacity">
+            {l.label}
+          </a>
         ))}
 
         <div class="w-px h-5 bg-[#191118]/20" />
@@ -83,13 +96,14 @@ const otherBrand =
     class="md:hidden absolute left-1/2 -translate-x-1/2 top-full pointer-events-none opacity-0 -translate-y-2 transition-all duration-300"
   >
     <div class="relative w-[90vw] max-w-[460px]">
-      <!-- triangolino -->
       <span class="absolute left-1/2 -translate-x-1/2 -top-[0.4rem] w-3 h-3 bg-[#191118] rotate-45"></span>
 
       <div class="bg-[#191118] text-white">
         <nav class="flex flex-col items-center text-center gap-6 py-8 uppercase tracking-[0.25em] text-[12px]">
           {nav.map((l) => (
-            <a href={l.href} class="hover:opacity-70 transition-opacity" data-close-menu>{l.label}</a>
+            <a href={l.href} class="hover:opacity-70 transition-opacity" data-close-menu>
+              {l.label}
+            </a>
           ))}
 
           <a href="/contacts" class="hover:opacity-70 transition-opacity" data-close-menu>
@@ -104,49 +118,52 @@ const otherBrand =
     </div>
   </div>
 
-  <!-- Script toggle -->
   <script is:inline>
     (() => {
-      const btn = document.getElementById('menuToggle');
-      const panel = document.getElementById('mobilePanel');
-      const diamond = document.getElementById('hoverDiamond');
-      const lines = btn?.querySelectorAll('.line') ?? [];
+      const btn = document.getElementById("menuToggle");
+      const panel = document.getElementById("mobilePanel");
+      const diamond = document.getElementById("hoverDiamond");
+      const lines = btn?.querySelectorAll(".line") ?? [];
       if (!btn || !panel || !diamond) return;
 
       let open = false;
 
-      // rombo outline solo in hover quando chiuso
-      btn.addEventListener('mouseenter', () => { if (!open) diamond.style.opacity = '1'; });
-      btn.addEventListener('mouseleave', () => { diamond.style.opacity = '0'; });
+      btn.addEventListener("mouseenter", () => {
+        if (!open) diamond.style.opacity = "1";
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        diamond.style.opacity = "0";
+      });
 
       function setOpen(state) {
         open = state;
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
 
-        // panel
-        panel.style.pointerEvents = open ? 'auto' : 'none';
-        panel.style.opacity = open ? '1' : '0';
-        panel.style.transform = open ? 'translate(-50%,0)' : 'translate(-50%,-0.5rem)';
+        panel.style.pointerEvents = open ? "auto" : "none";
+        panel.style.opacity = open ? "1" : "0";
+        panel.style.transform = open ? "translate(-50%,0)" : "translate(-50%,-0.5rem)";
 
-        // hamburger → X
         if (open) {
-          lines[0]?.classList.add('translate-y-[6px]', 'rotate-45');
-          lines[1]?.classList.add('opacity-0');
-          lines[2]?.classList.add('-translate-y-[6px]', '-rotate-45');
-          diamond.style.opacity = '0'; // mai visibile quando aperto
+          lines[0]?.classList.add("translate-y-[6px]", "rotate-45");
+          lines[1]?.classList.add("opacity-0");
+          lines[2]?.classList.add("-translate-y-[6px]", "-rotate-45");
+          diamond.style.opacity = "0";
         } else {
-          lines[0]?.classList.remove('translate-y-[6px]', 'rotate-45');
-          lines[1]?.classList.remove('opacity-0');
-          lines[2]?.classList.remove('-translate-y-[6px]', '-rotate-45');
+          lines[0]?.classList.remove("translate-y-[6px]", "rotate-45");
+          lines[1]?.classList.remove("opacity-0");
+          lines[2]?.classList.remove("-translate-y-[6px]", "-rotate-45");
         }
       }
 
-      btn.addEventListener('click', () => setOpen(!open));
-      panel.addEventListener('click', (e) => {
-        if (e.target.closest('[data-close-menu]')) setOpen(false);
+      btn.addEventListener("click", () => setOpen(!open));
+
+      panel.addEventListener("click", (e) => {
+        if (e.target.closest("[data-close-menu]")) setOpen(false);
       });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && open) setOpen(false);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && open) setOpen(false);
       });
     })();
   </script>

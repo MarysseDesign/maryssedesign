@@ -121,8 +121,8 @@ const absoluteOgImage = ogImage.startsWith("http")
     class="min-h-screen bg-white text-gray-900 font-sans text-base font-light"
     data-footer-variant={footerVariant}
   >
-    {brand === "marysszang" ? <SiteHeaderMarysszang /> : <Header />}
-    <CookieBanner GA_ID="UA-120911902-1" />
+{brand === "marysszang" ? <SiteHeaderMarysszang /> : <Header />}
+<CookieBanner GA_ID={import.meta.env.PUBLIC_GA_ID ?? ""} />
 
     <!-- IMPORTANT: se noMainBottomPadding=true, niente pb-24 => sparisce la striscia bianca -->
     <main

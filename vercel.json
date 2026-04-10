@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/progetti/:slug",
+      "destination": "/projects/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/progetti",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/marysse",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/marysse/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ]
+}

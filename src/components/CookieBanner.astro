@@ -1,46 +1,69 @@
 ---
-const { GA_ID = "UA-120911902-1" } = Astro.props;
+const { GA_ID = "" } = Astro.props;
 ---
 
 <style is:global>
-  .shadow-cookie { box-shadow: 0 12px 32px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04); }
+  .shadow-cookie {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
 </style>
 
 <!-- Badge -->
 <div id="cookie-badge" class="fixed bottom-4 right-4 z-[60] select-none">
-  <button type="button"
-    class="font-montserrat uppercase tracking-[.2em] text-[10px] px-3 py-2 rounded-full border border-gray-300 bg-white hover:bg-gray-50">
+  <button
+    type="button"
+    class="font-montserrat uppercase tracking-[.2em] text-[10px] px-3 py-2 rounded-full border border-gray-300 bg-white hover:bg-gray-50"
+    aria-controls="cookie-panel"
+    aria-expanded="false"
+  >
     🍪 Cookies
   </button>
 </div>
 
 <!-- Panel -->
-<div id="cookie-panel"
-  class="hidden fixed bottom-4 right-4 z-[70] w-[min(92vw,520px)] rounded-2xl border border-gray-200 bg-white shadow-cookie">
+<div
+  id="cookie-panel"
+  class="hidden fixed bottom-4 right-4 z-[70] w-[min(92vw,520px)] rounded-2xl border border-gray-200 bg-white shadow-cookie"
+>
   <div class="p-5 md:p-6">
-   <h3 class="font-semibold text-sm mb-1">Cookies & Privacy</h3>
-<p class="text-[12px] leading-relaxed text-gray-700">
-We use cookies to improve your experience and understand how the site is used.
-Learn more in our <a href="/cookie-policy" class="underline">Cookie Policy</a> and
-<a href="/privacy" class="underline">Privacy Policy</a>.
-</p>
-<div class="mt-4 flex items-center gap-2">
-  <button id="cookie-accept"
-    class="px-4 py-2 rounded-full bg-gray-900 text-white text-[12px] uppercase tracking-[.15em]">
-    Accept
-  </button>
-  <button id="cookie-decline"
-    class="px-4 py-2 rounded-full border border-gray-300 text-[12px] uppercase tracking-[.15em] hover:bg-gray-50">
-    Decline
-  </button>
-  <button id="cookie-close"
-    class="ml-auto px-3 py-2 text-[12px] text-gray-500 hover:text-gray-700">
-    Close
-  </button>
+    <h3 class="font-semibold text-sm mb-1">Cookies &amp; Privacy</h3>
+
+    <p class="text-[12px] leading-relaxed text-gray-700">
+      We use cookies to improve your experience and understand how the site is used.
+      Learn more in our <a href="/cookie-policy" class="underline">Cookie Policy</a> and
+      <a href="/privacy" class="underline">Privacy Policy</a>.
+    </p>
+
+    <div class="mt-4 flex items-center gap-2 flex-wrap">
+      <button
+        id="cookie-accept"
+        type="button"
+        class="px-4 py-2 rounded-full bg-gray-900 text-white text-[12px] uppercase tracking-[.15em]"
+      >
+        Accept
+      </button>
+
+      <button
+        id="cookie-decline"
+        type="button"
+        class="px-4 py-2 rounded-full border border-gray-300 text-[12px] uppercase tracking-[.15em] hover:bg-gray-50"
+      >
+        Decline
+      </button>
+
+      <button
+        id="cookie-close"
+        type="button"
+        class="ml-auto px-3 py-2 text-[12px] text-gray-500 hover:text-gray-700"
+      >
+        Close
+      </button>
+    </div>
+  </div>
 </div>
 
-<script>
-  (function () {
+<script define:vars={{ GA_ID }}>
+  (() => {
     const KEY = "cookieConsent";
     const badge = document.getElementById("cookie-badge");
     const badgeBtn = badge?.querySelector("button");
@@ -48,36 +71,68 @@ Learn more in our <a href="/cookie-policy" class="underline">Cookie Policy</a> a
     const btnAccept = document.getElementById("cookie-accept");
     const btnDecline = document.getElementById("cookie-decline");
     const btnClose = document.getElementById("cookie-close");
-    const GA = "<?= GA_ID ?>"; // Astro inietta come stringa
+    const GA = GA_ID;
 
-    function getState(){ try{return JSON.parse(localStorage.getItem(KEY));}catch{return null;} }
-    function setState(status){ localStorage.setItem(KEY, JSON.stringify({status, ts: Date.now()})); }
-    function openPanel(){ panel?.classList.remove("hidden"); }
-    function closePanel(){ panel?.classList.add("hidden"); }
+    function getState() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY));
+      } catch {
+        return null;
+      }
+    }
 
-    function loadGA(){
-      if(!GA || document.getElementById("gtag-js")) return;
+    function setState(status) {
+      localStorage.setItem(KEY, JSON.stringify({ status, ts: Date.now() }));
+    }
+
+    function openPanel() {
+      panel?.classList.remove("hidden");
+      badgeBtn?.setAttribute("aria-expanded", "true");
+    }
+
+    function closePanel() {
+      panel?.classList.add("hidden");
+      badgeBtn?.setAttribute("aria-expanded", "false");
+    }
+
+    function loadGA() {
+      if (!GA || document.getElementById("gtag-js")) return;
+
       const s = document.createElement("script");
-      s.id = "gtag-js"; s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id="+GA;
+      s.id = "gtag-js";
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA;
       document.head.appendChild(s);
+
       const i = document.createElement("script");
+      i.id = "gtag-inline";
       i.text = `
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date()); gtag('config', '${GA}');
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', '${GA}');
       `;
       document.head.appendChild(i);
     }
 
-    // init
     const st = getState();
-    if (st?.status === "accepted") loadGA();
+    if (st?.status === "accepted") {
+      loadGA();
+    }
 
-    // handlers (attacco SEMPRE agli elementi, no selettori annidati strani)
     badgeBtn?.addEventListener("click", openPanel);
     btnClose?.addEventListener("click", closePanel);
-    btnAccept?.addEventListener("click", ()=>{ setState("accepted"); loadGA(); closePanel(); });
-    btnDecline?.addEventListener("click", ()=>{ setState("declined"); closePanel(); });
+
+    btnAccept?.addEventListener("click", () => {
+      setState("accepted");
+      loadGA();
+      closePanel();
+    });
+
+    btnDecline?.addEventListener("click", () => {
+      setState("declined");
+      closePanel();
+    });
   })();
 </script>
