@@ -28,7 +28,7 @@ sottotitolo: |
 
 intro: |
   During Fashion Week 2025 at Rinascente Milano, guests could book<br class="hide-mobile" /> a makeup session followed by a professional photoshoot.<br/>
-  In just 10 minutes, each participant received a magazine-cover style portrait, with live post-production and <br class="hide-mobile" /> a personal QR code to access and download their final image.
+  In just 10 minutes, each participant received a magazine-cover style portrait, with live post-production and a personal QR code to access and download their final image.
 
 prevSlug: "brezza-marina-rooms"
 nextSlug: "campari"

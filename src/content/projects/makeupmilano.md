@@ -64,7 +64,7 @@ translating the brand’s cosmetic expertise into a contemporary identity system
   </div>
 
   <div class="col-md-6">
-    <div class="box pt-0 reveal moretop moretoph3" data-delay="0">
+    <div class="box pt-0 reveal moretop moretoph3 stretto" data-delay="0">
       <h3>Brand identity &amp; website design</h3>
       <p><br class="hide-mobile" />
         A distinctive visual identity that blends elegance and experimentation, translating the world of cosmetics into a contemporary and expressive brand experience.
@@ -75,7 +75,7 @@ translating the brand’s cosmetic expertise into a contemporary identity system
 
 <div class="row mb-sm">
   <div class="col-md-6">
-    <div class="box pt-0 reveal moretop" data-delay="120">
+    <div class="box pt-0 reveal moretop stretto" data-delay="120">
       <h3>A business card inspired by a blush compact</h3>
       <p><br class="hide-mobile" />
         The visual identity for Make-Up Milano translates the brand’s core activity into a
@@ -98,16 +98,17 @@ translating the brand’s cosmetic expertise into a contemporary identity system
     />
   </div>
 </div>
+<br class="hide-mobile" />
 
 <h2 class="project-year with-line">2024</h2>
 
 Digital identity review and website redesign.<br class="hide-mobile" />
-The intervention refined the visual system and updated the digital experience to current standards,
-while preserving the brand’s distinctive character.<br class="hide-mobile" />
+The intervention refined the visual system and updated the digital experience to current standards,<br class="hide-mobile" />
+while preserving the brand’s distinctive character.<br class="hide-mobile" /><br class="hide-mobile" />
 Project developed in collaboration with
 <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noreferrer noopener">Creative Department Studio</a>.<br class="hide-mobile" />
 Photo and video shooting by
-<a href="https://www.buzin.it/" target="_blank" rel="noreferrer noopener">Buzin</a>.
+<a href="https://www.buzin.it/" target="_blank" rel="noreferrer noopener">Buzin</a>.<br class="hide-mobile" /><br class="hide-mobile" />
 
 <div class="row mb-sm nolarge">
   <div class="col-md-6">
@@ -145,7 +146,7 @@ Photo and video shooting by
 
 <div class="row mb-sm">
   <div class="col-md-6">
-    <div class="box pt-0 reveal moretop">
+    <div class="box pt-0 reveal moretop stretto">
       <br><br><br class="hide-mobile" />
       <h3>A digital experience for a contemporary cosmetics Brand</h3>
       <p><br class="hide-mobile" />
