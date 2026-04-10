@@ -71,3 +71,9 @@ header img.logo-marysszang[alt="marysszang"] {
     max-height: 40px;
   }
 }
+
+
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+}

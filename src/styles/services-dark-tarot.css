@@ -578,7 +578,6 @@ body {
     scroll-padding-inline: 16px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    touch-action: pan-x;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: auto;
   }
@@ -606,7 +605,6 @@ body {
       opacity 0.2s ease,
       border-color 0.2s ease,
       transform 0.2s ease;
-    touch-action: manipulation;
   }
 
   .tarot-slide.is-active {

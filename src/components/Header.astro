@@ -146,17 +146,24 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
           lines[1]?.classList.add("opacity-0");
           lines[2]?.classList.add("-translate-y-[6px]", "-rotate-45");
           diamond.style.opacity = "0";
+          document.documentElement.classList.add("menu-open");
+          document.body.classList.add("menu-open");
         } else {
           lines[0]?.classList.remove("translate-y-[6px]", "rotate-45");
           lines[1]?.classList.remove("opacity-0");
           lines[2]?.classList.remove("-translate-y-[6px]", "-rotate-45");
+          document.documentElement.classList.remove("menu-open");
+          document.body.classList.remove("menu-open");
         }
       }
 
       btn.addEventListener("click", () => setOpen(!open));
 
       panel.addEventListener("click", (e) => {
-        if ((e.target as HTMLElement)?.closest?.("[data-close-menu]")) setOpen(false);
+        const target = e.target;
+        if (target instanceof HTMLElement && target.closest("[data-close-menu]")) {
+          setOpen(false);
+        }
       });
 
       document.addEventListener("keydown", (e) => {
