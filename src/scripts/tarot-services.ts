@@ -316,7 +316,6 @@ declare global {
           return !!t?.closest?.("a,button,input,textarea,select,label");
         };
 
-        card.style.touchAction = "none";
 
         const onMove = (e: PointerEvent) => {
           if (!dragging) return;
@@ -348,6 +347,7 @@ declare global {
         const stopDrag = () => {
           if (!dragging) return;
           dragging = false;
+          card.style.touchAction = "";
           card.classList.remove("is-dragging");
 
           if (activePointerId !== null) {
@@ -373,6 +373,7 @@ declare global {
           dragging = true;
           moved = 0;
 
+          card.style.touchAction = "none";
           card.classList.add("is-dragging");
           bringToFront(card);
 

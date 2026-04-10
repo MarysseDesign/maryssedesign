@@ -234,7 +234,7 @@ const selectedWorks = [
 
       <div class="tarot-mobile" id="tarotMobile" aria-label="Services carousel">
         <div class="tarot-carousel" id="tarotCarousel">
-          {tarotServices.map((s) => (
+          {tarotServices.map((s, i) => (
             <button
               class="tarot-slide"
               type="button"
@@ -251,7 +251,7 @@ const selectedWorks = [
                 <img
                   src={s.img}
                   alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`}
-                  loading="lazy"
+                  loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
                 />
 
