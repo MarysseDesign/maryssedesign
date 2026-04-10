@@ -25,7 +25,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
 
 <BaseLayout brand="marysse" title="Contact · Marysse Design">
   <main class="contact-page">
-    <!-- HERO -->
     <section class="contact-section contact-hero" aria-label="Contact hero">
       <div class="site-container contact-inner">
         <header class="contact-head reveal" style="--delay: 80ms">
@@ -42,10 +41,8 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
           </div>
         </header>
       </div>
-
     </section>
 
-    <!-- FORM -->
     <section class="contact-section contact-formSection" aria-label="Project enquiry form">
       <div class="site-container contact-inner">
         <div class="contact-card reveal" style="--delay: 140ms" id="enquiry">
@@ -57,42 +54,40 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
             </p>
           </header>
 
-          <!-- ✅ SUBMIT CLASSICO A FORMSPREE -->
-          <form class="contact-form" action={FORM_ACTION} method="POST">
-            <!-- Honeypot anti-spam -->
+          <form
+            class="contact-form"
+            action={FORM_ACTION}
+            method="POST"
+            accept-charset="UTF-8"
+          >
             <input
               type="text"
               name="_gotcha"
               style="display:none"
-              tabindex="-1"
-              autocomplete="off"
+              tabIndex="-1"
+              autoComplete="off"
               aria-hidden="true"
             />
 
-            <!-- (Opzionale) Subject in email -->
             <input type="hidden" name="_subject" value="Project enquiry | Marysse Design" />
+            <input type="hidden" name="_next" value="https://maryssedesign.com/thanks" />
 
-            <!-- ✅ Redirect dopo submit (aggiorna col dominio definitivo quando sei live) -->
-            <!-- <input type="hidden" name="_next" value="https://maryssedesign.com/thanks" /> -->
-
-            <!-- Name + Email -->
             <div class="field-row">
               <label class="field">
                 <span>Name</span>
-                <input name="name" type="text" autocomplete="name" placeholder="Your name" required />
+                <input name="name" type="text" autoComplete="name" placeholder="Your name" required />
               </label>
 
               <label class="field">
                 <span>Email</span>
-                <input name="email" type="email" autocomplete="email" placeholder="you@email.com" required />
+                <input name="email" type="email" autoComplete="email" placeholder="you@email.com" required />
               </label>
             </div>
 
-            <!-- Brand + Focus -->
             <div class="field-row">
               <label class="field">
                 <span>Brand</span>
-                <input name="brand" type="text" autocomplete="organization" placeholder="Brand or company" />
+                <input name="brand" type="text" autoComplete="organization" placeholder="Brand or company" />
               </label>
 
               <label class="field">
@@ -106,7 +101,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
               </label>
             </div>
 
-            <!-- Timing + Budget -->
             <div class="field-row">
               <label class="field">
                 <span>Timing</span>
@@ -129,7 +123,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
               </label>
             </div>
 
-            <!-- Message -->
             <label class="field">
               <span>Message</span>
               <textarea
@@ -140,13 +133,11 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
               ></textarea>
             </label>
 
-            <!-- Links (tollerante) -->
             <label class="field">
               <span>Links</span>
               <input name="links" type="text" placeholder="Website, deck, reference, Instagram, folder" />
             </label>
 
-            <!-- ✅ Privacy consent (must be inside the form) -->
             <label class="privacy-consent">
               <input type="checkbox" name="privacy_consent" required />
               <span>
@@ -169,7 +160,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
           </form>
         </div>
 
-        <!-- SMALL “FIT” NOTE -->
         <div class="contact-fit reveal" style="--delay: 200ms" aria-label="Best fit note">
           <p class="contact-miniKicker">Best fit</p>
           <div class="pill-grid">
@@ -179,13 +169,10 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
             <span class="pill">Teams who value detail and coherence</span>
           </div>
         </div>
-
-
       </div>
     </section>
   </main>
 
-  <!-- Reveal -->
   <script is:inline>
     const els = document.querySelectorAll(".reveal");
     if (els.length) {
@@ -197,7 +184,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
     }
   </script>
 
-  <!-- PAGE CSS (solo contact) -->
   <style is:global>
     .contact-page{
       background:#fff;
@@ -243,7 +229,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
       flex-wrap:wrap;
     }
 
-    /* CTA (assumo esista già altrove; qui solo fallback) */
     .cta-dark{
       display:inline-block;
       padding: 12px 22px;
@@ -335,7 +320,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
       transition: border-color 180ms ease, box-shadow 180ms ease;
     }
 
-    /* ===== Custom select arrow ===== */
     .field select {
       appearance: none;
       -webkit-appearance: none;
@@ -355,7 +339,6 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
       box-shadow: 0 0 0 4px rgba(25, 17, 24, 0.06);
     }
 
-    /* ✅ Privacy consent */
     .privacy-consent{
       display:flex;
       align-items:flex-start;
@@ -445,6 +428,5 @@ const budgetOptions = ["Under 3k", "3k to 8k", "8k to 15k", "15k plus", "Prefer 
       .contact-title{ font-size: clamp(30px, 9.4vw, 44px); line-height: 1.08; }
       .contact-card, .contact-fit{ border-radius: 40px; }
     }
-
   </style>
 </BaseLayout>
