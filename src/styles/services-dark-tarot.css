@@ -476,9 +476,11 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: grab;
   user-select: none;
+  -webkit-user-select: none;
   transition:
     box-shadow 0.25s ease,
     border-color 0.25s ease,
@@ -510,6 +512,8 @@ body {
   object-fit: cover;
   display: block;
   filter: saturate(0.98) contrast(1.03);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .tarot-card__meta {
@@ -572,14 +576,16 @@ body {
     grid-auto-columns: min(78vw, 300px);
     gap: 12px;
     overflow-x: auto;
+    overflow-y: visible;
     padding: 8px 16px 12px;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: x mandatory;
     scroll-padding-inline: 16px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
-    touch-action: pan-y;
+    overscroll-behavior-inline: contain;
+    overscroll-behavior-block: auto;
+    touch-action: pan-x pan-y;
+    align-items: stretch;
   }
 
   .tarot-carousel::-webkit-scrollbar {
@@ -587,18 +593,23 @@ body {
   }
 
   .tarot-slide {
+    display: block;
     scroll-snap-align: center;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
     max-width: 300px;
     border-radius: 22px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.16);
     background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     padding: 0;
     text-align: left;
     cursor: pointer;
-    touch-action: manipulation;
+    touch-action: auto;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
     box-shadow: none !important;
     opacity: 0.52;
     transform: translateY(0);
@@ -662,6 +673,8 @@ body {
     height: 100%;
     display: block;
     object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
   }
 
   .tarot-slide__meta {
@@ -693,6 +706,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.14);
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     box-shadow: none !important;
   }
 
@@ -764,6 +778,7 @@ html.tarot-modal-lock body {
   inset: 0;
   background: rgba(2, 6, 18, 0.82);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   transition: opacity 0.18s ease;
 }
@@ -864,6 +879,8 @@ html.tarot-modal-lock body {
   height: 100%;
   display: block;
   object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .tarot-modal__content {
@@ -1257,6 +1274,7 @@ body[data-footer-variant="minimal"] main {
     rgba(255, 255, 255, 0.04) 100%
   );
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
   transition:
     transform 0.28s ease,

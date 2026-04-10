@@ -162,7 +162,11 @@ const selectedWorks = [
     </div>
 
     <section class="tarot-hero" id="services">
-     <div class="tarot-hero__wrap"> <h1 class="tarot-hero__title"> <span class="only-desktop">Building brands that feel inevitable.</span> <span class="only-mobile">Building brands that feel inevitable.</span> </h1>
+      <div class="tarot-hero__wrap">
+        <h1 class="tarot-hero__title">
+          <span class="only-desktop">Building brands that feel inevitable.</span>
+          <span class="only-mobile">Building brands that feel inevitable.</span>
+        </h1>
 
         <p class="tarot-hero__sub">
           Art direction, identity and visual worlds,
@@ -216,6 +220,7 @@ const selectedWorks = [
                   alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`}
                   loading={i < 2 ? "eager" : "lazy"}
                   decoding="async"
+                  draggable="false"
                 />
               </div>
 
@@ -235,9 +240,10 @@ const selectedWorks = [
       <div class="tarot-mobile" id="tarotMobile" aria-label="Services carousel">
         <div class="tarot-carousel" id="tarotCarousel">
           {tarotServices.map((s, i) => (
-            <button
+            <article
               class="tarot-slide"
-              type="button"
+              tabindex="0"
+              role="button"
               data-key={s.key}
               data-number={s.number}
               data-title={s.title}
@@ -253,6 +259,7 @@ const selectedWorks = [
                   alt={`Tarot-inspired card for ${s.title}, ${s.subtitle}`}
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
+                  draggable="false"
                 />
 
                 <div class="tarot-slide__card-meta" aria-hidden="true">
@@ -265,7 +272,7 @@ const selectedWorks = [
                 <div class="tarot-slide__kicker">{s.subtitle}</div>
                 <div class="tarot-slide__title">{s.title}</div>
               </div>
-            </button>
+            </article>
           ))}
         </div>
 
@@ -309,7 +316,7 @@ const selectedWorks = [
                 <p class="tarot-modal__card-archetype" id="tarotModalArchetype"></p>
               </div>
 
-              <img id="tarotModalImg" alt="" />
+              <img id="tarotModalImg" alt="" draggable="false" />
             </div>
 
             <div class="tarot-modal__content">
@@ -455,6 +462,7 @@ const selectedWorks = [
                   alt={project.alt}
                   loading="lazy"
                   decoding="async"
+                  draggable="false"
                 />
               </div>
 

@@ -1,7 +1,9 @@
 // src/scripts/tarot-services.ts
 // Tarot services interactions (desktop drag + modal, mobile carousel details)
-// Base: old working behavior preserved.
-// Added only: roman number + archetype support for modal and mobile detail.
+// Refined mobile gesture handling:
+// - robust separation between tap and swipe
+// - safer pointer lifecycle
+// - compatible with article[role="button"] for mobile cards
 
 type TarotData = {
   key?: string;
@@ -87,6 +89,7 @@ declare global {
 
     // ===== MOBILE =====
     const mobileRoot = document.getElementById("tarotMobile");
+    const mobileCarousel = document.getElementById("tarotCarousel");
     const detailKicker = document.getElementById("tarotDetailKicker");
     const detailTitle = document.getElementById("tarotDetailTitle");
     const detailArchetype = document.getElementById("tarotDetailArchetype");
@@ -120,21 +123,100 @@ declare global {
     };
 
     const initMobile = () => {
-      if (!mobileRoot) return;
+      if (!mobileRoot || !mobileCarousel) return;
 
       const slides = Array.from(
         mobileRoot.querySelectorAll<HTMLElement>(".tarot-slide"),
       );
       if (!slides.length) return;
 
-      slides.forEach((btn) => {
-        on(btn, "click", () => setDetailFromBtn(btn), { passive: true });
+      const TAP_DISTANCE = 10;
 
-        on(btn, "keydown", (e: Event) => {
+      slides.forEach((slide) => {
+        let pointerId: number | null = null;
+        let startX = 0;
+        let startY = 0;
+        let moved = false;
+
+        const resetGesture = () => {
+          pointerId = null;
+          startX = 0;
+          startY = 0;
+          moved = false;
+        };
+
+        on(
+          slide,
+          "pointerdown",
+          (e: Event) => {
+            const pe = e as PointerEvent;
+
+            pointerId = pe.pointerId;
+            startX = pe.clientX;
+            startY = pe.clientY;
+            moved = false;
+          },
+          { passive: true },
+        );
+
+        on(
+          slide,
+          "pointermove",
+          (e: Event) => {
+            const pe = e as PointerEvent;
+            if (pointerId !== pe.pointerId) return;
+
+            const dx = Math.abs(pe.clientX - startX);
+            const dy = Math.abs(pe.clientY - startY);
+
+            if (dx > TAP_DISTANCE || dy > TAP_DISTANCE) {
+              moved = true;
+            }
+          },
+          { passive: true },
+        );
+
+        on(
+          slide,
+          "pointerup",
+          (e: Event) => {
+            const pe = e as PointerEvent;
+            if (pointerId !== pe.pointerId) return;
+            pointerId = null;
+          },
+          { passive: true },
+        );
+
+        on(
+          slide,
+          "pointercancel",
+          () => {
+            resetGesture();
+          },
+          { passive: true },
+        );
+
+        on(
+          slide,
+          "click",
+          (e: Event) => {
+            if (moved) {
+              e.preventDefault();
+              resetGesture();
+              return;
+            }
+
+            setDetailFromBtn(slide);
+            resetGesture();
+          },
+          false,
+        );
+
+        on(slide, "keydown", (e: Event) => {
           const ke = e as KeyboardEvent;
           if (ke.key === "Enter" || ke.key === " ") {
             ke.preventDefault();
-            setDetailFromBtn(btn);
+            setDetailFromBtn(slide);
           }
         });
       });
@@ -209,6 +291,7 @@ declare global {
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden", "true");
       document.documentElement.classList.remove("tarot-modal-lock");
+
       window.setTimeout(() => {
         (modal as any).hidden = true;
 
@@ -315,7 +398,6 @@ declare global {
           const t = el as HTMLElement | null;
           return !!t?.closest?.("a,button,input,textarea,select,label");
         };
-
 
         const onMove = (e: PointerEvent) => {
           if (!dragging) return;
