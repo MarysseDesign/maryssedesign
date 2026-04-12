@@ -1,10 +1,9 @@
 // src/scripts/tarot-services.ts
 // Tarot services interactions (desktop drag + modal, mobile carousel details)
-// Final version:
-// - desktop keeps drag + modal
-// - mobile separates tap and swipe cleanly
-// - no preventDefault on click
-// - first mobile detail activation waits one frame
+// Refined mobile gesture handling:
+// - robust separation between tap and swipe
+// - safer pointer lifecycle
+// - compatible with article[role="button"] for mobile cards
 
 type TarotData = {
   key?: string;
@@ -90,6 +89,7 @@ declare global {
 
     // ===== MOBILE =====
     const mobileRoot = document.getElementById("tarotMobile");
+    const mobileCarousel = document.getElementById("tarotCarousel");
     const detailKicker = document.getElementById("tarotDetailKicker");
     const detailTitle = document.getElementById("tarotDetailTitle");
     const detailArchetype = document.getElementById("tarotDetailArchetype");
@@ -123,7 +123,7 @@ declare global {
     };
 
     const initMobile = () => {
-      if (!mobileRoot) return;
+      if (!mobileRoot || !mobileCarousel) return;
 
       const slides = Array.from(
         mobileRoot.querySelectorAll<HTMLElement>(".tarot-slide"),
@@ -150,6 +150,7 @@ declare global {
           "pointerdown",
           (e: Event) => {
             const pe = e as PointerEvent;
+
             pointerId = pe.pointerId;
             startX = pe.clientX;
             startY = pe.clientY;
@@ -198,7 +199,10 @@ declare global {
         on(
           slide,
           "click",
-          () => {
+          (e: Event) => {
+            // FIX: rimosso e.preventDefault() — non era necessario sul click
+            // (il click non causa scroll) ma impediva al browser di ottimizzare
+            // il touch pipeline, bloccando lo scroll su Safari/Chrome mobile.
             if (moved) {
               resetGesture();
               return;
@@ -207,7 +211,7 @@ declare global {
             setDetailFromBtn(slide);
             resetGesture();
           },
-          { passive: true },
+          { passive: true }, // FIX: passive: true sblocca il thread di scroll
         );
 
         on(slide, "keydown", (e: Event) => {
@@ -219,6 +223,10 @@ declare global {
         });
       });
 
+      // FIX: requestAnimationFrame assicura che il layout del carousel
+      // sia settled prima di attivare la prima carta. Senza questo,
+      // su Safari iOS il primo render non era ancora completato e
+      // l'utente doveva toccare la seconda carta per sbloccare l'interazione.
       requestAnimationFrame(() => {
         setDetailFromBtn(slides[0]);
       });
