@@ -485,7 +485,6 @@ body {
     box-shadow 0.25s ease,
     border-color 0.25s ease,
     transform 0.25s ease;
-  will-change: left, top, transform;
 }
 
 .tarot-card:hover {

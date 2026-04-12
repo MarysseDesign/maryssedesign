@@ -199,9 +199,8 @@ declare global {
         on(
           slide,
           "click",
-          (e: Event) => {
+          () => {
             if (moved) {
-              e.preventDefault();
               resetGesture();
               return;
             }
@@ -209,7 +208,7 @@ declare global {
             setDetailFromBtn(slide);
             resetGesture();
           },
-          false,
+          { passive: true },
         );
 
         on(slide, "keydown", (e: Event) => {
@@ -221,7 +220,9 @@ declare global {
         });
       });
 
-      setDetailFromBtn(slides[0]);
+      requestAnimationFrame(() => {
+        setDetailFromBtn(slides[0]);
+      });
     };
 
     // ===== DESKTOP =====
