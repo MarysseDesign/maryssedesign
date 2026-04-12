@@ -461,6 +461,7 @@ body {
   background: transparent;
   border: 0;
   overflow: visible;
+  contain: layout style;
 }
 
 .tarot-card {
@@ -575,15 +576,15 @@ body {
     grid-auto-columns: min(78vw, 300px);
     gap: 12px;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: hidden;
     padding: 8px 16px 12px;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     scroll-padding-inline: 16px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    overscroll-behavior-inline: contain;
-    overscroll-behavior-block: auto;
-    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+    touch-action: pan-y pinch-zoom;
     align-items: stretch;
   }
 
@@ -594,7 +595,7 @@ body {
   .tarot-slide {
     display: block;
     scroll-snap-align: center;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
     max-width: 300px;
     border-radius: 22px;
     overflow: hidden;
@@ -605,7 +606,7 @@ body {
     padding: 0;
     text-align: left;
     cursor: pointer;
-    touch-action: auto;
+    touch-action: pan-y pinch-zoom;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
@@ -626,6 +627,7 @@ body {
 
   .tarot-slide__img {
     aspect-ratio: 3 / 3.1;
+    pointer-events: none;
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     position: relative;
@@ -699,6 +701,8 @@ body {
 
   .tarot-detail {
     width: min(720px, calc(100% - 32px));
+    position: relative;
+    z-index: 1;
     margin: 10px auto 0;
     padding: 14px 14px 16px;
     border-radius: 18px;
