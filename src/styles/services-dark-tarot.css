@@ -443,6 +443,7 @@ body {
    ========================================================= */
 .tarot-stage-wrap {
   position: relative;
+  contain: layout paint style;
   z-index: 6;
   width: 100%;
   margin-top: 0;
@@ -461,7 +462,6 @@ body {
   background: transparent;
   border: 0;
   overflow: visible;
-  contain: layout style;
 }
 
 .tarot-card {
@@ -582,9 +582,8 @@ body {
     scroll-padding-inline: 16px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
-    touch-action: pan-y pinch-zoom;
+    overscroll-behavior-inline: contain;
+    overscroll-behavior-block: auto;
     align-items: stretch;
   }
 
@@ -606,7 +605,6 @@ body {
     padding: 0;
     text-align: left;
     cursor: pointer;
-    touch-action: pan-y pinch-zoom;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
@@ -627,7 +625,6 @@ body {
 
   .tarot-slide__img {
     aspect-ratio: 3 / 3.1;
-    pointer-events: none;
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     position: relative;
@@ -701,8 +698,6 @@ body {
 
   .tarot-detail {
     width: min(720px, calc(100% - 32px));
-    position: relative;
-    z-index: 1;
     margin: 10px auto 0;
     padding: 14px 14px 16px;
     border-radius: 18px;

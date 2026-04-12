@@ -130,31 +130,70 @@ declare global {
       );
       if (!slides.length) return;
 
-      let rafId = 0;
+      let raf = 0;
 
-      const selectSlide = (slide: HTMLElement) => {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          setDetailFromBtn(slide);
+      const setActiveSlide = (slide: HTMLElement | null) => {
+        if (!slide) return;
+        setDetailFromBtn(slide);
+      };
+
+      const getClosestToCenter = () => {
+        const carouselRect = mobileCarousel.getBoundingClientRect();
+        const center = carouselRect.left + carouselRect.width / 2;
+
+        let best: HTMLElement | null = null;
+        let bestDist = Number.POSITIVE_INFINITY;
+
+        for (const slide of slides) {
+          const rect = slide.getBoundingClientRect();
+          const slideCenter = rect.left + rect.width / 2;
+          const dist = Math.abs(slideCenter - center);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = slide;
+          }
+        }
+
+        return best;
+      };
+
+      const syncFromScroll = () => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          setActiveSlide(getClosestToCenter());
         });
       };
 
       slides.forEach((slide) => {
         on(slide, "click", () => {
-          selectSlide(slide);
+          slide.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+          });
+          setActiveSlide(slide);
         });
 
         on(slide, "keydown", (e: Event) => {
           const ke = e as KeyboardEvent;
           if (ke.key === "Enter" || ke.key === " ") {
             ke.preventDefault();
-            selectSlide(slide);
+            slide.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+            setActiveSlide(slide);
           }
         });
       });
 
+      on(mobileCarousel, "scroll", syncFromScroll, { passive: true });
+      on(window, "resize", syncFromScroll, { passive: true });
+
       requestAnimationFrame(() => {
-        setDetailFromBtn(slides[0]);
+        setActiveSlide(slides[0]);
       });
     };
 
@@ -441,23 +480,14 @@ declare global {
 
       cards.forEach(enableDrag);
 
-      const deferShuffle = () => {
-        if ("requestIdleCallback" in window) {
-          (window as Window & {
-            requestIdleCallback?: (
-              callback: IdleRequestCallback,
-              options?: IdleRequestOptions,
-            ) => number;
-          }).requestIdleCallback?.(() => shuffle(), { timeout: 320 });
-          return;
-        }
-
-        window.setTimeout(() => {
-          shuffle();
-        }, 120);
-      };
-
-      deferShuffle();
+      if ("requestIdleCallback" in window) {
+        (window as Window & { requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number }).requestIdleCallback?.(
+          () => shuffle(),
+          { timeout: 250 },
+        );
+      } else {
+        window.setTimeout(shuffle, 120);
+      }
     };
 
     const boot = () => {
