@@ -1,9 +1,10 @@
 // src/scripts/tarot-services.ts
 // Tarot services interactions (desktop drag + modal, mobile carousel details)
-// Refined mobile gesture handling:
-// - robust separation between tap and swipe
-// - safer pointer lifecycle
-// - compatible with article[role="button"] for mobile cards
+// Final version:
+// - desktop keeps drag + modal
+// - mobile separates tap and swipe cleanly
+// - no preventDefault on click
+// - first mobile detail activation waits one frame
 
 type TarotData = {
   key?: string;
@@ -89,7 +90,6 @@ declare global {
 
     // ===== MOBILE =====
     const mobileRoot = document.getElementById("tarotMobile");
-    const mobileCarousel = document.getElementById("tarotCarousel");
     const detailKicker = document.getElementById("tarotDetailKicker");
     const detailTitle = document.getElementById("tarotDetailTitle");
     const detailArchetype = document.getElementById("tarotDetailArchetype");
@@ -123,7 +123,7 @@ declare global {
     };
 
     const initMobile = () => {
-      if (!mobileRoot || !mobileCarousel) return;
+      if (!mobileRoot) return;
 
       const slides = Array.from(
         mobileRoot.querySelectorAll<HTMLElement>(".tarot-slide"),
@@ -150,7 +150,6 @@ declare global {
           "pointerdown",
           (e: Event) => {
             const pe = e as PointerEvent;
-
             pointerId = pe.pointerId;
             startX = pe.clientX;
             startY = pe.clientY;
@@ -199,9 +198,8 @@ declare global {
         on(
           slide,
           "click",
-          (e: Event) => {
+          () => {
             if (moved) {
-              e.preventDefault();
               resetGesture();
               return;
             }
@@ -209,7 +207,7 @@ declare global {
             setDetailFromBtn(slide);
             resetGesture();
           },
-          false,
+          { passive: true },
         );
 
         on(slide, "keydown", (e: Event) => {
@@ -221,7 +219,9 @@ declare global {
         });
       });
 
-      setDetailFromBtn(slides[0]);
+      requestAnimationFrame(() => {
+        setDetailFromBtn(slides[0]);
+      });
     };
 
     // ===== DESKTOP =====
