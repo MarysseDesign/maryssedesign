@@ -200,10 +200,8 @@ declare global {
           slide,
           "click",
           (e: Event) => {
-            // FIX: rimosso e.preventDefault() — non era necessario sul click
-            // (il click non causa scroll) ma impediva al browser di ottimizzare
-            // il touch pipeline, bloccando lo scroll su Safari/Chrome mobile.
             if (moved) {
+              e.preventDefault();
               resetGesture();
               return;
             }
@@ -211,7 +209,7 @@ declare global {
             setDetailFromBtn(slide);
             resetGesture();
           },
-          { passive: true }, // FIX: passive: true sblocca il thread di scroll
+          false,
         );
 
         on(slide, "keydown", (e: Event) => {
@@ -223,13 +221,7 @@ declare global {
         });
       });
 
-      // FIX: requestAnimationFrame assicura che il layout del carousel
-      // sia settled prima di attivare la prima carta. Senza questo,
-      // su Safari iOS il primo render non era ancora completato e
-      // l'utente doveva toccare la seconda carta per sbloccare l'interazione.
-      requestAnimationFrame(() => {
-        setDetailFromBtn(slides[0]);
-      });
+      setDetailFromBtn(slides[0]);
     };
 
     // ===== DESKTOP =====

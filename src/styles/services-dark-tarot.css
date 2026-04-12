@@ -94,9 +94,7 @@ body {
   inset: -60px;
   background-repeat: repeat;
   transform-origin: 50% 50%;
-  /* FIX: drop-shadow rimosso — su elementi con background-repeat animato
-     causava ricalcolo del filtro ad ogni frame, contribuendo al jank
-     sul primo scroll. L'effetto era visivamente impercettibile. */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.18));
 }
 
 .stars--far {
@@ -180,17 +178,6 @@ body {
   }
   70% {
     opacity: 0.45;
-  }
-}
-
-/* FIX: keyframe stars-drift mancante — le classi .stars--far/mid/near
-   referenziavano questa animazione senza definirla nel file. */
-@keyframes stars-drift {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-60px);
   }
 }
 
@@ -498,9 +485,7 @@ body {
     box-shadow 0.25s ease,
     border-color 0.25s ease,
     transform 0.25s ease;
-  /* FIX: will-change rimosso dalla regola statica — left/top non sono
-     compositable e forzavano 10 layer GPU permanenti che bloccavano
-     il primo scroll. Viene aggiunto solo durante il drag attivo. */
+  will-change: left, top, transform;
 }
 
 .tarot-card:hover {
@@ -512,7 +497,7 @@ body {
 .tarot-card.is-dragging {
   cursor: grabbing;
   transition: none;
-  will-change: transform; /* solo durante il drag attivo — corretto */
+  will-change: transform;
 }
 
 .tarot-card__img {
@@ -599,11 +584,7 @@ body {
     scrollbar-width: none;
     overscroll-behavior-inline: contain;
     overscroll-behavior-block: auto;
-    /* FIX: pan-x pan-y lasciava al browser ambiguità sullo swipe verticale
-       quando i figli avevano touch-action: auto. Usando pan-x si dichiara
-       esplicitamente che lo scroll orizzontale è gestito dal carousel,
-       e il browser può ottimizzare il vertical scroll della pagina. */
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     align-items: stretch;
   }
 
@@ -625,10 +606,7 @@ body {
     padding: 0;
     text-align: left;
     cursor: pointer;
-    /* FIX: touch-action: pan-x ereditato dal carousel — rimuoviamo
-       "auto" che su webkit override-ava il parent e causava il blocco
-       dello scroll verticale della pagina al primo touch. */
-    touch-action: pan-x;
+    touch-action: auto;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
@@ -1057,7 +1035,7 @@ body[data-footer-variant="minimal"] main {
   text-align: center;
   position: relative;
   content-visibility: auto;
-  contain-intrinsic-size: auto 280px;
+  contain-intrinsic-size: 280px;
 }
 
 .tarot-foundation::before {
@@ -1150,9 +1128,7 @@ body[data-footer-variant="minimal"] main {
   position: relative;
   z-index: 1;
   content-visibility: auto;
-  /* FIX: aggiunto prefisso "auto" — il browser ricorda l'altezza reale
-     dopo il primo render, eliminando il layout shift durante lo scroll. */
-  contain-intrinsic-size: auto 900px;
+  contain-intrinsic-size: 900px;
 }
 
 .md-home-wrap {
@@ -1273,7 +1249,7 @@ body[data-footer-variant="minimal"] main {
   position: relative;
   padding: 34px 0 100px;
   content-visibility: auto;
-  contain-intrinsic-size: auto 1000px;
+  contain-intrinsic-size: 1000px;
 }
 
 .md-work-grid {
@@ -1408,7 +1384,7 @@ body[data-footer-variant="minimal"] main {
 .md-bottom-cta {
   padding: 10px 0 54px;
   content-visibility: auto;
-  contain-intrinsic-size: auto 420px;
+  contain-intrinsic-size: 420px;
 }
 
 .md-bottom-cta__inner {
