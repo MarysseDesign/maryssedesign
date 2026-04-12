@@ -242,8 +242,6 @@ const selectedWorks = [
           {tarotServices.map((s, i) => (
             <article
               class="tarot-slide"
-              tabindex="0"
-              role="button"
               data-key={s.key}
               data-number={s.number}
               data-title={s.title}
@@ -251,7 +249,7 @@ const selectedWorks = [
               data-archetype={s.archetype}
               data-img={s.img}
               data-desc={s.desc}
-              aria-label={`${s.title} — show details`}
+              aria-label={`${s.title} card`}
             >
               <div class="tarot-slide__img">
                 <img

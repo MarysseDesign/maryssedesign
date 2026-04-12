@@ -443,7 +443,6 @@ body {
    ========================================================= */
 .tarot-stage-wrap {
   position: relative;
-  contain: layout paint style;
   z-index: 6;
   width: 100%;
   margin-top: 0;
@@ -577,13 +576,13 @@ body {
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 8px 16px 12px;
+    padding: 8px 16px 16px;
     scroll-snap-type: x proximity;
     scroll-padding-inline: 16px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    overscroll-behavior-inline: contain;
-    overscroll-behavior-block: auto;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
     align-items: stretch;
   }
 
@@ -594,7 +593,6 @@ body {
   .tarot-slide {
     display: block;
     scroll-snap-align: center;
-    scroll-snap-stop: normal;
     max-width: 300px;
     border-radius: 22px;
     overflow: hidden;
@@ -604,8 +602,9 @@ body {
     -webkit-backdrop-filter: blur(5px);
     padding: 0;
     text-align: left;
-    cursor: pointer;
+    cursor: grab;
     -webkit-tap-highlight-color: transparent;
+    pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
     box-shadow: none !important;
