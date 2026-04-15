@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "silvian-heach"
+
 ordine: 7
 titolo: "Silvian Heach Showcases"
 cliente: "Silvian Heach"

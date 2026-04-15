@@ -91,6 +91,13 @@
   .project-page.template-brand-ecosystem .row-center {
     padding-bottom: 0px !important;
   }
+
+  .project-page.template-crop-video .stretto {
+    padding-left: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ✅ IMPORTANT: niente padding-bottom “globale” qui.

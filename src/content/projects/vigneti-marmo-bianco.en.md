@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "vigneti-marmo-bianco"
+
 ordine: 6
 titolo: "Vigneti Marmo Bianco"
 cliente: "Vigneti Marmo Bianco"

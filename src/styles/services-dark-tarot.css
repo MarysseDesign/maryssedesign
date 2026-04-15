@@ -576,14 +576,13 @@ body {
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 8px 16px 12px;
+    padding: 8px 16px 16px;
     scroll-snap-type: x proximity;
     scroll-padding-inline: 16px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    overscroll-behavior-inline: auto;
-    overscroll-behavior-block: auto;
-    touch-action: auto;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
     align-items: stretch;
   }
 
@@ -594,7 +593,6 @@ body {
   .tarot-slide {
     display: block;
     scroll-snap-align: center;
-    scroll-snap-stop: normal;
     max-width: 300px;
     border-radius: 22px;
     overflow: hidden;
@@ -604,9 +602,9 @@ body {
     -webkit-backdrop-filter: blur(5px);
     padding: 0;
     text-align: left;
-    cursor: pointer;
-    touch-action: auto;
+    cursor: grab;
     -webkit-tap-highlight-color: transparent;
+    pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
     box-shadow: none !important;
@@ -629,7 +627,6 @@ body {
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     position: relative;
-    pointer-events: none;
   }
 
   .tarot-slide__card-meta {
@@ -675,12 +672,10 @@ body {
     object-fit: cover;
     user-select: none;
     -webkit-user-drag: none;
-    pointer-events: none;
   }
 
   .tarot-slide__meta {
     padding: 12px 12px 14px;
-    pointer-events: none;
   }
 
   .tarot-slide__kicker {

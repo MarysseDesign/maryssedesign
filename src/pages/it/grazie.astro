@@ -1,0 +1,181 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout 
+  brand="marysse" 
+  title="Messaggio ricevuto · Marysse Design" 
+  footerVariant="minimal"
+>
+  <!-- SEO -->
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <div class="contact-page">
+    <section class="contact-hero" aria-label="Messaggio ricevuto">
+      <div class="site-container contact-inner">
+        
+        <!-- Head -->
+        <header class="contact-head reveal" style="--delay: 80ms">
+          <p class="contact-kicker">Messaggio ricevuto</p>
+          <h1 class="contact-title">Grazie.</h1>
+          <p class="contact-lead">
+            Il tuo messaggio è stato ricevuto correttamente.
+            Se in linea con il progetto, riceverai un riscontro con i prossimi step.
+          </p>
+        </header>
+
+        <!-- Panel -->
+        <div class="contact-panel reveal" style="--delay: 140ms">
+          <div class="contact-actions">
+            <a class="cta-dark" href="/progetti/">Scopri i progetti</a>
+            <a class="cta-stroke" href="/servizi/">Esplora i servizi</a>
+          </div>
+
+          <p class="contact-note">
+            Se la tua richiesta è urgente, puoi scrivere anche a
+            <a class="contact-link" href="mailto:info@maryssedesign.com">
+              info@maryssedesign.com
+            </a>.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Reveal animation -->
+    <script is:inline>
+      (() => {
+        const els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window) || !els.length) {
+          els.forEach(el => el.classList.add("is-inview"));
+          return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-inview");
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.14 });
+
+        els.forEach(el => io.observe(el));
+      })();
+    </script>
+
+    <!-- Styles -->
+    <style is:global>
+      .contact-page {
+        background: #fff;
+      }
+
+      .contact-hero {
+        padding: clamp(64px, 8vw, 110px) 0;
+        text-align: center;
+      }
+
+      .contact-inner {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      .contact-kicker {
+        margin: 0 0 12px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(25, 17, 24, 0.62);
+      }
+
+      .contact-title {
+        margin: 0;
+        font-family: "Noto Serif Display", serif;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        line-height: 1.04;
+        font-size: clamp(40px, 6vw, 72px);
+        color: var(--ink);
+      }
+
+      .contact-lead {
+        margin: 14px auto 0;
+        font-size: 16px;
+        line-height: 1.9;
+        font-weight: 300;
+        color: rgba(25, 17, 24, 0.82);
+        max-width: 66ch;
+      }
+
+      .contact-panel {
+        margin: clamp(22px, 3vw, 30px) auto 0;
+        max-width: 720px;
+        border: 1px solid rgba(25, 17, 24, 0.12);
+        border-radius: 44px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 14px 40px rgba(25, 17, 24, 0.08);
+        padding: clamp(18px, 2.6vw, 26px);
+      }
+
+      .contact-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-stroke {
+        display: inline-block;
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        background: rgba(255, 255, 255, 0.85);
+        color: rgba(25, 17, 24, 0.78);
+        border: 1px solid rgba(25, 17, 24, 0.16);
+        transition: all 220ms ease;
+        text-decoration: none;
+      }
+
+      .cta-stroke:hover {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+        transform: translateY(-1px);
+      }
+
+      .contact-note {
+        margin: 14px 0 0;
+        font-size: 13.5px;
+        line-height: 1.85;
+        font-weight: 300;
+        color: rgba(25, 17, 24, 0.72);
+      }
+
+      .contact-link {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 400;
+      }
+
+      .contact-link:hover {
+        color: var(--ink);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 500ms ease, transform 500ms ease;
+        transition-delay: var(--delay, 0ms);
+      }
+
+      .reveal.is-inview {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </div>
+</BaseLayout>

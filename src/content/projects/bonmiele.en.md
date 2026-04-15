@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "bonmiele"
+
 ordine: 12
 titolo: "Bonmiele"
 cliente: "Bonmiele"

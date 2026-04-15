@@ -1,5 +1,12 @@
 ---
-const { GA_ID = "" } = Astro.props;
+import { useTranslations } from "@/lib/useTranslations";
+
+const { GA_ID = "", lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+const isIt = lang === "it";
+
+const cookieHref = isIt ? "/it/cookie-policy" : "/cookie-policy";
+const privacyHref = isIt ? "/it/privacy" : "/privacy";
 ---
 
 <style is:global>
@@ -8,7 +15,6 @@ const { GA_ID = "" } = Astro.props;
   }
 </style>
 
-<!-- Badge -->
 <div id="cookie-badge" class="fixed bottom-4 right-4 z-[60] select-none">
   <button
     type="button"
@@ -16,22 +22,24 @@ const { GA_ID = "" } = Astro.props;
     aria-controls="cookie-panel"
     aria-expanded="false"
   >
-    🍪 Cookies
+    🍪 {t.cookies.badge}
   </button>
 </div>
 
-<!-- Panel -->
 <div
   id="cookie-panel"
   class="hidden fixed bottom-4 right-4 z-[70] w-[min(92vw,520px)] rounded-2xl border border-gray-200 bg-white shadow-cookie"
 >
   <div class="p-5 md:p-6">
-    <h3 class="font-semibold text-sm mb-1">Cookies &amp; Privacy</h3>
+    <h3 class="font-semibold text-sm mb-1">{t.cookies.title}</h3>
 
     <p class="text-[12px] leading-relaxed text-gray-700">
-      We use cookies to improve your experience and understand how the site is used.
-      Learn more in our <a href="/cookie-policy" class="underline">Cookie Policy</a> and
-      <a href="/privacy" class="underline">Privacy Policy</a>.
+      {t.cookies.text} {t.cookies.learnMore}
+      <a href={cookieHref} class="underline">Cookie Policy</a>
+      {" "}
+      {t.cookies.learnMoreConnector}
+      {" "}
+      <a href={privacyHref} class="underline">Privacy Policy</a>.
     </p>
 
     <div class="mt-4 flex items-center gap-2 flex-wrap">
@@ -40,7 +48,7 @@ const { GA_ID = "" } = Astro.props;
         type="button"
         class="px-4 py-2 rounded-full bg-gray-900 text-white text-[12px] uppercase tracking-[.15em]"
       >
-        Accept
+        {t.cookies.accept}
       </button>
 
       <button
@@ -48,7 +56,7 @@ const { GA_ID = "" } = Astro.props;
         type="button"
         class="px-4 py-2 rounded-full border border-gray-300 text-[12px] uppercase tracking-[.15em] hover:bg-gray-50"
       >
-        Decline
+        {t.cookies.decline}
       </button>
 
       <button
@@ -56,7 +64,7 @@ const { GA_ID = "" } = Astro.props;
         type="button"
         class="ml-auto px-3 py-2 text-[12px] text-gray-500 hover:text-gray-700"
       >
-        Close
+        {t.cookies.close}
       </button>
     </div>
   </div>
@@ -117,9 +125,7 @@ const { GA_ID = "" } = Astro.props;
     }
 
     const st = getState();
-    if (st?.status === "accepted") {
-      loadGA();
-    }
+    if (st?.status === "accepted") loadGA();
 
     badgeBtn?.addEventListener("click", openPanel);
     btnClose?.addEventListener("click", closePanel);

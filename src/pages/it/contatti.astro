@@ -1,0 +1,433 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const FORM_ACTION = "https://formspree.io/f/mlgwpkgl";
+const DIRECT_EMAIL = "info@maryssedesign.com";
+
+const focusOptions = [
+  "Branding",
+  "Creative Direction",
+  "Advertising",
+  "Storytelling",
+  "Web Design",
+  "Social Media",
+  "Visual System",
+  "Photography",
+  "Video",
+  "Experiential",
+  "Curatorial support",
+];
+
+const timingOptions = ["Ora", "Da 2 a 4 settimane", "Da 1 a 3 mesi", "Oltre 3 mesi"];
+
+const budgetOptions = ["Sotto 3k", "3k – 8k", "8k – 15k", "Oltre 15k", "Preferisco non indicarlo"];
+---
+
+<BaseLayout brand="marysse" title="Contatti · Marysse Design">
+  <main class="contact-page">
+    <section class="contact-section contact-hero" aria-label="Contatti">
+      <div class="site-container contact-inner">
+        <header class="contact-head reveal" style="--delay: 80ms">
+          <p class="contact-kicker">Contatti</p>
+         <h1 class="contact-title">Iniziamo da qui.</h1>
+<p class="contact-lead">
+  Un primo scambio per capire il progetto e valutare se siamo il match giusto.<br/>
+</p>
+
+          <div class="contact-actions">
+            <a href="#enquiry" class="cta-dark">AVVIA UNA RICHIESTA</a>
+          </div></header><br />
+            <p>O se preferisci, scrivi direttamente a:
+  <a class="inline-link underline" href={`mailto:${DIRECT_EMAIL}`}>{DIRECT_EMAIL}</a>
+</p>
+        </header>
+      </div>
+    </section>
+
+    <section class="contact-section contact-formSection" aria-label="Richiesta progetto">
+      <div class="site-container contact-inner">
+        <div class="contact-card reveal" style="--delay: 140ms" id="enquiry">
+          <header class="contact-cardHead">
+            <p class="contact-miniKicker">Richiesta progetto</p>
+            <h2 class="contact-cardTitle">Poche domande. Massima chiarezza.</h2>
+            <p class="contact-cardLead">
+              Condividi solo ciò che conta. I link sono benvenuti. Non è necessario un brief completo.
+            </p>
+          </header>
+
+          <form
+            class="contact-form"
+            action={FORM_ACTION}
+            method="POST"
+            accept-charset="UTF-8"
+          >
+            <input
+              type="text"
+              name="_gotcha"
+              style="display:none"
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            <input type="hidden" name="_subject" value="Richiesta progetto | Marysse Design" />
+            <input type="hidden" name="_next" value="https://maryssedesign.com/it/grazie" />
+
+            <div class="field-row">
+              <label class="field">
+                <span>Nome</span>
+                <input name="name" type="text" autoComplete="name" placeholder="Il tuo nome" required />
+              </label>
+
+              <label class="field">
+                <span>Email</span>
+                <input name="email" type="email" autoComplete="email" placeholder="you@email.com" required />
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Brand</span>
+                <input name="brand" type="text" autoComplete="organization" placeholder="Brand o azienda" />
+              </label>
+
+              <label class="field">
+                <span>Focus principale</span>
+                <select name="focus" required>
+                  <option value="" disabled selected>Seleziona</option>
+                  {focusOptions.map((o) => (
+                    <option value={o}>{o}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Tempistiche</span>
+                <select name="timing" required>
+                  <option value="" disabled selected>Seleziona</option>
+                  {timingOptions.map((o) => (
+                    <option value={o}>{o}</option>
+                  ))}
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Budget indicativo</span>
+                <select name="budget" required>
+                  <option value="" disabled selected>Seleziona</option>
+                  {budgetOptions.map((o) => (
+                    <option value={o}>{o}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Messaggio</span>
+              <textarea
+                name="message"
+                rows="6"
+                required
+                placeholder="Cosa stai costruendo e quale obiettivo deve raggiungere? Inserisci eventuali link se rilevanti."
+              ></textarea>
+            </label>
+
+            <label class="field">
+              <span>Link</span>
+              <input name="links" type="text" placeholder="Sito, presentazione, reference, Instagram, cartella" />
+            </label>
+
+            <label class="privacy-consent">
+              <input type="checkbox" name="privacy_consent" required />
+              <span>
+                Ho letto e accetto la{" "}
+                <a href="/privacy" class="underline">Privacy Policy</a>.
+              </span>
+            </label>
+
+            <div class="form-foot">
+              <button class="cta-dark" type="submit">INVIA RICHIESTA</button>
+              <p class="contact-note">
+                Preferisci scrivere direttamente?{" "}
+                <a class="contact-link" href={`mailto:${DIRECT_EMAIL}`}>{DIRECT_EMAIL}</a>.
+              </p>
+            </div>
+
+            <p class="contact-footnote">
+              Questo form è volutamente essenziale. Se il progetto è in linea, riceverai un riscontro con i prossimi step.
+            </p>
+          </form>
+        </div>
+
+        <div class="contact-fit reveal" style="--delay: 200ms">
+          <p class="contact-miniKicker">Progetti ideali</p>
+          <div class="pill-grid">
+            <span class="pill">Posizionamento premium e luxury</span>
+            <span class="pill">Founder e team di brand</span>
+            <span class="pill">Lanci o evoluzioni di brand</span>
+            <span class="pill">Team attenti a dettaglio e coerenza</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const els = document.querySelectorAll(".reveal");
+    if (els.length) {
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("is-inview")),
+        { threshold: 0.14 }
+      );
+      els.forEach((el) => io.observe(el));
+    }
+  </script>
+
+  <style is:global>
+    .contact-page{
+      background:#fff;
+      --box-border-color: rgba(25, 17, 24, 0.12);
+      --box-border-width: 1px;
+    }
+    .contact-section{
+      position:relative;
+      padding: clamp(54px, 7vw, 92px) 0;
+      text-align:center;
+    }
+    .contact-hero{ padding-top: clamp(74px, 10vw, 122px); }
+    .contact-inner{ position:relative; }
+    .contact-kicker{
+      margin: 0 0 12px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(25, 17, 24, 0.62);
+    }
+    .contact-title{
+      margin: 0;
+      font-family: "Noto Serif Display", serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.06;
+      font-size: clamp(34px, 4.8vw, 60px);
+      color: var(--ink);
+    }
+    .contact-lead{
+      margin: 14px auto 0;
+      font-size: 16px;
+      line-height: 1.85;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.82);
+      max-width: 72ch;
+    }
+    .contact-actions{
+      margin-top: 22px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .cta-dark{
+      display:inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      text-decoration:none;
+      background: var(--ink, #191118);
+      color: #fff;
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+    .cta-dark:hover{ transform: translateY(-1px); opacity: 0.92; }
+
+    .contact-formSection{ padding-top: 0; text-align:left; }
+    .contact-card{
+      max-width: 980px;
+      margin: 0 auto;
+      border: var(--box-border-width) solid var(--box-border-color);
+      border-radius: 46px;
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 14px 40px rgba(25, 17, 24, 0.08);
+      overflow:hidden;
+      padding: clamp(18px, 2.2vw, 28px);
+    }
+    .contact-cardHead{
+      text-align:left;
+      margin-bottom: 14px;
+    }
+    .contact-miniKicker{
+      margin:0 0 10px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(25, 17, 24, 0.62);
+    }
+    .contact-cardTitle{
+      margin:0;
+      font-family:"Noto Serif Display", serif;
+      font-weight:300;
+      letter-spacing:-0.02em;
+      font-size: clamp(22px, 2.6vw, 34px);
+      line-height:1.12;
+      color: var(--ink);
+    }
+    .contact-cardLead{
+      margin:10px 0 0;
+      font-size: 14.5px;
+      line-height: 1.85;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.78);
+      max-width: 70ch;
+    }
+    .contact-form{
+      display:grid;
+      gap: 12px;
+    }
+    .field-row{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 760px){
+      .field-row{ grid-template-columns: 1fr 1fr; }
+    }
+    .field{
+      display:grid;
+      gap: 7px;
+    }
+    .field span{
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(25, 17, 24, 0.62);
+    }
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      border-radius: 18px;
+      border: 1px solid rgba(25, 17, 24, 0.14);
+      background: rgba(255,255,255,0.9);
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.86);
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .field select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 42px;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23191118' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 12px;
+    }
+
+    .field textarea{ resize: vertical; min-height: 140px; }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color: rgba(25, 17, 24, 0.32);
+      box-shadow: 0 0 0 4px rgba(25, 17, 24, 0.06);
+    }
+
+    .privacy-consent{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(25, 17, 24, 0.12);
+      background: rgba(255,255,255,0.75);
+    }
+    .privacy-consent input{
+      margin-top: 3px;
+      accent-color: rgba(25, 17, 24, 0.88);
+    }
+    .privacy-consent span{
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.68);
+    }
+
+    .form-foot{
+      margin-top: 4px;
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .form-foot .cta-dark{
+      border: 0;
+      cursor: pointer;
+    }
+    .contact-link{
+      color: rgba(25, 17, 24, 0.88);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(25, 17, 24, 0.22);
+    }
+    .contact-link:hover{ border-bottom-color: rgba(25, 17, 24, 0.55); }
+    .contact-note{
+      margin:0;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.62);
+    }
+    .contact-footnote{
+      margin: 10px 0 0;
+      font-size: 12.5px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(25, 17, 24, 0.58);
+    }
+    .contact-fit{
+      max-width: 980px;
+      margin: 14px auto 0;
+      border: var(--box-border-width) solid var(--box-border-color);
+      border-radius: 46px;
+      background: rgba(255,255,255,0.62);
+      padding: 18px;
+      text-align:left;
+    }
+    .pill-grid{
+      margin-top: 10px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    @media (min-width: 520px){
+      .pill-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    .pill{
+      display:block;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(25, 17, 24, 0.12);
+      background: rgba(255, 255, 255, 0.6);
+      font-size: 12.5px;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      text-align: center;
+      color: rgba(25, 17, 24, 0.78);
+    }
+
+    .reveal{ transition-delay: var(--delay, 0ms); }
+    @media (max-width: 640px){
+      .contact-section{ padding: 52px 0; }
+      .contact-title{ font-size: clamp(30px, 9.4vw, 44px); line-height: 1.08; }
+      .contact-card, .contact-fit{ border-radius: 40px; }
+    }
+  </style>
+</BaseLayout>

@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "gorillas-urban-activation"
+
 ordine: 9
 titolo: "Gorillas · Urban Activation"
 cliente: "Gorillas / Dude Milano"

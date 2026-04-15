@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "armani-rinascente"
+
 ordine: 1
 titolo: "Armani In the Spotlight"
 cliente: "Armani Beauty · Rinascente Milano"
@@ -85,7 +88,7 @@ Each guest completed a short, guided journey: booking → makeup session → pro
 ## The Role of<br class="show-mobile" /> Marysse Studio
 
 Marysse Studio was responsible for the design and execution of the digital backbone of the activation, <br class="hide-mobile" />ensuring a smooth and consistent output under real-time constraints.<br/>
-Live retouching was carried out on-site using a dedicated workflow (Portrait Pro),<br class="show-mobile" /> with each portrait then composed as<br class="show-mobile" /> a fashion magazine cover.<br class="hide-mobile" />
+Live retouching was carried out on-site using a dedicated workflow,<br class="show-mobile" /> with each portrait then composed as<br class="show-mobile" /> a fashion magazine cover.<br class="hide-mobile" />
 The main challenge was speed without compromising visual quality.<br class="hide-mobile" />
 Each portrait had to be retouched, exported and delivered within minutes, while maintaining a premium editorial finish.
 

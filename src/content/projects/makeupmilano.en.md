@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "makeupmilano"
+
 ordine: 11
 titolo: "Make-Up Milano"
 cliente: "Make-Up Milano S.r.l."

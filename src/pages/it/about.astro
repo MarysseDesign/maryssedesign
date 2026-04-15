@@ -11,13 +11,17 @@ const iconImages = {
 };
 ---
 
-<BaseLayout brand="marysse" title="About · Marysse Design" noMainBottomPadding={true} footerVariant="minimal">
+<BaseLayout 
+brand="marysse" 
+title="About · Marysse Design" 
+description="Scopri l’approccio di Marysse Design: una direzione creativa indipendente che costruisce identità, immagini e sistemi di brand per posizionamenti premium e luxury."
+noMainBottomPadding={true} 
+footerVariant="minimal">
   <head slot="head">
     <link rel="preload" as="image" href={HERO_IMG_DESKTOP} />
     <link rel="preload" as="image" href={HERO_IMG_MOBILE} media="(max-width: 768px)" />
   </head>
 
-  <!-- HERO -->
   <section class="relative h-screen w-full overflow-hidden -mt-20">
     <picture class="absolute inset-0">
       <source srcset={HERO_IMG_MOBILE} media="(max-width: 768px)" />
@@ -34,27 +38,34 @@ const iconImages = {
 
     <div class="hero-inner relative z-20 flex h-full items-center">
       <div class="site-container pb-14 md:pb-16">
-        <div class="hero-copy max-w-xl text-white">
-          <h1 class="hero-title text-5xl md:text-7xl">
-            Ready to shape<br />your vision.
-          </h1>
+     <div class="hero-copy max-w-xl text-white">
+ <h1 class="hero-title text-5xl md:text-7xl">
+  <span class="hero-desktop-copy">La boutique agency <br />per brand memorabili.</span>
+  <span class="hero-mobile-copy">Per brand memorabili.</span>
+</h1>
 
-          <p class="about-leadwhite opacity-100">
-            Thoughtful brand architecture and <br class="show-mobile" /> refined identity for modern brands.
-            <br />
-            Some visions need to be shaped.<br class="show-mobile" />
-            Others need to be read. <br class="hide-mobile" />
-            Each one requires a precise eye, and a single direction.
-          </p>
+<p class="about-leadwhite opacity-100">
+  <span class="hero-desktop-copy">
+    Marysse Design affianca brand e realtà imprenditoriali nella costruzione di un’immagine chiara, coerente e distintiva.
+    <br />
+    Dall’identità visiva alla presenza digitale, ogni progetto nasce per valorizzare ciò che rende un brand riconoscibile, credibile e desiderabile.
+  </span>
 
-          <div class="mt-10 hero-cta flex flex-wrap gap-3">
-            <a href="/services/" class="cta-light">DISCOVER HOW</a>
-          </div>
-        </div>
+  <span class="hero-mobile-copy">
+    Diamo forma a brand e realtà imprenditoriali, costruendo un’immagine chiara, <br class="show-mobile" />coerente e distintiva.
+  </span>
+</p>
+
+  <div class="mt-10 hero-cta flex flex-wrap gap-3">
+    <a href="/it/servizi/" class="cta-light">
+      <span class="hero-desktop-copy">SCOPRI IL METODO</span>
+      <span class="hero-mobile-copy">SCOPRI COME</span>
+    </a>
+  </div>
+</div>
       </div>
     </div>
 
-    <!-- MARQUEE -->
     <div class="absolute inset-x-0 bottom-0 z-30 h-11 md:h-14">
       <div class="marquee-overlay"></div>
       <div class="relative h-full w-full overflow-hidden leading-none flex items-center">
@@ -85,30 +96,28 @@ const iconImages = {
     </div>
   </section>
 
-  <!-- ABOUT -->
   <div class="about-page">
-    <!-- INTRO -->
-    <section class="about-section about-light" aria-label="About overview">
+    <section class="about-section about-light" aria-label="Panoramica su Marysse Design">
       <div class="site-container about-inner">
         <div class="about-top">
           <div class="reveal" style="--delay: 80ms">
-            <p class="about-kicker">About Marysse Design</p>
+            <p class="about-kicker">About Marysse Design<br class="show-mobile" /><br class="show-mobile" /></p>
+            
             <h2 class="about-title">
-              A Boutique Studio <br class="hide-mobile" />for Brand Architecture.
-            </h2>
+  Uno studio boutique per costruire <br class="hide-mobile" /> brand solidi, distintivi e ben posizionati.<br class="show-mobile" /><br class="show-mobile" />
+</h2>
             <br class="hide-mobile" />
-            <p class="about-lead">
-              Marysse Design is an independent creative studio founded and directed by <br class="show-mobile" />Maria Assunta Zangone.<br class="show-mobile" />
-              <br/>
-              It operates as a focused creative direction, shaping brand identity, campaigns
-              <br class="hide-mobile" />
-              and digital experiences for premium and luxury positioning.
-              Each project is guided by <br class="show-mobile" />a singular vision, where strategy defines structure and aesthetic choices <br class="show-mobile" />are never arbitrary.
-            </p>
+           <p class="about-lead">
+  Marysse Design è uno studio creativo indipendente fondato e diretto da <br class="show-mobile" />Maria Assunta Zangone.
+  <br /><br class="show-mobile" />
+  Si occupa di identità di marca, direzione creativa, campagne ed <br class="hide-mobile" />esperienze digitali per<br class="show-mobile" /> brand premium e luxury.
+  <br class="hide-mobile" /><br/>
+  Ogni progetto nasce da una visione chiara: <br class="hide-mobile" />dare al brand una presenza riconoscibile, coerente e di valore.
+</p>
 
-            <p class="about-lead">
-              Every brand is approached as a system, shaped through three fundamental layers.
-            </p>
+<p class="about-lead">
+  Il lavoro si sviluppa attraverso <br class="show-mobile" />tre aree principali: <br class="show-mobile" />posizionamento, identità ed esperienza.
+</p>
           </div>
         </div>
 
@@ -119,16 +128,17 @@ const iconImages = {
             </figure>
 
             <div class="tarot-content">
-              <h3>Positioning</h3>
-              <p>
-                We define what a brand stands for and <br class="hide-mobile" />
-                how it should be perceived, instantly and consistently.
-              </p>
+             <h3>Posizionamento</h3>
+<p>
+  Definiamo con chiarezza chi è il brand, <br class="hide-mobile" /> cosa lo distingue
+ 
+  e come deve essere  <br class="hide-mobile" />percepito dal suo pubblico.
+</p>
 
               <div class="tarot-items">
-                <span class="tarot-item">Brand Strategy</span>
-                <span class="tarot-item">Voice and Tone</span>
-                <span class="tarot-item">Guiding Principles</span>
+                <span class="tarot-item">Strategia di Marca</span>
+                <span class="tarot-item">Tone of voice</span>
+                <span class="tarot-item">Principi Guida</span>
               </div>
             </div>
           </article>
@@ -139,16 +149,17 @@ const iconImages = {
             </figure>
 
             <div class="tarot-content">
-              <h3>Identity</h3>
-              <p>
-                We design structured systems that are coherent, <br class="hide-mobile" />
-                elegant and scalable. Every element is intentional.
-              </p>
+              <h3>Identità</h3>
+<p>
+  Costruiamo un’immagine visiva coerente, <br class="hide-mobile" />elegante e riconoscibile,
+  
+  capace di rappresentare il brand in ogni contesto.
+</p>
 
               <div class="tarot-items">
                 <span class="tarot-item">Art Direction</span>
-                <span class="tarot-item">Visual Identity</span>
-                <span class="tarot-item">Design Systems</span>
+                <span class="tarot-item">Identità Visiva</span>
+                <span class="tarot-item">Design System</span>
               </div>
             </div>
           </article>
@@ -159,13 +170,17 @@ const iconImages = {
             </figure>
 
             <div class="tarot-content">
-              <h3>Experiences</h3>
-              <p>We translate brand worlds into touchpoints that feel editorial, premium and aligned.</p>
+             <h3>Esperienze</h3>
+<p>
+  Portiamo il brand nei suoi spazi di relazione:
+  <br class="hide-mobile" />
+  sito, contenuti, campagne e  <br class="hide-mobile" />materiali di comunicazione.
+</p>
 
               <div class="tarot-items">
                 <span class="tarot-item">Web Design</span>
-                <span class="tarot-item">Campaigns</span>
-                <span class="tarot-item">Content Direction</span>
+                <span class="tarot-item">Campagne</span>
+                <span class="tarot-item">Direzione Contenuti</span>
               </div>
             </div>
           </article>
@@ -173,89 +188,94 @@ const iconImages = {
       </div>
     </section>
 
-    <!-- VISION -->
-    <section class="about-section about-veil" aria-label="Vision">
+    <section class="about-section about-veil" aria-label="Visione">
       <div class="site-container about-inner">
         <div class="about-grid">
           <header class="about-head reveal" style="--delay: 80ms">
-            <p class="about-kicker">Vision</p>
-            <h2 class="about-title">
-              We build brand worlds, guided by a <br class="show-mobile" /> precise and consistent vision.
-            </h2>
-            <p class="about-lead">
-              A premium brand is not the result of multiple directions, but of one clear point of view.
-
-              The goal is coherence across touchpoints, <br class="show-mobile" />
-              so the brand feels effortless, desirable,<br class="show-mobile" />
-              and unmistakably itself.
-            </p>
+            <p class="about-kicker">Visione</p>
+           <h2 class="about-title">
+  Un brand forte nasce da una visione chiara e coerente.
+</h2>
+            <p class="about-lead"><br class="show-mobile" />
+  Un brand premium non si costruisce sommando elementi scollegati,
+  ma mantenendo una direzione precisa nel tempo.
+  <br class="show-mobile" />
+  Il nostro lavoro è creare coerenza tra immagine, linguaggio e presenza digitale,
+  affinché il brand risulti naturale, autorevole e immediatamente riconoscibile.
+</p>
           </header>
 
           <div class="about-body">
             <div class="about-miniGrid">
               <div class="about-mini reveal" style="--delay: 140ms">
-                <h4>Clarity comes first</h4>
-                <p>
-                  Strategy is the backbone that makes <br class="hide-mobile" />
-                  everything feel inevitable.
-                </p>
+               <h4>Prima viene la chiarezza</h4>
+<p>
+  Ogni scelta funziona meglio quando <br class="hide-mobile" />il brand ha una direzione precisa
+  <br class="hide-mobile" />
+  e una struttura ben definita.
+</p>
               </div>
 
               <div class="about-mini2 reveal" style="--delay: 200ms">
-                <h4>Consistency defines perception</h4>
-                <p>
-                  One sensibility guides every output, from a <br class="hide-mobile" />
-                  landing page to a campaign frame.
-                </p>
+                <h4>La coerenza crea fiducia</h4>
+<p>
+  Quando tutto parla la stessa lingua, <br class="hide-mobile" />il brand appare più solido,
+  <br class="hide-mobile" />
+  credibile e memorabile.
+</p>
               </div>
 
               <div class="about-mini reveal" style="--delay: 260ms">
-                <h4>Timeless over trendy</h4>
-                <p>Restraint, precision and direction shape a visual language designed to endure.</p>
+               <h4>Lo stile deve durare</h4>
+<p>
+  L’eleganza non segue la moda del <br class="hide-mobile" />momento:
+  nasce da misura,<br class="hide-mobile" /> precisione e continuità.
+</p>
               </div>
             </div>
           </div>
 
           <p class="about-lead">
-            A strong brand grows when every detail speaks the same language. <br class="show-mobile" />
+  Un brand di valore cresce quando ogni dettaglio è coerente con la sua identità.
+<br class="show-mobile" />
           </p>
         </div>
       </div>
     </section>
 
-    <!-- METHOD / FIT -->
-    <section class="about-section about-light about-collab" aria-label="Method">
+    <section class="about-section about-light about-collab" aria-label="Metodo">
       <div class="site-container about-inner">
         <div class="about-grid">
           <header class="about-head reveal" style="--delay: 80ms">
-            <p class="about-kicker">Method</p>
-            <h2 class="about-title">Where detail leads.</h2>
-            <p class="about-lead">
-              The studio operates under a <br class="show-mobile" />single creative direction.<br class="hide-mobile" />
-              Each project is shaped through a curated structure, where collaborators and specialists are involved based on the brand’s needs, while the vision remains consistent and controlled.
-            </p>
+            <p class="about-kicker">Metodo</p>
+            <h2 class="about-title">Un metodo curato, flessibile e su misura.<br class="show-mobile" /><br class="show-mobile" /></h2>
+           <p class="about-lead">
+  Marysse Design lavora attraverso una direzione creativa unitaria.
+  <br class="hide-mobile" />
+  In base al progetto, vengono coinvolti collaboratori e specialisti selezionati,
+  mantenendo sempre una visione chiara, coerente e sotto controllo.
+</p>
           </header>
 
           <div class="about-body">
             <div class="about-miniGrid two">
               <div class="about-mini2 reveal" style="--delay: 140ms">
-                <h4>Studio structure</h4>
-                <p>
-                  A flexible, curated setup designed to adapt to the scale and nature of each brand.
-                  The structure evolves with the project, never the other way around.
-                </p>
+               <h4>Struttura dello studio</h4>
+<p>
+  Una realtà agile e ben organizzata, capace di adattarsi alle esigenze del brand
+  senza perdere qualità, attenzione e coerenza.
+</p>
               </div>
 
               <div class="about-mini reveal" style="--delay: 200ms">
-                <h4>One direction</h4>
-                <p>
-                  Every decision follows a single creative direction.
-                  The result is a coherent language, precise taste, and shared standards at every touchpoint.
-                </p>
+                <h4>Una sola direzione</h4>
+<p>
+  Ogni progetto segue una guida creativa precisa,
+  così che immagine, contenuti e presenza digitale risultino allineati.
+</p>
               </div>
             </div>
 
-            <!-- SIGNATURE -->
             <div class="about-signature reveal" style="--delay: 240ms">
               <div class="signature-inner">
                 <div class="signature-image">
@@ -263,23 +283,21 @@ const iconImages = {
                 </div>
 
                 <div class="signature-content">
-                  <p class="about-kicker">Signature</p>
+                  <p class="about-kicker">Firma</p>
 
                   <p class="about-lead">
-                    Marysse Design is built on a specific sensibility:
-                    a balance between structure and intuition,
-                    between editorial aesthetics and strategic clarity.
-                  </p>
+  Marysse Design nasce da una sensibilità che unisce visione estetica e chiarezza strategica.
+</p>
 
-                  <p class="about-lead">
-                    The direction is singular,
-                    shaping each project with precision and consistency.
-                  </p>
+<p class="about-lead">
+  Ogni progetto viene seguito con una direzione precisa,
+  per costruire brand coerenti, riconoscibili e ben posizionati.
+</p>
 
-                  <p class="about-lead">
-                    Every brand is treated as a whole system,
-                    where taste, coherence and intention are aligned from the start.
-                  </p>
+<p class="about-lead">
+  L’obiettivo è dare forma a sistemi di marca completi,
+  in cui immagine, linguaggio e presenza lavorano insieme in modo armonico.
+</p>
 
                   <p class="signature-caption">
                     Maria Assunta Zangone <br />
@@ -292,19 +310,19 @@ const iconImages = {
             <div class="about-split reveal" style="--delay: 260ms">
               <div>
                 <p class="about-kicker">Best fit</p>
-                <h3 class="about-subtitle">For brands that value meaning.</h3>
+                <h3 class="about-subtitle">Per brand che vogliono distinguersi con chiarezza e valore.</h3>
               </div>
               <ul class="about-list">
-                <li>Premium and luxury positioning</li>
-                <li>Founders and brand teams</li>
-                <li>New launches or brand evolutions</li>
-                <li>Teams who care about detail and coherence</li>
+                <li>Posizionamenti premium e luxury</li>
+                <li>Founder e team di brand</li>
+                <li>Nuovi lanci o evoluzioni di marca</li>
+                <li>Team attenti al dettaglio e alla coerenza</li>
               </ul>
             </div>
 
             <div class="about-actions reveal" style="--delay: 320ms">
-              <a href="/projects/" class="cta-dark">EXPLORE PROJECTS</a>
-              <a href="/marysszang/" class="cta-ghost-dark">ARTISTIC SIDE</a>
+              <a href="/it/progetti/" class="cta-dark">ESPLORA I PROGETTI</a>
+              <a href="/it/marysszang/" class="cta-ghost-dark">SCOPRI IL LATO ARTISTICO DI MARYSSE</a>
             </div>
           </div>
         </div>
@@ -313,10 +331,6 @@ const iconImages = {
   </div>
 
   <style is:global>
-    /* =========================================================
-       ABOUT ONLY
-       ========================================================= */
-
     .about-page {
       background: #fff;
       --box-border-color: #e5e7eb;
@@ -375,7 +389,6 @@ const iconImages = {
         linear-gradient(180deg, #fbfbfb 0%, #ffffff 100%);
     }
 
-    /* Typography */
     .about-kicker {
       margin: 0 0 12px;
       font-size: 11px;
@@ -423,7 +436,6 @@ const iconImages = {
       max-width: 70ch;
     }
 
-    /* Layout */
     .about-top {
       max-width: 1120px;
       margin: 0 auto;
@@ -444,7 +456,6 @@ const iconImages = {
       max-width: 980px;
     }
 
-    /* Cards grid */
     .about-cards {
       margin-top: 26px;
       display: grid;
@@ -455,7 +466,6 @@ const iconImages = {
       margin-right: auto;
     }
 
-    /* unified border */
     .about-card,
     .about-mini,
     .about-mini2,
@@ -463,7 +473,6 @@ const iconImages = {
       border: var(--box-border-width) solid var(--box-border-color);
     }
 
-    /* Tarot outer cards */
     .tarot-min {
       position: relative;
       border-radius: 42px;
@@ -561,7 +570,6 @@ const iconImages = {
       color: rgba(25, 17, 24, 0.78);
     }
 
-    /* Mini cards */
     .about-miniGrid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -612,7 +620,6 @@ const iconImages = {
       color: rgba(25, 17, 24, 0.78);
     }
 
-    /* Split */
     .about-split {
       margin-top: 18px;
       display: grid;
@@ -637,7 +644,6 @@ const iconImages = {
       text-align: center;
     }
 
-    /* Actions */
     .about-actions {
       margin-top: 18px;
       display: flex;
@@ -679,24 +685,13 @@ const iconImages = {
       display: none;
     }
 
-    /* =========================================
-       REVEAL SYSTEM
-       ========================================= */
-
-    /* fallback: se JS non parte, tutto resta visibile */
     .about-page .reveal {
       opacity: 1;
       transform: none;
     }
 
-    /* stato iniziale animabile */
     .about-page.reveal-ready .reveal {
       opacity: 0;
-      /* translateY invece di translate3d: evita il bug Safari/iOS
-         in cui opacity:0 + translate3d blocca il repaint GPU.
-         transition-delay NON e' dichiarato qui: viene applicato
-         via JavaScript dopo che reveal-ready e' attiva, cosi'
-         non c'e' race condition con le CSS custom properties su Safari. */
       transform: translateY(18px);
       transition:
         opacity 0.72s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -706,15 +701,12 @@ const iconImages = {
       backface-visibility: hidden;
     }
 
-    /* stato visibile */
     .about-page.reveal-ready .reveal.is-inview {
       opacity: 1;
       transform: translateY(0);
-      /* Reset del delay una volta rivelato */
       transition-delay: 0ms !important;
     }
 
-    /* Collaboration: center text vertically (desktop) */
     .about-collab .about-grid {
       align-items: stretch;
     }
@@ -731,7 +723,6 @@ const iconImages = {
       margin-right: auto;
     }
 
-    /* SIGNATURE */
     .about-signature {
       margin-top: 32px;
     }
@@ -764,7 +755,6 @@ const iconImages = {
       color: rgba(25, 17, 24, 0.6);
     }
 
-    /* Desktop / tablet */
     @media (min-width: 768px) {
       .show-mobile {
         display: none !important;
@@ -775,7 +765,6 @@ const iconImages = {
       }
     }
 
-    /* Responsive */
     @media (max-width: 980px) {
       .about-grid {
         grid-template-columns: 1fr;

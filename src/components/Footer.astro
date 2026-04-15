@@ -1,10 +1,19 @@
+---
+import { useTranslations } from "@/lib/useTranslations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+const isIt = lang === "it";
+
+const privacyHref = isIt ? "/it/privacy" : "/privacy";
+const cookiesHref = isIt ? "/it/cookie-policy" : "/cookie-policy";
+---
+
 <footer class="border-t border-black/20 mt-0 pt-2 md:pt-4 pb-10 md:pb-16 font-montserrat uppercase tracking-[2px] text-[#191118]">
   <div class="container mx-auto max-w-screen-xl text-center text-[9px] md:text-[10px]">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mt-7 md:gap-0 md:items-center">
-
-      <!-- Instagram (dual) -->
       <div class="space-y-3">
-        <h6 class="leading-relaxed opacity-60">Instagram</h6>
+        <h6 class="leading-relaxed opacity-60">{t.footer.instagram}</h6>
 
         <div class="space-y-2">
           <a
@@ -13,9 +22,8 @@
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 hover:opacity-70 transition-opacity"
           >
-            <span class="opacity-60">Brand Boutique</span>
+            <span class="opacity-60">{t.footer.brandBoutique}</span>
             <span class="underline underline-offset-4 decoration-black/20">@maryssedesign</span>
-          
           </a>
 
           <a
@@ -24,21 +32,16 @@
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 hover:opacity-70 transition-opacity"
           >
-            <span class="opacity-60">Artistic Side</span>
+            <span class="opacity-60">{t.footer.artisticSide}</span>
             <span class="underline underline-offset-4 decoration-black/20">@marysszang</span>
-           
           </a>
         </div>
       </div>
 
-      <!-- Location -->
       <div>
-        <h6 class="leading-relaxed">
-          working in <br/> milan, italy
-        </h6>
+        <h6 class="leading-relaxed" set:html={t.footer.location.replace('\n', '<br/>')} />
       </div>
 
-      <!-- Email / Phone -->
       <div>
         <h6 class="leading-relaxed">
           <a
@@ -47,22 +50,21 @@
           >
             info@maryssedesign.com
           </a>
-          <br/>
+          <br />
           + 39 346 6600169
         </h6>
       </div>
 
-      <!-- Elsewhere (optional, soft) -->
       <div class="space-y-3">
-        <h6 class="leading-relaxed opacity-60">Elsewhere</h6>
+        <h6 class="leading-relaxed opacity-60">{t.footer.elsewhere}</h6>
 
         <div class="flex items-center justify-center gap-4">
           <a
             href="https://www.behance.net/marysse93"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline underline-offset-4 decoration-black/20">
-          
+            class="underline underline-offset-4 decoration-black/20"
+          >
             Behance
           </a>
 
@@ -70,36 +72,31 @@
             href="https://it.linkedin.com/in/marysse"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline underline-offset-4 decoration-black/20">
+            class="underline underline-offset-4 decoration-black/20"
+          >
             LinkedIn
           </a>
         </div>
 
-        <!-- se vuoi dichiararlo senza “peso” -->
-        <p class="opacity-40 leading-relaxed">updating</p>
+        <p class="opacity-40 leading-relaxed">{t.footer.updating}</p>
       </div>
-
     </div>
   </div>
 </footer>
 
-<!-- Bottom footer -->
 <footer class="bg-[#191118] pt-12 pb-12 font-montserrat uppercase tracking-[2px] text-[#a5a0a5]">
   <div class="container mx-auto max-w-screen-xl">
     <div class="text-center text-[9px] md:text-[10px] space-y-5">
       <div>
         <img src="/images/Marysse_logo_footer.png" alt="Marysse Logo" class="mx-auto max-w-[180px] logofootbottom" />
       </div>
-      <div class="font-light">BY MARIA ASSUNTA ZANGONE</div>
+      <div class="font-light">{t.footer.by}</div>
+      <div class="font-light">{t.footer.rights}</div>
       <div class="font-light">
-        &copy; MARYSSE DESIGN 2026 | P. IVA: 13993600967 | REGISTERED OFFICE: VIA LOMELLINA 12, MILAN (MI) ITALY
-      </div>
-      <div class="font-light">
-        <a href="/privacy" class="text-[#f4f2f4] hover:opacity-70">Privacy Policy</a>
+        <a href={privacyHref} class="text-[#f4f2f4] hover:opacity-70">{t.footer.privacy}</a>
         <span class="mx-2">|</span>
-        <a href="/cookie-policy" class="text-[#f4f2f4] hover:opacity-70">Cookie Policy</a>
+        <a href={cookiesHref} class="text-[#f4f2f4] hover:opacity-70">{t.footer.cookies}</a>
       </div>
     </div>
   </div>
 </footer>
-

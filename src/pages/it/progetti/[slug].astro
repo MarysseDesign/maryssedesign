@@ -7,7 +7,7 @@ import "@/styles/badges.css";
 import "@/styles/legacy-project-templates.css";
 
 export async function getStaticPaths() {
-  const projects = await getCollection("projects", ({ data }) => data.lang === "en");
+  const projects = await getCollection("projects", ({ data }) => data.lang === "it");
 
   return projects.map((p) => ({
     params: { slug: p.data.translationKey },
@@ -20,26 +20,14 @@ const { Content } = await project.render();
 
 const template = (project.data.template ?? "legacy").toString().toLowerCase();
 
-const slugify = (s = "") =>
-  s
-    .toString()
-    .trim()
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-const badgeToFilterHref = (badge) => `/projects#badge=${encodeURIComponent(slugify(badge))}`;
-const categoryToFilterHref = (cat) => `/projects#cat=${encodeURIComponent(slugify(cat))}`;
-
 const showDivider = project.data.showDivider !== false;
 ---
 
 <BaseLayout
-  title={`${project.data.titolo} — Projects`}
-  description={project.data.abstract ?? "Project case study."}
+  title={`${project.data.titolo} · Marysse Design`}
+  description={project.data.abstract ?? "Case study di progetto."}
   brand="marysse"
-  lang="en"
+  lang="it"
 >
   <main class={`project-page template-${template}`}>
     <section class="hero text-center">
@@ -53,7 +41,7 @@ const showDivider = project.data.showDivider !== false;
             )}
 
             {project.data.badges?.length ? (
-              <div class="badge-row reveal" data-delay="220" aria-label="Project roles">
+              <div class="badge-row reveal" data-delay="220" aria-label="Ruoli del progetto">
                 {project.data.badges.map((b) => (
                   <span class="badge" title={b}>
                     {b}
@@ -84,12 +72,12 @@ const showDivider = project.data.showDivider !== false;
       <div class="container">
         <div class="row mt-xl">
           <div class="col-md-12">
-            <div class="pagination" aria-label="Project navigation">
+            <div class="pagination" aria-label="Navigazione progetti">
               {project.data.prevSlug ? (
                 <a
                   class="nav-circle"
-                  href={`/projects/${project.data.prevSlug}/`}
-                  aria-label="Previous project"
+                  href={`/it/progetti/${project.data.prevSlug}/`}
+                  aria-label="Progetto precedente"
                 >
                   <span class="nav-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
@@ -119,15 +107,15 @@ const showDivider = project.data.showDivider !== false;
                 </span>
               )}
 
-              <a class="nav-pill" href="/projects">
-                Back
+              <a class="nav-pill" href="/it/progetti">
+                Indietro
               </a>
 
               {project.data.nextSlug ? (
                 <a
                   class="nav-circle"
-                  href={`/projects/${project.data.nextSlug}/`}
-                  aria-label="Next project"
+                  href={`/it/progetti/${project.data.nextSlug}/`}
+                  aria-label="Progetto successivo"
                 >
                   <span class="nav-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none">

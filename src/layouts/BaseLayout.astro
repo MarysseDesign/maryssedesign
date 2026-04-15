@@ -8,6 +8,8 @@ import SiteHeaderMarysszang from "@/components/SiteHeader.astro";
 import Footer from "@/components/Footer.astro";
 import CookieBanner from "@/components/CookieBanner.astro";
 
+import { getLangFromUrl } from "@/lib/i18n";
+
 type FooterVariant = "default" | "minimal";
 
 interface Props {
@@ -15,17 +17,9 @@ interface Props {
   title?: string;
   description?: string;
   lang?: string;
-
-  /** Social image opzionale (absolute o relative). Default: /og-image.jpg */
   ogImage?: string;
-
-  /** se true: rimuove il padding-bottom del main (evita “striscia bianca” su pagine full-bg) */
   noMainBottomPadding?: boolean;
-
-  /** footer standard o minimal (solo per pagine come /services) */
   footerVariant?: FooterVariant;
-
-  /** se true: rimuove il padding-top nella pagina index da mobile) */
   noMainTopPadding?: boolean;
 }
 
@@ -33,98 +27,102 @@ const {
   brand = "marysse",
   title = "Marysse Design — Brand Boutique",
   description = "Creative direction, brand identity and visual culture.",
-  lang = "en",
+  lang: langProp,
   ogImage = "/og-image.jpg",
   noMainBottomPadding = false,
   footerVariant = "default",
   noMainTopPadding = false,
 } = Astro.props;
 
-/**
- * URL assoluti per OG/canonical:
- * - se astro.config.mjs ha `site`, usa quello
- * - altrimenti fallback all'origin corrente (Astro.url.origin)
- */
+const lang = langProp ?? getLangFromUrl(Astro.url);
+const isIt = lang === "it";
+
 const origin = (Astro.site ?? Astro.url.origin) as string;
 const canonicalURL = new URL(Astro.url.pathname, origin).toString();
 
 const absoluteOgImage = ogImage.startsWith("http")
   ? ogImage
   : new URL(ogImage, origin).toString();
+
+const ogLocale = isIt ? "it_IT" : "en_US";
 ---
 
 <html lang={lang}>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index,follow" />
 
-    <slot name="head" />
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:locale" content={ogLocale} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Marysse Design" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={absoluteOgImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content={canonicalURL} />
 
-    <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/m_favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/m_favicon-16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={absoluteOgImage} />
 
-    <!-- Social (dynamic) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={absoluteOgImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content={canonicalURL} />
+  <slot name="head" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={absoluteOgImage} />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/m_favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/m_favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-       <!-- STRUCTURED DATA -->
-    <script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "CreativeAgency",
- "name": "Marysse Design",
- "url": "https://maryssedesign.com",
- "logo": "https://maryssedesign.com/images/Marysse_logo_footer.png",
- "description": "Brand boutique focused on creative direction, brand identity and visual culture.",
- "sameAs": [
-   "https://www.instagram.com/marysszang/"
- ],
- "founder": {
-   "@type": "Person",
-   "name": "Maria Assunta Zangone",
-   "jobTitle": "Art Director & Visual Artist"
- }
-}
-</script>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CreativeAgency",
+      name: "Marysse Design",
+      url: "https://maryssedesign.com",
+      logo: "https://maryssedesign.com/images/Marysse_logo_footer.png",
+      description: isIt
+        ? "Brand boutique specializzata in direzione creativa, brand identity e cultura visiva."
+        : "Brand boutique focused on creative direction, brand identity and visual culture.",
+      sameAs: [
+        "https://www.instagram.com/maryssedesign/",
+        "https://www.instagram.com/marysszang/"
+      ],
+      founder: {
+        "@type": "Person",
+        name: "Maria Assunta Zangone",
+        jobTitle: isIt ? "Art Director e Visual Artist" : "Art Director & Visual Artist",
+      },
+    })}
+  />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@100;300;400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@100;300;400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
   <body
     class="min-h-screen bg-white text-gray-900 font-sans text-base font-light"
     data-footer-variant={footerVariant}
   >
-{brand === "marysszang" ? <SiteHeaderMarysszang /> : <Header />}
-<CookieBanner GA_ID={import.meta.env.PUBLIC_GA_ID ?? ""} />
+    {brand === "marysszang"
+      ? <SiteHeaderMarysszang lang={lang} />
+      : <Header brand={brand} lang={lang} />}
 
-    <!-- IMPORTANT: se noMainBottomPadding=true, niente pb-24 => sparisce la striscia bianca -->
+    <CookieBanner GA_ID={import.meta.env.PUBLIC_GA_ID ?? ""} lang={lang} />
+
     <main
       style={`padding-top: ${noMainTopPadding ? "0px" : "var(--header-h, 80px)"}`}
       class={`${noMainBottomPadding ? "pb-0" : "pb-24"}`}
@@ -133,38 +131,40 @@ const absoluteOgImage = ogImage.startsWith("http")
     </main>
 
     {footerVariant === "minimal" ? (
-      <footer data-footer-variant="minimal" class="bg-[#120b10] text-white/70">
-        <div class="max-w-6xl mx-auto px-6 py-16 text-center">
-          <img
-            src="/images/Marysse_logo_footer.png"
-            alt="Marysse Design"
-            class="mx-auto h-10 w-auto opacity-90"
-            loading="lazy"
-            decoding="async"
-          />
-          <p class="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-70">
-            BY MARIA ASSUNTA ZANGONE
-          </p>
+  <footer data-footer-variant="minimal" class="bg-[#120b10] text-white/70">
+    <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+      <img
+        src="/images/Marysse_logo_footer.png"
+        alt="Marysse Design"
+        class="mx-auto h-10 w-auto opacity-90"
+        loading="lazy"
+        decoding="async"
+      />
+      <p class="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-70">
+        BY MARIA ASSUNTA ZANGONE
+      </p>
 
-          <p class="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-50">
-            © MARYSSE DESIGN 2026 | P. IVA: 13993600967 | REGISTERED OFFICE: VIA
-            LOMELLINA 12, MILAN (MI) ITALY
-          </p>
+      <p class="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-50">
+        © MARYSSE DESIGN 2026 | P. IVA: 13993600967 |
+        {isIt
+          ? " SEDE LEGALE: VIA LOMELLINA 12, MILANO (MI) ITALIA"
+          : " REGISTERED OFFICE: VIA LOMELLINA 12, MILAN (MI) ITALY"}
+      </p>
 
-          <div class="mt-8 flex items-center justify-center gap-6 text-[11px] tracking-[0.22em] uppercase">
-            <a class="opacity-70 hover:opacity-100 transition" href="/privacy"
-              >Privacy Policy</a
-            >
-            <span class="opacity-40">|</span>
-            <a class="opacity-70 hover:opacity-100 transition" href="/cookie-policy"
-              >Cookie Policy</a
-            >
-          </div>
-        </div>
-      </footer>
-    ) : (
-      <Footer />
-    )}
+      <div class="mt-8 flex items-center justify-center gap-6 text-[11px] tracking-[0.22em] uppercase">
+        <a class="opacity-70 hover:opacity-100 transition" href={isIt ? "/it/privacy" : "/privacy"}>
+          Privacy Policy
+        </a>
+        <span class="opacity-40">|</span>
+        <a class="opacity-70 hover:opacity-100 transition" href={isIt ? "/it/cookie-policy" : "/cookie-policy"}>
+          Cookie Policy
+        </a>
+      </div>
+    </div>
+  </footer>
+) : (
+  <Footer lang={lang} />
+)}
 
     <script defer src="/js/smooth-scroll.js"></script>
     <script defer src="/js/monogram-cursor.js"></script>
@@ -180,11 +180,9 @@ const absoluteOgImage = ogImage.startsWith("http")
         const io = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (!entry.isIntersecting) return;
-
             const el = entry.target;
             const d = el.getAttribute('data-delay');
             if (d) el.style.setProperty('--delay', `${d}ms`);
-
             el.classList.add('is-inview');
             io.unobserve(el);
           });
@@ -201,14 +199,11 @@ const absoluteOgImage = ogImage.startsWith("http")
       (() => {
         const normalize = (p) => {
           if (!p) return "/";
-          // rimuove query/hash e trailing slash (eccetto root)
           const clean = p.split("?")[0].split("#")[0];
           return clean.length > 1 ? clean.replace(/\/+$/, "") : "/";
         };
 
         const path = normalize(window.location.pathname);
-
-        // seleziona i link del menu
         const links = document.querySelectorAll("header nav a[href^='/']");
         if (!links.length) return;
 
@@ -217,8 +212,6 @@ const absoluteOgImage = ogImage.startsWith("http")
 
         links.forEach((a) => {
           const href = normalize(a.getAttribute("href") || "/");
-
-          // match esatto oppure se la pagina sta "dentro" quella sezione
           const isMatch = href === path || (href !== "/" && path.startsWith(href + "/"));
           if (!isMatch) return;
 
@@ -233,7 +226,6 @@ const absoluteOgImage = ogImage.startsWith("http")
     </script>
 
     <style is:global>
-      /* Active menu item (minimal + luxury) */
       header nav a.is-active {
         color: var(--ink);
         position: relative;

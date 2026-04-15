@@ -1,0 +1,288 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import ProjectsGrid from "@/components/ProjectsGrid.jsx";
+
+const ALL_CATEGORIES = [
+  "Tutti",
+  "Fashion & Luxury",
+  "Corporate & Innovation",
+  "Retail & Hospitality",
+  "Professional Services",
+  "Big Brands",
+];
+
+const projects = await getCollection("projects", ({ data }) => data.lang === "it");
+
+const items = projects
+  .map((p) => ({
+    slug: p.data.translationKey,
+    ordine: p.data.ordine ?? 999,
+    titolo: p.data.titolo,
+    abstract: p.data.abstract ?? "",
+    cover: p.data.cover,
+    meta: [p.data.cliente, p.data.anno].filter(Boolean).join(" • "),
+    badges: p.data.badges ?? [],
+    categories: p.data.categories ?? [],
+  }))
+  .sort((a, b) => a.ordine - b.ordine);
+---
+
+<BaseLayout 
+title="Progetti · Marysse Design" 
+description="Una selezione di progetti firmati Marysse Design tra brand identity, retail experience, campagne e design digitale."
+lang="it">
+  <main class="projects-page">
+    <header class="projects-hero">
+      <div class="projects-center">
+        <div class="projects-hero__inner">
+          <h1 class="projects-title page-fade" style="--d: 80ms;">Progetti</h1>
+
+          <p class="projects-subtitle">
+            Ogni brand richiede una direzione precisa.</br>
+Ogni dettaglio è pensato per dare forma a un’identità chiara, distintiva e coerente.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="projects-center page-fade" style="--d: 320ms;">
+      <ProjectsGrid client:load items={items} categories={ALL_CATEGORIES} lang="it" />
+    </div>
+
+    <style>
+      .projects-page {
+        padding-top: 40px;
+        padding-bottom: 80px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .projects-center {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .projects-hero {
+        text-align: center;
+        width: 100%;
+      }
+
+      .projects-hero__inner {
+        width: min(980px, 52vw);
+        text-align: center;
+        position: relative;
+      }
+
+      .projects-title,
+      .projects-subtitle {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      .projects-title {
+        margin: 0;
+        font-family: "Noto Serif Display", serif;
+        font-weight: 300;
+        font-size: clamp(40px, 5.2vw, 78px);
+        line-height: 1.02;
+        color: #111;
+      }
+
+      .projects-subtitle {
+        margin: 14px auto 0;
+        font-size: 16px;
+        line-height: 1.85;
+        font-weight: 300;
+        color: rgba(25, 17, 24, 0.82);
+        max-width: 70ch;
+      }
+
+      :global(.projects) {
+        width: min(1100px, 94vw);
+        margin: 0 !important;
+      }
+
+      :global(.projects__filters) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 0 26px;
+      }
+
+      :global(.filter-chip) {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        background: rgba(255, 255, 255, 0.7);
+        color: rgba(13, 13, 13, 0.78);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      :global(.filter-chip:hover) {
+        transform: translateY(-1px);
+        border-color: rgba(0, 0, 0, 0.28);
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      :global(.filter-chip__dot) {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.22);
+      }
+
+      :global(.filter-chip.is-active) {
+        border-color: rgba(0, 0, 0, 0.38);
+        background: rgba(0, 0, 0, 0.03);
+        color: rgba(12, 12, 12, 0.98);
+      }
+
+      :global(.filter-chip.is-active .filter-chip__dot) {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      :global(.projects__grid) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+        padding-top: 6px;
+      }
+
+      @media (max-width: 840px) {
+        .projects-title { font-size: 44px; }
+        :global(.projects__grid) { grid-template-columns: 1fr; }
+        .spark { display: none; }
+      }
+
+      :global(.p-card) {
+        display: block;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(25, 17, 24, 0.12);
+        background: rgba(255, 255, 255, 0.86);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        box-shadow: 0 10px 28px rgba(25, 17, 24, 0.06);
+      }
+
+      :global(.p-card:hover) {
+        transform: translateY(-2px);
+        border-color: rgba(25, 17, 24, 0.18);
+        box-shadow: 0 16px 44px rgba(25, 17, 24, 0.10);
+      }
+
+      :global(.p-card__media) {
+        border-radius: 24px 24px 0 0;
+        overflow: hidden;
+      }
+
+      :global(.p-card__media img) {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      :global(.p-card__body) {
+        padding: 16px 18px 18px;
+      }
+
+      :global(.p-card__title) {
+        margin: 0;
+        font-family: "Noto Serif Display", serif;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 1.18;
+        letter-spacing: -0.01em;
+        color: rgba(25, 17, 24, 0.92);
+      }
+
+      :global(.p-card__abstract) {
+        margin: 10px 0 0;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.7;
+        color: rgba(25, 17, 24, 0.76);
+      }
+
+      :global(.p-card__meta) {
+        margin: 10px 0 0;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(25, 17, 24, 0.52);
+      }
+
+      :global(.p-card__badges) {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      :global(.p-badge) {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(25, 17, 24, 0.12);
+        color: rgba(25, 17, 24, 0.62);
+        background: rgba(255, 255, 255, 0.65);
+      }
+
+      @media (max-width: 640px) {
+        .projects-hero {
+          text-align: center;
+          margin: 10px auto 40px;
+          max-width: 760px;
+        }
+
+        .projects-hero__inner {
+          padding-top: 20px !important;
+          width: min(980px, 92vw);
+        }
+
+        .projects-page {
+          padding-top: 20px !important;
+          padding-bottom: 40px !important;
+        }
+
+        .projects-title {
+          font-size: 40px;
+          line-height: 1.05;
+          margin-bottom: 8px;
+        }
+
+        .projects-subtitle {
+          margin: 10px auto 10px;
+          font-size: 15px;
+          line-height: 1.55;
+        }
+
+        :global(.projects__filters) {
+          padding: 10px 0 16px;
+          gap: 8px;
+        }
+
+        :global(.filter-chip) {
+          padding: 8px 12px;
+          font-size: 10px;
+        }
+      }
+    </style>
+  </main>
+</BaseLayout>

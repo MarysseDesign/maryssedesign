@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "schreiber-gioielli"
+
 ordine: 4
 titolo: "Schreiber Gioielli"
 cliente: "Schreiber Gioielli"

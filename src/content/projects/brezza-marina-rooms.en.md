@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "brezza-marina-rooms"
+
 ordine: 13
 titolo: "Brezza Marina Rooms"
 cliente: "Brezza Marina Rooms"

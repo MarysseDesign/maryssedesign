@@ -3,6 +3,9 @@ import { defineCollection, z } from "astro:content";
 const projects = defineCollection({
   type: "content",
   schema: z.object({
+    lang: z.enum(["en", "it"]),
+    translationKey: z.string(),
+
     ordine: z.number().optional(),
     titolo: z.string(),
     cliente: z.string().optional(),

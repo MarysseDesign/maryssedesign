@@ -455,3 +455,37 @@ a:focus-visible {
     opacity: 1;
   }
 }
+.hero-mobile-copy {
+  display: none;
+}
+
+.hero-desktop-copy {
+  display: inline;
+}
+
+@media (max-width: 640px) {
+  .hero-desktop-copy {
+    display: none;
+  }
+
+  .hero-mobile-copy {
+    display: inline;
+  }
+
+  .hero-copy {
+    max-width: 22rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-leadwhite {
+    max-width: 28ch;
+    font-size: 15px;
+    line-height: 1.7;
+    padding-top: 10px;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+}

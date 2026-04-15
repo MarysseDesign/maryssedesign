@@ -1,26 +1,33 @@
 ---
+lang: "it"
+translationKey: "giffgaff-back-to-the-city"
+
 ordine: 8
 titolo: "GiffGaff · Back to the City"
 cliente: "GiffGaff"
 anno: "2022"
-abstract: "Award-winning OOH campaign concept turning phone recycling into visible urban change."
+abstract: "Concept di campagna OOH premiato che trasforma il riciclo degli smartphone in un cambiamento urbano visibile."
+
 cover: "/images/projects/covers/09.giffgaff.jpg"
 template: "award-case"
+
 badges:
   - "Art Direction"
   - "Concept"
   - "OOH"
   - "Sustainability"
+
 categories:
   - "Big Brands"
   - "Advertising"
 
 sottotitolo: |
-  <b>OOH Campaign Concept<br class="show-mobile" /> · D&AD Yellow Pencil</b><br><br><br class="hide-mobile" />
-  Back to the City makes phone recycling tangible by bringing it back into the urban landscape.
+  <b>Concept campagna OOH<br class="show-mobile" /> · D&AD Yellow Pencil</b><br><br><br class="hide-mobile" />
+  Back to the City rende visibile il riciclo degli smartphone, riportandolo nello spazio urbano.
 
 intro: |
-  Showing the impact of phone recycling by turning old devices into visible urban change.
+  Un progetto che rende tangibile l’impatto del riciclo degli smartphone,<br class="hide-mobile" />
+  trasformando dispositivi dismessi in un intervento urbano concreto.
 
 prevSlug: "silvian-heach"
 nextSlug: "gorillas-urban-activation"
@@ -31,33 +38,43 @@ nextSlug: "gorillas-urban-activation"
 </div>
 
 <div class="award-note">
-  The
+  Il
   <a href="https://www.dandad.org/awards/pencils" target="_blank" rel="noreferrer noopener">
     Yellow Pencil
   </a>
-  is one of the highest recognitions awarded by D&AD,
-  <br class="hide-mobile" />
-  celebrating outstanding <br class="show-mobile" />creative excellence worldwide.
+  è tra i riconoscimenti più prestigiosi assegnati da D&AD,<br class="hide-mobile" />
+  e celebra l’eccellenza creativa a livello internazionale.
 </div>
 
 <div class="award-link">
-  View the project in the official
+  Scopri il progetto nell’
   <a
     href="https://www.dandad.org/work/new-blood-archive/back-to-the-city"
     target="_blank"
     rel="noreferrer noopener"
   >
-    D&AD New Blood Archive
+    archivio ufficiale D&AD New Blood
   </a>.
-</div>
+</div><br class="hide-mobile" /><br class="hide-mobile" />
 
-<br class="hide-mobile" />
+## Concept
+
+Back to the City nasce da un’idea semplice: dare nuova vita a materiali di scarto, rendendo visibile il loro impatto nella città.
+
+Il riciclo degli smartphone si traduce in un intervento urbano concreto,<br class="hide-mobile" />
+in cui i materiali recuperati vengono restituiti alla città,<br class="hide-mobile" />
+diventando parte dello spazio pubblico.
+
+La città diventa così il mezzo della comunicazione,<br class="hide-mobile" />
+creando una relazione diretta tra gesto individuale e impatto collettivo.
+
+<br class="hide-mobile" /><br class="hide-mobile" />
 
 <div class="col-md-12 nopaddingbottom">
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff01.jpg"
-    alt="OOH campaign concept showing a London street scene with a red phone booth filled with recycled phone components and highlighted urban repair message."
+    alt="Concept OOH con cabina telefonica londinese riempita di componenti riciclati, simbolo della trasformazione urbana"
     width="1920"
     height="1358"
     loading="eager"
@@ -69,7 +86,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff02.jpg"
-    alt="Campaign key visual featuring the 'giffgaff back to the city' headline over a city map background with multiple tagged urban locations."
+    alt="Visual di campagna con headline Back to the City su mappa urbana con punti attivati nella città"
     width="2000"
     height="1414"
     loading="lazy"
@@ -96,7 +113,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff05.jpg"
-    alt="Campaign visual showing a smartphone screen with a 'Phone hunt map' interface, multiple tagged London locations and a sign-up call to action over a busy city street background."
+    alt="Interfaccia mobile con mappa interattiva e punti urbani attivati per la raccolta degli smartphone"
     width="2000"
     height="1414"
     loading="lazy"
@@ -113,7 +130,7 @@ nextSlug: "gorillas-urban-activation"
       playsinline
       preload="metadata"
       class="project-video"
-      aria-label="Animated 3D render of a black smartphone rotating against a neutral background."
+      aria-label="Render 3D animato di uno smartphone in rotazione"
     >
       <source src="/videos/projects/giffgaff/giffgaff06.mp4" type="video/mp4" />
     </video>
@@ -124,7 +141,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff07.jpg"
-    alt="Campaign visual for step 2 showing a bright yellow 'Phone Bag' shipping package against the London skyline, explaining how to send old phones for recycling."
+    alt="Visual di campagna con packaging Phone Bag utilizzato per l’invio degli smartphone da riciclare"
     width="2000"
     height="1414"
     loading="lazy"
@@ -141,7 +158,7 @@ nextSlug: "gorillas-urban-activation"
       playsinline
       preload="metadata"
       class="project-video"
-      aria-label="Animated 3D render of a smartphone device rotating against a neutral background."
+      aria-label="Animazione 3D di smartphone in trasformazione"
     >
       <source src="/videos/projects/giffgaff/giffgaff08.mp4" type="video/mp4" />
     </video>
@@ -152,7 +169,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff09.jpg"
-    alt="Campaign visual for step 3 featuring a large hourglass filled with phone components in front of Tower Bridge, symbolizing the deconstruction and repair process."
+    alt="Clessidra con componenti di smartphone a simboleggiare il processo di trasformazione e riutilizzo"
     width="2000"
     height="1414"
     loading="lazy"
@@ -169,7 +186,7 @@ nextSlug: "gorillas-urban-activation"
       playsinline
       preload="metadata"
       class="project-video"
-      aria-label="Animated city map with yellow location pins highlighting campaign placement points across London."
+      aria-label="Mappa urbana animata con punti di attivazione della campagna"
     >
       <source src="/videos/projects/giffgaff/giffgaff10.mp4" type="video/mp4" />
     </video>
@@ -180,7 +197,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff11.jpg"
-    alt="Campaign visual for step 4 showing a red London phone booth with a tagged repaired component, Big Ben and a red double-decker bus in the background."
+    alt="Cabina telefonica londinese con componente rigenerato evidenziato come parte del progetto"
     width="2800"
     height="1980"
     loading="lazy"
@@ -192,7 +209,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff12.jpg"
-    alt="Collage of user-generated social media posts featuring people interacting with tagged urban objects in London as part of the recycling campaign."
+    alt="Contenuti social generati dagli utenti che interagiscono con elementi urbani della campagna"
     width="1920"
     height="1358"
     loading="lazy"
@@ -204,7 +221,7 @@ nextSlug: "gorillas-urban-activation"
   <img
     class="fadein reveal-media"
     src="/images/projects/portfolio/giffgaff/giffgaff13.jpg"
-    alt="Collection of sponsored social media ads showing urban objects labeled as recycled phones, including a taxi, streetlamp and fire hydrant."
+    alt="Annunci social sponsorizzati con oggetti urbani etichettati come smartphone riciclati"
     width="1920"
     height="1358"
     loading="lazy"
@@ -238,7 +255,6 @@ nextSlug: "gorillas-urban-activation"
         <span class="team-arrow">→</span>
       </a>
     </div>
-
   </div>
 
   <div class="project-tutors">
@@ -263,7 +279,7 @@ nextSlug: "gorillas-urban-activation"
 <div class="project-credits">
   <h2>Credits</h2>
   <p>
-    Project: <span class="underline">GiffGaff · Back to the City.</span><br class="hide-mobile" />
-    Award: <span class="underline">D&AD New Blood Awards · Yellow Pencil.</span>
+    Progetto: <span class="underline">GiffGaff · Back to the City</span>.<br class="hide-mobile" />
+    Award: <span class="underline">D&AD New Blood Awards · Yellow Pencil</span>.
   </p>
 </div>

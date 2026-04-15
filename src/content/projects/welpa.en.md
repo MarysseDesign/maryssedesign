@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "welpa"
+
 ordine: 5
 titolo: "Welpa"
 cliente: "Welpa"

@@ -1,26 +1,33 @@
 ---
+import { useTranslations } from "@/lib/useTranslations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+const isIt = lang === "it";
+
 const LOGO = "/images/Logo-marysszang.png";
+const base = isIt ? "/it/marysszang/" : "/marysszang/";
+const contactsHref = isIt ? "/it/contatti" : "/contacts";
+const homeHref = isIt ? "/it/" : "/";
+const langSwitchHref = isIt ? "/marysszang/" : "/it/marysszang/";
 ---
 
 <header class="msz-header">
   <div class="msz-header__bar">
-    <!-- Logo -->
-    <a href="/marysszang/" class="msz-header__brand" aria-label="Marysszang">
+    <a href={base} class="msz-header__brand" aria-label="Marysszang">
       <img src={LOGO} alt="marysszang" />
     </a>
 
-    <!-- NAV DESKTOP (mostrata solo ≥1024px) -->
-   <nav class="msz-desktop-nav" aria-label="Primary">
-  <a href="/marysszang/#artworks">Artworks</a>
-  <a href="/marysszang/#about">About Marysszang</a>
-  <a href="/marysszang/#collaborations">Collaborations</a>
-  <span class="divider" aria-hidden="true"></span>
-  <a href="/contacts" class="msz-chip-btn">Contacts</a>
-  <a href="/" class="pill pill--dark">Brand Boutique</a>
-</nav>
+    <nav class="msz-desktop-nav" aria-label="Primary">
+      <a href={`${base}#artworks`}>{t.nav.artworks}</a>
+      <a href={`${base}#about`}>{t.nav.aboutMarysszang}</a>
+      <a href={`${base}#collaborations`}>{t.nav.collaborations}</a>
+      <span class="divider" aria-hidden="true"></span>
+      <a href={contactsHref} class="msz-chip-btn">{t.nav.contacts}</a>
+      <a href={homeHref} class="pill pill--dark">{t.nav.brandBoutique}</a>
+      <a href={langSwitchHref}>{isIt ? "EN" : "IT"}</a>
+    </nav>
 
-
-    <!-- HAMBURGER MOBILE (mostrato solo <1024px) -->
     <button id="mszHamburger" class="msz-hamburger" aria-label="Open menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
@@ -28,17 +35,16 @@ const LOGO = "/images/Logo-marysszang.png";
     </button>
   </div>
 
-  <!-- PANNELLO MOBILE -->
   <div id="mszMobilePanel" class="msz-menu">
     <span class="msz-menu__diamond" aria-hidden="true"></span>
     <nav class="msz-menu__nav">
-  <a href="/marysszang/#artworks">artworks</a>
-  <a href="/marysszang/#about">About Marysszang</a>
-  <a href="/marysszang/#collaborations">collaborations</a>
-  <a href="/contacts">Contacts</a>
-  <a href="/" class="pill pill--dark msz-menu__cta">Brand Boutique</a>
-</nav>
-
+      <a href={`${base}#artworks`}>{t.nav.artworks}</a>
+      <a href={`${base}#about`}>{t.nav.aboutMarysszang}</a>
+      <a href={`${base}#collaborations`}>{t.nav.collaborations}</a>
+      <a href={contactsHref}>{t.nav.contacts}</a>
+      <a href={homeHref} class="pill pill--dark msz-menu__cta">{t.nav.brandBoutique}</a>
+      <a href={langSwitchHref}>{isIt ? "EN" : "IT"}</a>
+    </nav>
   </div>
 
   <script is:inline>

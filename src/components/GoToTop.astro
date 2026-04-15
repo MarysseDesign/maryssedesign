@@ -1,52 +1,44 @@
 ---
-const label = "GO TO TOP";
+import { useTranslations } from "@/lib/useTranslations";
+import { getLangFromUrl } from "@/lib/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const label = t.ui.goToTop.toUpperCase();
 ---
 
 <button
-  aria-label="Go to top"
+  aria-label={t.ui.goToTop}
   class="go-to-top js-go-to-top"
 >
   {label}
 </button>
 
 <style>
-/* ===============================
-   Go to top – cookie style
-================================ */
+/* lascia tutto il tuo CSS invariato */
 .go-to-top {
   position: fixed;
   right: 16px;
   bottom: 60px;
   padding: 10px 19px;
-
   border-radius: 999px;
   background: #fff;
   color: #111;
-
   font-family: inherit;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-
   border-width: 1px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   z-index: 60;
-
-  /* stato nascosto */
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
-
-  transition:
-    opacity .25s ease,
-    transform .25s ease;
+  transition: opacity .25s ease, transform .25s ease;
 }
 
-/* visibile (solo mobile) */
 @media (max-width: 768px) {
   .go-to-top.is-visible {
     opacity: .75;
@@ -55,17 +47,14 @@ const label = "GO TO TOP";
   }
 }
 
-/* stato attivo (tap) */
 .go-to-top.is-active {
   opacity: 1 !important;
 }
 
-/* feedback tap */
 .go-to-top:active {
   transform: translateY(2px);
 }
 
-/* hover su device che lo supportano */
 @media (hover: hover) {
   .go-to-top.is-visible:hover {
     opacity: 1;
@@ -81,11 +70,8 @@ const label = "GO TO TOP";
   let activeTimeout;
 
   const toggleVisibility = () => {
-    if (window.scrollY > 300) {
-      btn.classList.add('is-visible');
-    } else {
-      btn.classList.remove('is-visible');
-    }
+    if (window.scrollY > 300) btn.classList.add('is-visible');
+    else btn.classList.remove('is-visible');
   };
 
   const setActive = () => {
@@ -97,7 +83,6 @@ const label = "GO TO TOP";
   };
 
   btn.addEventListener('pointerdown', setActive);
-
   btn.addEventListener('click', () => {
     setActive();
     window.scrollTo({ top: 0, behavior: 'smooth' });

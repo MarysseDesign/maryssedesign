@@ -1,0 +1,47 @@
+export const it = {
+  nav: {
+    about: "About",
+    projects: "Progetti",
+    services: "Servizi",
+    contacts: "Contatti",
+    artisticSide: "Artistic Side",
+    brandBoutique: "Brand Boutique",
+    artworks: "Opere",
+    collaborations: "Collaborazioni",
+    aboutMarysszang: "About Marysszang",
+  },
+  cta: {
+    contact: "Get in touch",
+  },
+  footer: {
+    instagram: "Instagram",
+    brandBoutique: "Brand Boutique",
+    artisticSide: "Artistic Side",
+    elsewhere: "Altrove",
+    updating: "in aggiornamento",
+    location: " sede operativa a \n milano, italia",
+    rights:
+      "© MARYSSE DESIGN 2026 | P. IVA: 13993600967 | SEDE LEGALE: VIA LOMELLINA 12, MILANO (MI) ITALIA",
+    by: "BY MARIA ASSUNTA ZANGONE",
+    privacy: "Privacy Policy",
+    cookies: "Cookie Policy",
+  },
+  cookies: {
+    badge: "Cookies",
+    title: "Cookies & Privacy",
+    text: "Utilizziamo i cookie per migliorare la tua esperienza e comprendere come viene utilizzato il sito.",
+    learnMore: "Maggiori informazioni nella nostra",
+    learnMoreConnector: "e nella",
+    accept: "Accetta",
+    decline: "Rifiuta",
+    close: "Chiudi",
+  },
+  ui: {
+    goToTop: "Torna su",
+    filterAll: "Tutti",
+    filterAria: "Filtra i progetti per settore",
+    rolesAria: "Ruoli",
+    mediaStrip: "Galleria media",
+    patternBand: "Fascia decorativa",
+  },
+};

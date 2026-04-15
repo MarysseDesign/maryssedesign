@@ -1,0 +1,531 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/styles/services-dark-tarot.css";
+
+
+const tarotServices = [
+  {
+    key: "branding",
+    number: "I",
+    title: "Branding",
+    archetype: "La Firma",
+    subtitle: "Identità e Posizionamento",
+    img: "/images/tarot/branding.jpg",
+    desc:
+"Identità visive pensate per rendere i brand unici, riconoscibili, coerenti e inevitabili in ogni punto di contatto.",
+  },
+  {
+    key: "strategy",
+    number: "II",
+    title: "Direzione Creativa",
+    archetype: "La Visione",
+    subtitle: "Strategia e Concept Creativo",
+    img: "/images/tarot/strategy.jpg",
+    desc:
+"Scelte creative che danno forma a visione e significato, allineando strategia, concept ed espressione in un sistema coerente.",
+ },
+  {
+    key: "advertising",
+    number: "III",
+    title: "Advertising",
+    archetype: "L’Allure",
+    subtitle: "Campagne e Art Direction",
+    img: "/images/tarot/advertising.jpg",
+    desc:
+"Campagne guidate da un’art direction precisa, dove ogni elemento contribuisce a costruire valore e desiderabilità.",
+  },
+  {
+    key: "web",
+    number: "IV",
+    title: "Web Design",
+    archetype: "Il Portale",
+    subtitle: "Esperienze Digitali Luxury",
+    img: "/images/tarot/web.jpg",
+    desc:
+"Esperienze digitali progettate con precisione e sensibilità, dove struttura, tipografia e movimento risultano naturali e impeccabili.",
+      
+  },
+  {
+    key: "storytelling",
+    number: "V",
+    title: "Storytelling",
+    archetype: "La Voce",
+    subtitle: "Narrazione e Voce del Brand",
+    img: "/images/tarot/storytelling.jpg",
+    desc:
+"Narrazioni intenzionali, capaci di dare voce al marchio con carattere e restare rilevanti nel tempo.",
+  },
+  {
+    key: "social",
+    number: "VI",
+    title: "Social Media",
+    archetype: "Il Ritmo",
+    subtitle: "Contenuti e Ritmo Editoriale",
+    img: "/images/tarot/social.jpg",
+   desc:
+"Una presenza digitale costruita con coerenza e direzione, dove contenuto, ritmo e immagine parlano all’unisono.",
+      
+  },
+  {
+    key: "visual",
+    number: "VII",
+    title: "Sistema Visivo",
+    archetype: "Il Codice",
+    subtitle: "Linee Guida e Linguaggio di Design",
+    img: "/images/tarot/visual.jpg",
+   desc:
+"Un sistema visivo che stabilisce regole, struttura e linguaggio progettuale, pensato per evolvere insieme al brand.",
+      
+  },
+  {
+    key: "photo",
+    number: "VIII",
+    title: "Fotografia",
+    archetype: "Lo Sguardo",
+    subtitle: "Immagini di Prodotto e di Brand",
+    img: "/images/tarot/photo.jpg",
+    desc:
+"Immagini guidate dall’art direction, pensate per essere coerenti, elevate e perfettamente intenzionali.",
+  },
+  {
+    key: "video",
+    number: "IX",
+    title: "Video",
+    archetype: "Il Movimento",
+    subtitle: "Motion e Brand Film",
+    img: "/images/tarot/video.jpg",
+    desc:
+"Contenuti video e motion sviluppati con sensibilità cinematografica, tra narrazione e costruzione dell’immaginario.",
+      
+  },
+  {
+    key: "events",
+    number: "X",
+    title: "Experiential",
+    archetype: "L’Incontro",
+    subtitle: "Eventi e Brand Moments",
+    img: "/images/tarot/events.jpg",
+    desc:
+      "Esperienze di brand costruite attraverso identità, visual e direzione, per tradurre il marchio in una presenza fisica riconoscibile.",
+  },
+];
+
+const collaborations = [
+  { name: "Armani", src: "/images/collaborations/armani-beauty-logo.png" },
+  { name: "Rinascente", src: "/images/collaborations/rinascente-logo.png" },
+  { name: "Mondadori", src: "/images/collaborations/mondadori-logo.png" },
+  { name: "Campari Academy", src: "/images/collaborations/campari-academy-logo.png" },
+  { name: "Terrazza Aperol", src: "/images/collaborations/terrazza-aperol-logo.png" },
+  { name: "Berlucchi Franciacorta", src: "/images/collaborations/berlucchi-logo.png" },
+  { name: "The Wom", src: "/images/collaborations/the-wom-logo.png" },
+  { name: "My Personal Trainer", src: "/images/collaborations/my-personal-trainer-logo.png" },
+  { name: "My Personal Beauty", src: "/images/collaborations/my-personal-beauty-logo.png" },
+  { name: "L'Oreal", src: "/images/collaborations/loreal-logo.png" },
+  { name: "Pupa", src: "/images/collaborations/pupa-logo.png" },
+  { name: "Primolino", src: "/images/collaborations/primolino-logo.png" },
+];
+
+const selectedWorks = [
+  {
+    title: "Armani × Rinascente",
+    category: "Retail Experience / Art Direction",
+    href: "/it/progetti/armani-rinascente/",
+    image: "/images/projects/covers/home_Armani_Rinascente.jpg",
+    alt: "Cover del progetto Armani Rinascente",
+  },
+  {
+    title: "Campari Academy",
+    category: "Brand Experience / Campaign",
+    href: "/it/progetti/campari/",
+    image: "/images/projects/covers/03.png",
+    alt: "Cover del progetto Campari Academy",
+  },
+  {
+    title: "Primolino Milano",
+    category: "Brand Identity / Packaging",
+    href: "/it/progetti/primolino/",
+    image: "/images/projects/covers/11.Primolino.jpg",
+    alt: "Cover del progetto Primolino",
+  },
+];
+---
+
+<BaseLayout
+  brand="marysse"
+  title="Marysse Design · Brand Architecture, Art Direction & Digital Design"
+  description="Marysse Design guida progetti di brand dalla strategia all’esecuzione, dando forma a sistemi visivi coerenti, riconoscibili e distintivi."
+  noMainTopPadding={true}
+  footerVariant="minimal"
+>
+  <div class="about-page home-marysse">
+    <div class="starfield" aria-hidden="true">
+      <div class="sky-glow"></div>
+      <div class="stars stars--far"></div>
+      <div class="stars stars--mid"></div>
+      <div class="stars stars--near"></div>
+      <div class="stars stars--bright"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <section class="tarot-hero" id="services">
+      <div class="tarot-hero__wrap">
+        <h1 class="tarot-hero__title">
+          <span class="only-desktop">Identità, art direction e design strategico per brand memorabili.</span>
+          <span class="only-mobile">Identità, art direction e design strategico per brand memorabili.</span>
+        </h1>
+
+        <p class="tarot-hero__sub">
+        Marysse Design guida progetti di brand dalla strategia all’esecuzione,
+  dando forma a sistemi visivi coerenti, riconoscibili e distintivi.
+        </p>
+
+        <p class="tarot-hero__explain only-desktop">
+         Un brand non è mai una sola dimensione.
+Ogni carta ne rivela una parte essenziale.
+        </p>
+
+        <p class="tarot-hint only-desktop">
+          Trascina per muoverti. Estrai una carta. Clicca per scoprirne i dettagli.
+        </p>
+
+        <p class="tarot-hero__explain only-mobile">
+          Scorri per esplorare gli elementi che costruiscono un brand.
+        </p>
+
+        <div class="tarot-actions">
+          <button class="tarot-btn shuffle" type="button" id="tarotShuffle">
+            Mescola
+          </button>
+        </div>
+      </div>
+
+      <div class="tarot-stage-wrap" aria-hidden="false">
+        <div class="tarot-stage" id="tarotStage" aria-label="Spazio servizi tarot">
+          {tarotServices.map((s, i) => (
+            <article
+              class="tarot-card"
+              tabindex="0"
+              role="button"
+              aria-label={`${s.title} — apri i dettagli`}
+              data-key={s.key}
+              data-number={s.number}
+              data-title={s.title}
+              data-subtitle={s.subtitle}
+              data-archetype={s.archetype}
+              data-img={s.img}
+              data-desc={s.desc}
+              style={`
+                --x:${10 + (i * 8) % 80};
+                --y:${58 + ((i % 3) * 10) - (i % 2 ? 6 : 0)};
+                --r:${(i % 2 ? 10 : -10)}deg;
+              `}
+            >
+              <div class="tarot-card__img">
+                <img
+                  src={s.img}
+                  alt={`Carta ispirata ai tarocchi per ${s.title}, ${s.subtitle}`}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+
+              <div class="tarot-card__meta">
+                <div class="tarot-card__top">
+                  <span class="tarot-card__mark">◆</span>
+                  <span class="tarot-card__tag">{s.subtitle}</span>
+                  <span class="tarot-card__mark">◆</span>
+                </div>
+                <h3 class="tarot-card__title">{s.title}</h3>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="tarot-mobile" id="tarotMobile" aria-label="Carosello servizi">
+        <div class="tarot-carousel" id="tarotCarousel">
+          {tarotServices.map((s, i) => (
+            <article
+              class="tarot-slide"
+              data-key={s.key}
+              data-number={s.number}
+              data-title={s.title}
+              data-subtitle={s.subtitle}
+              data-archetype={s.archetype}
+              data-img={s.img}
+              data-desc={s.desc}
+              aria-label={`Carta ${s.title}`}
+            >
+              <div class="tarot-slide__img">
+                <img
+                  src={s.img}
+                  alt={`Carta ispirata ai tarocchi per ${s.title}, ${s.subtitle}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  draggable="false"
+                />
+
+                <div class="tarot-slide__card-meta" aria-hidden="true">
+                  <p class="tarot-slide__card-number">{s.number}</p>
+                  <p class="tarot-slide__card-archetype">{s.archetype}</p>
+                </div>
+              </div>
+
+              <div class="tarot-slide__meta">
+                <div class="tarot-slide__kicker">{s.subtitle}</div>
+                <div class="tarot-slide__title">{s.title}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="tarot-detail" id="tarotDetail" aria-live="polite">
+          <p class="tarot-detail__kicker" id="tarotDetailKicker"></p>
+          <h2 class="tarot-detail__title" id="tarotDetailTitle"></h2>
+          <p class="tarot-detail__archetype" id="tarotDetailArchetype"></p>
+          <p class="tarot-detail__text" id="tarotDetailText"></p>
+
+          <div class="tarot-detail__actions">
+            <a class="tarot-btn" id="tarotDetailMore" href="/it/servizi/">
+              Esplora il servizio
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tarot-modal" id="tarotModal" hidden aria-hidden="true">
+        <div class="tarot-modal__backdrop" data-close></div>
+
+        <div
+          class="tarot-modal__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="tarotModalTitle"
+          aria-describedby="tarotModalText"
+        >
+          <button
+            class="tarot-modal__close"
+            type="button"
+            aria-label="Chiudi"
+            data-close
+          >
+            ✕
+          </button>
+
+          <div class="tarot-modal__grid">
+            <div class="tarot-modal__media">
+              <div class="tarot-modal__card-meta" aria-hidden="true">
+                <p class="tarot-modal__card-number" id="tarotModalNumber"></p>
+                <p class="tarot-modal__card-archetype" id="tarotModalArchetype"></p>
+              </div>
+
+              <img id="tarotModalImg" alt="" draggable="false" />
+            </div>
+
+            <div class="tarot-modal__content">
+              <p class="tarot-modal__kicker" id="tarotModalKicker"></p>
+              <h2 id="tarotModalTitle" class="tarot-modal__title"></h2>
+              <p class="tarot-modal__text" id="tarotModalText"></p>
+
+              <div class="tarot-modal__actions">
+                <a class="tarot-btn" id="tarotModalMore" href="/it/servizi/">
+                  Esplora il servizio
+                </a>
+                <button
+                  class="tarot-btn tarot-btn--solid"
+                  type="button"
+                  id="tarotModalShuffle"
+                >
+                  Mescola di nuovo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="../../scripts/tarot-services.ts"></script>
+    </section>
+
+    <section
+      class="md-home-section md-collaborations fade-row"
+      id="collaborations"
+      aria-labelledby="collab-title"
+    >
+      <div class="md-home-wrap">
+        <div class="md-section-head">
+          <p class="md-section-kicker">Collaborazioni</p>
+          <h2 id="collab-title" class="md-section-title">
+            Alcuni dei brand con cui ho lavorato
+          </h2>
+        </div>
+
+        <div class="md-marquee-shell" aria-label="Marquee con i loghi delle collaborazioni">
+          <div class="md-marquee-row">
+            {collaborations.concat(collaborations).map((logo, index) => (
+              <div class="md-logo-item" aria-hidden={index >= collaborations.length ? "true" : undefined}>
+                <img
+                  src={logo.src}
+                  alt={index < collaborations.length ? logo.name : ""}
+                  decoding="async"
+                  class="md-logo-image"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="md-divider fade-row"></div>
+
+    <section class="md-home-section md-partners fade-row" aria-labelledby="partners-title">
+      <div class="md-home-wrap">
+        <div class="md-section-head">
+          <p class="md-section-kicker">Network</p>
+          <h2 id="partners-title" class="md-section-title">
+            Agenzie e partner
+          </h2>
+        </div>
+
+        <div class="md-partners-grid md-partners-grid--desktop">
+          <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
+          <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
+          <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
+          <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
+          <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
+          <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
+          <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
+          <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
+          <a href="https://www.instagram.com/whiteneststudio.milano/" target="_blank" rel="noopener">White Nest Studio</a>
+          <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
+          <a href="https://www.instagram.com/irisvideo_official/" target="_blank" rel="noopener">Iris Video Studio</a>
+          <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
+          <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
+          <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
+        </div>
+
+        <div class="md-partners-inline" aria-label="Agenzie e collaboratori">
+          <a href="https://www.canon.it/" target="_blank" rel="noopener">Canon</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.gruppomondadori.it//" target="_blank" rel="noopener">Gruppo Mondadori</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.uvetevents.com/it/" target="_blank" rel="noopener">Uvet Events</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://listenagency.com" target="_blank" rel="noopener">Listen Agency</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://nesscommunication.com/" target="_blank" rel="noopener">Ness Communication</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://dude.it" target="_blank" rel="noopener">Dude Milano</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://buzin.it" target="_blank" rel="noopener">Buzin Media Agency</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://motionstudio.it/" target="_blank" rel="noopener">Motion Studio</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.instagram.com/whiteneststudio.milano/" target="_blank" rel="noopener">White Nest Studio</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://creativedeptstudio.com/creative-department-design" target="_blank" rel="noopener">Creative Department Design</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.instagram.com/irisvideo_official/" target="_blank" rel="noopener">Iris Video Studio</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.ied.edu" target="_blank" rel="noopener">IED</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.naba.it" target="_blank" rel="noopener">NABA</a>
+          <span aria-hidden="true">•</span>
+          <a href="https://www.accademiadellusso.com/" target="_blank" rel="noopener">Accademia del Lusso</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="md-divider fade-row"></div>
+
+    <section
+      class="md-home-section md-selected-work fade-row"
+      id="selected-work"
+      aria-labelledby="selected-work-title"
+    >
+      <div class="md-home-wrap">
+        <div class="md-section-head md-section-head--work">
+          <p class="md-section-kicker kicker-work">Progetti selezionati</p>
+          <h2 id="selected-work-title" class="md-section-title">
+            Una selezione di progetti tra retail, experience e brand identity.
+          </h2>
+        </div>
+
+        <div class="md-work-grid">
+          {selectedWorks.map((project, index) => (
+            <a
+              class="md-work-card md-work-card--visual"
+              href={project.href}
+              aria-label={`Apri il progetto ${project.title}`}
+            >
+              <div class="md-work-card__visual">
+                <img
+                  src={project.image}
+                  alt={project.alt}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+
+              <div class="md-work-card__content">
+                <p class="md-work-card__index">{String(index + 1).padStart(2, "0")}</p>
+                <p class="md-work-card__category">{project.category}</p>
+                <h3 class="md-work-card__title">{project.title}</h3>
+                <span class="md-work-card__link">Vedi progetto</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="md-home-section md-bottom-cta fade-row" aria-labelledby="md-bottom-cta-title">
+      <div class="md-bottom-cta__inner">
+        <div class="tarot-foundation md-bottom-cta__foundation">
+          <p id="md-bottom-cta-title" class="tarot-foundation__text">
+            Una brand boutique che dà forma a identità, immagini ed esperienze
+attraverso art direction e design strategico.
+          </p>
+        </div>
+
+        <div class="tarot-continue md-home-continue md-home-continue--bottom">
+          <a class="tarot-btn tarot-btn--solid" href="/it/about/">
+            Scopri lo studio
+          </a>
+
+          <a class="tarot-btn" href="/it/progetti/">
+            Esplora i progetti
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const fadeRows = document.querySelectorAll(".fade-row");
+
+      if (!fadeRows.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.14,
+          rootMargin: "0px 0px -8% 0px",
+        }
+      );
+
+      fadeRows.forEach((row) => observer.observe(row));
+    });
+  </script>
+</BaseLayout>

@@ -1,9 +1,7 @@
 // src/scripts/tarot-services.ts
-// Tarot services interactions (desktop drag + modal, mobile carousel details)
-// Refined mobile gesture handling:
-// - robust separation between tap and swipe
-// - safer pointer lifecycle
-// - compatible with article[role="button"] for mobile cards
+// Tarot services interactions
+// - Mobile: native horizontal carousel, detail synced from scroll position
+// - Desktop: draggable cards + modal
 
 type TarotData = {
   key?: string;
@@ -72,13 +70,6 @@ declare global {
       );
     };
 
-    const destroy = () => {
-      closeModal();
-      for (const c of cleanups.splice(0)) c();
-    };
-
-    window.__tarotServicesDestroy = destroy;
-
     const mqMobile = window.matchMedia("(max-width: 900px)");
     const isMobile = () => mqMobile.matches;
 
@@ -98,10 +89,10 @@ declare global {
       "tarotDetailMore",
     ) as HTMLAnchorElement | null;
 
-    const setDetailFromBtn = (btn: HTMLElement | null) => {
-      if (!btn || !detailKicker || !detailTitle || !detailText) return;
+    const setDetailFromSlide = (slide: HTMLElement | null) => {
+      if (!slide || !detailKicker || !detailTitle || !detailText) return;
 
-      const ds = btn.dataset;
+      const ds = slide.dataset;
       detailKicker.textContent = ds.subtitle || "";
       detailTitle.textContent = ds.title || "";
 
@@ -119,7 +110,7 @@ declare global {
         ?.querySelectorAll<HTMLElement>(".tarot-slide.is-active")
         .forEach((el) => el.classList.remove("is-active"));
 
-      btn.classList.add("is-active");
+      slide.classList.add("is-active");
     };
 
     const initMobile = () => {
@@ -130,69 +121,88 @@ declare global {
       );
       if (!slides.length) return;
 
-      let activeKey = "";
-      let raf = 0;
+      let activeSlide: HTMLElement | null = null;
+      let rafId = 0;
 
-      const setActive = (slide: HTMLElement | null) => {
-        if (!slide) return;
-        const key = slide.dataset.key ?? "";
-        if (key === activeKey) return;
-        activeKey = key;
-        setDetailFromBtn(slide);
-      };
-
-      const getClosestSlide = () => {
-        const viewport = mobileCarousel.getBoundingClientRect();
-        const center = viewport.left + viewport.width / 2;
+      const getNearestSlide = () => {
+        const carouselRect = mobileCarousel.getBoundingClientRect();
+        const viewportCenter = carouselRect.left + carouselRect.width / 2;
 
         let best: HTMLElement | null = null;
-        let bestDistance = Number.POSITIVE_INFINITY;
+        let bestDist = Number.POSITIVE_INFINITY;
 
         for (const slide of slides) {
           const rect = slide.getBoundingClientRect();
-          const slideCenter = rect.left + rect.width / 2;
-          const distance = Math.abs(slideCenter - center);
-
-          if (distance < bestDistance) {
-            bestDistance = distance;
+          const center = rect.left + rect.width / 2;
+          const dist = Math.abs(center - viewportCenter);
+          if (dist < bestDist) {
             best = slide;
+            bestDist = dist;
           }
         }
 
-        return best;
+        return best ?? slides[0];
       };
 
       const syncActiveFromScroll = () => {
-        if (raf) window.cancelAnimationFrame(raf);
-        raf = window.requestAnimationFrame(() => {
-          setActive(getClosestSlide());
-        });
+        rafId = 0;
+        const next = getNearestSlide();
+        if (next && next !== activeSlide) {
+          activeSlide = next;
+          setDetailFromSlide(next);
+        }
       };
 
+      const requestSync = () => {
+        if (rafId) return;
+        rafId = window.requestAnimationFrame(syncActiveFromScroll);
+      };
+
+      setDetailFromSlide(slides[0]);
+      activeSlide = slides[0];
+
+      on(mobileCarousel, "scroll", requestSync, { passive: true });
+      on(window, "resize", requestSync, { passive: true });
+      on(window, "orientationchange", requestSync, { passive: true });
+
+      // Optional tap-to-snap without attaching handlers to each slide.
       on(
         mobileCarousel,
-        "scroll",
-        () => {
-          syncActiveFromScroll();
+        "click",
+        (e: Event) => {
+          const me = e as MouseEvent;
+          const x = me.clientX;
+          const y = me.clientY;
+
+          let best: HTMLElement | null = null;
+          let bestDist = Number.POSITIVE_INFINITY;
+
+          for (const slide of slides) {
+            const rect = slide.getBoundingClientRect();
+            if (y < rect.top || y > rect.bottom) continue;
+            const dx = Math.abs(x - (rect.left + rect.width / 2));
+            if (dx < bestDist) {
+              best = slide;
+              bestDist = dx;
+            }
+          }
+
+          if (!best) return;
+
+          best.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+          });
+
+          activeSlide = best;
+          setDetailFromSlide(best);
         },
         { passive: true },
       );
 
-      slides.forEach((slide) => {
-        on(
-          slide,
-          "click",
-          () => {
-            const left = slide.offsetLeft - 16;
-            mobileCarousel.scrollTo({ left, behavior: "smooth" });
-            setActive(slide);
-          },
-          { passive: true },
-        );
-      });
-
-      requestAnimationFrame(() => {
-        setActive(slides[0]);
+      cleanups.push(() => {
+        if (rafId) window.cancelAnimationFrame(rafId);
       });
     };
 
@@ -479,8 +489,23 @@ declare global {
 
       cards.forEach(enableDrag);
 
-      requestAnimationFrame(() => shuffle());
+      const scheduleShuffle = () => {
+        if ("requestIdleCallback" in window) {
+          (window as any).requestIdleCallback(() => shuffle(), { timeout: 250 });
+        } else {
+          window.setTimeout(shuffle, 120);
+        }
+      };
+
+      scheduleShuffle();
     };
+
+    const destroy = () => {
+      closeModal();
+      for (const c of cleanups.splice(0)) c();
+    };
+
+    window.__tarotServicesDestroy = destroy;
 
     const boot = () => {
       if (isMobile()) initMobile();

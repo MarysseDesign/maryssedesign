@@ -1,11 +1,16 @@
 ---
+lang: "it"
+translationKey: "primolino"
+
 ordine: 3
 titolo: "Primolino"
 cliente: "Primolino Milano"
 anno: "2020–2025"
-abstract: "Brand ecosystem for a dual-structure company operating across B2B and B2C."
+abstract: "Ecosistema di brand per una realtà duale attiva tra B2B e B2C."
+
 cover: "/images/projects/covers/11.Primolino.jpg"
 template: "brand-ecosystem"
+
 categories:
   - "Fashion & Luxury"
   - "Food & Beverage"
@@ -22,12 +27,12 @@ badges:
 
 sottotitolo: |
   <b>BRAND ECOSYSTEM · B2B + B2C</b><br><br><br class="hide-mobile" />
-  2020–2025: development of the digital identity, sub-brand architecture and website redesign to host both Primolino Milano (B2B)<br class="hide-mobile" /> and Primolino Casa (B2C e-commerce) within a unified digital ecosystem: <a href="https://primolino.it/" target="_blank" rel="noreferrer noopener">primolino.it</a>.<br> Project developed in collaboration with <a href="https://nesscommunication.com/" target="_blank" rel="noreferrer noopener">Ness Communication</a>.<br><br class="hide-mobile" /> 2025 rebrand by Marysse Design: refined logotypes, standalone “P” monogram system and dedicated pattern library.
+  2020–2025: sviluppo di identità e architettura del brand, redesign <br class="hide-mobile" />del sito per accogliere in un unico ecosistema Primolino Milano (B2B)<br class="hide-mobile" /> e Primolino Casa (e-commerce B2C): <a href="https://primolino.it/" target="_blank" rel="noreferrer noopener">primolino.it</a>.<br><br class="hide-mobile" />
+  Progetto sviluppato in collaborazione con <a href="https://nesscommunication.com/" target="_blank" rel="noreferrer noopener">Ness Communication</a>.<br><br class="hide-mobile" />
+  2025: Rebranding a cura di Marysse Design: <br class="hide-mobile" />logotipi ridefiniti, sistema monogramma “P” autonomo e pattern library dedicata.
 
 intro: |
-  Primolino is a dual-structure brand operating in both B2B and B2C markets.<br/>
-  Over time, the project evolved from a digital identity definition to a full brand ecosystem, <br class="hide-mobile" />
-  including art direction, website architecture, e-commerce integration,<br class="hide-mobile" /> logo refinement, monogram development and pattern design.
+  Primolino è un’azienda produttrice di tessuti premium per il mondo dell’ospitalità di lusso, <br class="hide-mobile" /> con una struttura duale attiva tra B2B e B2C.<br/><br class="hide-mobile" />
 
 prevSlug: "campari"
 nextSlug: "schreiber-gioielli"
@@ -37,9 +42,19 @@ nextSlug: "schreiber-gioielli"
 
 <div class="row row-center template-brand-ecosystem__overview">
   <div class="col-md-12">
-    <p>
-      A five-year evolution from digital identity to a complete brand ecosystem, unifying two audiences under one coherent visual and commercial strategy.
-    </p>
+<p>
+Il progetto ha riguardato la costruzione di un ecosistema di brand completo,<br class="hide-mobile" />
+pensato per valorizzare il prodotto e distinguersi nel contesto retail attraverso un linguaggio visivo chiaro e contemporaneo.<br class="hide-mobile" /><br class="hide-mobile" />
+
+Nel tempo, l’identità si è evoluta in un sistema articolato,<br class="hide-mobile" />
+tra direzione creativa, architettura del sito ed integrazione e-commerce,<br class="hide-mobile" />
+fino alla ridefinizione dei logotipi, allo sviluppo del monogramma e alla creazione di un sistema di pattern coordinati.<br class="hide-mobile" /><br class="hide-mobile" />
+
+Obiettivo: costruire riconoscibilità e coerenza su tutti i touchpoint,<br class="hide-mobile" />
+definendo una base solida e scalabile nel tempo.
+
+</p>
+
   </div>
 </div>
 
@@ -48,7 +63,7 @@ nextSlug: "schreiber-gioielli"
     <img
       class="fadein reveal-media"
       src="/images/projects/portfolio/primolino/primolino_hero_01.jpg"
-      alt="Primolino brand ecosystem overview showing editorial product styling and refined visual direction."
+      alt="Panoramica ecosistema Primolino con styling editoriale del prodotto e direzione visiva"
       loading="lazy"
       decoding="async"
     />
@@ -61,11 +76,12 @@ nextSlug: "schreiber-gioielli"
       <div class="ecosystem-kicker">B2B</div>
       <h3 class="ecosystem-title">Primolino Milano</h3>
       <p class="ecosystem-text">
-        Corporate and professional communication, <br class="hide-mobile" /> brand presence and institutional storytelling.
+        Comunicazione corporate e istituzionale,
+        presenza digitale <br class="hide-mobile" />e sviluppo di uno storytelling strutturato per il contesto professionale.
       </p>
       <div class="ecosystem-actions">
         <a class="ecosystem-pill" href="https://primolino.it/" target="_blank" rel="noreferrer noopener">
-          Visit portal
+          Visita il sito
         </a>
       </div>
     </div>
@@ -76,11 +92,11 @@ nextSlug: "schreiber-gioielli"
       <div class="ecosystem-kicker">B2C</div>
       <h3 class="ecosystem-title">Primolino Casa</h3>
       <p class="ecosystem-text">
-        A dedicated consumer sub-brand with product storytelling <br class="hide-mobile" /> and an integrated e-commerce.
+        Sub-brand orientato al consumatore, con una narrazione editoriale <br class="hide-mobile" />del prodotto e un ecosistema e-commerce integrato.
       </p>
       <div class="ecosystem-actions">
         <a class="ecosystem-pill" href="https://casa.primolino.it/" target="_blank" rel="noreferrer noopener">
-          Visit e-commerce
+          Visita l’e-commerce
         </a>
       </div>
     </div>
@@ -92,75 +108,60 @@ nextSlug: "schreiber-gioielli"
     <img
       class="fadein reveal-media"
       src="/images/projects/portfolio/primolino/primolino_hero_02.jpg"
-      alt="Primolino digital and brand identity overview featuring website and content system."
+      alt="Panoramica identità digitale Primolino con sito web e sistema contenuti"
       loading="lazy"
       decoding="async"
     />
   </div>
 </div>
 
-<div class="role-blockmobile hide-mobile">
-  <section>...</section>
+<div class="role-block hide-mobile">
+  <section class="role-grid">
+    ...
+  </section>
 </div>
 
 ## Art Direction, Content Production & Digital Identity
 
 <p>
-Creative direction was developed through concept definition, brand moodboards, reference building and storytelling,
-working alongside external photo/video professionals. <br class="hide-mobile" />
-Post-production and social material development were curated by Marysse Design.
+La direzione creativa è stata sviluppata attraverso concept, moodboard e costruzione di <br class="show-mobile" />un sistema narrativo coerente,<br class="hide-mobile" />
+in collaborazione con professionisti esterni per la <br class="show-mobile" />produzione foto e video.
 </p>
 
 <p>
-The visual system was designed to feel refined, warm and editorial, while remaining flexible across
-brand, digital and social touchpoints.
+Il sistema visivo è stato progettato per risultare raffinato, caldo ed editoriale,<br class="hide-mobile" />
+con un equilibrio tra estetica e funzionalità e una forte adattabilità tra brand, digitale e social.<br class="hide-mobile" /><br class="hide-mobile" />
 </p>
 
-<div class="role-blockmobile hide-mobile">
-  <section>...</section>
-</div>
-
-<!-- Media strip: moodboard / identity elements -->
-<div class="media-strip" aria-label="Digital identity strip">
+<!-- MEDIA STRIP -->
+<div class="media-strip" aria-label="Striscia identità visiva">
   <div class="media-strip__track">
 
    <figure class="media-strip__item">
       <div class="media-crop" data-video-toggle>
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          aria-label="Primolino identity motion preview." >
+        <video autoplay muted loop playsinline preload="metadata"
+          aria-label="Animazione identità Primolino">
           <source src="/videos/projects/primolino/01-identity_primolino.mp4" type="video/mp4" />
         </video>
-
-</div>
-</figure>
-
- <figure class="media-strip__item">
-      <img loading="lazy" decoding="async" src="/images/projects/portfolio/primolino/strip_02.jpg" alt="Identity typography details and layout accents." />
+      </div>
     </figure>
 
- <figure class="media-strip__item">
-      <img loading="lazy" decoding="async" src="/images/projects/portfolio/primolino/strip_03.jpg" alt="Primolino brand palette and tonal system." />
+  <figure class="media-strip__item">
+      <img src="/images/projects/portfolio/primolino/strip_02.jpg" alt="Dettagli tipografici e layout dell’identità Primolino" />
     </figure>
 
- <figure class="media-strip__item">
+   <figure class="media-strip__item">
+      <img src="/images/projects/portfolio/primolino/strip_03.jpg" alt="Palette cromatica Primolino" />
+    </figure>
+
+   <figure class="media-strip__item">
       <div class="media-crop" data-video-toggle>
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          aria-label="Primolino storytelling motion preview." >
+        <video autoplay muted loop playsinline preload="metadata"
+          aria-label="Animazione storytelling Primolino">
           <source src="/videos/projects/primolino/02-storytelling_primolino.mp4" type="video/mp4" />
         </video>
-
-</div>
-</figure>
+      </div>
+    </figure>
 
   </div>
 </div>
@@ -168,19 +169,19 @@ brand, digital and social touchpoints.
 <div class="row row-cols-2 mb-xl">
   <div class="col-md-6">
     <div class="box">
-      <h3>Goal</h3>
+      <h3>Obiettivo</h3>
       <p>
-        Define a premium digital identity capable of scaling from brand storytelling to <br class="hide-mobile" />
-        e-commerce content, while keeping a consistent tone and recognizable aesthetic.
+        Definire un’identità digitale premium e scalabile, capace di estendersi dal brand storytelling ai contenuti e-commerce mantenendo coerenza e riconoscibilità.
       </p>
     </div>
   </div>
+
   <div class="col-md-6">
     <div class="box">
       <h3>Output</h3>
       <p>
-        Visual guidelines, social system, content templates and a <br class="hide-mobile" />
-        flexible foundation for the future web ecosystem.
+        Linee guida visive, sistema social, template di contenuto<br class="hide-mobile" />
+        e una base flessibile per lo sviluppo futuro dell’ecosistema digitale.
       </p>
     </div>
   </div>
@@ -201,8 +202,8 @@ brand, digital and social touchpoints.
 ## Website Ecosystem: B2B + B2C
 
 <p>
-The website was redesigned to host both the professional and consumer worlds inside the same portal, <br class="hide-mobile" />
-ensuring consistent brand presence while optimizing navigation and content priorities for each audience.
+Il sito è stato riprogettato per integrare in un unico ecosistema il mondo professionale e quello consumer,<br class="hide-mobile" />
+garantendo coerenza di brand e ottimizzando navigazione e contenuti per entrambi i target.<br class="hide-mobile" /><br class="hide-mobile" />
 </p>
 
 <div class="media-strip" aria-label="Website and e-commerce UI strip">
@@ -249,14 +250,13 @@ ensuring consistent brand presence while optimizing navigation and content prior
 ## Logo Rebrand (Logotypes + Monogram System)
 
 <p>
-In 2025, the brand marks were subtly reinterpreted to achieve a more contemporary and polished expression,<br class="hide-mobile" />
-while safeguarding the historical trace and refined heritage<br class="show-mobile" /> embedded in the original design.
+Nel 2025 i marchi sono stati reinterpretati con un intervento mirato,<br class="hide-mobile" />
+per ottenere un’espressione più contemporanea mantenendo il legame <br class="show-mobile" />con la loro identità storica.
 </p>
 
 <p>
-The update involved both logotypes (Primolino Milano and Primolino Casa) and the introduction of a standalone “P” monogram, <br class="hide-mobile" />
-designed to function independently and at small scale. 
-The color palette was also slightly refined to create a more cohesive and contemporary visual system.
+Il redesign ha coinvolto i logotipi e introdotto un monogramma “P” autonomo,<br class="hide-mobile" />
+pensato per funzionare anche in scala ridotta e in modo indipendente.
 </p>
 
 <div class="row row-cols-2 mb-xl">
@@ -304,15 +304,22 @@ The color palette was also slightly refined to create a more cohesive and contem
 
   </div>
 </div>
+<div class="role-block hide-mobile">
+  <section class="role-grid">
+    ...
+  </section>
+</div>
 
-## 2025 · First Textile Pattern Collections by Marysse Design
+## 2025 · Textile Pattern Collection
 
 <p><br class="hide-mobile" />
-Although Primolino had previously used decorative patterns within its visual communication,<br class="hide-mobile" />
-2025 marks the first original textile pattern collections<br class="show-mobile" /> designed by Marysse Design.
-<br>
-The system was developed specifically for tablecloths, placemats and runners<br class="hide-mobile" />
-introducing a structured and scalable approach to surface design within the brand universe.<br class="hide-mobile" /><br class="hide-mobile" />
+Il 2025 segna l’introduzione delle prime collezioni di pattern tessili originali firmate Marysse Design,<br class="hide-mobile" />
+sviluppate per applicazioni su tovaglie, runner e accessori.
+</p>
+
+<p>
+Il sistema introduce un approccio strutturato e scalabile al surface design,<br class="hide-mobile" />
+ampliando l’universo visivo del brand.<br class="hide-mobile" /><br class="hide-mobile" />
 </p>
 
 <div class="row mb-xl nopaddingbottom">
@@ -330,20 +337,20 @@ introducing a structured and scalable approach to surface design within the bran
 <div class="row row-cols-2 mb-xl">
   <div class="col-md-6">
     <div class="box"><br class="hide-mobile" /><br class="hide-mobile" /><br class="hide-mobile" />
-      <h3>Geometric Series</h3>
+      <h3>Serie Geometrica</h3>
       <p>
-        The geometric collection explores modular repetition and vertical rhythm,
-        designed to create continuity across large table surfaces while maintaining
-        proportion and clarity on smaller textile formats.
+        La collezione geometrica esplora la ripetizione modulare e il ritmo verticale,
+        progettata per creare continuità su superfici ampie mantenendo
+        proporzione e leggibilità anche nei formati tessili più ridotti.
       </p>
     </div>
   </div>
   <div class="col-md-6">
     <div class="box"><br class="hide-mobile" /><br class="hide-mobile" /><br class="hide-mobile" />
-      <h3>Floral / Heraldic Series</h3>
+      <h3>Serie Floreale / Araldica</h3>
       <p>
-        The floral–heraldic collection reinterprets ornamental symmetry through a refined,
-        contemporary lens, bringing decorative richness and heritage references into the Primolino textile language.
+        La collezione floreale–araldica reinterpreta la simmetria ornamentale attraverso uno sguardo contemporaneo,
+        introducendo ricchezza decorativa e richiami alla tradizione nel linguaggio tessile di Primolino.
       </p>
     </div>
   </div>
@@ -382,15 +389,9 @@ introducing a structured and scalable approach to surface design within the bran
 <div class="project-credits">
   <h2>Credits</h2>
   <p>
-    Client: <a href="https://primolino.it/" target="_blank" rel="noreferrer">Primolino Milano</a>.<br class="hide-mobile" />
-    Creative Direction, Brand Identity, Website Design, Logo Rebrand, Monogram System & Pattern Design: Marysse Design.<br class="hide-mobile" /> 
-    Collaboration (2020–2025): <a href="https://nesscommunication.com/" target="_blank" rel="noreferrer">Ness Communication</a>.<br class="hide-mobile" /> 
-    Photo & Video Production: <a href="https://www.buzin.it/" target="_blank" rel="noreferrer">Buzin Media Agency</a>.  <br class="hide-mobile" />
-    Photographers: <a href="https://www.buzin.it/" target="_blank" rel="noreferrer">Emanuele Bonapace</a> and <a href="https://www.francescobozzo.it/" target="_blank" rel="noreferrer">Francesco Bozzo</a>.<br class="hide-mobile" />
-    Photo/video Assistants: Demetrio Vadalà, Christian Betti.  <br class="hide-mobile" />
-    Set Design: Giada Valentini, Agnese Gagliardini, Martina Malaspina.<br class="hide-mobile" />
-    Set Design Assistants:  Michela Marchesi, Melinda Dahoxhaj, Giulia Mancini, Mario Dan, Emma De Guarda. <br class="hide-mobile" />
+    Cliente: <a href="https://primolino.it/" target="_blank" rel="noreferrer">Primolino Milano</a>.<br class="hide-mobile" />
+    Creative Direction, Brand Identity, Website Design, Rebranding & Pattern Design: Marysse Design.<br class="hide-mobile" />
+    Collaboration: <a href="https://nesscommunication.com/" target="_blank" rel="noreferrer">Ness Communication</a>.<br class="hide-mobile" />
+    Photo & Video: <a href="https://www.buzin.it/" target="_blank" rel="noreferrer">Buzin Media Agency</a>.
   </p>
-  <div class="project-spacer"></div>
-  
 </div>

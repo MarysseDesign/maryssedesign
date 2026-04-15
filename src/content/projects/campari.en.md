@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "campari"
+
 ordine: 2
 titolo: "Campari Academy"
 cliente: "Campari Academy"

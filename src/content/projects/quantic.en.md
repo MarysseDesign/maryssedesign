@@ -1,4 +1,7 @@
 ---
+lang: "en"
+translationKey: "quantic"
+
 ordine: 10
 titolo: "Quantic Milano"
 cliente: "Listen S.R.L."
@@ -24,7 +27,7 @@ sottotitolo: |
 intro: |
   Some projects are defined by iteration. <br>
 
-  Quantic Milano’s logo went through an extensive exploration phase before reaching the final mark, an exercise in precision that ultimately shaped a clear, contemporary identity.
+  Quantic Milano’s identity went through an extensive exploration phase before reaching the final mark, an exercise in precision that ultimately shaped a clear, contemporary identity.
 
 prevSlug: "gorillas-urban-activation"
 nextSlug: "makeupmilano"

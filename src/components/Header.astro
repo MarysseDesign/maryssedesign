@@ -1,25 +1,36 @@
 ---
-const { brand = "marysse" } = Astro.props;
+import { useTranslations } from "@/lib/useTranslations";
 
+const { brand = "marysse", lang = "en" } = Astro.props;
+
+const t = useTranslations(lang);
 const isMarysse = brand === "marysse";
+const isIt = lang === "it";
+
+const route = (enPath: string, itPath: string) => (isIt ? itPath : enPath);
 
 const nav = isMarysse
   ? [
-      { href: "/about", label: "About" },
-      { href: "/projects/", label: "Projects" },
-      { href: "/services", label: "Services" },
+      { href: route("/about", "/it/about"), label: t.nav.about },
+      { href: route("/projects", "/it/progetti"), label: t.nav.projects },
+      { href: route("/services", "/it/servizi"), label: t.nav.services },
     ]
   : [
-      { href: "/marysszang/#artworks", label: "Artworks" },
-      { href: "/marysszang/#collaborations", label: "Partners" },
-      { href: "/marysszang/#about", label: "About" },
-    ]; 
+      { href: route("/marysszang/#artworks", "/it/marysszang/#artworks"), label: t.nav.artworks },
+      { href: route("/marysszang/#collaborations", "/it/marysszang/#collaborations"), label: t.nav.collaborations },
+      { href: route("/marysszang/#about", "/it/marysszang/#about"), label: t.nav.aboutMarysszang },
+    ];
 
 const otherBrand = isMarysse
-  ? { href: "/marysszang/", label: "Artistic Side" }
-  : { href: "/", label: "Brand Boutique" };
+  ? { href: route("/marysszang/", "/it/marysszang/"), label: t.nav.artisticSide }
+  : { href: route("/", "/it/"), label: t.nav.brandBoutique };
 
-const homeHref = isMarysse ? "/" : "/marysszang/";
+const homeHref = isMarysse ? route("/", "/it/") : route("/marysszang/", "/it/marysszang/");
+const contactsHref = route("/contacts", "/it/contatti");
+
+const langSwitchHref = isIt
+  ? (isMarysse ? "/" : "/marysszang/")
+  : (isMarysse ? "/it/" : "/it/marysszang/");
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-[#191118]/15">
@@ -38,7 +49,7 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
       <button
         id="menuToggle"
         class="group absolute right-6 top-1/2 -translate-y-1/2 w-8 h-8 flex flex-col items-center justify-center z-50"
-        aria-label="Open menu"
+        aria-label={isIt ? 'Apri menu' : 'Open menu'}
         aria-expanded="false"
         aria-controls="mobilePanel"
         type="button"
@@ -46,11 +57,6 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
         <span class="line block w-6 h-[1px] bg-[#191118] transition-all duration-300"></span>
         <span class="line block w-6 h-[1px] bg-[#191118] transition-all duration-300 my-[5px]"></span>
         <span class="line block w-6 h-[1px] bg-[#191118] transition-all duration-300"></span>
-
-        <span
-          id="hoverDiamond"
-          class="pointer-events-none absolute -right-3 w-2.5 h-2.5 rotate-45 border border-[#191118] opacity-0 transition-opacity duration-150"
-        ></span>
       </button>
     </div>
 
@@ -75,14 +81,18 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
         <div class="w-px h-5 bg-[#191118]/20" />
 
         <a
-          href="/contacts"
+          href={contactsHref}
           class="px-3 py-1 rounded-full border border-[#191118]/25 text-[#191118] hover:bg-[#191118]/5 transition-colors"
         >
-          Contacts
+          {t.nav.contacts}
         </a>
 
         <a href={otherBrand.href} class="cta-dark ml-2 hidden lg:inline-block">
           {otherBrand.label}
+        </a>
+
+        <a href={langSwitchHref} class="opacity-60 hover:opacity-100 transition-opacity">
+          {isIt ? "EN" : "IT"}
         </a>
       </nav>
     </div>
@@ -103,12 +113,16 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
             </a>
           ))}
 
-          <a href="/contacts" class="hover:opacity-70 transition-opacity" data-close-menu>
-            Contacts
+          <a href={contactsHref} class="hover:opacity-70 transition-opacity" data-close-menu>
+            {t.nav.contacts}
           </a>
 
           <a href={otherBrand.href} class="cta-light mt-6" data-close-menu>
             {otherBrand.label}
+          </a>
+
+          <a href={langSwitchHref} class="opacity-80 hover:opacity-100 transition-opacity" data-close-menu>
+            {isIt ? "EN" : "IT"}
           </a>
         </nav>
       </div>
@@ -119,24 +133,14 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
     (() => {
       const btn = document.getElementById("menuToggle");
       const panel = document.getElementById("mobilePanel");
-      const diamond = document.getElementById("hoverDiamond");
       const lines = btn?.querySelectorAll(".line") ?? [];
-      if (!btn || !panel || !diamond) return;
+      if (!btn || !panel) return;
 
       let open = false;
-
-      btn.addEventListener("mouseenter", () => {
-        if (!open) diamond.style.opacity = "1";
-      });
-
-      btn.addEventListener("mouseleave", () => {
-        diamond.style.opacity = "0";
-      });
 
       function setOpen(state) {
         open = state;
         btn.setAttribute("aria-expanded", open ? "true" : "false");
-
         panel.style.pointerEvents = open ? "auto" : "none";
         panel.style.opacity = open ? "1" : "0";
         panel.style.transform = open ? "translate(-50%,0)" : "translate(-50%,-0.5rem)";
@@ -145,7 +149,6 @@ const homeHref = isMarysse ? "/" : "/marysszang/";
           lines[0]?.classList.add("translate-y-[6px]", "rotate-45");
           lines[1]?.classList.add("opacity-0");
           lines[2]?.classList.add("-translate-y-[6px]", "-rotate-45");
-          diamond.style.opacity = "0";
           document.documentElement.classList.add("menu-open");
           document.body.classList.add("menu-open");
         } else {

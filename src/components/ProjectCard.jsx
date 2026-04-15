@@ -7,6 +7,7 @@ export default function ProjectCard({
   abstract,
   meta,
   badges = [],
+  rolesAria = "Roles",
 }) {
   return (
     <a className="p-card" href={href}>
@@ -21,7 +22,7 @@ export default function ProjectCard({
         {meta && <p className="p-card__meta">{meta}</p>}
 
         {badges?.length > 0 && (
-          <div className="p-card__badges" aria-label="Roles">
+          <div className="p-card__badges" aria-label={rolesAria}>
             {badges.map((b) => (
               <span className="p-badge" key={b}>
                 {b}

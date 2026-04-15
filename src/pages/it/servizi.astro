@@ -1,0 +1,358 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/styles/bigservices.css";
+
+const modules = [
+  {
+    key: "branding",
+    title: "Branding",
+    subtitle: "Identità e Posizionamento",
+  desc:
+  "Costruiamo identità e posizionamento per rendere il brand chiaro, riconoscibile e coerente in ogni contesto.",
+    bullets: [
+      "Architettura di marca e posizionamento",
+      "Sistema di identità visiva",
+      "Linee guida e asset fondamentali",
+    ],
+    image: "/images/tarot/branding.jpg",
+    imageAlt: "Carta tarot dedicata al branding",
+  },
+  {
+    key: "creative-direction",
+    title: "Direzione Creativa",
+    subtitle: "Strategia e Concept Creativo",
+desc:
+  "Definiamo la visione che guida strategia, concept e immagine, affinché ogni elemento parli la stessa lingua.",
+    bullets: [
+      "Concept creativo e direzione",
+      "Art direction e linguaggio visivo",
+      "Supervisione dei touchpoint",
+    ],
+    image: "/images/tarot/strategy.jpg",
+    imageAlt: "Carta tarot dedicata alla direzione creativa",
+  },
+  {
+    key: "advertising",
+    title: "Advertising",
+    subtitle: "Campagne e Art Direction",
+   desc:
+  "Campagne costruite con precisione, dove concept, immagini e art direction lavorano insieme per esprimere valore e desiderabilità.",
+    bullets: [
+      "Concept di campagna e key visual",
+      "Art direction per i contenuti visivi",
+      "Asset per digitale e stampa",
+    ],
+    image: "/images/tarot/advertising.jpg",
+    imageAlt: "Carta tarot dedicata all'advertising",
+  },
+  {
+    key: "storytelling",
+    title: "Storytelling",
+    subtitle: "Narrazione e Voce del Brand",
+   desc:
+  "Definiamo tono di voce e linguaggio visivo per costruire una narrazione chiara, autentica e riconoscibile nel tempo.",
+    bullets: [
+      "Tono di voce e messaggi chiave",
+      "Struttura narrativa e copy direction",
+      "Linee guida editoriali",
+    ],
+    image: "/images/tarot/storytelling.jpg",
+    imageAlt: "Carta tarot dedicata allo storytelling",
+  },
+  {
+    key: "web-design",
+    title: "Web Design",
+    subtitle: "Esperienze Digitali Luxury",
+    desc:
+  "Progettiamo esperienze digitali in cui struttura, estetica e chiarezza convivono con naturalezza.",
+    bullets: [
+      "Architettura UX e UI",
+      "Design system pronto per lo sviluppo",
+      "Sviluppo in Astro o WordPress",
+    ],
+    image: "/images/tarot/web.jpg",
+    imageAlt: "Carta tarot dedicata al web design",
+  },
+  {
+    key: "social-media",
+    title: "Social Media",
+    subtitle: "Contenuti e Ritmo Editoriale",
+    desc:
+  "Costruiamo una presenza social coerente nel tempo, attraverso contenuti, ritmo editoriale e continuità visiva.",
+    bullets: [
+      "Ritmo editoriale e regole di formato",
+      "Direzione contenuti e pianificazione",
+      "Coerenza visiva nel tempo",
+    ],
+    image: "/images/tarot/social.jpg",
+    imageAlt: "Carta tarot dedicata ai social media",
+  },
+  {
+    key: "visual-system",
+    title: "Sistema Visivo",
+    subtitle: "Linee Guida e Linguaggio di Design",
+    desc:
+  "Un sistema chiaro e strutturato, pensato per far crescere il brand senza perdere coerenza.",
+    bullets: [
+      "Linguaggio di design e regole di layout",
+      "Template e componenti",
+      "Linee guida per team e collaboratori",
+    ],
+    image: "/images/tarot/visual.jpg",
+    imageAlt: "Carta tarot dedicata al sistema visivo",
+  },
+  {
+    key: "photography",
+    title: "Fotografia",
+    subtitle: "Immagini di Prodotto e di Brand",
+    desc:
+  "Immagini guidate da una direzione precisa, per costruire coerenza e qualità visiva.",
+    bullets: [
+      "Pianificazione pre-shoot",
+      "Art direction sul set",
+      "Selezione e post-produzione",
+    ],
+    image: "/images/tarot/photo.jpg",
+    imageAlt: "Carta tarot dedicata alla fotografia",
+  },
+  {
+    key: "video",
+    title: "Video",
+    subtitle: "Motion e Brand Film",
+    desc:
+  "Contenuti video e motion progettati per raccontare il brand con chiarezza e sensibilità visiva.",
+    bullets: [
+      "Direzione del linguaggio motion",
+      "Storyboard e ritmo narrativo",
+      "Deliverable per il digitale",
+    ],
+    image: "/images/tarot/video.jpg",
+    imageAlt: "Carta tarot dedicata al video",
+  },
+  {
+    key: "experiential",
+    title: "Experiential",
+    subtitle: "Eventi e Brand Moments",
+    desc:
+  "Traduciamo il brand in esperienza, preservandone coerenza e riconoscibilità.",
+    bullets: [
+      "Identità e direzione evento",
+      "Touchpoint e asset dedicati",
+      "Coerenza dell’esperienza nello spazio",
+    ],
+    image: "/images/tarot/events.jpg",
+    imageAlt: "Carta tarot dedicata alle esperienze di brand",
+  },
+];
+
+const architectures = [
+  {
+    kicker: "Identità",
+    title: "Posizionamento e linguaggio di design.",
+    lead:
+  "La base che definisce come il brand viene percepito e ne costruisce la coerenza nel tempo.",
+    keys: ["branding", "storytelling", "visual-system"],
+  },
+  {
+    kicker: "Direzione",
+    title: "Concept, campagne e immaginario visivo.",
+    lead:
+  "Una visione unica guida contenuti, immagini ed esecuzione, mantenendo il brand coerente in ogni espressione.",
+    keys: ["creative-direction", "advertising", "photography", "video", "experiential"],
+  },
+  {
+    kicker: "Digitale",
+    title: "Presenza web ed editoriale.",
+   lead:
+  "Esperienze digitali progettate con struttura e chiarezza, per rendere il brand solido e riconoscibile online.",
+    keys: ["web-design", "social-media"],
+  },
+];
+
+const byKey = Object.fromEntries(modules.map((m) => [m.key, m]));
+---
+
+<BaseLayout 
+brand="marysse" 
+title="Servizi · Marysse Design" 
+description="Servizi modulari di branding, art direction, campagne, web design, fotografia, video e contenuti per brand premium e luxury."
+footerVariant="minimal">
+  <main class="bigservices-page services-page">
+    <header class="bigservices-hero">
+      <div class="bigservices-center">
+        <div class="bigservices-hero__inner">
+          <h1 class="bigservices-title page-fade" style="--d: 80ms;">Servizi</h1>
+
+         <p class="bigservices-subtitle"> Servizi per costruire brand chiari, riconoscibili e coerenti nel tempo.<br />
+Un sistema modulare pensato per progetti premium e luxury,<br class="hide-mobile" />
+guidato da strategia e visione.
+</p>
+        </div>
+      </div>
+    </header>
+
+    <section id="modules" class="services-section about-veil" aria-label="Moduli di servizio">
+      <div class="site-container services-inner">
+        <div class="module-grid" role="list">
+          {modules.map((m, idx) => (
+            <a
+              class="module-card reveal"
+              style={`--delay:${140 + idx * 40}ms`}
+              href={`#${m.key}`}
+              role="listitem"
+              aria-label={`Apri la sezione ${m.title}`}
+            >
+              <figure class="module-media" aria-hidden="true">
+                <img src={m.image} alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+              </figure>
+              <div class="module-meta">
+                <h3 class="module-title">{m.title}</h3>
+                <p class="module-sub">{m.subtitle}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section about-light" aria-label="Dettaglio dei servizi">
+      <div class="site-container services-inner">
+        {architectures.map((a, aIdx) => (
+          <section class="services-arch" aria-label={a.kicker}>
+            <header class="services-archHead reveal" style={`--delay:${80 + aIdx * 40}ms`}>
+              <p class="services-kicker">{a.kicker}</p>
+              <h2 class="services-title">{a.title}</h2>
+              <p class="services-lead">{a.lead}</p>
+            </header>
+
+            <div class="services-rows">
+              {a.keys.map((key, idx) => {
+                const m = byKey[key];
+                const reverse = idx % 2 === 1;
+                return (
+                  <article
+                    id={m.key}
+                    class={`service-row reveal ${reverse ? "is-reversed" : ""}`}
+                    style={`--delay:${140 + idx * 60}ms`}
+                  >
+                    <figure class="service-media" aria-label={m.imageAlt}>
+                      <img src={m.image} alt={m.imageAlt} width="1400" height="1750" loading="lazy" decoding="async" />
+                    </figure>
+
+                    <div class="service-content">
+                      <p class="services-kicker">{m.subtitle}</p>
+                      <h3 class="services-subtitle">{m.title}</h3>
+                      <p class="service-lead">{m.desc}</p>
+
+                      <div class="service-items" aria-label={`Cosa include ${m.title}`}>
+                        {m.bullets.map((b) => (
+                          <span class="service-item">{b}</span>
+                        ))}
+                      </div>
+
+                      <div class="service-actions" aria-label={`Azioni disponibili per ${m.title}`}>
+                        <a href="/it/contatti/" class="cta-dark">RICHIEDI INFORMAZIONI</a>
+                        <a href="/it/progetti/" class="cta-stroke">VEDI I PROGETTI</a>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section class="services-section about-veil" aria-label="Supporto curatoriale">
+      <div class="site-container services-inner">
+        <div class="services-curation reveal" style="--delay: 80ms">
+          <p class="services-kicker">Supporto curatoriale</p>
+          <h2 class="services-title">Una collaborazione continuativa.</h2>
+         <p class="services-lead">
+ Per brand che richiedono continuità, chiarezza e precisione.
+  Definiamo insieme la combinazione di servizi più adatta,
+  guidata da una visione unica.
+</p>
+
+          <div class="curation-grid">
+            <div class="curation-card">
+              <h3>On call</h3>
+             <p>
+ Interventi mirati per decisioni strategiche, affinamenti e direzione nei momenti chiave. 
+</p>
+            </div>
+
+            <div class="curation-card2">
+              <h3>Continuativo</h3>
+             <p>
+ Una collaborazione continuativa per mantenere il brand coerente nel tempo,
+tra contenuti, campagne e presenza digitale.
+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="services-section about-light" aria-label="Contatto">
+      <div class="site-container services-inner">
+        <header class="services-intro reveal" style="--delay: 80ms">
+          <p class="services-kicker">Contatto</p>
+          <h2 class="services-title">Parliamo del progetto.</h2>
+        <p class="services-lead">
+  Raccontaci cosa stai costruendo <br class="hide-mobile" />e ti indicheremo il passo successivo più adatto.<br />
+  Preferisci l’email? Scrivi a
+  <a class="inline-link" href="mailto:info@maryssedesign.com">info@maryssedesign.com</a>.
+
+            <br class="hide-mobile" />
+          </p>
+        </header>
+
+        <div class="contact-actions reveal" style="--delay: 140ms">
+          <a class="cta-dark" href="/it/contatti/">AVVIA UNA RICHIESTA</a>
+          <a class="cta-stroke" href="/it/progetti/">VEDI I PROGETTI </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<button id="goToTop" aria-label="Torna in alto" class="go-to-top">
+  TORNA SU
+</button>
+
+<script is:inline>
+  const els = document.querySelectorAll(".reveal");
+  if (els.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("is-inview");
+        });
+      },
+      { threshold: 0.14 }
+    );
+    els.forEach((el) => io.observe(el));
+  }
+
+  (() => {
+    const btn = document.getElementById("goToTop");
+    if (!btn) return;
+
+    const toggle = () => {
+      if (window.scrollY > 300) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
+    };
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
+  })();
+</script>

@@ -1,0 +1,347 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/styles/marysszang.css";
+
+const filterDefs = [
+  { label: "Tutte", key: "all" },
+  { label: "Collezione Clouds", key: "clouds" },
+  { label: "Collezione Architecture", key: "architecture" },
+  { label: "Collezione La vie en rose", key: "la-vie-en-rose" },
+  { label: "Collezione Moon", key: "moon" },
+  { label: "Collezione Creathings", key: "creathings" },
+];
+
+const items = [
+  { src: "/images/artworks/36-ig.jpg", title: "Listening", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/31-ig.jpg", title: "Touching", collection: "Collezione Moon", filterKey: "moon" },
+  { src: "/images/artworks/34-ig.jpg", title: "Restare", collection: "Collezione Moon", filterKey: "moon" },
+  { src: "/images/artworks/33-ig.jpg", title: "Moon's surf", collection: "Collezione Moon", filterKey: "moon" },
+  { src: "/images/artworks/32-ig.jpg", title: "Naked", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/30-ig.jpg", title: "Oxygen", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/29-ig.jpg", title: "Collapse", collection: "Collezione Creathings", filterKey: "creathings" },
+  { src: "/images/artworks/35-ig.jpg", title: "Blossed plane", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/01-ig.jpg", title: "Children Dreams I", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/02-ig.jpg", title: "Flight to heaven", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/03-ig.jpg", title: "Life is a carousel", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/04-ig.jpg", title: "Up like mushrooms", collection: "Collezione Architecture", filterKey: "architecture" },
+  { src: "/images/artworks/05-ig.jpg", title: "Serenity", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/06-ig.jpg", title: "Head in the clouds", collection: "Collezione Creathings", filterKey: "creathings" },
+  { src: "/images/artworks/07-ig.jpg", title: "Color attack", collection: "Collezione Creathings", filterKey: "creathings" },
+  { src: "/images/artworks/08-ig.jpg", title: "The pink hour", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/09-ig.jpg", title: "Melting skyline", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/10-ig.jpg", title: "Cotton city", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/11-ig.jpg", title: "Sweet skyline", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/12-ig.jpg", title: "Shapes", collection: "Collezione Architecture", filterKey: "architecture" },
+  { src: "/images/artworks/13-ig.jpg", title: "Anthophila", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/14-ig.jpg", title: "Carts & stairs", collection: "Collezione Creathings", filterKey: "creathings" },
+  { src: "/images/artworks/15-ig.jpg", title: "Born to be print", collection: "Collezione Creathings", filterKey: "creathings" },
+  { src: "/images/artworks/16-ig.jpg", title: "Feelings of shapes", collection: "Collezione Creathings", filterKey: "creathings" },
+  { src: "/images/artworks/17-ig.jpg", title: "Sunflower inn", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/18-ig.jpg", title: "Fior di luna", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/19-ig.jpg", title: "La vie en rose", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/20-ig.jpg", title: "Children Dreams II", collection: "Collezione Clouds", filterKey: "clouds" },
+  { src: "/images/artworks/21-ig.jpg", title: "Sunny Day", collection: "Collezione Architecture", filterKey: "architecture" },
+  { src: "/images/artworks/22-ig.jpg", title: "Breid", collection: "Collezione Architecture", filterKey: "architecture" },
+  { src: "/images/artworks/23-ig.jpg", title: "Chemical chimney", collection: "Collezione Architecture", filterKey: "architecture" },
+  { src: "/images/artworks/24-ig.jpg", title: "Cut-things", collection: "Collezione Architecture", filterKey: "architecture" },
+  { src: "/images/artworks/25-ig.jpg", title: "L-over", collection: "Collezione Moon", filterKey: "moon" },
+  { src: "/images/artworks/26-ig.jpg", title: "Delicate", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+  { src: "/images/artworks/27-ig.jpg", title: "Hello beauty!", collection: "Collezione Moon", filterKey: "moon" },
+  { src: "/images/artworks/28-ig.jpg", title: "Chatouille", collection: "Collezione La vie en rose", filterKey: "la-vie-en-rose" },
+];
+
+const pageTitle = "L’arte è presenza.";
+
+const altBySrc = {
+  "/images/artworks/20-ig.jpg": "Architettura minimalista dai toni pastello con una cornice ad arco e un piccolo uccello in un cielo rosa",
+  "/images/artworks/21-ig.jpg": "Aereo che lascia una scia bianca sopra un edificio color arcobaleno sotto un cielo terso",
+  "/images/artworks/22-ig.jpg": "Tetti geometrici dai toni pastello con ombre morbide e una lieve scia nel cielo",
+  "/images/artworks/23-ig.jpg": "Sagoma femminile sfocata sotto una luna a forma di cuore in un cielo da tramonto sognante",
+  "/images/artworks/24-ig.jpg": "Tre delicati fiori color pesca allineati verticalmente su uno sfondo neutro",
+  "/images/artworks/25-ig.jpg": "Luna crescente sospesa in un cielo al tramonto dai toni rosa e azzurri",
+  "/images/artworks/26-ig.jpg": "Mano che regge un ramo fiorito delicato contro un cielo rosa tenue con uccelli in volo",
+  "/images/artworks/27-ig.jpg": "Ritratto surreale di una donna curva sotto una scala in un interno dai toni pastello",
+  "/images/artworks/28-ig.jpg": "Figura femminile di spalle davanti al mare con capelli mossi dal vento che si fondono con le nuvole",
+  "/images/artworks/29-ig.jpg": "Dente di leone sospeso sotto una luna crescente in un crepuscolo azzurro e rosa",
+  "/images/artworks/30-ig.jpg": "Donna seduta da sola su montagne rocciose bianche tra nebbia e nuvole",
+  "/images/artworks/31-ig.jpg": "Luna piena appoggiata su un mare calmo al tramonto con nuvole pastello sopra",
+  "/images/artworks/32-ig.jpg": "Donna che cammina verso il mare sotto una luna crescente in un tramonto pastello",
+  "/images/artworks/33-ig.jpg": "Fiori rosa incorniciati in una finestra circolare con una luna crescente sullo sfondo",
+  "/images/artworks/34-ig.jpg": "Donna seduta in un paesaggio desertico rosato al tramonto con riflessi luminosi",
+  "/images/artworks/35-ig.jpg": "Casa vittoriana che emerge da nuvole pastello con uccelli in volo nel cielo",
+  "/images/artworks/36-ig.jpg": "Statua dorata vista attraverso una finestra circolare contro un cielo tenue azzurro e pesca",
+};
+
+const getAlt = (src, title) => altBySrc[src] ?? `${title} — opera digitale di Marysszang`;
+---
+
+<BaseLayout 
+brand="marysszang" 
+title="Marysszang · Opere"
+description="Una selezione di opere digitali di Marysszang, tra fotografia, composizione visiva e immaginari sospesi tra delicatezza e surrealismo.">
+  <style is:inline>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
+  <section class="msz-hero" aria-labelledby="msz-title">
+    <h1 class="msz-title typewriter" id="msz-title" data-text={pageTitle}>
+      <span class="sr-only">{pageTitle}</span>
+      <span aria-hidden="true">{pageTitle}</span>
+    </h1>
+
+ <p class="msz-subtitle">
+  Un dialogo tra visione e realtà. <br />
+  <br />
+  <a
+    href="https://www.instagram.com/marysszang"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="msz-ig"
+  >
+    @marysszang
+  </a>
+</p>
+
+    <p id="filterStatus" class="sr-only" aria-live="polite"></p>
+
+    <ul class="msz-filters" id="filters" aria-label="Filtra le opere">
+      {filterDefs.map((f) => (
+        <li>
+          <button
+            type="button"
+            class={"msz-chip " + (f.key === "all" ? "active" : "")}
+            data-filter={f.key}
+            aria-controls="artworks"
+            aria-pressed={f.key === "all" ? "true" : "false"}
+          >
+            {f.label}
+          </button>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="msz-grid" id="artworks" aria-label="Griglia delle opere">
+    {items.map((it) => (
+      <figure class={"msz-card " + it.filterKey} data-filterkey={it.filterKey}>
+        <img
+          loading="lazy"
+          decoding="async"
+          src={it.src}
+          alt={getAlt(it.src, it.title)}
+        />
+        <figcaption>
+          <strong>{it.title}</strong>
+          <span>{it.collection}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </section>
+
+  <section class="msz-about" id="about" aria-labelledby="about-title">
+<div class="msz-about-inner">
+  <h2 id="about-title">About Marysszang</h2>
+
+  <p>
+    Marysszang è lo spazio visivo di Maria Assunta Zangone,<br class="hide-on-mobile" />
+    una ricerca che si muove tra equilibrio ed emozione.
+    <br class="hide-on-mobile" /><br />
+    Ogni creazione nasce da un’intuizione
+    e si traduce in immagini essenziali, <br class="hide-on-mobile" />costruite attraverso composizione, dettaglio e armonia.
+  </p>
+
+  <p>
+    Il suo linguaggio si sviluppa tra morbidezza e sospensione,<br class="hide-on-mobile" />
+    ispirato dalla bellezza delle cose, dalla luce e dal ritmo quieto del tempo.
+    <br class="hide-on-mobile" /><br/>
+    Marysszang è una pratica visiva in evoluzione,<br class="hide-on-mobile" />
+    un modo di osservare e dare forma alla realtà con sensibilità e misura.
+  </p>
+</div>
+
+      <a
+        href="https://www.instagram.com/marysszang"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="msz-ig"
+        aria-label="Apri @marysszang su Instagram (si apre in una nuova scheda)"
+      >
+        @marysszang
+      </a>
+    </div>
+
+    <figure class="msz-about-figure">
+      <img
+        src="/images/about/marysszang-portrait.jpg"
+        alt="Ritratto minimal e surreale di Marysszang"
+        loading="lazy"
+        decoding="async"
+        width="768"
+        height="910"
+      />
+    </figure>
+  </section>
+
+ <section class="msz-collaborations mt-24" id="collaborations" aria-labelledby="collab-title">
+  <h2
+    id="collab-title"
+    class="text-center text-[18px] tracking-[0.25em] uppercase text-gray-600 mb-6"
+  >
+    Collaborazioni
+  </h2>
+
+  <p class="msz-collaborations-intro">
+    Una selezione di collaborazioni con brand e realtà creative,<br class="hide-on-mobile" />
+    sviluppate tra ricerca visiva e costruzione dell’immagine.
+  </p>
+
+    <div class="relative overflow-hidden" aria-label="Marquee con i loghi delle collaborazioni">
+      <div class="flex animate-marquee items-center whitespace-nowrap">
+        <img src="/images/collaborations/Canon.png" alt="Canon" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Kia.png" alt="Kia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Acaf-Catania.png" alt="Acaf Catania" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Telki-Milano.png" alt="Telkì Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Psicografici-Editore.png" alt="Psicografici Editore" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/PullAndBear.png" alt="Pull&Bear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Garnier.png" alt="Garnier" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Tijnhomelife.png" alt="Tijnhomelife" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Campomarzio70.png" alt="Campomarzio70" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Memoparis.png" alt="Memoparis" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ortastro.png" alt="Ortastro" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/GoodYear.png" alt="GoodYear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Italia.png" alt="Igers Italia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Milano.png" alt="Igers Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Visit-Milano.png" alt="Visit Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Europa.png" alt="Igers Europa" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Tropea.png" alt="Igers Tropea" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Calabria.png" alt="Igers Calabria" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Dyson.png" alt="Dyson" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/NapLoungewear.png" alt="Nap Loungewear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ecosusi-Vintage.png" alt="Ecosusi Vintage" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Little-Look-Shop.png" alt="Little Look Shop" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Stronger.png" alt="Stronger" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+
+        <img src="/images/collaborations/Canon.png" alt="Canon" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Kia.png" alt="Kia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Acaf-Catania.png" alt="Acaf Catania" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Telki-Milano.png" alt="Telkì Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Psicografici-Editore.png" alt="Psicografici Editore" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/PullAndBear.png" alt="Pull&Bear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Garnier.png" alt="Garnier" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Tijnhomelife.png" alt="Tijnhomelife" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Campomarzio70.png" alt="Campomarzio70" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Memoparis.png" alt="Memoparis" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ortastro.png" alt="Ortastro" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/GoodYear.png" alt="GoodYear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Italia.png" alt="Igers Italia" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Milano.png" alt="Igers Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Visit-Milano.png" alt="Visit Milano" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Europa.png" alt="Igers Europa" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Tropea.png" alt="Igers Tropea" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Igers-Calabria.png" alt="Igers Calabria" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Dyson.png" alt="Dyson" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/NapLoungewear.png" alt="Nap Loungewear" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Ecosusi-Vintage.png" alt="Ecosusi Vintage" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Little-Look-Shop.png" alt="Little Look Shop" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+        <img src="/images/collaborations/Stronger.png" alt="Stronger" class="h-14 sm:h-20 lg:h-24 mx-12 opacity-90" />
+      </div>
+    </div>
+  </section>
+
+<footer class="msz-footer-simple">
+  <p class="msz-affiliate">
+    Alcuni contenuti possono includere link affiliati. In qualità di Affiliata Amazon, Marysszang può ricevere una commissione dagli acquisti idonei.
+  </p>
+</footer>
+
+  <button id="goToTop" aria-label="Torna in alto" class="go-to-top">
+    TORNA SU
+  </button>
+
+  <script is:inline>
+    function initMszFilters() {
+      const filtersRoot = document.getElementById("filters");
+      const grid = document.getElementById("artworks");
+      const status = document.getElementById("filterStatus");
+      if (!filtersRoot || !grid) return;
+
+      const buttons = Array.from(filtersRoot.querySelectorAll("button[data-filter]"));
+      const cards = Array.from(grid.querySelectorAll(".msz-card"));
+
+      if (!buttons.length || !cards.length) return;
+
+      const getLabelByKey = (key) => {
+        const btn = buttons.find((b) => (b.dataset.filter || "all") === key);
+        return btn ? btn.textContent.trim() : "Tutte";
+      };
+
+      const applyFilter = (key) => {
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const show = key === "all" || card.classList.contains(key);
+          card.style.display = show ? "" : "none";
+          if (show) visibleCount++;
+        });
+
+        if (status) {
+          const label = getLabelByKey(key);
+          status.textContent = `${label} selezionata. Sono visibili ${visibleCount} opere.`;
+        }
+      };
+
+      const setActiveButton = (activeBtn) => {
+        buttons.forEach((b) => {
+          const isActive = b === activeBtn;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.dataset.filter || "all";
+          setActiveButton(btn);
+          applyFilter(key);
+        });
+      });
+
+      const initial = buttons.find((b) => (b.dataset.filter || "all") === "all") || buttons[0];
+      setActiveButton(initial);
+      applyFilter("all");
+    }
+
+    document.addEventListener("DOMContentLoaded", initMszFilters);
+    document.addEventListener("astro:page-load", initMszFilters);
+
+    (() => {
+      const btn = document.getElementById("goToTop");
+      if (!btn) return;
+
+      const toggle = () => {
+        if (window.scrollY > 300) {
+          btn.classList.add("is-visible");
+        } else {
+          btn.classList.remove("is-visible");
+        }
+      };
+
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener("scroll", toggle, { passive: true });
+      toggle();
+    })();
+  </script>
+</BaseLayout>
