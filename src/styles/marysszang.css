@@ -323,14 +323,17 @@ html.msz-no-scroll,
     padding: 0 1rem;
   }
 }
-
 /* Nascondi il <br> su mobile */
+.hide-on-mobile {
+  display: inline;
+}
 .msz-subtitle .hide-on-mobile {
   display: inline;
 }
 @media (max-width: 640px) {
+  .hide-on-mobile,
   .msz-subtitle .hide-on-mobile {
-    display: none;
+    display: none !important;
   }
   .hide-mobile {
     display: none !important;
@@ -475,7 +478,7 @@ html.msz-no-scroll,
   margin: 1.75rem auto 5rem;
   padding: 0 var(--gutter);
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0;
 }
 @media (min-width: 640px) {
@@ -569,6 +572,40 @@ html.msz-no-scroll,
 @media (max-width: 767px) {
   .msz-card figcaption strong {
     font-weight: 400;
+  }
+}
+
+/* Mobile: didascalie compatte per griglia a 2 colonne */
+@media (max-width: 639px) {
+  .msz-card figcaption {
+    padding: 10px 10px 10px;
+    margin: 0;
+    border-bottom: none; /* rimuove linea sotto */
+    min-height: 72px; /* altezza fissa uguale per tutti i blocchi */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .msz-card figcaption strong {
+    font-size: 13px;
+    margin: 0 0 4px 0;
+  }
+  .msz-card figcaption span {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    min-height: 2.8em; /* forza sempre 2 righe di testo collezione */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: visible;
+    white-space: normal;
+  }
+  /* Nasconde anche la pseudo-linea animata */
+  .msz-card figcaption::after {
+    display: none;
+  }
+
+  .msz-grid {
+    gap: 2px;
   }
 }
 
@@ -930,6 +967,7 @@ html {
   color: rgba(25, 17, 24, 0.58);
   font-weight: 300;
   letter-spacing: 0.01em;
+  text-align: center;
 }
 
 :root {
@@ -976,4 +1014,30 @@ html {
 .md-go-top:hover {
   transform: translateY(-2px);
   border-color: rgba(255, 255, 255, 0.4);
+}
+
+.msz-cpp-pill {
+  display: inline-block;
+  margin: 0 auto 2rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(25, 17, 24, 0.14);
+  border-radius: 999px;
+  background: #f7f7f7;
+  color: var(--ink);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.msz-collaborations .msz-cpp-pill {
+  display: table;
+}
+.show-on-mobile {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .show-on-mobile {
+    display: block;
+  }
 }
