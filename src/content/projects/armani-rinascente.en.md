@@ -24,13 +24,13 @@ badges:
 # HERO
 sottotitolo: |
   <b>DIGITAL EXPERIENCE &amp; LIVE CONTENT DELIVERY</b><br><br><br class="hide-mobile" />
-  Fashion Week activation at Rinascente Milano for
+  Design Week activation at Rinascente Milano for
   <a href="https://www.armanibeauty.it/" target="_blank" rel="noreferrer noopener">Armani Beauty</a>.<br>
   Project delivered with <a href="https://www.buzin.it/" target="_blank" rel="noreferrer noopener">Buzin Media Agency</a> and
   <a href="https://www.uvetevents.com/it/" target="_blank" rel="noreferrer noopener">Uvet Events</a>.<br>
 
 intro: |
-  During Fashion Week 2025 at Rinascente Milano, guests could book<br class="hide-mobile" /> a makeup session followed by a professional photoshoot.<br/>
+  During Design Week 2025 at Rinascente Milano, guests could book<br class="hide-mobile" /> a makeup session followed by a professional photoshoot.<br/>
   In just 10 minutes, each participant received a magazine-cover style portrait, with live post-production and a personal QR code to access and download their final image.
 
 prevSlug: "brezza-marina-rooms"
@@ -47,7 +47,7 @@ Each guest completed a short, guided journey: booking → makeup session → pro
     <img
   class="fadein imagepadding"
   src="/images/projects/portfolio/08_Armani_Rinascente.jpg"
-  alt="Armani Beauty takeover at Rinascente Milano during Fashion Week, with illuminated arches and branded red window displays."
+  alt="Armani Beauty takeover at Rinascente Milano during Design Week, with illuminated arches and branded red window displays."
   width="1392"
   height="777"
   loading="eager"
@@ -127,7 +127,7 @@ Alongside the digital experience, Marysse Studio developed printed materials use
    />
   </div>
   <div class="col-md-3">
-    <img class="fadein reveal-media" src="/images/projects/portfolio/armani-pass-prive-mockup.jpg" alt="Armani In the Spotlight VIP access pass mockup designed for the Fashion Week activation."
+    <img class="fadein reveal-media" src="/images/projects/portfolio/armani-pass-prive-mockup.jpg" alt="Armani In the Spotlight VIP access pass mockup designed for the Design Week activation."
     width="1500"
     height="1140"
     loading="lazy"

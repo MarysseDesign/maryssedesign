@@ -25,11 +25,11 @@ badges:
 # HERO
 sottotitolo: |
   <b>DIGITAL EXPERIENCE &amp; LIVE CONTENT DELIVERY</b><br><br><br class="hide-mobile" />
-  Attivazione durante la Fashion Week presso Rinascente Milano <br class="show-mobile" />per <a href="https://www.armanibeauty.it/" target="_blank" rel="noreferrer noopener">Armani Beauty</a>.<br>
+  Attivazione durante la Design Week presso Rinascente Milano <br class="show-mobile" />per <a href="https://www.armanibeauty.it/" target="_blank" rel="noreferrer noopener">Armani Beauty</a>.<br>
   Progetto realizzato con <a href="https://www.buzin.it/" target="_blank" rel="noreferrer noopener">Buzin Media Agency</a> e <a href="https://www.uvetevents.com/it/" target="_blank" rel="noreferrer noopener">Uvet Events</a>.<br>
 
 intro: |
-  Durante la Fashion Week 2025 presso Rinascente Milano,<br class="hide-mobile" />
+  Durante la Design Week 2025 presso Rinascente Milano,<br class="hide-mobile" />
   gli ospiti e i clienti accedevano a un’esperienza esclusiva firmata Armani.<br class="hide-mobile" /><br class="hide-mobile" />
   Un momento dedicato al make-up, seguito da uno shooting fotografico professionale, per trasformare ogni partecipante in un ritratto dall’estetica editoriale, curato e consegnato in tempo reale tramite link personale attraverso QR code.
 
@@ -51,7 +51,7 @@ Un flusso continuo pensato per coniugare performance, qualità visiva e immediat
     <img
       class="fadein imagepadding"
       src="/images/projects/portfolio/08_Armani_Rinascente.jpg"
-      alt="Allestimento Armani Beauty alla Rinascente di Milano durante la Fashion Week, con archi illuminati e vetrine rosse brandizzate."
+      alt="Allestimento Armani Beauty alla Rinascente di Milano durante la Design Week, con archi illuminati e vetrine rosse brandizzate."
       width="1392"
       height="777"
       loading="eager"
