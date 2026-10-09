@@ -48,8 +48,11 @@ declare global {
     return map[key] ?? key;
   };
 
-  const makeServicesHref = (key?: string) =>
-    `${joinBase("services/")}#${slugFromKey(key ?? "")}`;
+  const makeServicesHref = (key?: string) => {
+    const isItalian = /^\/it(?:\/|$)/.test(window.location.pathname);
+    const route = isItalian ? "it/servizi/" : "services/";
+    return `${joinBase(route)}#${slugFromKey(key ?? "")}`;
+  };
 
   const run = () => {
     window.__tarotServicesDestroy?.();
