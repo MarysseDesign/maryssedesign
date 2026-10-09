@@ -18,7 +18,8 @@
    ========================================================= */
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
+  overflow-y: auto;
   background: var(--bg);
 }
 
@@ -28,7 +29,7 @@ body {
   color: var(--text);
   min-height: 100vh;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* =========================================================
@@ -576,6 +577,7 @@ body {
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
+    touch-action: pan-x pan-y;
     padding: 8px 16px 16px;
     scroll-snap-type: x proximity;
     scroll-padding-inline: 16px;
@@ -1633,3 +1635,6 @@ body[data-footer-variant="minimal"] main {
     transition: none !important;
   }
 }
+
+/* Allow natural vertical page scrolling while interacting with cards. */
+.tarot-card { touch-action: pan-y; }
